@@ -9,9 +9,7 @@
 #ifndef RxTx232H
 #define RxTx232H
 
-//Predeclaration des fonctions.     
+//Predeclaration des fonctions.
 void vInitPortSerie(void);
-
-
 
 #endif
