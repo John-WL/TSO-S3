@@ -1,0 +1,6 @@
+"ProjetFinalMain.obj",
+"I2C.obj",
+"RxTx232.obj",
+"LCD.obj" 
+TO "Projet fianl TSO S3" 
+RAMSIZE(256) 

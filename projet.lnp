@@ -1,0 +1,6 @@
+"ProjetFinalMain.obj",
+"I2C.obj",
+"RxTx232.obj",
+"LCD.obj" 
+TO "projet" 
+RAMSIZE(256) 
