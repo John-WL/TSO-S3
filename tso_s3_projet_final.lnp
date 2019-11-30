@@ -1,0 +1,9 @@
+"I2C.obj",
+"LCD.obj",
+"ProjetFinalMain.obj",
+"RxTx232.obj",
+"SubOptimizedLcdPrinter.obj",
+"Timer0.obj",
+"TypeConversion.obj" 
+TO "tso_s3_projet_final" 
+RAMSIZE(256) 

@@ -1,4 +1,4 @@
-/*****************************Timer0 handling*******************************/
+/*****************************Type conversion handling*******************************/
 /*
 		Nom du fichier: TypeConversion.c
 		Auteur : John-William Lebel
@@ -19,7 +19,7 @@ unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate);
 
 
 // *************************************************************************************************
-unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex);
+unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -52,7 +52,7 @@ unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigne
 }
 
 // *************************************************************************************************
-unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex);
+unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -139,11 +139,11 @@ unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate)
 		
 		if(*numberToEvaluate <= 9)
 		{
-			result = '0' + *numberToEvalute;
+			result = '0' + *numberToEvaluate;
 		}
 		else if(*numberToEvaluate <= 0x0F)
 		{
-			result = 'A' + (*numberToEvaluate - 0x10)
+			result = 'A' + (*numberToEvaluate - 0x10);
 		}
 		else
 		{

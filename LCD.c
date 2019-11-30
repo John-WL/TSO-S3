@@ -184,7 +184,7 @@ void vEffaceLCD(void)
 //****************************************************************************
 {	
 	vAttendreBusyLcd(); 
-	*PtrLCDConfig = 0x01;   
+	*PtrLCDConfig = 0x01;
 }
 
 

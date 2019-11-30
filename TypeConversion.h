@@ -8,9 +8,15 @@
 #ifndef TYPECONVERSION_H
 #define TYPECONVERSION_H
 
-// Prédéclaration
-unsigned char unsignedCharToHexaDecimal(unsigned char numberToEvaluate, unsigned char digitIndex);
-unsigned char unsignedCharToDecimal(unsigned char numberToEvaluate, unsigned char digitIndex);
+// Définitions
+#define BLUE_WEIGHT	 0
+#define GREEN_WEIGHT 1
+#define RED_WEIGHT	 2
+#define NONE_WEIGHT	 3
+
+// Prédéclarations
+unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex);
+unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex);
 unsigned char* weightTypeToString(unsigned char* weightTypeIndex);
 
 #endif
