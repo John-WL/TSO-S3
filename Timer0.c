@@ -1,13 +1,13 @@
 /*****************************Timer0 handling*******************************/
-/* 
-   Nom du fichier: timer0.c
-   Auteur : John-William Lebel
+/*
+		Nom du fichier: Timer0.c
+		Auteur : John-William Lebel
 
-Version 1.0 2019-11-29
- 
-    Fonctions nécessaires pour gérer le timer0
-    
-      
+		Date de création: 2019-11-29
+
+    Fonction(s) nécessaire(s) pour gérer le timer0
+
+
 *****************************************************************************************/
 
 //-------------- header files  -----------------

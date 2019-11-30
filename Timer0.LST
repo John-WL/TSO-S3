@@ -1,0 +1,58 @@
+C51 COMPILER V9.53.0.0   TIMER0                                                            11/29/2019 20:17:08 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE TIMER0
+OBJECT MODULE PLACED IN Timer0.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Timer0.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          /*****************************Timer0 handling*******************************/
+   2          /*
+   3              Nom du fichier: Timer0.c
+   4              Auteur : John-William Lebel
+   5          
+   6              Date de création: 2019-11-29
+   7          
+   8              Fonction(s) nécessaire(s) pour gérer le timer0
+   9          
+  10          
+  11          *****************************************************************************************/
+  12          
+  13          //-------------- header files  -----------------
+  14          #include "ds89c450.h"       // Définition des bits et des registres du microcontrôleur
+  15          #include "Timer0.h"
+  16          
+  17          
+  18          // *************************************************************************************************
+  19          void initTimer50ms(void)
+  20          //
+  21          //  Auteur: John-William Lebel
+  22          //
+  23          //  Description: Initialize a timer that overflows every 50 milliseconds
+  24          //  Paramètres d'entrées  : Aucun
+  25          //  Paramètres de sortie  : Aucun
+  26          //  Notes                 : Aucune
+  27          //
+  28          // *************************************************************************************************
+  29          {
+  30   1          TMOD = TMOD & 0xF0;           // Timer0, internal, no control
+  31   1          TMOD = TMOD | 0x01;           // external pin, 16 bits counter
+  32   1          TL0 = 0x00;                   // overflows every milliseconds
+  33   1          TH0 = 0x4C;                   // 
+  34   1          TR0 = 1;                      // Start the timer
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
