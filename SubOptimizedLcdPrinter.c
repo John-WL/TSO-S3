@@ -1,6 +1,6 @@
 /**************************************************************************************************
-   Nom du fichier: LCD.c
-   Auteur: Stéphane Deschênes                  
+   Nom du fichier: SubOptimizedLcdPrinter.c
+   Auteur: John-William Lebel
    Date de création: 2019-11-29
 	 
 	 Fichier qui contient les fonctions utiles à l'optimisation partielle du temps d'affichage du LCD
