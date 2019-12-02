@@ -10,7 +10,7 @@
 
 // Prédéclarations
 void printLcdDeltaMotors(struct ArmState* currentArmState);
-void printLcdDeltaSensors(struct AdcSensors* sensors);
+void printLcdDeltaTrame(struct TramePIC* trame);
 void printLcdDeltaWeightType(unsigned char* weightType);
 void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSettings);
 void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes);

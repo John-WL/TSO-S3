@@ -1,0 +1,243 @@
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 15:51:25 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CIRCULARBUFFER_RX
+OBJECT MODULE PLACED IN CircularBuffer_Rx.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE CircularBuffer_Rx.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TA
+                    -BS(2)
+
+line level    source
+
+   1          /*****************************Contrôle Communication Série*******************************/
+   2          /* 
+   3             Nom du fichier : CircularBuffer_Rx.c
+   4             Auteur : Hugo Pellerin
+   5          
+   6          Date de creation :  02-12-19
+   7           
+   8          Fonction necessaire pour reception la trame du PIC
+   9              
+  10              
+  11                
+  12          *****************************************************************************************/
+  13          #include <stdio.h>   
+  14          #include "RxTx232.h"
+  15          #include "ds89c450.h" 
+  16          #include "ProjectDefinitions.h"
+  17          #include "CircularBuffer_Rx.h"
+  18          
+  19          unsigned char ucRx(void);
+  20          void ucTx(unsigned char ucTransmi);
+  21          
+  22          unsigned char ucIndiceIN = 0;
+  23          unsigned char ucIndiceOUT = 0;
+  24          unsigned char ucIndiceTrame = 0;
+  25          unsigned char ucData = 0;
+  26          
+  27          unsigned char ucCircularBuffer[8];
+  28          
+  29          
+  30          void vInitInterrupt(void)
+  31          //
+  32          //  Auteur: Hugo Pellerin   
+  33          //  Date de création :  19-11-08
+  34          //  Version 1.0
+  35          //
+  36          //  Description: initialise les interruption (general, SERIAL0)
+  37          //               
+  38          //  Paramètres d'entrées : -
+  39          //  Paramètres de sortie : -
+  40          //  Notes                : Aucune
+  41          //
+  42          // *************************************************************************************************
+  43          {
+  44   1        ES0 = 1;    // Permettre interruption du Serial 0
+  45   1        EA = 1;     // Permettre les interruptions générale
+  46   1      }
+  47          
+  48          void InterruptionSerie0 (void) interrupt 4
+  49          //
+  50          //  Auteur: Hugo Pellerin   
+  51          //  Date de création :  19-11-08
+  52          //  Version 1.0
+  53          //
+  54          //  Description: remet les flag du port serie a 0 et call RX
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 15:51:25 PAGE 2   
+
+  55          //  Paramètres d'entrées : -
+  56          //  Paramètres de sortie : vrai ou faux
+  57          //  Notes                : Aucune
+  58          //
+  59          // *************************************************************************************************
+  60          {
+  61   1        if(RI_0 == 1)
+  62   1        {
+  63   2          ucData = ucRx();
+  64   2          ucCircularBuffer[ucIndiceIN] = ucData;
+  65   2          ucIndiceIN = ((ucIndiceIN + 1) & 0x07);
+  66   2          RI_0 = 0;
+  67   2        }
+  68   1        if(TI_0 == 1)
+  69   1        {
+  70   2          TI_0 = 0;
+  71   2        }
+  72   1      }
+  73          
+  74          unsigned char ucRx()
+  75          //
+  76          //  Auteur: Hugo Pellerin   
+  77          //  Date de création :  19-11-08
+  78          //  Version 1.0
+  79          //
+  80          //  Description: met la valeur de SBUF0 dans une varible et appel des fonction pour l'affichage LCD
+  81          //  Paramètres d'entrées : -
+  82          //  Paramètres de sortie : -
+  83          //  Notes                : Aucune
+  84          //
+  85          // *************************************************************************************************
+  86          {
+  87   1        unsigned char ucTemp;
+  88   1        ucTemp = SBUF0;
+  89   1        return ucTemp;
+  90   1      }
+  91          
+  92          void vCircularBuffer(struct TramePIC *tramePtr)
+  93          //
+  94          //  Auteur: Hugo Pellerin   
+  95          //  Date de création :  19-12-02
+  96          //  Version 1.0
+  97          //
+  98          //  Description: 
+  99          //  Paramètres d'entrées : -
+ 100          //  Paramètres de sortie : -
+ 101          //  Notes                : Aucune
+ 102          //
+ 103          // *************************************************************************************************
+ 104          {
+ 105   1        unsigned char ucRecu = 0;
+ 106   1        if(ucIndiceIN != ucIndiceOUT)
+ 107   1        {
+ 108   2          switch(ucIndiceTrame)
+ 109   2          {
+ 110   3            case 0:
+ 111   3              ucRecu = ucCircularBuffer[ucIndiceOUT];
+ 112   3              ucCircularBuffer[ucIndiceOUT] = 0x00;
+ 113   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 114   3            
+ 115   3              if(ucRecu == 'G')
+ 116   3              {
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 15:51:25 PAGE 3   
+
+ 117   4                ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 118   4                ucTx('G');
+ 119   4              }
+ 120   3              
+ 121   3              break;
+ 122   3            case 1:
+ 123   3              ucRecu = ucCircularBuffer[ucIndiceOUT];
+ 124   3              ucCircularBuffer[ucIndiceOUT] = 0x00;
+ 125   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 126   3            
+ 127   3              if(ucRecu == 'O')
+ 128   3              {
+ 129   4                ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 130   4                ucTx('O');
+ 131   4              }
+ 132   3              else 
+ 133   3              {
+ 134   4                ucIndiceTrame = ((ucIndiceTrame - 1) & 0x07);
+ 135   4              }
+ 136   3              break;
+ 137   3            case 2:
+ 138   3              tramePtr->adcSensors.touchScreen.x = ucCircularBuffer[ucIndiceOUT];
+ 139   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 140   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 141   3              ucTx('1');
+ 142   3              break;
+ 143   3            case 3:
+ 144   3             tramePtr->adcSensors.touchScreen.y = ucCircularBuffer[ucIndiceOUT];
+ 145   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 146   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 147   3              ucTx('2');
+ 148   3              break;
+ 149   3            case 4:
+ 150   3              tramePtr->adcSensors.gripIntensity = ucCircularBuffer[ucIndiceOUT];
+ 151   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 152   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 153   3              ucTx('3');
+ 154   3              break;
+ 155   3            case 5:
+ 156   3              tramePtr->adcSensors.weightSensor = ucCircularBuffer[ucIndiceOUT];
+ 157   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 158   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 159   3              ucTx('4');
+ 160   3              break;
+ 161   3            case 6:
+ 162   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 163   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 164   3              ucTx('5');
+ 165   3              break;
+ 166   3            case 7:
+ 167   3              tramePtr->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
+ 168   3              ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 169   3              ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 170   3              ucTx('6');
+ 171   3              break;
+ 172   3          }
+ 173   2        }
+ 174   1      }
+ 175          
+ 176          void ucTx(unsigned char ucTransmi)
+ 177          //
+ 178          //  Auteur: Hugo Pellerin   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 15:51:25 PAGE 4   
+
+ 179          //  Date de création :  19-11-08
+ 180          //  Version 1.0
+ 181          //
+ 182          //  Description: envoie une donner sur UART
+ 183          //  Paramètres d'entrées : donne a envoyer unsigned char
+ 184          //  Paramètres de sortie : -
+ 185          //  Notes                : Aucune
+ 186          //
+ 187          // *************************************************************************************************
+ 188          {
+ 189   1        ES0 = 0;
+ 190   1        SBUF0 = ucTransmi;
+ 191   1        while(TI_0 == 0);
+ 192   1        TI_0 = 0;
+ 193   1        ES0 = 1;
+ 194   1      }
+ 195          
+ 196          unsigned char ucKbHit()
+ 197          //
+ 198          //  Auteur: Hugo Pellerin   
+ 199          //  Date de création :  19-10-11
+ 200          //  Version 1.0
+ 201          //
+ 202          //  Description: Test si le flag du port serie est lever
+ 203          //  Paramètres d'entrées : -
+ 204          //  Paramètres de sortie : vrai ou faux
+ 205          //  Notes                : Aucune
+ 206          //
+ 207          // *************************************************************************************************
+ 208          {
+ 209   1        if(RI_0)
+ 210   1          return 1;
+ 211   1        else
+ 212   1          return 0;
+ 213   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    600    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     12       4
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

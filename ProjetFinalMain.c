@@ -22,6 +22,7 @@ Versions:
 //#include "MemoryI2C.h"
 #include "ProjectDefinitions.h"
 #include "SubOptimizedLcdPrinter.h"
+#include "CircularBuffer_Rx.h"
 
 // *************************************************************************************************
 //  CONSTANTES
@@ -51,7 +52,7 @@ struct ArmState currentArmState = { MIDDLE_POSITION,			// base starting position
 																		MIDDLE_POSITION,			// wrist starting position
 																		MAXIMUM_POSITION };		// grip starting position (open)
 
-struct AdcSensors sensors = {{0xFF, 0xFF}, 0xFF, 0xFF};		// default readings
+struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};		// default readings
 unsigned char weightType = NONE_WEIGHT;										// default to "no weight"
 struct KeyboardManualSettings keyboardManualSettings = {MOTOR_0, 5};	// defaultselected motor = base
 																																			// and default manual speed is
@@ -174,9 +175,10 @@ void main(void)
 		//writeSequencesToMemoryI2C();	// that function might be misimplemented... gotta look into how to write 350 values to the I2C memory in an optimized fashion
 		initTimer50ms();			// init the timer0
 		vAfficheLCDComplet(lcdInitializationContent);					// initialize the content of the lcd
+    vInitInterrupt();     // init interrupt on serial 0
 		
 		while(1)
-		{
+		{       
 				if(isOperating)		// the movements of the robot arm are automatic
 				{
 						//currentArmState.base = readMemoryI2C(currentSequenceIndexes.sequence, currentSequenceIndexes.step, BASE);
@@ -206,7 +208,7 @@ void main(void)
 void printLcdDeltaCharacters()
 {
 		printLcdDeltaMotors(&currentArmState);
-		printLcdDeltaSensors(&sensors);
+		printLcdDeltaTrame(&trame);
 		printLcdDeltaWeightType(&weightType);
 		printLcdDeltaManualSettings(&keyboardManualSettings);
 		printLcdCurrentSequenceStep(&currentSequenceIndexes);

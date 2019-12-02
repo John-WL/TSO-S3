@@ -1,9 +1,9 @@
-C51 COMPILER V9.53.0.0   LCD                                                               11/29/2019 21:50:55 PAGE 1   
+C51 COMPILER V9.53.0.0   LCD                                                               12/02/2019 15:51:23 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE LCD
 OBJECT MODULE PLACED IN LCD.OBJ
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   53          //
   54          //  Auteur: Stéphane Deschênes  
   55          //  Date de création :  01-09-2019
-C51 COMPILER V9.53.0.0   LCD                                                               11/29/2019 21:50:55 PAGE 2   
+C51 COMPILER V9.53.0.0   LCD                                                               12/02/2019 15:51:23 PAGE 2   
 
   56          //  Version 1.0
   57          //
@@ -126,7 +126,7 @@ line level    source
  115          //
  116          //  Description: Écrit un caractère sur le LCD, sur la ligne et la colonne voulue.
  117          //  Paramètres d'entrées : ucCaract: Caractère que l'on veut écrire
-C51 COMPILER V9.53.0.0   LCD                                                               11/29/2019 21:50:55 PAGE 3   
+C51 COMPILER V9.53.0.0   LCD                                                               12/02/2019 15:51:23 PAGE 3   
 
  118          //                         ucLigne:  Ligne où l'on veut écrire (o à 3)
  119          //                         ucCase:  Colonne où l'on veut écrire (0 à 19)
@@ -190,7 +190,7 @@ line level    source
  177          //  Description : Efface le LCD au complet           
  178          //  Date de création :  1-09-2019
  179          //  Version 1.0
-C51 COMPILER V9.53.0.0   LCD                                                               11/29/2019 21:50:55 PAGE 4   
+C51 COMPILER V9.53.0.0   LCD                                                               12/02/2019 15:51:23 PAGE 4   
 
  180          //  Paramètres d'entrée :  Aucun
  181          //  Paramètres de sortie : Aucun                
@@ -199,7 +199,7 @@ line level    source
  184          //****************************************************************************
  185          { 
  186   1        vAttendreBusyLcd(); 
- 187   1        *PtrLCDConfig = 0x01;   
+ 187   1        *PtrLCDConfig = 0x01;
  188   1      }
  189          
  190          
@@ -254,17 +254,17 @@ line level    source
  239   1        return ucTemp;
  240   1      }
  241          
-C51 COMPILER V9.53.0.0   LCD                                                               11/29/2019 21:50:55 PAGE 5   
+C51 COMPILER V9.53.0.0   LCD                                                               12/02/2019 15:51:23 PAGE 5   
 
  242          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    238    ----
+   CODE SIZE        =    331    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
+   XDATA SIZE       =      6      12
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      6      12
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

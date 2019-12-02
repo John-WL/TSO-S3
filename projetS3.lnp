@@ -1,0 +1,12 @@
+"I2C.obj",
+"LCD.obj",
+"ProjetFinalMain.obj",
+"RxTx232.obj",
+"SubOptimizedLcdPrinter.obj",
+"Timer0.obj",
+"TypeConversion.obj",
+"CircularBuffer_Rx.obj" 
+TO "projetS3" 
+RAMSIZE(256) 
+CODE( 0X0000-0X7FFF )
+XDATA( 0X0000-0X7FFF )

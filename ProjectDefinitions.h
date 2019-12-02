@@ -101,6 +101,12 @@ struct AdcSensors
 		unsigned char weightSensor;
 };
 
+struct TramePIC
+{
+  struct AdcSensors adcSensors;
+  unsigned char ucCheckSum;
+};
+
 struct SequenceStep
 {
 		unsigned char sequence;
