@@ -5,7 +5,7 @@
 "SubOptimizedLcdPrinter.obj",
 "Timer0.obj",
 "TypeConversion.obj",
-"CircularBuffer_Rx.obj" 
+"CircularBuffer_RxTx.obj" 
 TO "projetS3" 
 RAMSIZE(256) 
 CODE( 0X0000-0X7FFF )

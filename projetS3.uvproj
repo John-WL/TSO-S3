@@ -398,14 +398,14 @@
               <FilePath>.\TypeConversion.c</FilePath>
             </File>
             <File>
-              <FileName>CircularBuffer_Rx.c</FileName>
+              <FileName>CircularBuffer_RxTx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\CircularBuffer_Rx.c</FilePath>
+              <FilePath>.\CircularBuffer_RxTx.c</FilePath>
             </File>
             <File>
-              <FileName>CircularBuffer_Rx.h</FileName>
+              <FileName>CircularBuffer_RxTx.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\CircularBuffer_Rx.h</FilePath>
+              <FilePath>.\CircularBuffer_RxTx.h</FilePath>
             </File>
           </Files>
         </Group>

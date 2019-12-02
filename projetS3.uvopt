@@ -271,8 +271,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\CircularBuffer_Rx.c</PathWithFileName>
-      <FilenameWithoutPath>CircularBuffer_Rx.c</FilenameWithoutPath>
+      <PathWithFileName>.\CircularBuffer_RxTx.c</PathWithFileName>
+      <FilenameWithoutPath>CircularBuffer_RxTx.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -284,8 +284,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\CircularBuffer_Rx.h</PathWithFileName>
-      <FilenameWithoutPath>CircularBuffer_Rx.h</FilenameWithoutPath>
+      <PathWithFileName>.\CircularBuffer_RxTx.h</PathWithFileName>
+      <FilenameWithoutPath>CircularBuffer_RxTx.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

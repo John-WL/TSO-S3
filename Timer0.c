@@ -13,7 +13,9 @@
 //-------------- header files  -----------------
 #include "ds89c450.h"				// Définition des bits et des registres du microcontrôleur
 #include "Timer0.h"
+#include "ProjectDefinitions.h"
 
+  
 
 // *************************************************************************************************
 void initTimer50ms(void)
@@ -32,4 +34,12 @@ void initTimer50ms(void)
 		TL0 = 0x00;                   // overflows every milliseconds
 		TH0 = 0x4C;                   // 
 		TR0 = 1;                      // Start the timer
+}
+
+void vUpdateCompteurTimer0(struct Compteur *compteurPtr)
+{
+  TF0 = 0;
+  compteurPtr->ucCompteur300ms++;
+  compteurPtr->ucCompteur200ms++;
+  compteurPtr->ucCompteur2sec++;
 }

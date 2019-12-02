@@ -118,5 +118,11 @@ struct KeyboardManualSettings
 		unsigned char manualySelectedMotor;
 		unsigned char manualMovingSpeed;
 };
+struct Compteur
+{
+  unsigned char ucCompteur300ms;
+  unsigned char ucCompteur200ms;
+  unsigned char ucCompteur2sec;
+};
 
 #endif

@@ -30,7 +30,7 @@ compiling RxTx232.c...
 compiling SubOptimizedLcdPrinter.c...
 compiling Timer0.c...
 compiling TypeConversion.c...
-compiling CircularBuffer_Rx.c...
+compiling CircularBuffer_RxTx.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?VI2CSTARTBIT?I2C
@@ -41,70 +41,51 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_UCLIRE8BITSI2C?I2C
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?VINITLCD?LCD
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_VAFFICHELCDCOMPLET?LCD
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?PRINTLCDDELTACHARACTERS?PROJETFINALMAIN
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INITTIMER50MS?TIMER0
-Program Size: data=9.0 xdata=513 code=3141
+    SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RXTX
+Program Size: data=9.0 xdata=513 code=3431
 creating hex file from "projetS3"...
-"projetS3" - 0 Error(s), 8 Warning(s).
-</pre>
-</body>
-</html>
+"projetS3" - 0 Error(s), 6 Warning(s).
 ameter list
-ProjetFinalMain.c(69): error C244: 'isOperating': can't initialize, bad type or class
-ProjetFinalMain.c(69): error C132: 'isOperating': not in formal parameter list
-ProjetFinalMain.c(72): error C244: 'lcdInitializationContent': can't initialize, bad type or class
-ProjetFinalMain.c(75): error C132: 'lcdInitializationContent': not in formal parameter list
-compiling RxTx232.c...
-compiling SubOptimizedLcdPrinter.c...
-compiling Timer0.c...
-compiling TypeConversion.c...
-compiling CircularBuffer_Rx.c...
-CircularBuffer_Rx.c(19): error C132: 'ucRx': not in formal parameter list
-CircularBuffer_Rx.c(20): error C132: '_ucTx': not in formal parameter list
-CircularBuffer_Rx.c(22): error C244: 'ucIndiceIN': can't initialize, bad type or class
-CircularBuffer_Rx.c(22): error C132: 'ucIndiceIN': not in formal parameter list
-CircularBuffer_Rx.c(23): error C244: 'ucIndiceOUT': can't initialize, bad type or class
-CircularBuffer_Rx.c(23): error C132: 'ucIndiceOUT': not in formal parameter list
-CircularBuffer_Rx.c(24): error C244: 'ucIndiceTrame': can't initialize, bad type or class
-CircularBuffer_Rx.c(24): error C132: 'ucIndiceTrame': not in formal parameter list
-CircularBuffer_Rx.c(25): error C244: 'ucData': can't initialize, bad type or class
-CircularBuffer_Rx.c(25): error C132: 'ucData': not in formal parameter list
-CircularBuffer_Rx.c(27): error C132: 'ucCircularBuffer': not in formal parameter list
-CircularBuffer_Rx.c(43): error C132: 'vInitInterrupt': not in formal parameter list
-CircularBuffer_Rx.c(43): error C141: syntax error near '{'
-CircularBuffer_Rx.c(44): error C136: 'ES0': 'void' on variable
-CircularBuffer_Rx.c(44): error C244: 'ES0': can't initialize, bad type or class
-CircularBuffer_Rx.c(44): error C136: 'ES0': 'void' on variable
-CircularBuffer_Rx.c(44): error C132: 'ES0': not in formal parameter list
-CircularBuffer_Rx.c(45): error C244: 'EA': can't initialize, bad type or class
-CircularBuffer_Rx.c(45): error C132: 'EA': not in formal parameter list
-CircularBuffer_Rx.c(46): error C141: syntax error near '}'
-CircularBuffer_Rx.c(63): error C202: 'ucData': undefined identifier
-CircularBuffer_Rx.c(64): error C202: 'ucIndiceIN': undefined identifier
-CircularBuffer_Rx.c(65): error C202: 'ucIndiceIN': undefined identifier
-CircularBuffer_Rx.c(106): error C202: 'ucIndiceIN': undefined identifier
-CircularBuffer_Rx.c(108): error C202: 'ucIndiceTrame': undefined identifier
-CircularBuffer_Rx.c(111): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(112): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(113): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(117): error C202: 'ucIndiceTrame': undefined identifier
-Target not created.
-tifier
-CircularBuffer_Rx.c(143): error C230: 'TramePIC': unknown struct/union/enum tag
-CircularBuffer_Rx.c(143): error C204: 'adcSensors': undefined member
-CircularBuffer_Rx.c(144): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(145): error C202: 'ucIndiceTrame': undefined identifier
-CircularBuffer_Rx.c(148): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(149): error C202: 'ucIndiceTrame': undefined identifier
-CircularBuffer_Rx.c(152): error C230: 'TramePIC': unknown struct/union/enum tag
-CircularBuffer_Rx.c(152): error C204: 'ucCheckSum': undefined member
-CircularBuffer_Rx.c(153): error C202: 'ucIndiceOUT': undefined identifier
-CircularBuffer_Rx.c(154): error C202: 'ucIndiceTrame': undefined identifier
-Target not created.
-60): error C202: 'ucTableauTrame': undefined identifier
+CircularBuffer_RxTx.c(44): error C132: 'vInitInterrupt': not in formal parameter list
+CircularBuffer_RxTx.c(44): error C141: syntax error near '{'
+CircularBuffer_RxTx.c(45): error C136: 'ES0': 'void' on variable
+CircularBuffer_RxTx.c(45): error C244: 'ES0': can't initialize, bad type or class
+CircularBuffer_RxTx.c(45): error C136: 'ES0': 'void' on variable
+CircularBuffer_RxTx.c(45): error C132: 'ES0': not in formal parameter list
+CircularBuffer_RxTx.c(46): error C244: 'EA': can't initialize, bad type or class
+CircularBuffer_RxTx.c(46): error C132: 'EA': not in formal parameter list
+CircularBuffer_RxTx.c(47): error C141: syntax error near '}'
+CircularBuffer_RxTx.c(64): error C202: 'ucData': undefined identifier
+CircularBuffer_RxTx.c(65): error C202: 'ucIndiceIN': undefined identifier
+CircularBuffer_RxTx.c(66): error C202: 'ucIndiceIN': undefined identifier
+CircularBuffer_RxTx.c(107): error C202: 'ucIndiceIN': undefined identifier
+CircularBuffer_RxTx.c(109): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(112): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(113): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(114): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(118): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(124): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(125): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(126): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(130): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(135): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(139): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(140): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(141): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(145): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(146): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(147): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(151): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(152): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(153): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(157): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(158): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(159): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(163): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(164): error C202: 'ucIndiceTrame': undefined identifier
+CircularBuffer_RxTx.c(168): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(169): error C202: 'ucIndiceOUT': undefined identifier
+CircularBuffer_RxTx.c(170): error C202: 'ucIndiceTrame': undefined identifier
 Target not created.

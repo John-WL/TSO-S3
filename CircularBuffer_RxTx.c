@@ -14,10 +14,11 @@ Fonction necessaire pour reception la trame du PIC
 #include "RxTx232.h"
 #include "ds89c450.h"	
 #include "ProjectDefinitions.h"
-#include "CircularBuffer_Rx.h"
+#include "CircularBuffer_RxTx.h"
 
 unsigned char ucRx(void);
 void ucTx(unsigned char ucTransmi);
+unsigned char ucHandleCS(struct ArmState *statePtr);
 
 unsigned char ucIndiceIN = 0;
 unsigned char ucIndiceOUT = 0;
@@ -173,6 +174,25 @@ void vCircularBuffer(struct TramePIC *tramePtr)
   }
 }
 
+void vHandleTrame(struct TramePIC *tramePtr, struct ArmState *statePtr)
+{
+  vCircularBuffer(tramePtr);
+  
+  ucTx('G');
+  ucTx('O');
+  ucTx(statePtr->base);
+  ucTx(statePtr->shoulder);
+  ucTx(statePtr->elbow);
+  ucTx(statePtr->wrist);
+  ucTx(statePtr->grip);
+  ucTx(ucHandleCS(statePtr));
+}
+unsigned char ucHandleCS(struct ArmState *statePtr)
+{
+  unsigned char ucCheckSum;
+  ucCheckSum = statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + statePtr->grip;  
+  return ucCheckSum;
+}
 void ucTx(unsigned char ucTransmi)
 //
 //  Auteur: Hugo Pellerin 	
