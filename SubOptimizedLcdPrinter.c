@@ -100,8 +100,8 @@ void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSe
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 0), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 0), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
+		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 1), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
+		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 2), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
@@ -116,8 +116,8 @@ void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(currentSequenceIndexes->sequence, LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
-		vLcdEcrireCaract(currentSequenceIndexes->step, LCD_LINE3, LCD_STEP_DIGIT_POSITION);
+		vLcdEcrireCaract(currentSequenceIndexes->sequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
+		vLcdEcrireCaract(currentSequenceIndexes->step + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
 }
 
 // *************************************************************************************************

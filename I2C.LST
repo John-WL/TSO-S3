@@ -1,9 +1,9 @@
-C51 COMPILER V9.53.0.0   I2C                                                               11/29/2019 21:50:55 PAGE 1   
+C51 COMPILER V9.53.0.0   I2C                                                               12/02/2019 16:02:37 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C
 OBJECT MODULE PLACED IN I2C.OBJ
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE I2C.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE I2C.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   53          //       Date de création : 30-05-2007              
   54          //  Description :   Routine de délai pour la communication I2C. 
   55          //              
-C51 COMPILER V9.53.0.0   I2C                                                               11/29/2019 21:50:55 PAGE 2   
+C51 COMPILER V9.53.0.0   I2C                                                               12/02/2019 16:02:37 PAGE 2   
 
   56          //  Fonctions appelées :  Aucune    
   57          //  Paramètres d'entrée :   Aucun   
@@ -94,12 +94,16 @@ line level    source
   83          {
   84   1        SDA = 1;            
   85   1        vI2CDelai (dDelai); 
+*** ERROR C202 IN LINE 85 OF I2C.c: 'dDelai': undefined identifier
   86   1        SCL = 1;            
   87   1        vI2CDelai (dDelai);
+*** ERROR C202 IN LINE 87 OF I2C.c: 'dDelai': undefined identifier
   88   1        SDA = 0;            
   89   1        vI2CDelai (dDelai); 
+*** ERROR C202 IN LINE 89 OF I2C.c: 'dDelai': undefined identifier
   90   1        SCL = 0;            
   91   1        vI2CDelai(dDelai);  
+*** ERROR C202 IN LINE 91 OF I2C.c: 'dDelai': undefined identifier
   92   1      }
   93          
   94          
@@ -122,13 +126,16 @@ line level    source
  111   1        //STOP BIT.
  112   1        SDA = 0;            // Donnée à zéro et
  113   1        SCL = 0;            // clock aussi.
+C51 COMPILER V9.53.0.0   I2C                                                               12/02/2019 16:02:37 PAGE 3   
+
  114   1        vI2CDelai (dDelai); // Légère attente.
+*** ERROR C202 IN LINE 114 OF I2C.c: 'dDelai': undefined identifier
  115   1        SCL = 1;            // SCL à 1.
  116   1        vI2CDelai (dDelai); // Légère attente.
+*** ERROR C202 IN LINE 116 OF I2C.c: 'dDelai': undefined identifier
  117   1        SDA = 1;            // SDA à 1.
-C51 COMPILER V9.53.0.0   I2C                                                               11/29/2019 21:50:55 PAGE 3   
-
  118   1        vI2CDelai (dDelai); // Légère attente.  
+*** ERROR C202 IN LINE 118 OF I2C.c: 'dDelai': undefined identifier
  119   1      }
  120          
  121          
@@ -161,10 +168,13 @@ line level    source
  148   1        else
  149   1          SDA = 0;  
  150   1        vI2CDelai(dDelai);  // Légère attente.
+*** ERROR C202 IN LINE 150 OF I2C.c: 'dDelai': undefined identifier
  151   1        SCL = 1;            // Aller activer la ligne SCL.
  152   1        vI2CDelai(dDelai);  // Légère attente.
+*** ERROR C202 IN LINE 152 OF I2C.c: 'dDelai': undefined identifier
  153   1        SCL = 0;            // On replace la ligne SCL à 0.
  154   1        vI2CDelai(dDelai);  // Légère attente.
+*** ERROR C202 IN LINE 154 OF I2C.c: 'dDelai': undefined identifier
  155   1      }
  156          
  157          
@@ -180,6 +190,8 @@ line level    source
  167          //      donnée est placé temporairement dans une va-
  168          //      riable ucBitIn et sera réutilisé dans 
  169          //      une routine de traitement d'octets.
+C51 COMPILER V9.53.0.0   I2C                                                               12/02/2019 16:02:37 PAGE 4   
+
  170          //              
  171          //  Fonctions appelées :    Aucune    
  172          //  Paramètres d'entrée :   Aucun   
@@ -190,22 +202,23 @@ line level    source
  177   1      unsigned char ucBitIn;
  178   1        ucBitIn = 0xFF;       // On assume le bit à lire à 1.
  179   1        SDA = 1;              // La ligne SDA est en entrée.
-C51 COMPILER V9.53.0.0   I2C                                                               11/29/2019 21:50:55 PAGE 4   
-
  180   1        vI2CDelai(dDelai);    // Légère attente.
+*** ERROR C202 IN LINE 180 OF I2C.c: 'dDelai': undefined identifier
  181   1        SCL = 1;              // On lève la ligne SCL.
  182   1        vI2CDelai(dDelai);    // Légère attente.
+*** ERROR C202 IN LINE 182 OF I2C.c: 'dDelai': undefined identifier
  183   1        if (!SDA)             // Vérifier et ajuster le bit de donnée.
  184   1          ucBitIn = 0x00;
  185   1        SCL = 0;              // On replace la ligne SCL à 0.
  186   1        vI2CDelai(dDelai);    // Légère attente.
+*** ERROR C202 IN LINE 186 OF I2C.c: 'dDelai': undefined identifier
  187   1        return (ucBitIn);     // Retourner l'état du bit.
  188   1      }
  189          
  190          
  191          
  192          // *************************************************************************************************
- 193          unsigned char vEcrire8BitsI2C (unsigned char ucTxData)
+ 193          unsigned char ucEcrire8BitsI2C (unsigned char ucTxData)
  194          //  Auteur: Alain Champagne 
  195          //  Date de création :  30-05-2007
  196          //  
@@ -231,6 +244,7 @@ line level    source
  216   3          }
  217   2          vEcrire1BitI2C(ucI2CBit); 
  218   2          vI2CDelai(dDelai);        
+*** ERROR C202 IN LINE 218 OF I2C.c: 'dDelai': undefined identifier
  219   2          ucTxData = ucTxData << 1; 
  220   2        }  
  221   1        return(ucLire1BitI2C());        
@@ -240,6 +254,8 @@ line level    source
  225          //**********************************************************************
  226          unsigned char ucLire8BitsI2C (unsigned char ucAckValue)
  227          //  Auteur : Alain Champagne    
+C51 COMPILER V9.53.0.0   I2C                                                               12/02/2019 16:02:37 PAGE 5   
+
  228          //      Date de création : 30-05-2001             
  229          //  Description :   Routine de réception de 8 bits de donnée 
  230          //      provenant d'une communication I2C.
@@ -254,8 +270,6 @@ line level    source
  239          //  Equate :    Aucun 
  240          //  #Define :     Aucun 
  241          //            
-C51 COMPILER V9.53.0.0   I2C                                                               11/29/2019 21:50:55 PAGE 5   
-
  242          //**********************************************************************
  243          {
  244   1        unsigned char ucRxData, ucI2C;
@@ -266,6 +280,7 @@ line level    source
  249   2          ucRxData = ucRxData << 1; // Décaler la donnée reçue.
  250   2          ucI2C = ucLire1BitI2C();  // Appel de la fonction de lecture d'un bit.
  251   2          vI2CDelai(dDelai);        // Légère attente.
+*** ERROR C202 IN LINE 251 OF I2C.c: 'dDelai': undefined identifier
  252   2          if (ucI2C==0xFF)          // Traitement et ajustement de la variable.
  253   2          ucRxData = ucRxData | 0x01;  
  254   2        } 
@@ -276,16 +291,4 @@ line level    source
  259          
  260          
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    192    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  15 ERROR(S)

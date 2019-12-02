@@ -70,7 +70,7 @@ unsigned char isOperating = 0;															// variable that tells if we're in 
 
 unsigned char lcdInitializationContent[4][21] = {	{"1:66 2:66 3:66 4:66 "},
 																									{"5:66 X:FF Y:FF P:FF "},
-																									{"B:FF POID:--        "},
+																									{"B:FF Poid:Aucun     "},
 																									{"05 seq:0 step:0 OffL"} };
 
 			// that stupid and massive array might be useful to fill up the I2C memory... just a thought
@@ -177,6 +177,7 @@ void main(void)
 		
 		while(1)
 		{
+        printLcdDeltaCharacters();
 				if(isOperating)		// the movements of the robot arm are automatic
 				{
 						//currentArmState.base = readMemoryI2C(currentSequenceIndexes.sequence, currentSequenceIndexes.step, BASE);
@@ -187,11 +188,7 @@ void main(void)
 				}
 				else							// the movements of the robot arm are manual; we need to read the keyboard
 				{
-						//keyboardCharacter = readKeyboardI2C();		// read the keyboard and put the character in a variable
-						if(keyboardCharacter != ' ')							// if we read a character
-						{
-								//handleKey(keyboardCharacter);					// handle the character and update the global variables accordignly
-						}
+						handleKey(&readKeyboardI2C());					// read the keyboard and update the variables accordingly
 				}
 				
 				//if(isBufferFull)															// if the circular buffer has sent a whole sequence of 8 valid bytes

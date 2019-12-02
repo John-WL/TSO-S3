@@ -1,16 +1,16 @@
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            11/29/2019 21:50:56 PAGE 1   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 16:02:38 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SUBOPTIMIZEDLCDPRINTER
 OBJECT MODULE PLACED IN SubOptimizedLcdPrinter.OBJ
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE SubOptimizedLcdPrinter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TAB
-                    -S(2)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE SubOptimizedLcdPrinter.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTE
+                    -ND TABS(2)
 
 line level    source
 
    1          /**************************************************************************************************
-   2             Nom du fichier: LCD.c
-   3             Auteur: Stéphane Deschênes                  
+   2             Nom du fichier: SubOptimizedLcdPrinter.c
+   3             Auteur: John-William Lebel
    4             Date de création: 2019-11-29
    5             
    6             Fichier qui contient les fonctions utiles à l'optimisation partielle du temps d'affichage du LCD
@@ -62,7 +62,7 @@ line level    source
   43   1          vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->grip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_PO
              -SITION_1);
   44   1      }
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            11/29/2019 21:50:56 PAGE 2   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 16:02:38 PAGE 2   
 
   45          
   46          // *************************************************************************************************
@@ -126,7 +126,7 @@ line level    source
   95          //
   96          //  Description: prints at the right place on the LCD the current setted values for the manual control of 
              -the arm
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            11/29/2019 21:50:56 PAGE 3   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 16:02:38 PAGE 3   
 
   97          //  Paramètres d'entrées  : keyboardManualSettings
   98          //  Paramètres de sortie  : None
@@ -134,9 +134,9 @@ line level    source
  100          //
  101          // *************************************************************************************************
  102          {
- 103   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 0), LCD_LINE3, LCD_
+ 103   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 1), LCD_LINE3, LCD_
              -MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
- 104   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 0), LCD_LINE3, LCD_
+ 104   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 2), LCD_LINE3, LCD_
              -MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
  105   1      }
  106          
@@ -152,8 +152,8 @@ line level    source
  116          //
  117          // *************************************************************************************************
  118          {
- 119   1          vLcdEcrireCaract(currentSequenceIndexes->sequence, LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
- 120   1          vLcdEcrireCaract(currentSequenceIndexes->step, LCD_LINE3, LCD_STEP_DIGIT_POSITION);
+ 119   1          vLcdEcrireCaract(currentSequenceIndexes->sequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
+ 120   1          vLcdEcrireCaract(currentSequenceIndexes->step + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
  121   1      }
  122          
  123          // *************************************************************************************************
@@ -176,11 +176,11 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    648    ----
+   CODE SIZE        =    866    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
+   XDATA SIZE       =   ----      18
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      18
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -40,7 +40,7 @@ unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigne
 		}
 		else if(digitIndex == 1)
 		{
-			result = *numberToEvaluate | 0x0F;
+			result = (*numberToEvaluate) & 0x0F;
 		}
 		else
 		{
@@ -70,7 +70,7 @@ unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned ch
 	
 		if(digitIndex == 0)
 		{
-			result = '0' + (*numberToEvaluate % 10);
+			result = '0' + (*numberToEvaluate / 100);
 		}
 		else if(digitIndex == 1)
 		{
@@ -78,7 +78,7 @@ unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned ch
 		}
 		else if(digitIndex == 2)
 		{
-			result = '0' + (*numberToEvaluate / 100);
+			result = '0' + (*numberToEvaluate % 10);
 		}
 		else
 		{
@@ -117,7 +117,7 @@ unsigned char* weightTypeToString(unsigned char* weightTypeIndex)
 		}
 		else
 		{
-				result = "None ";
+				result = "Aucun";
 		}
 		
 		return result;
@@ -143,7 +143,7 @@ unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate)
 		}
 		else if(*numberToEvaluate <= 0x0F)
 		{
-			result = 'A' + (*numberToEvaluate - 0x10);
+			result = 'A' + (*numberToEvaluate - 0x0A);
 		}
 		else
 		{

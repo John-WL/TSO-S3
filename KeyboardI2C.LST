@@ -1,0 +1,54 @@
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/02/2019 16:02:38 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYBOARDI2C
+OBJECT MODULE PLACED IN KeyboardI2C.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE KeyboardI2C.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          /*****************************Timer0 handling*******************************/
+   2          /*
+   3              Nom du fichier: Keyboard.c
+   4              Auteur : John-William Lebel
+   5          
+   6              Date de création: 2019-12-02
+   7          
+   8              Fonction(s) nécessaire(s) pour intercepter et gérer les touches du clavier I2C
+   9          
+  10          
+  11          *****************************************************************************************/
+  12          #include "Keyboard.h"
+*** WARNING C318 IN LINE 12 OF KeyboardI2C.c: can't open file 'Keyboard.h'
+  13          #include "I2C.h"
+  14          
+  15          void readKeyboardI2C()
+  16          {
+  17   1          unsigned char key = ' ';
+  18   1          unsigned char ackValue = 0;
+  19   1          
+  20   1          if(!P1_7)
+*** ERROR C202 IN LINE 20 OF KeyboardI2C.c: 'P1_7': undefined identifier
+  21   1          {
+  22   2              vI2CStartBit();
+  23   2              if(!ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1))
+*** ERROR C202 IN LINE 23 OF KeyboardI2C.c: 'KEYBOARD_ADDRESS_I2C': undefined identifier
+  24   2              {
+  25   3                  return ' '; // return space if noAcks were detected
+  26   3              }
+  27   2              key = ucLire8BitsI2C(0);  // read with noAck
+  28   2              vI2CStopBit();
+  29   2          }
+  30   1          
+  31   1          return key;
+  32   1      }
+  33          
+  34          
+  35          void handleKey(unsigned char* key)
+  36          {
+  37   1          switch()
+*** ERROR C141 IN LINE 37 OF KeyboardI2C.c: syntax error near ')'
+  38   1      }
+*** ERROR C141 IN LINE 38 OF KeyboardI2C.c: syntax error near '}'
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  4 ERROR(S)

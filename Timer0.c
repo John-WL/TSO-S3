@@ -29,7 +29,7 @@ void initTimer50ms(void)
 {
 		TMOD = TMOD & 0xF0;           // Timer0, internal, no control
 		TMOD = TMOD | 0x01;           // external pin, 16 bits counter
-		TL0 = 0x00;                   // overflows every milliseconds
+		TL0 = 0x00;                   // overflows every 50 milliseconds
 		TH0 = 0x4C;                   // 
 		TR0 = 1;                      // Start the timer
 }

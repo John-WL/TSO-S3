@@ -190,7 +190,7 @@ unsigned char ucBitIn;
 
 
 // *************************************************************************************************
-unsigned char vEcrire8BitsI2C (unsigned char ucTxData)
+unsigned char ucEcrire8BitsI2C (unsigned char ucTxData)
 //  Auteur: Alain Champagne	
 //  Date de création :  30-05-2007
 //  
