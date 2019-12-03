@@ -10,5 +10,5 @@
 
 // Prédéclaration
 void initTimer50ms(void);
-
+void vUpdateCompteurTimer0(struct Compteur* stCompteur);
 #endif

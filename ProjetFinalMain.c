@@ -22,7 +22,8 @@ Versions:
 //#include "MemoryI2C.h"
 #include "ProjectDefinitions.h"
 #include "SubOptimizedLcdPrinter.h"
-#include "CircularBuffer_Rx.h"
+#include "KeyboardI2C.h"
+#include "CircularBuffer_RxTx.h"
 
 // *************************************************************************************************
 //  CONSTANTES
@@ -173,7 +174,6 @@ void main(void)
 //
 // *************************************************************************************************
 {
-		unsigned char keyboardCharacter;	// just a little buffer for the keyboard
     vInitPortSerie();			// init the serial port to utilize the RxTx232 comunication with the pic16F88
 		vInitLCD();						// init the lcd
 		//writeSequencesToMemoryI2C();	// that function might be misimplemented... gotta look into how to write 350 values to the I2C memory in an optimized fashion
@@ -194,11 +194,11 @@ void main(void)
 				}
 				else							// the movements of the robot arm are manual; we need to read the keyboard
 				{
-						//keyboardCharacter = readKeyboardI2C();		// read the keyboard and put the character in a variable
-						if(keyboardCharacter != ' ')							// if we read a character
-						{
-								//handleKey(keyboardCharacter);					// handle the character and update the global variables accordignly
-						}
+						handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState);		// read the keyboard and update the variables accordingly
+            if(trame.adcSensors.touchScreen.x != 0xFF && trame.adcSensors.touchScreen.y != 0xFF)
+            {
+                //if(isIn)
+            }
 				}
 				
 				// ... gotta finish what happens next!
@@ -216,12 +216,12 @@ void main(void)
         {
             stCompteur.ucCompteur200ms = 0;
             printLcdDeltaCharacters();
+            vHandleTrame(&trame, &currentArmState);     // WATCH OUT! c'est pas la bonne fonction! C'est juste pour tester. La vraie fonction qui va là, c'est vHandleSequence().
         }
         
         if(stCompteur.ucCompteur2sec > 39)
         {
             stCompteur.ucCompteur2sec = 0;
-            //vHandleSequence
         }
 		}
 }

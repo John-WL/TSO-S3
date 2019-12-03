@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   RXTX232                                                           12/03/2019 14:33:30 PAGE 1   
+C51 COMPILER V9.53.0.0   RXTX232                                                           12/03/2019 18:09:14 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE RXTX232
@@ -44,7 +44,7 @@ line level    source
   35          {
   36   1          SCON0 = 0x50;         // Selectione mode 1, 8-bit avec reception      
   37   1          TMOD  = TMOD | 0x20; // timer 1, mode 2, 8-bit auto reload        
-  38   1          TH1   = 0xFF;        // a 11.0592MHz: FA=4800,FD=9600,FE=14400 et FF=28800    
+  38   1          TH1   = 0xFD;        // a 11.0592MHz: FA=4800,FD=9600,FE=14400 et FF=28800    
   39   1          PCON  = PCON | 0x80; // Le bit SMOD = 1 pour vitesse * 2 du port serie 
   40   1          TR1   = 1;           // Active le timer 1                          
   41   1          TI_0  = 1;           // Pour pouvoir envoyer un premier charactere    
@@ -62,7 +62,7 @@ line level    source
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     17    ----
    CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.53.0.0   RXTX232                                                           12/03/2019 14:33:30 PAGE 2   
+C51 COMPILER V9.53.0.0   RXTX232                                                           12/03/2019 18:09:14 PAGE 2   
 
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

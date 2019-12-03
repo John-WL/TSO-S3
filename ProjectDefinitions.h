@@ -5,8 +5,6 @@
         Fichier de déclaration et de définition des variables et constantes du projet
   
 ****************************************************************************************/
-#include <stdio.h>
-
 
 #ifndef PROJECTDEFINITION_H
 	#define PROJECTDEFINITION_H
@@ -119,6 +117,12 @@ struct KeyboardManualSettings
 {
 		unsigned char manualySelectedMotor;
 		unsigned char manualMovingSpeed;
+};
+struct Compteur
+{
+  unsigned char ucCompteur300ms;
+  unsigned char ucCompteur200ms;
+  unsigned char ucCompteur2sec;
 };
 
 #endif

@@ -1,4 +1,3 @@
-"CircularBuffer_Rx.obj",
 "I2C.obj",
 "KeyboardI2C.obj",
 "LCD.obj",
@@ -6,6 +5,7 @@
 "RxTx232.obj",
 "SubOptimizedLcdPrinter.obj",
 "Timer0.obj",
-"TypeConversion.obj" 
+"TypeConversion.obj",
+"CircularBuffer_RxTx.obj" 
 TO "tso_s3_projet_final" 
 RAMSIZE(256) 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 14:33:30 PAGE 1   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 18:09:13 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
@@ -33,69 +33,68 @@ line level    source
   22          //#include "MemoryI2C.h"
   23          #include "ProjectDefinitions.h"
   24          #include "SubOptimizedLcdPrinter.h"
-  25          #include "CircularBuffer_Rx.h"
-  26          
-  27          // *************************************************************************************************
-  28          //  CONSTANTES
-  29          // *************************************************************************************************
-  30          
-  31          // in "ProjectDefinitions.h"
-  32          
-  33          // *************************************************************************************************
-  34          //  FONCTIONS LOCALES
-  35          // *************************************************************************************************
-  36          
-  37          void printLcdDeltaCharacters(void);
-  38          //void writeSequencesToMemoryI2C(void);     // only needed once when we'll fill up the memory
-  39          
-  40          // *************************************************************************************************
-  41          //  STRUCTURES ET UNIONS
-  42          // *************************************************************************************************
-  43          
-  44          // in "ProjectDefinitions.h"
-  45          
-  46          // *************************************************************************************************
-  47          // VARIABLES GLOBALES
-  48          // *************************************************************************************************
-  49          
-  50          struct ArmState currentArmState = { MIDDLE_POSITION,      // base starting position
-  51                                              MIDDLE_POSITION,      // shoulder starting position
-  52                                              MIDDLE_POSITION,      // elbow starting position
-  53                                              MIDDLE_POSITION,      // wrist starting position
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 14:33:30 PAGE 2   
+  25          #include "KeyboardI2C.h"
+  26          #include "CircularBuffer_RxTx.h"
+  27          
+  28          // *************************************************************************************************
+  29          //  CONSTANTES
+  30          // *************************************************************************************************
+  31          
+  32          // in "ProjectDefinitions.h"
+  33          
+  34          // *************************************************************************************************
+  35          //  FONCTIONS LOCALES
+  36          // *************************************************************************************************
+  37          
+  38          void printLcdDeltaCharacters(void);
+  39          //void writeSequencesToMemoryI2C(void);     // only needed once when we'll fill up the memory
+  40          
+  41          // *************************************************************************************************
+  42          //  STRUCTURES ET UNIONS
+  43          // *************************************************************************************************
+  44          
+  45          // in "ProjectDefinitions.h"
+  46          
+  47          // *************************************************************************************************
+  48          // VARIABLES GLOBALES
+  49          // *************************************************************************************************
+  50          
+  51          struct ArmState currentArmState = { MIDDLE_POSITION,      // base starting position
+  52                                              MIDDLE_POSITION,      // shoulder starting position
+  53                                              MIDDLE_POSITION,      // elbow starting position
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 18:09:13 PAGE 2   
 
-  54                                              MAXIMUM_POSITION };   // grip starting position (open)
-  55          
-  56          struct Compteur stCompteur = {0, 0, 0};
-*** ERROR C230 IN LINE 56 OF ProjetFinalMain.c: 'Compteur': unknown struct/union/enum tag
-  57          
-  58          struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
-  59          unsigned char weightType = NONE_WEIGHT;                   // default to "no weight"
-  60          struct KeyboardManualSettings keyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
-  61                                                                                // and default manual speed is
-  62                                                                                // set to an arbitrary value.
-  63          struct SequenceStep currentSequenceIndexes = {0, 0};        // this is to store the current sequence
-  64                                                                      // the arm is executing with two indexes:
-  65                                                                      // "sequence" and "step". It probably needs
-  66                                                                      // a better name... plz be charitable to the community much luv thx.
-  67          
-  68          unsigned char connectionStateString[4] = LCD_DELTA_OFFLINE_VALUE;
-  69                                                                      // OffL/OnL. It's a variable storing the changes to print to the
-  70                                                                      // lcd in case we lose contact with the exterior... 
-  71          
-  72          unsigned char isOperating = 0;                              // variable that tells if we're in manual or automatic funtio
+  54                                              MIDDLE_POSITION,      // wrist starting position
+  55                                              MAXIMUM_POSITION };   // grip starting position (open)
+  56          
+  57          struct Compteur stCompteur = {0, 0, 0};
+  58          
+  59          struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
+  60          unsigned char weightType = NONE_WEIGHT;                   // default to "no weight"
+  61          struct KeyboardManualSettings keyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
+  62                                                                                // and default manual speed is
+  63                                                                                // set to an arbitrary value.
+  64          struct SequenceStep currentSequenceIndexes = {0, 0};        // this is to store the current sequence
+  65                                                                      // the arm is executing with two indexes:
+  66                                                                      // "sequence" and "step". It probably needs
+  67                                                                      // a better name... plz be charitable to the community much luv thx.
+  68          
+  69          unsigned char connectionStateString[4] = LCD_DELTA_OFFLINE_VALUE;
+  70                                                                      // OffL/OnL. It's a variable storing the changes to print to the
+  71                                                                      // lcd in case we lose contact with the exterior... 
+  72          
+  73          unsigned char isOperating = 0;                              // variable that tells if we're in manual or automatic funtio
              -nning
-  73                                                                      // of the robotic arm.
-  74          
+  74                                                                      // of the robotic arm.
   75          
-  76          unsigned char lcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
-  77                                                            {"5:66 X:FF Y:FF P:FF "},
-  78                                                            {"B:FF POID:--        "},
-  79                                                            {"05 seq:0 step:0 OffL"} };
-  80          
-  81                // that stupid and massive array might be useful to fill up the I2C memory... just a thought
-  82          unsigned char xdata sequences[7][10][5] = { { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
-  83                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+  76          
+  77          unsigned char lcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
+  78                                                            {"5:66 X:FF Y:FF P:FF "},
+  79                                                            {"B:FF POID:--        "},
+  80                                                            {"05 seq:0 step:0 OffL"} };
+  81          
+  82                // that stupid and massive array might be useful to fill up the I2C memory... just a thought
+  83          unsigned char xdata sequences[7][10][5] = { { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   84                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   85                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   86                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -103,10 +102,10 @@ line level    source
   88                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   89                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   90                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
-  91                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
-  92          
-  93                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
-  94                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+  91                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+  92                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+  93          
+  94                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   95                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   96                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
   97                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -114,10 +113,10 @@ line level    source
   99                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  100                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  101                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 102                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
- 103          
- 104                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 105                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 102                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 103                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+ 104          
+ 105                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  106                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  107                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  108                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -125,12 +124,12 @@ line level    source
  110                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  111                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  112                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 113                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 14:33:30 PAGE 3   
+ 113                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 114                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 18:09:13 PAGE 3   
 
- 114          
- 115                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 116                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 115          
+ 116                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  117                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  118                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  119                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -138,10 +137,10 @@ line level    source
  121                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  122                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  123                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 124                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
- 125          
- 126                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 127                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 124                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 125                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+ 126          
+ 127                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  128                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  129                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  130                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -149,10 +148,10 @@ line level    source
  132                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  133                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  134                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 135                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
- 136          
- 137                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 138                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 135                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 136                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+ 137          
+ 138                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  139                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  140                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  141                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -160,10 +159,10 @@ line level    source
  143                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  144                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  145                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 146                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
- 147          
- 148                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 149                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 146                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 147                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} },
+ 148          
+ 149                                                      { {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  150                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  151                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  152                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
@@ -171,28 +170,28 @@ line level    source
  154                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  155                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
  156                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
- 157                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} } };
- 158          
- 159          // *************************************************************************************************
- 160          // VARIABLES LOCALES
- 161          // *************************************************************************************************
- 162          
+ 157                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+ 158                                                        {0xFF, 0xFF, 0xFF, 0xFF, 0xFF} } };
+ 159          
+ 160          // *************************************************************************************************
+ 161          // VARIABLES LOCALES
+ 162          // *************************************************************************************************
  163          
- 164          // *************************************************************************************************
- 165          void main(void)
- 166          //
- 167          //  Auteur: John-William Lebel
- 168          //
- 169          //  Description: Appelé lorsque le programme démarre
- 170          //  Paramètres d'entrées  : Aucun
- 171          //  Paramètres de sortie  : Aucun
- 172          //  Notes                 : Aucune
- 173          //
- 174          // *************************************************************************************************
- 175          {
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 14:33:30 PAGE 4   
+ 164          
+ 165          // *************************************************************************************************
+ 166          void main(void)
+ 167          //
+ 168          //  Auteur: John-William Lebel
+ 169          //
+ 170          //  Description: Appelé lorsque le programme démarre
+ 171          //  Paramètres d'entrées  : Aucun
+ 172          //  Paramètres de sortie  : Aucun
+ 173          //  Notes                 : Aucune
+ 174          //
+ 175          // *************************************************************************************************
+ 176          {
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 18:09:13 PAGE 4   
 
- 176   1          unsigned char keyboardCharacter;  // just a little buffer for the keyboard
  177   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
  178   1          vInitLCD();           // init the lcd
  179   1          //writeSequencesToMemoryI2C();  // that function might be misimplemented... gotta look into how to write 
@@ -219,11 +218,11 @@ line level    source
  194   3              }
  195   2              else              // the movements of the robot arm are manual; we need to read the keyboard
  196   2              {
- 197   3                  //keyboardCharacter = readKeyboardI2C();    // read the keyboard and put the character in a variable
- 198   3                  if(keyboardCharacter != ' ')              // if we read a character
+ 197   3                  handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState);    // read the keyboard and u
+             -pdate the variables accordingly
+ 198   3                  if(trame.adcSensors.touchScreen.x != 0xFF && trame.adcSensors.touchScreen.y != 0xFF)
  199   3                  {
- 200   4                      //handleKey(keyboardCharacter);         // handle the character and update the global variables accord
-             -ignly
+ 200   4                      //if(isIn)
  201   4                  }
  202   3              }
  203   2              
@@ -242,19 +241,20 @@ line level    source
  216   2              {
  217   3                  stCompteur.ucCompteur200ms = 0;
  218   3                  printLcdDeltaCharacters();
- 219   3              }
- 220   2              
- 221   2              if(stCompteur.ucCompteur2sec > 39)
- 222   2              {
- 223   3                  stCompteur.ucCompteur2sec = 0;
- 224   3                  //vHandleSequence
+ 219   3                  vHandleTrame(&trame, &currentArmState);     // WATCH OUT! c'est pas la bonne fonction! C'est j
+             -uste pour tester. La vraie fonction qui va là, c'est vHandleSequence().
+ 220   3              }
+ 221   2              
+ 222   2              if(stCompteur.ucCompteur2sec > 39)
+ 223   2              {
+ 224   3                  stCompteur.ucCompteur2sec = 0;
  225   3              }
  226   2          }
  227   1      }
  228          
  229          void printLcdDeltaCharacters()
  230          {
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 14:33:30 PAGE 5   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/03/2019 18:09:13 PAGE 5   
 
  231   1          printLcdDeltaMotors(&currentArmState);
  232   1          printLcdDeltaTrame(&trame);
@@ -269,4 +269,16 @@ line level    source
  241            //writeMemoryI2C(sequences);
  242          //}
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    186    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    457    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

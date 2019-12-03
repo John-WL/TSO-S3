@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 14:33:29 PAGE 1   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYBOARDI2C
@@ -62,7 +62,7 @@ line level    source
   51          {
   52   1          switch(*key)
   53   1          {
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 14:33:29 PAGE 2   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 2   
 
   54   2              case '1':
   55   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_0;
@@ -126,7 +126,7 @@ line level    source
  110   1      }
  111          
  112          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 14:33:29 PAGE 3   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 3   
 
  113          {
  114   1          if(*direction == 1 && *motorValue > 205)

@@ -35,7 +35,7 @@ void vInitPortSerie(void)
 {
 		SCON0 = 0x50;        	// Selectione mode 1, 8-bit avec reception      
 		TMOD  = TMOD | 0x20; // timer 1, mode 2, 8-bit auto reload        
-		TH1   = 0xFF;        // a 11.0592MHz: FA=4800,FD=9600,FE=14400 et FF=28800    
+		TH1   = 0xFD;        // a 11.0592MHz: FA=4800,FD=9600,FE=14400 et FF=28800    
 		PCON  = PCON | 0x80; // Le bit SMOD = 1 pour vitesse * 2 du port serie 
 		TR1   = 1;           // Active le timer 1                          
 		TI_0  = 1;           // Pour pouvoir envoyer un premier charactere    
