@@ -22,7 +22,7 @@ Versions:
 //#include "MemoryI2C.h"
 #include "ProjectDefinitions.h"
 #include "SubOptimizedLcdPrinter.h"
-#include "KeyboardI2C.h"
+#include "CircularBuffer_Rx.h"
 
 // *************************************************************************************************
 //  CONSTANTES
@@ -46,11 +46,14 @@ void printLcdDeltaCharacters(void);
 // *************************************************************************************************
 // VARIABLES GLOBALES
 // *************************************************************************************************
+
 struct ArmState currentArmState = { MIDDLE_POSITION,			// base starting position
 																		MIDDLE_POSITION,			// shoulder starting position
 																		MIDDLE_POSITION,			// elbow starting position
 																		MIDDLE_POSITION,			// wrist starting position
 																		MAXIMUM_POSITION };		// grip starting position (open)
+
+struct Compteur stCompteur = {0, 0, 0};
 
 struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};		// default readings
 unsigned char weightType = NONE_WEIGHT;										// default to "no weight"
@@ -69,9 +72,10 @@ unsigned char connectionStateString[4] = LCD_DELTA_OFFLINE_VALUE;
 unsigned char isOperating = 0;															// variable that tells if we're in manual or automatic funtionning
 																														// of the robotic arm.
 
+
 unsigned char lcdInitializationContent[4][21] = {	{"1:66 2:66 3:66 4:66 "},
 																									{"5:66 X:FF Y:FF P:FF "},
-																									{"B:FF Poid:Aucun     "},
+																									{"B:FF POID:--        "},
 																									{"05 seq:0 step:0 OffL"} };
 
 			// that stupid and massive array might be useful to fill up the I2C memory... just a thought
@@ -169,17 +173,19 @@ void main(void)
 //
 // *************************************************************************************************
 {
-		vInitPortSerie();			// init the serial port to utilize the RxTx232 comunication with the pic16F88
+		unsigned char keyboardCharacter;	// just a little buffer for the keyboard
+    vInitPortSerie();			// init the serial port to utilize the RxTx232 comunication with the pic16F88
 		vInitLCD();						// init the lcd
 		//writeSequencesToMemoryI2C();	// that function might be misimplemented... gotta look into how to write 350 values to the I2C memory in an optimized fashion
 		initTimer50ms();			// init the timer0
-		vAfficheLCDComplet(lcdInitializationContent);					// initialize the content of the lcd
+    vAfficheLCDComplet(lcdInitializationContent);					// initialize the content of the lcd
+    vInitInterrupt();     // init interrupt on serial 0
 		
 		while(1)
 		{
-        printLcdDeltaCharacters();
-				if(isOperating)		// the movements of the robot arm are automatic
-				{
+      
+			if(isOperating)		// the movements of the robot arm are automatic
+		  {
 						//currentArmState.base = readMemoryI2C(currentSequenceIndexes.sequence, currentSequenceIndexes.step, BASE);
 						//currentArmState.base = readMemoryI2C(currentSequenceIndexes.sequence, currentSequenceIndexes.step, SHOULDER);
 						//currentArmState.base = readMemoryI2C(currentSequenceIndexes.sequence, currentSequenceIndexes.step, ELBOW);
@@ -188,15 +194,35 @@ void main(void)
 				}
 				else							// the movements of the robot arm are manual; we need to read the keyboard
 				{
-						handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState);					// read the keyboard and update the variables accordingly
-				}
-				
-				//if(isBufferFull)															// if the circular buffer has sent a whole sequence of 8 valid bytes
-				{
-																											// update the global variables accordingly
+						//keyboardCharacter = readKeyboardI2C();		// read the keyboard and put the character in a variable
+						if(keyboardCharacter != ' ')							// if we read a character
+						{
+								//handleKey(keyboardCharacter);					// handle the character and update the global variables accordignly
+						}
 				}
 				
 				// ... gotta finish what happens next!
+        if(TF0 == 1)
+        {
+            vUpdateCompteurTimer0(&stCompteur);
+        }
+        
+        if(stCompteur.ucCompteur300ms > 5)
+        {
+            stCompteur.ucCompteur300ms = 0;
+        }
+        
+        if(stCompteur.ucCompteur200ms > 3)
+        {
+            stCompteur.ucCompteur200ms = 0;
+            printLcdDeltaCharacters();
+        }
+        
+        if(stCompteur.ucCompteur2sec > 39)
+        {
+            stCompteur.ucCompteur2sec = 0;
+            //vHandleSequence
+        }
 		}
 }
 
