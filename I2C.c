@@ -81,14 +81,13 @@ void vI2CStartBit(void)
 //	Notes: Passage de 1 à 0 de la ligne SDA durant un niveau haut de SCL
 //**********************************************************************
 {
-  SDA = 1;			 			
-	vI2CDelai (dDelai);	
-	SCL = 1;						
+  SDA = 1;
+	SCL = 1;
   vI2CDelai (dDelai);
-  SDA = 0;						
-  vI2CDelai (dDelai);	
-  SCL = 0;						
-  vI2CDelai(dDelai);	
+  SDA = 0;
+  vI2CDelai (dDelai);
+  SCL = 0;
+  vI2CDelai(dDelai);
 }
 
 
@@ -141,9 +140,8 @@ void vEcrire1BitI2C(unsigned char ucBitOut)
 //**********************************************************************
 {
 	SCL = 0;
-  
 	// On assume le bit à 0.
-  if (ucBitOut==0xFF)	// Vérifier et ajuster l'état du bit à sortir.
+  if (ucBitOut == 0xFF)	// Vérifier et ajuster l'état du bit à sortir.
     SDA = 1;
 	else
 		SDA = 0;	
@@ -174,7 +172,8 @@ unsigned char ucLire1BitI2C(void)
 //
 //**********************************************************************
 {
-unsigned char ucBitIn;
+  unsigned char ucBitIn;
+  
 	ucBitIn = 0xFF;	  		// On assume le bit à lire à 1.
 	SDA = 1;							// La ligne SDA est en entrée.
 	vI2CDelai(dDelai);		// Légère attente.
@@ -184,6 +183,7 @@ unsigned char ucBitIn;
 	  ucBitIn = 0x00;
 	SCL = 0;							// On replace la ligne SCL à 0.
 	vI2CDelai(dDelai);		// Légère attente.
+  
 	return (ucBitIn);			// Retourner l'état du bit.
 }
 
@@ -206,6 +206,7 @@ unsigned char ucEcrire8BitsI2C (unsigned char ucTxData)
 {
 	int i;
 	unsigned char ucI2C, ucI2CBit;
+  
   for (i=0; i<8; i++)		   		
   {
     ucI2CBit = 0x00;		   		

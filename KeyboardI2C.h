@@ -8,12 +8,12 @@
 #ifndef KEYBOARDI2C_H
 #define KEYBOARDI2C_H
 
-# Définitions
+// Définitions
 #define KEYBOARD_ADDRESS_I2C 0x28
 
 // Prédéclarations
-void readKeyboardI2C(void);
-void handleKey(unsigned char* key);
+unsigned char* readKeyboardI2C(void);
+void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState);
 
 
 

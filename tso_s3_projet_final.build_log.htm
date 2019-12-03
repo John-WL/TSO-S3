@@ -23,34 +23,87 @@ Project File Date:  12/02/2019
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
+compiling CircularBuffer_Rx.c...
 compiling I2C.c...
-I2C.c(85): error C202: 'dDelai': undefined identifier
-I2C.c(87): error C202: 'dDelai': undefined identifier
-I2C.c(89): error C202: 'dDelai': undefined identifier
-I2C.c(91): error C202: 'dDelai': undefined identifier
-I2C.c(114): error C202: 'dDelai': undefined identifier
-I2C.c(116): error C202: 'dDelai': undefined identifier
-I2C.c(118): error C202: 'dDelai': undefined identifier
-I2C.c(150): error C202: 'dDelai': undefined identifier
-I2C.c(152): error C202: 'dDelai': undefined identifier
-I2C.c(154): error C202: 'dDelai': undefined identifier
-I2C.c(180): error C202: 'dDelai': undefined identifier
-I2C.c(182): error C202: 'dDelai': undefined identifier
-I2C.c(186): error C202: 'dDelai': undefined identifier
-I2C.c(218): error C202: 'dDelai': undefined identifier
-I2C.c(251): error C202: 'dDelai': undefined identifier
+compiling KeyboardI2C.c...
 compiling LCD.c...
 compiling ProjetFinalMain.c...
-ProjetFinalMain.c(191): warning C206: 'readKeyboardI2C': missing function-prototype
-ProjetFinalMain.c(191): error C190: '&': not an lvalue
+ProjetFinalMain.c(206): warning C182: pointer to different objects
 compiling RxTx232.c...
 compiling SubOptimizedLcdPrinter.c...
 compiling Timer0.c...
 compiling TypeConversion.c...
-compiling KeyboardI2C.c...
-KeyboardI2C.c(12): warning C318: can't open file 'Keyboard.h'
-KeyboardI2C.c(20): error C202: 'P1_7': undefined identifier
-KeyboardI2C.c(23): error C202: 'KEYBOARD_ADDRESS_I2C': undefined identifier
-KeyboardI2C.c(37): error C141: syntax error near ')'
-KeyboardI2C.c(38): error C141: syntax error near '}'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?VINITINTERRUPT?CIRCULARBUFFER_RX
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_VCIRCULARBUFFER?CIRCULARBUFFER_RX
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RX
+Program Size: data=9.0 xdata=513 code=4061
+creating hex file from "tso_s3_projet_final"...
+"tso_s3_projet_final" - 0 Error(s), 4 Warning(s).
+
+    MODULE:  ProjetFinalMain.obj (PROJETFINALMAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  VINITI2C
+    MODULE:  ProjetFinalMain.obj (PROJETFINALMAIN)
+    ADDRESS: 0C53H
+Program Size: data=9.0 xdata=497 code=3942
+creating hex file from "tso_s3_projet_final"...
+"tso_s3_projet_final" - 0 Error(s), 7 Warning(s).
+eyboardI2C.c(87): error C141: syntax error near ':'
+KeyboardI2C.c(88): error C141: syntax error near 'currentArmState'
+KeyboardI2C.c(91): error C141: syntax error near ':'
+KeyboardI2C.c(92): error C141: syntax error near 'currentArmState'
+KeyboardI2C.c(95): error C141: syntax error near ':'
+KeyboardI2C.c(96): error C141: syntax error near 'currentArmState'
+KeyboardI2C.c(99): error C141: syntax error near ':'
+KeyboardI2C.c(100): error C141: syntax error near 'currentArmState'
+compiling LCD.c...
+compiling ProjetFinalMain.c...
+ProjetFinalMain.c(191): warning C209: '_handleKey': too few actual parameters
+ProjetFinalMain.c(206): warning C206: 'printLcdDeltaTrame': missing function-prototype
+ProjetFinalMain.c(206): error C267: 'printLcdDeltaTrame': requires ANSI-style prototype
+compiling RxTx232.c...
+compiling SubOptimizedLcdPrinter.c...
+compiling Timer0.c...
+compiling TypeConversion.c...
 Target not created.
+C230: 'KeyboardManualSettings': unknown struct/union/enum tag
+KeyboardI2C.c(81): error C204: 'manualySelectedMotor': undefined member
+KeyboardI2C.c(83): error C141: syntax error near ':'
+KeyboardI2C.c(84): error C202: 'MOTOR_0': undefined identifier
+KeyboardI2C.c(85): error C230: 'ArmState': unknown struct/union/enum tag
+KeyboardI2C.c(85): error C204: 'base': undefined member
+KeyboardI2C.c(87): error C141: syntax error near ':'
+KeyboardI2C.c(88): error C202: 'MOTOR_1': undefined identifier
+KeyboardI2C.c(89): error C230: 'ArmState': unknown struct/union/enum tag
+KeyboardI2C.c(89): error C204: 'shoulder': undefined member
+KeyboardI2C.c(91): error C141: syntax error near ':'
+KeyboardI2C.c(92): error C202: 'MOTOR_2': undefined identifier
+KeyboardI2C.c(93): error C230: 'ArmState': unknown struct/union/enum tag
+KeyboardI2C.c(93): error C204: 'elbow': undefined member
+KeyboardI2C.c(95): error C141: syntax error near ':'
+KeyboardI2C.c(96): error C202: 'MOTOR_3': undefined identifier
+KeyboardI2C.c(97): error C230: 'ArmState': unknown struct/union/enum tag
+KeyboardI2C.c(97): error C204: 'wrist': undefined member
+KeyboardI2C.c(99): error C141: syntax error near ':'
+KeyboardI2C.c(100): error C202: 'MOTOR_4': undefined identifier
+KeyboardI2C.c(101): error C230: 'ArmState': unknown struct/union/enum tag
+KeyboardI2C.c(101): error C204: 'grip': undefined member
+compiling LCD.c...
+compiling ProjetFinalMain.c...
+ProjetFinalMain.c(191): warning C209: '_handleKey': too few actual parameters
+ProjetFinalMain.c(206): warning C206: 'printLcdDeltaTrame': missing function-prototype
+ProjetFinalMain.c(206): error C267: 'printLcdDeltaTrame': requires ANSI-style prototype
+compiling RxTx232.c...
+compiling SubOptimizedLcdPrinter.c...
+compiling Timer0.c...
+compiling TypeConversion.c...
+Target not created.
+piling SubOptimizedLcdPrinter.c...
+compiling Timer0.c...
+compiling TypeConversion.c...
+Target not created.
+.

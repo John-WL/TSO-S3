@@ -44,7 +44,7 @@ void printLcdDeltaMotors(struct ArmState* currentArmState)
 }
 
 // *************************************************************************************************
-void printLcdDeltaSensors(struct AdcSensors* sensors)
+void printLcdDeltaTrame(struct TramePIC* trame)
 //
 //  Auteur: John-William Lebel
 //
@@ -55,17 +55,17 @@ void printLcdDeltaSensors(struct AdcSensors* sensors)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->touchScreen.x), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->touchScreen.x), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.x), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.x), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->touchScreen.y), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->touchScreen.y), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.y), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.y), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->gripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->gripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.gripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.gripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
 		
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->weightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(sensors->weightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.weightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
+		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.weightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************

@@ -5,6 +5,8 @@
         Fichier de déclaration et de définition des variables et constantes du projet
   
 ****************************************************************************************/
+#include <stdio.h>
+
 
 #ifndef PROJECTDEFINITION_H
 	#define PROJECTDEFINITION_H
@@ -99,6 +101,12 @@ struct AdcSensors
 		struct TouchScreen touchScreen;
 		unsigned char gripIntensity;
 		unsigned char weightSensor;
+};
+
+struct TramePIC
+{
+  struct AdcSensors adcSensors;
+  unsigned char ucCheckSum;
 };
 
 struct SequenceStep

@@ -22,6 +22,7 @@ Versions:
 //#include "MemoryI2C.h"
 #include "ProjectDefinitions.h"
 #include "SubOptimizedLcdPrinter.h"
+#include "KeyboardI2C.h"
 
 // *************************************************************************************************
 //  CONSTANTES
@@ -51,7 +52,7 @@ struct ArmState currentArmState = { MIDDLE_POSITION,			// base starting position
 																		MIDDLE_POSITION,			// wrist starting position
 																		MAXIMUM_POSITION };		// grip starting position (open)
 
-struct AdcSensors sensors = {{0xFF, 0xFF}, 0xFF, 0xFF};		// default readings
+struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};		// default readings
 unsigned char weightType = NONE_WEIGHT;										// default to "no weight"
 struct KeyboardManualSettings keyboardManualSettings = {MOTOR_0, 5};	// defaultselected motor = base
 																																			// and default manual speed is
@@ -168,7 +169,6 @@ void main(void)
 //
 // *************************************************************************************************
 {
-		unsigned char keyboardCharacter;	// just a little buffer for the keyboard
 		vInitPortSerie();			// init the serial port to utilize the RxTx232 comunication with the pic16F88
 		vInitLCD();						// init the lcd
 		//writeSequencesToMemoryI2C();	// that function might be misimplemented... gotta look into how to write 350 values to the I2C memory in an optimized fashion
@@ -188,7 +188,7 @@ void main(void)
 				}
 				else							// the movements of the robot arm are manual; we need to read the keyboard
 				{
-						handleKey(&readKeyboardI2C());					// read the keyboard and update the variables accordingly
+						handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState);					// read the keyboard and update the variables accordingly
 				}
 				
 				//if(isBufferFull)															// if the circular buffer has sent a whole sequence of 8 valid bytes
@@ -203,7 +203,7 @@ void main(void)
 void printLcdDeltaCharacters()
 {
 		printLcdDeltaMotors(&currentArmState);
-		printLcdDeltaSensors(&sensors);
+		printLcdDeltaTrame(&trame);
 		printLcdDeltaWeightType(&weightType);
 		printLcdDeltaManualSettings(&keyboardManualSettings);
 		printLcdCurrentSequenceStep(&currentSequenceIndexes);
