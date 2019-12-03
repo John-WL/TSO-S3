@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        12/02/2019  21:43:58  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/02/2019  22:03:21  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -59,44 +59,44 @@ LINK MAP OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
             CODE    056BH     0124H     UNIT         ?C?LIB_CODE
             CODE    068FH     0119H     UNIT         ?PR?_PRINTLCDDELTAMOTORS?SUBOPTIMIZEDLCDPRINTER
             CODE    07A8H     00E1H     UNIT         ?PR?_PRINTLCDDELTATRAME?SUBOPTIMIZEDLCDPRINTER
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 2
 
 
             CODE    0889H     00DBH     UNIT         ?PR?_HANDLEKEY?KEYBOARDI2C
-            CODE    0964H     0094H     UNIT         ?PR?_PRINTLCDDELTAWEIGHTTYPE?SUBOPTIMIZEDLCDPRINTER
-            CODE    09F8H     008CH     UNIT         ?C_C51STARTUP
-            CODE    0A84H     0062H     UNIT         ?PR?INTERRUPTIONSERIE0?CIRCULARBUFFER_RX
-            CODE    0AE6H     0060H     UNIT         ?PR?_WEIGHTTYPETOSTRING?TYPECONVERSION
-            CODE    0B46H     0053H     UNIT         ?PR?_PRINTLCDDELTACONNECTIONSTATE?SUBOPTIMIZEDLCDPRINTER
-            CODE    0B99H     004EH     UNIT         ?PR?_HANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
-            CODE    0BE7H     0045H     UNIT         ?PR?VINITLCD?LCD
-            CODE    0C2CH     0043H     UNIT         ?PR?_PRINTLCDDELTAMANUALSETTINGS?SUBOPTIMIZEDLCDPRINTER
-            CODE    0C6FH     0042H     UNIT         ?PR?_VAFFICHELIGNELCD?LCD
-            CODE    0CB1H     0040H     UNIT         ?PR?READKEYBOARDI2C?KEYBOARDI2C
-            CODE    0CF1H     003FH     UNIT         ?PR?_VLCDECRIRECARACT?LCD
-            CODE    0D30H     003EH     UNIT         ?PR?_PRINTLCDCURRENTSEQUENCESTEP?SUBOPTIMIZEDLCDPRINTER
-            CODE    0D6EH     003DH     UNIT         ?PR?_VAFFICHELCDCOMPLET?LCD
-            CODE    0DABH     003DH     UNIT         ?PR?MAIN?PROJETFINALMAIN
-            CODE    0DE8H     0036H     UNIT         ?PR?PRINTLCDDELTACHARACTERS?PROJETFINALMAIN
-            CODE    0E1EH     0030H     UNIT         ?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECONVERSION
-            CODE    0E4EH     002DH     UNIT         ?PR?_UCLIRE8BITSI2C?I2C
-            CODE    0E7BH     002DH     UNIT         ?PR?_UNSIGNEDCHARTODECIMAL?TYPECONVERSION
-            CODE    0EA8H     002AH     UNIT         ?PR?_UCECRIRE8BITSI2C?I2C
-            CODE    0ED2H     0021H     UNIT         ?PR?_HALFCHARTOHEXADECIMAL?TYPECONVERSION
-            CODE    0EF3H     001EH     UNIT         ?PR?_VI2CDELAI?I2C
-            CODE    0F11H     0018H     UNIT         ?PR?_VECRIRE1BITI2C?I2C
-            CODE    0F29H     0018H     UNIT         ?CO?TYPECONVERSION
-            CODE    0F41H     0017H     UNIT         ?PR?VATTENDREBUSYLCD?LCD
-            CODE    0F58H     0014H     UNIT         ?PR?UCLIRE1BITI2C?I2C
-            CODE    0F6CH     0013H     UNIT         ?PR?VI2CSTARTBIT?I2C
-            CODE    0F7FH     0012H     UNIT         ?PR?VEFFACELCD?LCD
-            CODE    0F91H     0011H     UNIT         ?PR?VINITPORTSERIE?RXTX232
-            CODE    0FA2H     0010H     UNIT         ?PR?VI2CSTOPBIT?I2C
-            CODE    0FB2H     000FH     UNIT         ?PR?INITTIMER50MS?TIMER0
-            CODE    0FC1H     000CH     UNIT         ?PR?_UCTX?CIRCULARBUFFER_RX
-            CODE    0FCDH     0009H     UNIT         ?PR?UCKBHIT?CIRCULARBUFFER_RX
-            CODE    0FD6H     0005H     UNIT         ?PR?VINITINTERRUPT?CIRCULARBUFFER_RX
-            CODE    0FDBH     0003H     UNIT         ?PR?UCRX?CIRCULARBUFFER_RX
+            CODE    0964H     008CH     UNIT         ?C_C51STARTUP
+            CODE    09F0H     007DH     UNIT         ?PR?_PRINTLCDDELTAWEIGHTTYPE?SUBOPTIMIZEDLCDPRINTER
+            CODE    0A6DH     0062H     UNIT         ?PR?INTERRUPTIONSERIE0?CIRCULARBUFFER_RX
+            CODE    0ACFH     0060H     UNIT         ?PR?_WEIGHTTYPETOSTRING?TYPECONVERSION
+            CODE    0B2FH     0053H     UNIT         ?PR?_PRINTLCDDELTACONNECTIONSTATE?SUBOPTIMIZEDLCDPRINTER
+            CODE    0B82H     004EH     UNIT         ?PR?_HANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
+            CODE    0BD0H     0045H     UNIT         ?PR?VINITLCD?LCD
+            CODE    0C15H     0043H     UNIT         ?PR?_PRINTLCDDELTAMANUALSETTINGS?SUBOPTIMIZEDLCDPRINTER
+            CODE    0C58H     0042H     UNIT         ?PR?_VAFFICHELIGNELCD?LCD
+            CODE    0C9AH     0040H     UNIT         ?PR?READKEYBOARDI2C?KEYBOARDI2C
+            CODE    0CDAH     003FH     UNIT         ?PR?_VLCDECRIRECARACT?LCD
+            CODE    0D19H     003EH     UNIT         ?PR?_PRINTLCDCURRENTSEQUENCESTEP?SUBOPTIMIZEDLCDPRINTER
+            CODE    0D57H     003DH     UNIT         ?PR?_VAFFICHELCDCOMPLET?LCD
+            CODE    0D94H     003DH     UNIT         ?PR?MAIN?PROJETFINALMAIN
+            CODE    0DD1H     0036H     UNIT         ?PR?PRINTLCDDELTACHARACTERS?PROJETFINALMAIN
+            CODE    0E07H     0030H     UNIT         ?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECONVERSION
+            CODE    0E37H     002DH     UNIT         ?PR?_UCLIRE8BITSI2C?I2C
+            CODE    0E64H     002DH     UNIT         ?PR?_UNSIGNEDCHARTODECIMAL?TYPECONVERSION
+            CODE    0E91H     002AH     UNIT         ?PR?_UCECRIRE8BITSI2C?I2C
+            CODE    0EBBH     0021H     UNIT         ?PR?_HALFCHARTOHEXADECIMAL?TYPECONVERSION
+            CODE    0EDCH     001EH     UNIT         ?PR?_VI2CDELAI?I2C
+            CODE    0EFAH     0018H     UNIT         ?PR?_VECRIRE1BITI2C?I2C
+            CODE    0F12H     0018H     UNIT         ?CO?TYPECONVERSION
+            CODE    0F2AH     0017H     UNIT         ?PR?VATTENDREBUSYLCD?LCD
+            CODE    0F41H     0014H     UNIT         ?PR?UCLIRE1BITI2C?I2C
+            CODE    0F55H     0013H     UNIT         ?PR?VI2CSTARTBIT?I2C
+            CODE    0F68H     0012H     UNIT         ?PR?VEFFACELCD?LCD
+            CODE    0F7AH     0011H     UNIT         ?PR?VINITPORTSERIE?RXTX232
+            CODE    0F8BH     0010H     UNIT         ?PR?VI2CSTOPBIT?I2C
+            CODE    0F9BH     000FH     UNIT         ?PR?INITTIMER50MS?TIMER0
+            CODE    0FAAH     000CH     UNIT         ?PR?_UCTX?CIRCULARBUFFER_RX
+            CODE    0FB6H     0009H     UNIT         ?PR?UCKBHIT?CIRCULARBUFFER_RX
+            CODE    0FBFH     0005H     UNIT         ?PR?VINITINTERRUPT?CIRCULARBUFFER_RX
+            CODE    0FC4H     0003H     UNIT         ?PR?UCRX?CIRCULARBUFFER_RX
 
 
 
@@ -119,7 +119,7 @@ SEGMENT                                            XDATA_GROUP
   +--> ?PR?VINITPORTSERIE?RXTX232
   +--> ?PR?VINITLCD?LCD
   +--> ?PR?INITTIMER50MS?TIMER0
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 3
 
 
   +--> ?PR?_VAFFICHELCDCOMPLET?LCD
@@ -179,7 +179,7 @@ SEGMENT                                            XDATA_GROUP
 
 ?PR?_PRINTLCDDELTACONNECTIONSTATE?SUB...         01C6H    0003H
   +--> ?PR?_VLCDECRIRECARACT?LCD
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 4
 
 
 
@@ -237,23 +237,23 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00F8H         PUBLIC        EIP0
   C:023CH         PUBLIC        _vCircularBuffer
   X:01ECH         PUBLIC        ucIndiceOUT
-  C:0FDBH         PUBLIC        ucRx
+  C:0FC4H         PUBLIC        ucRx
   X:01EDH         PUBLIC        ucIndiceTrame
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 5
 
 
-  C:0FC1H         PUBLIC        _ucTx
+  C:0FAAH         PUBLIC        _ucTx
   B:0098H.0       PUBLIC        RI_0
   B:0098H.1       PUBLIC        TI_0
-  C:0FCDH         PUBLIC        ucKbHit
+  C:0FB6H         PUBLIC        ucKbHit
   D:0088H         PUBLIC        TCON
   X:01EEH         PUBLIC        ucIndiceIN
-  C:0A84H         PUBLIC        InterruptionSerie0
+  C:0A6DH         PUBLIC        InterruptionSerie0
   B:00A8H.4       PUBLIC        ES0
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
   X:01EFH         PUBLIC        ucData
-  C:0FD6H         PUBLIC        vInitInterrupt
+  C:0FBFH         PUBLIC        vInitInterrupt
   D:0099H         PUBLIC        SBUF0
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
@@ -262,36 +262,36 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITINTERRUPT
-  C:0FD6H         LINE#         30
-  C:0FD6H         LINE#         43
-  C:0FD6H         LINE#         44
-  C:0FD8H         LINE#         45
-  C:0FDAH         LINE#         46
+  C:0FBFH         LINE#         30
+  C:0FBFH         LINE#         43
+  C:0FBFH         LINE#         44
+  C:0FC1H         LINE#         45
+  C:0FC3H         LINE#         46
   -------         ENDPROC       VINITINTERRUPT
   -------         PROC          INTERRUPTIONSERIE0
-  C:0A84H         LINE#         48
-  C:0AA1H         LINE#         61
-  C:0AA4H         LINE#         62
-  C:0AA4H         LINE#         63
-  C:0AACH         LINE#         64
-  C:0ABCH         LINE#         65
-  C:0AC4H         LINE#         66
-  C:0AC6H         LINE#         67
-  C:0AC6H         LINE#         68
-  C:0AC9H         LINE#         69
-  C:0AC9H         LINE#         70
-  C:0ACBH         LINE#         71
-  C:0ACBH         LINE#         72
+  C:0A6DH         LINE#         48
+  C:0A8AH         LINE#         61
+  C:0A8DH         LINE#         62
+  C:0A8DH         LINE#         63
+  C:0A95H         LINE#         64
+  C:0AA5H         LINE#         65
+  C:0AADH         LINE#         66
+  C:0AAFH         LINE#         67
+  C:0AAFH         LINE#         68
+  C:0AB2H         LINE#         69
+  C:0AB2H         LINE#         70
+  C:0AB4H         LINE#         71
+  C:0AB4H         LINE#         72
   -------         ENDPROC       INTERRUPTIONSERIE0
   -------         PROC          UCRX
   -------         DO            
   D:0007H         SYMBOL        ucTemp
   -------         ENDDO         
-  C:0FDBH         LINE#         74
-  C:0FDBH         LINE#         86
-  C:0FDBH         LINE#         88
-  C:0FDDH         LINE#         89
-  C:0FDDH         LINE#         90
+  C:0FC4H         LINE#         74
+  C:0FC4H         LINE#         86
+  C:0FC4H         LINE#         88
+  C:0FC6H         LINE#         89
+  C:0FC6H         LINE#         90
   -------         ENDPROC       UCRX
   -------         PROC          _VCIRCULARBUFFER
   X:01FEH         SYMBOL        tramePtr
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:0003H         SYMBOL        ucRecu
   -------         ENDDO         
   C:023CH         LINE#         92
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 6
 
 
   C:0247H         LINE#         104
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   C:03D8H         LINE#         168
   C:03E0H         LINE#         169
   C:03E6H         LINE#         171
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 7
 
 
   C:03E6H         LINE#         172
@@ -368,28 +368,28 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   -------         ENDPROC       _VCIRCULARBUFFER
   -------         PROC          _UCTX
   D:0007H         SYMBOL        ucTransmi
-  C:0FC1H         LINE#         176
-  C:0FC1H         LINE#         188
-  C:0FC1H         LINE#         189
-  C:0FC3H         LINE#         190
-  C:0FC5H         LINE#         191
-  C:0FC8H         LINE#         192
-  C:0FCAH         LINE#         193
-  C:0FCCH         LINE#         194
+  C:0FAAH         LINE#         176
+  C:0FAAH         LINE#         188
+  C:0FAAH         LINE#         189
+  C:0FACH         LINE#         190
+  C:0FAEH         LINE#         191
+  C:0FB1H         LINE#         192
+  C:0FB3H         LINE#         193
+  C:0FB5H         LINE#         194
   -------         ENDPROC       _UCTX
   -------         PROC          UCKBHIT
-  C:0FCDH         LINE#         196
-  C:0FCDH         LINE#         208
-  C:0FCDH         LINE#         209
-  C:0FD0H         LINE#         210
-  C:0FD3H         LINE#         212
-  C:0FD5H         LINE#         213
+  C:0FB6H         LINE#         196
+  C:0FB6H         LINE#         208
+  C:0FB6H         LINE#         209
+  C:0FB9H         LINE#         210
+  C:0FBCH         LINE#         212
+  C:0FBEH         LINE#         213
   -------         ENDPROC       UCKBHIT
   -------         ENDMOD        CIRCULARBUFFER_RX
 
   -------         MODULE        I2C
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0FA2H         PUBLIC        vI2CStopBit
+  C:0F8BH         PUBLIC        vI2CStopBit
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
@@ -398,97 +398,97 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00F8H         PUBLIC        EIP0
   B:0090H.4       PUBLIC        P1_4
   B:0090H.5       PUBLIC        P1_5
-  C:0F00H         PUBLIC        _vI2CDelai
+  C:0EE9H         PUBLIC        _vI2CDelai
   D:0088H         PUBLIC        TCON
-  C:0EA8H         PUBLIC        _ucEcrire8BitsI2C
+  C:0E91H         PUBLIC        _ucEcrire8BitsI2C
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
-  C:0F11H         PUBLIC        _vEcrire1BitI2C
+  C:0EFAH         PUBLIC        _vEcrire1BitI2C
   D:00C8H         PUBLIC        T2CON
-  C:0F6CH         PUBLIC        vI2CStartBit
-  C:0E4EH         PUBLIC        _ucLire8BitsI2C
-  C:0F58H         PUBLIC        ucLire1BitI2C
+  C:0F55H         PUBLIC        vI2CStartBit
+  C:0E37H         PUBLIC        _ucLire8BitsI2C
+  C:0F41H         PUBLIC        ucLire1BitI2C
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
-  C:0EF3H         SYMBOL        L?0025
-  C:0EFAH         SYMBOL        L?0026
-  C:0EFCH         SYMBOL        L?0027
+  C:0EDCH         SYMBOL        L?0025
+  C:0EE3H         SYMBOL        L?0026
+  C:0EE5H         SYMBOL        L?0027
   -------         PROC          L?0024
   -------         ENDPROC       L?0024
-  C:0EF3H         SYMBOL        L?0025
-  C:0EFAH         SYMBOL        L?0026
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 8
+  C:0EDCH         SYMBOL        L?0025
+  C:0EE3H         SYMBOL        L?0026
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 8
 
 
-  C:0EFCH         SYMBOL        L?0027
+  C:0EE5H         SYMBOL        L?0027
   -------         PROC          _VI2CDELAI
   D:0006H         SYMBOL        tmp
-  C:0F00H         LINE#         64
-  C:0F00H         LINE#         65
-  C:0F00H         LINE#         66
-  C:0F09H         LINE#         67
-  C:0F09H         LINE#         68
-  C:0F0EH         LINE#         69
-  C:0F10H         LINE#         70
+  C:0EE9H         LINE#         64
+  C:0EE9H         LINE#         65
+  C:0EE9H         LINE#         66
+  C:0EF2H         LINE#         67
+  C:0EF2H         LINE#         68
+  C:0EF7H         LINE#         69
+  C:0EF9H         LINE#         70
   -------         ENDPROC       _VI2CDELAI
   -------         PROC          VI2CSTARTBIT
-  C:0F6CH         LINE#         74
-  C:0F6CH         LINE#         83
-  C:0F6CH         LINE#         84
-  C:0F6EH         LINE#         85
-  C:0F6EH         LINE#         86
-  C:0F71H         LINE#         87
-  C:0F73H         LINE#         88
-  C:0F76H         LINE#         89
-  C:0F78H         LINE#         90
+  C:0F55H         LINE#         74
+  C:0F55H         LINE#         83
+  C:0F55H         LINE#         84
+  C:0F57H         LINE#         85
+  C:0F57H         LINE#         86
+  C:0F5AH         LINE#         87
+  C:0F5CH         LINE#         88
+  C:0F5FH         LINE#         89
+  C:0F61H         LINE#         90
   -------         ENDPROC       VI2CSTARTBIT
   -------         PROC          VI2CSTOPBIT
-  C:0FA2H         LINE#         95
-  C:0FA2H         LINE#         107
-  C:0FA2H         LINE#         111
-  C:0FA4H         LINE#         112
-  C:0FA6H         LINE#         113
-  C:0FA6H         LINE#         114
-  C:0FA6H         LINE#         115
-  C:0FA9H         LINE#         116
-  C:0FABH         LINE#         117
+  C:0F8BH         LINE#         95
+  C:0F8BH         LINE#         107
+  C:0F8BH         LINE#         111
+  C:0F8DH         LINE#         112
+  C:0F8FH         LINE#         113
+  C:0F8FH         LINE#         114
+  C:0F8FH         LINE#         115
+  C:0F92H         LINE#         116
+  C:0F94H         LINE#         117
   -------         ENDPROC       VI2CSTOPBIT
   -------         PROC          _VECRIRE1BITI2C
   D:0007H         SYMBOL        ucBitOut
-  C:0F11H         LINE#         123
-  C:0F11H         LINE#         141
-  C:0F11H         LINE#         142
-  C:0F13H         LINE#         144
-  C:0F17H         LINE#         145
-  C:0F1BH         LINE#         147
-  C:0F1DH         LINE#         148
-  C:0F1DH         LINE#         149
-  C:0F1DH         LINE#         150
-  C:0F20H         LINE#         151
-  C:0F22H         LINE#         152
+  C:0EFAH         LINE#         123
+  C:0EFAH         LINE#         141
+  C:0EFAH         LINE#         142
+  C:0EFCH         LINE#         144
+  C:0F00H         LINE#         145
+  C:0F04H         LINE#         147
+  C:0F06H         LINE#         148
+  C:0F06H         LINE#         149
+  C:0F06H         LINE#         150
+  C:0F09H         LINE#         151
+  C:0F0BH         LINE#         152
   -------         ENDPROC       _VECRIRE1BITI2C
   -------         PROC          UCLIRE1BITI2C
   -------         DO            
   D:0005H         SYMBOL        ucBitIn
   -------         ENDDO         
-  C:0F58H         LINE#         159
-  C:0F58H         LINE#         174
-  C:0F58H         LINE#         177
-  C:0F5AH         LINE#         178
-  C:0F5CH         LINE#         179
-  C:0F5CH         LINE#         180
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 9
+  C:0F41H         LINE#         159
+  C:0F41H         LINE#         174
+  C:0F41H         LINE#         177
+  C:0F43H         LINE#         178
+  C:0F45H         LINE#         179
+  C:0F45H         LINE#         180
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 9
 
 
-  C:0F5CH         LINE#         181
-  C:0F5FH         LINE#         182
-  C:0F62H         LINE#         183
-  C:0F64H         LINE#         184
-  C:0F66H         LINE#         185
-  C:0F69H         LINE#         187
-  C:0F6BH         LINE#         188
+  C:0F45H         LINE#         181
+  C:0F48H         LINE#         182
+  C:0F4BH         LINE#         183
+  C:0F4DH         LINE#         184
+  C:0F4FH         LINE#         185
+  C:0F52H         LINE#         187
+  C:0F54H         LINE#         188
   -------         ENDPROC       UCLIRE1BITI2C
   -------         PROC          _UCECRIRE8BITSI2C
   D:0005H         SYMBOL        ucTxData
@@ -497,22 +497,22 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:0007H         SYMBOL        ucI2C
   D:0004H         SYMBOL        ucI2CBit
   -------         ENDDO         
-  C:0EA8H         LINE#         193
-  C:0EAAH         LINE#         206
-  C:0EAAH         LINE#         210
-  C:0EADH         LINE#         211
-  C:0EADH         LINE#         212
-  C:0EAFH         LINE#         213
-  C:0EB2H         LINE#         214
-  C:0EB5H         LINE#         215
-  C:0EB5H         LINE#         216
-  C:0EB7H         LINE#         217
-  C:0EB7H         LINE#         218
-  C:0EBCH         LINE#         219
-  C:0EBFH         LINE#         220
-  C:0EC3H         LINE#         221
-  C:0ECEH         LINE#         222
-  C:0ED1H         LINE#         223
+  C:0E91H         LINE#         193
+  C:0E93H         LINE#         206
+  C:0E93H         LINE#         210
+  C:0E96H         LINE#         211
+  C:0E96H         LINE#         212
+  C:0E98H         LINE#         213
+  C:0E9BH         LINE#         214
+  C:0E9EH         LINE#         215
+  C:0E9EH         LINE#         216
+  C:0EA0H         LINE#         217
+  C:0EA0H         LINE#         218
+  C:0EA5H         LINE#         219
+  C:0EA8H         LINE#         220
+  C:0EACH         LINE#         221
+  C:0EB7H         LINE#         222
+  C:0EBAH         LINE#         223
   -------         ENDPROC       _UCECRIRE8BITSI2C
   -------         PROC          _UCLIRE8BITSI2C
   D:0001H         SYMBOL        ucAckValue
@@ -521,25 +521,25 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:0005H         SYMBOL        ucI2C
   D:0002H         SYMBOL        i
   -------         ENDDO         
-  C:0E4EH         LINE#         227
-  C:0E50H         LINE#         244
-  C:0E50H         LINE#         247
-  C:0E52H         LINE#         248
-  C:0E54H         LINE#         249
-  C:0E54H         LINE#         250
-  C:0E58H         LINE#         251
-  C:0E5DH         LINE#         252
-  C:0E60H         LINE#         253
-  C:0E64H         LINE#         254
-  C:0E68H         LINE#         255
-  C:0E73H         LINE#         256
-  C:0E78H         LINE#         257
-  C:0E7AH         LINE#         258
+  C:0E37H         LINE#         227
+  C:0E39H         LINE#         244
+  C:0E39H         LINE#         247
+  C:0E3BH         LINE#         248
+  C:0E3DH         LINE#         249
+  C:0E3DH         LINE#         250
+  C:0E41H         LINE#         251
+  C:0E46H         LINE#         252
+  C:0E49H         LINE#         253
+  C:0E4DH         LINE#         254
+  C:0E51H         LINE#         255
+  C:0E5CH         LINE#         256
+  C:0E61H         LINE#         257
+  C:0E63H         LINE#         258
   -------         ENDPROC       _UCLIRE8BITSI2C
   -------         ENDMOD        I2C
 
   -------         MODULE        KEYBOARDI2C
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 10
 
 
   C:0000H         SYMBOL        _ICE_DUMMY_
@@ -550,14 +550,14 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   B:0090H.2       PUBLIC        P1_2
-  C:0CB1H         PUBLIC        readKeyboardI2C
+  C:0C9AH         PUBLIC        readKeyboardI2C
   C:0889H         PUBLIC        _handleKey
   D:0088H         PUBLIC        TCON
   C:03E7H         PUBLIC        _manualIncrementMotor
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
   X:01DCH         PUBLIC        keyboardCharacters
-  C:0B99H         PUBLIC        _handleMotorValueOverflow
+  C:0B82H         PUBLIC        _handleMotorValueOverflow
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
@@ -568,24 +568,24 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   X:01C6H         SYMBOL        key
   D:0007H         SYMBOL        ackValue
   -------         ENDDO         
-  C:0CB1H         LINE#         28
-  C:0CB1H         LINE#         29
-  C:0CB1H         LINE#         30
-  C:0CB7H         LINE#         31
-  C:0CB9H         LINE#         33
-  C:0CBCH         LINE#         34
-  C:0CBCH         LINE#         35
-  C:0CBFH         LINE#         36
-  C:0CC4H         LINE#         37
-  C:0CC7H         LINE#         38
-  C:0CC7H         LINE#         39
-  C:0CC9H         LINE#         40
-  C:0CC9H         LINE#         41
-  C:0CD3H         LINE#         42
-  C:0CD6H         LINE#         44
-  C:0CEAH         LINE#         45
-  C:0CEAH         LINE#         47
-  C:0CF0H         LINE#         48
+  C:0C9AH         LINE#         28
+  C:0C9AH         LINE#         29
+  C:0C9AH         LINE#         30
+  C:0CA0H         LINE#         31
+  C:0CA2H         LINE#         33
+  C:0CA5H         LINE#         34
+  C:0CA5H         LINE#         35
+  C:0CA8H         LINE#         36
+  C:0CADH         LINE#         37
+  C:0CB0H         LINE#         38
+  C:0CB0H         LINE#         39
+  C:0CB2H         LINE#         40
+  C:0CB2H         LINE#         41
+  C:0CBCH         LINE#         42
+  C:0CBFH         LINE#         44
+  C:0CD3H         LINE#         45
+  C:0CD3H         LINE#         47
+  C:0CD9H         LINE#         48
   -------         ENDPROC       READKEYBOARDI2C
   -------         PROC          _HANDLEKEY
   D:0001H         SYMBOL        key
@@ -599,7 +599,7 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   C:08B2H         LINE#         55
   C:08BEH         LINE#         56
   C:08C0H         LINE#         57
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 11
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 11
 
 
   C:08C0H         LINE#         58
@@ -659,22 +659,22 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   C:056AH         LINE#         110
   -------         ENDPROC       _MANUALINCREMENTMOTOR
   -------         PROC          _HANDLEMOTORVALUEOVERFLOW
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 12
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 12
 
 
   X:01D6H         SYMBOL        motorValue
   X:01D9H         SYMBOL        direction
-  C:0B99H         LINE#         112
-  C:0BA4H         LINE#         113
-  C:0BA4H         LINE#         114
-  C:0BC7H         LINE#         115
-  C:0BC7H         LINE#         116
-  C:0BC9H         LINE#         117
-  C:0BCBH         LINE#         118
-  C:0BE2H         LINE#         119
-  C:0BE2H         LINE#         120
-  C:0BE6H         LINE#         121
-  C:0BE6H         LINE#         122
+  C:0B82H         LINE#         112
+  C:0B8DH         LINE#         113
+  C:0B8DH         LINE#         114
+  C:0BB0H         LINE#         115
+  C:0BB0H         LINE#         116
+  C:0BB2H         LINE#         117
+  C:0BB4H         LINE#         118
+  C:0BCBH         LINE#         119
+  C:0BCBH         LINE#         120
+  C:0BCFH         LINE#         121
+  C:0BCFH         LINE#         122
   -------         ENDPROC       _HANDLEMOTORVALUEOVERFLOW
   -------         ENDMOD        KEYBOARDI2C
 
@@ -684,42 +684,42 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:0F7FH         PUBLIC        vEffaceLCD
+  C:0F68H         PUBLIC        vEffaceLCD
   X:01F8H         PUBLIC        PtrLCDChar
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   X:01FAH         PUBLIC        PtrLCDBusy
   D:0088H         PUBLIC        TCON
   C:0003H         PUBLIC        _ucDonneValeurLigne
-  C:0CF1H         PUBLIC        _vLcdEcrireCaract
+  C:0CDAH         PUBLIC        _vLcdEcrireCaract
   D:00B8H         PUBLIC        IP0
-  C:0D6EH         PUBLIC        _vAfficheLCDComplet
+  C:0D57H         PUBLIC        _vAfficheLCDComplet
   D:00E8H         PUBLIC        EIE
-  C:0BE7H         PUBLIC        vInitLCD
+  C:0BD0H         PUBLIC        vInitLCD
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
   X:01FCH         PUBLIC        PtrLCDConfig
   D:00C8H         PUBLIC        T2CON
-  C:0C6FH         PUBLIC        _vAfficheLigneLCD
-  C:0F41H         PUBLIC        vAttendreBusyLcd
+  C:0C58H         PUBLIC        _vAfficheLigneLCD
+  C:0F2AH         PUBLIC        vAttendreBusyLcd
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITLCD
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:0BE7H         LINE#         52
-  C:0BE7H         LINE#         64
-  C:0BE7H         LINE#         66
-  C:0BF5H         LINE#         67
-  C:0BF8H         LINE#         68
-  C:0C06H         LINE#         69
-  C:0C09H         LINE#         70
-  C:0C17H         LINE#         71
-  C:0C1AH         LINE#         72
-  C:0C1DH         LINE#         73
-  C:0C2BH         LINE#         74
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 13
+  C:0BD0H         LINE#         52
+  C:0BD0H         LINE#         64
+  C:0BD0H         LINE#         66
+  C:0BDEH         LINE#         67
+  C:0BE1H         LINE#         68
+  C:0BEFH         LINE#         69
+  C:0BF2H         LINE#         70
+  C:0C00H         LINE#         71
+  C:0C03H         LINE#         72
+  C:0C06H         LINE#         73
+  C:0C14H         LINE#         74
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 13
 
 
   -------         ENDPROC       VINITLCD
@@ -727,13 +727,13 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   X:01CFH         SYMBOL        ucCaract
   X:01D0H         SYMBOL        ucLigne
   X:01D1H         SYMBOL        ucCase
-  C:0CF1H         LINE#         110
-  C:0CFCH         LINE#         123
-  C:0CFCH         LINE#         124
-  C:0CFFH         LINE#         125
-  C:0D1AH         LINE#         126
-  C:0D1DH         LINE#         127
-  C:0D2FH         LINE#         128
+  C:0CDAH         LINE#         110
+  C:0CE5H         LINE#         123
+  C:0CE5H         LINE#         124
+  C:0CE8H         LINE#         125
+  C:0D03H         LINE#         126
+  C:0D06H         LINE#         127
+  C:0D18H         LINE#         128
   -------         ENDPROC       _VLCDECRIRECARACT
   -------         PROC          _VAFFICHELIGNELCD
   X:01CAH         SYMBOL        ucTab
@@ -741,45 +741,45 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   -------         DO            
   X:01CEH         SYMBOL        i
   -------         ENDDO         
-  C:0C6FH         LINE#         132
-  C:0C7DH         LINE#         143
-  C:0C7DH         LINE#         144
-  C:0C80H         LINE#         146
-  C:0C81H         LINE#         147
-  C:0C81H         LINE#         148
-  C:0CA4H         LINE#         149
-  C:0CB0H         LINE#         150
+  C:0C58H         LINE#         132
+  C:0C66H         LINE#         143
+  C:0C66H         LINE#         144
+  C:0C69H         LINE#         146
+  C:0C6AH         LINE#         147
+  C:0C6AH         LINE#         148
+  C:0C8DH         LINE#         149
+  C:0C99H         LINE#         150
   -------         ENDPROC       _VAFFICHELIGNELCD
   -------         PROC          _VAFFICHELCDCOMPLET
   X:01C6H         SYMBOL        ucTab
   -------         DO            
   X:01C9H         SYMBOL        i
   -------         ENDDO         
-  C:0D6EH         LINE#         154
-  C:0D79H         LINE#         165
-  C:0D79H         LINE#         167
-  C:0D86H         LINE#         168
-  C:0D86H         LINE#         169
-  C:0DA2H         LINE#         170
-  C:0DAAH         LINE#         171
+  C:0D57H         LINE#         154
+  C:0D62H         LINE#         165
+  C:0D62H         LINE#         167
+  C:0D6FH         LINE#         168
+  C:0D6FH         LINE#         169
+  C:0D8BH         LINE#         170
+  C:0D93H         LINE#         171
   -------         ENDPROC       _VAFFICHELCDCOMPLET
   -------         PROC          VEFFACELCD
-  C:0F7FH         LINE#         174
-  C:0F7FH         LINE#         185
-  C:0F7FH         LINE#         186
-  C:0F82H         LINE#         187
-  C:0F90H         LINE#         188
+  C:0F68H         LINE#         174
+  C:0F68H         LINE#         185
+  C:0F68H         LINE#         186
+  C:0F6BH         LINE#         187
+  C:0F79H         LINE#         188
   -------         ENDPROC       VEFFACELCD
   -------         PROC          VATTENDREBUSYLCD
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
-  C:0F41H         LINE#         192
-  C:0F41H         LINE#         204
-  C:0F41H         LINE#         206
-  C:0F50H         LINE#         207
-  C:0F57H         LINE#         208
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 14
+  C:0F2AH         LINE#         192
+  C:0F2AH         LINE#         204
+  C:0F2AH         LINE#         206
+  C:0F39H         LINE#         207
+  C:0F40H         LINE#         208
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 14
 
 
   -------         ENDPROC       VATTENDREBUSYLCD
@@ -822,12 +822,12 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   X:0001H         PUBLIC        keyboardManualSettings
   X:0003H         PUBLIC        trame
   X:0008H         PUBLIC        currentSequenceIndexes
-  C:0DABH         PUBLIC        main
+  C:0D94H         PUBLIC        main
   X:000AH         PUBLIC        currentArmState
   X:000FH         PUBLIC        weightType
   D:0088H         PUBLIC        TCON
   X:0010H         PUBLIC        connectionStateString
-  C:0DE8H         PUBLIC        printLcdDeltaCharacters
+  C:0DD1H         PUBLIC        printLcdDeltaCharacters
   D:00B8H         PUBLIC        IP0
   X:0014H         PUBLIC        sequences
   D:00E8H         PUBLIC        EIE
@@ -838,37 +838,37 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          MAIN
-  C:0DABH         LINE#         161
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 15
+  C:0D94H         LINE#         161
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 15
 
 
-  C:0DABH         LINE#         171
-  C:0DABH         LINE#         172
-  C:0DAEH         LINE#         173
-  C:0DB1H         LINE#         175
-  C:0DB4H         LINE#         176
-  C:0DBDH         LINE#         178
-  C:0DBDH         LINE#         179
-  C:0DBDH         LINE#         180
-  C:0DC0H         LINE#         181
-  C:0DC6H         LINE#         182
-  C:0DC6H         LINE#         188
-  C:0DC6H         LINE#         190
-  C:0DC6H         LINE#         191
-  C:0DE6H         LINE#         192
-  C:0DE6H         LINE#         195
-  C:0DE6H         LINE#         197
-  C:0DE6H         LINE#         200
+  C:0D94H         LINE#         171
+  C:0D94H         LINE#         172
+  C:0D97H         LINE#         173
+  C:0D9AH         LINE#         175
+  C:0D9DH         LINE#         176
+  C:0DA6H         LINE#         178
+  C:0DA6H         LINE#         179
+  C:0DA6H         LINE#         180
+  C:0DA9H         LINE#         181
+  C:0DAFH         LINE#         182
+  C:0DAFH         LINE#         188
+  C:0DAFH         LINE#         190
+  C:0DAFH         LINE#         191
+  C:0DCFH         LINE#         192
+  C:0DCFH         LINE#         195
+  C:0DCFH         LINE#         197
+  C:0DCFH         LINE#         200
   -------         ENDPROC       MAIN
   -------         PROC          PRINTLCDDELTACHARACTERS
-  C:0DE8H         LINE#         203
-  C:0DE8H         LINE#         204
-  C:0DE8H         LINE#         205
-  C:0DF1H         LINE#         206
-  C:0DFAH         LINE#         207
-  C:0E03H         LINE#         208
-  C:0E0CH         LINE#         209
-  C:0E15H         LINE#         210
+  C:0DD1H         LINE#         203
+  C:0DD1H         LINE#         204
+  C:0DD1H         LINE#         205
+  C:0DDAH         LINE#         206
+  C:0DE3H         LINE#         207
+  C:0DECH         LINE#         208
+  C:0DF5H         LINE#         209
+  C:0DFEH         LINE#         210
   -------         ENDPROC       PRINTLCDDELTACHARACTERS
   -------         ENDMOD        PROJETFINALMAIN
 
@@ -881,7 +881,7 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   B:0098H.1       PUBLIC        TI_0
-  C:0F91H         PUBLIC        vInitPortSerie
+  C:0F7AH         PUBLIC        vInitPortSerie
   D:0087H         PUBLIC        PCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
@@ -895,29 +895,29 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITPORTSERIE
-  C:0F91H         LINE#         23
-  C:0F91H         LINE#         35
-  C:0F91H         LINE#         36
-  C:0F94H         LINE#         37
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 16
+  C:0F7AH         LINE#         23
+  C:0F7AH         LINE#         35
+  C:0F7AH         LINE#         36
+  C:0F7DH         LINE#         37
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 16
 
 
-  C:0F97H         LINE#         38
-  C:0F9AH         LINE#         39
-  C:0F9DH         LINE#         40
-  C:0F9FH         LINE#         41
-  C:0FA1H         LINE#         42
+  C:0F80H         LINE#         38
+  C:0F83H         LINE#         39
+  C:0F86H         LINE#         40
+  C:0F88H         LINE#         41
+  C:0F8AH         LINE#         42
   -------         ENDPROC       VINITPORTSERIE
   -------         ENDMOD        RXTX232
 
   -------         MODULE        SUBOPTIMIZEDLCDPRINTER
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0D30H         PUBLIC        _printLcdCurrentSequenceStep
+  C:0D19H         PUBLIC        _printLcdCurrentSequenceStep
   C:07A8H         PUBLIC        _printLcdDeltaTrame
   C:068FH         PUBLIC        _printLcdDeltaMotors
-  C:0964H         PUBLIC        _printLcdDeltaWeightType
-  C:0B46H         PUBLIC        _printLcdDeltaConnectionState
-  C:0C2CH         PUBLIC        _printLcdDeltaManualSettings
+  C:09F0H         PUBLIC        _printLcdDeltaWeightType
+  C:0B2FH         PUBLIC        _printLcdDeltaConnectionState
+  C:0C15H         PUBLIC        _printLcdDeltaManualSettings
   -------         PROC          _PRINTLCDDELTAMOTORS
   X:01C6H         SYMBOL        currentArmState
   C:068FH         LINE#         19
@@ -947,39 +947,43 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   C:086DH         LINE#         68
   -------         ENDPROC       _PRINTLCDDELTATRAME
   -------         PROC          _PRINTLCDDELTAWEIGHTTYPE
-  X:01C6H         SYMBOL        weightType
-  C:0964H         LINE#         72
-  C:096FH         LINE#         83
-  C:096FH         LINE#         84
-  C:0988H         LINE#         85
-  C:09A4H         LINE#         86
-  C:09C0H         LINE#         87
-  C:09DCH         LINE#         88
+  D:0001H         SYMBOL        weightType
+  -------         DO            
+  X:01C6H         SYMBOL        weightString
+  -------         ENDDO         
+  C:09F0H         LINE#         72
+  C:09F0H         LINE#         83
+  C:09F0H         LINE#         84
+  C:09FEH         LINE#         85
+  C:0A09H         LINE#         86
+  C:0A22H         LINE#         87
+  C:0A3BH         LINE#         88
+  C:0A54H         LINE#         89
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 17
+
+
   -------         ENDPROC       _PRINTLCDDELTAWEIGHTTYPE
   -------         PROC          _PRINTLCDDELTAMANUALSETTINGS
   X:01C6H         SYMBOL        keyboardManualSettings
-  C:0C2CH         LINE#         92
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 17
-
-
-  C:0C37H         LINE#         102
-  C:0C37H         LINE#         103
-  C:0C53H         LINE#         104
+  C:0C15H         LINE#         93
+  C:0C20H         LINE#         103
+  C:0C20H         LINE#         104
+  C:0C3CH         LINE#         105
   -------         ENDPROC       _PRINTLCDDELTAMANUALSETTINGS
   -------         PROC          _PRINTLCDCURRENTSEQUENCESTEP
   X:01C6H         SYMBOL        currentSequenceIndexes
-  C:0D30H         LINE#         108
-  C:0D3BH         LINE#         118
-  C:0D3BH         LINE#         119
-  C:0D53H         LINE#         120
+  C:0D19H         LINE#         109
+  C:0D24H         LINE#         119
+  C:0D24H         LINE#         120
+  C:0D3CH         LINE#         121
   -------         ENDPROC       _PRINTLCDCURRENTSEQUENCESTEP
   -------         PROC          _PRINTLCDDELTACONNECTIONSTATE
   X:01C6H         SYMBOL        connectionStateString
-  C:0B46H         LINE#         124
-  C:0B51H         LINE#         134
-  C:0B51H         LINE#         135
-  C:0B67H         LINE#         136
-  C:0B80H         LINE#         137
+  C:0B2FH         LINE#         125
+  C:0B3AH         LINE#         135
+  C:0B3AH         LINE#         136
+  C:0B50H         LINE#         137
+  C:0B69H         LINE#         138
   -------         ENDPROC       _PRINTLCDDELTACONNECTIONSTATE
   -------         ENDMOD        SUBOPTIMIZEDLCDPRINTER
 
@@ -988,7 +992,7 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
-  C:0FB2H         PUBLIC        initTimer50ms
+  C:0F9BH         PUBLIC        initTimer50ms
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
@@ -1005,38 +1009,38 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          INITTIMER50MS
-  C:0FB2H         LINE#         19
-  C:0FB2H         LINE#         29
-  C:0FB2H         LINE#         30
-  C:0FB5H         LINE#         31
-  C:0FB8H         LINE#         32
-  C:0FBBH         LINE#         33
-  C:0FBEH         LINE#         34
-  C:0FC0H         LINE#         35
+  C:0F9BH         LINE#         19
+  C:0F9BH         LINE#         29
+  C:0F9BH         LINE#         30
+  C:0F9EH         LINE#         31
+  C:0FA1H         LINE#         32
+  C:0FA4H         LINE#         33
+  C:0FA7H         LINE#         34
+  C:0FA9H         LINE#         35
   -------         ENDPROC       INITTIMER50MS
   -------         ENDMOD        TIMER0
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 18
+
+
 
   -------         MODULE        TYPECONVERSION
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 18
-
-
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
-  C:0ED2H         PUBLIC        _halfCharToHexaDecimal
+  C:0EBBH         PUBLIC        _halfCharToHexaDecimal
   D:0088H         PUBLIC        TCON
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
-  C:0E7BH         PUBLIC        _unsignedCharToDecimal
+  C:0E64H         PUBLIC        _unsignedCharToDecimal
   D:0098H         PUBLIC        SCON0
-  C:0E1EH         PUBLIC        _unsignedCharToHexaDecimal
+  C:0E07H         PUBLIC        _unsignedCharToHexaDecimal
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
-  C:0AE6H         PUBLIC        _weightTypeToString
+  C:0ACFH         PUBLIC        _weightTypeToString
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          _UNSIGNEDCHARTOHEXADECIMAL
@@ -1045,22 +1049,22 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   -------         DO            
   X:01C9H         SYMBOL        result
   -------         ENDDO         
-  C:0E1EH         LINE#         22
-  C:0E1EH         LINE#         34
-  C:0E1EH         LINE#         37
-  C:0E21H         LINE#         38
-  C:0E21H         LINE#         39
-  C:0E26H         LINE#         40
-  C:0E28H         LINE#         41
-  C:0E2CH         LINE#         42
-  C:0E2CH         LINE#         43
-  C:0E35H         LINE#         44
-  C:0E37H         LINE#         46
-  C:0E37H         LINE#         47
-  C:0E3DH         LINE#         48
-  C:0E3DH         LINE#         49
-  C:0E4BH         LINE#         51
-  C:0E4DH         LINE#         52
+  C:0E07H         LINE#         22
+  C:0E07H         LINE#         34
+  C:0E07H         LINE#         37
+  C:0E0AH         LINE#         38
+  C:0E0AH         LINE#         39
+  C:0E0FH         LINE#         40
+  C:0E11H         LINE#         41
+  C:0E15H         LINE#         42
+  C:0E15H         LINE#         43
+  C:0E1EH         LINE#         44
+  C:0E20H         LINE#         46
+  C:0E20H         LINE#         47
+  C:0E26H         LINE#         48
+  C:0E26H         LINE#         49
+  C:0E34H         LINE#         51
+  C:0E36H         LINE#         52
   -------         ENDPROC       _UNSIGNEDCHARTOHEXADECIMAL
   -------         PROC          _UNSIGNEDCHARTODECIMAL
   D:0001H         SYMBOL        numberToEvaluate
@@ -1068,79 +1072,79 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
   -------         DO            
   D:0007H         SYMBOL        result
   -------         ENDDO         
-  C:0E7BH         LINE#         55
-  C:0E7BH         LINE#         68
-  C:0E7BH         LINE#         71
-  C:0E7EH         LINE#         72
-  C:0E7EH         LINE#         73
-  C:0E84H         LINE#         74
-  C:0E86H         LINE#         75
-  C:0E8AH         LINE#         76
-  C:0E8AH         LINE#         77
-  C:0E91H         LINE#         78
-  C:0E93H         LINE#         79
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 19
+  C:0E64H         LINE#         55
+  C:0E64H         LINE#         68
+  C:0E64H         LINE#         71
+  C:0E67H         LINE#         72
+  C:0E67H         LINE#         73
+  C:0E6DH         LINE#         74
+  C:0E6FH         LINE#         75
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 19
 
 
-  C:0E97H         LINE#         80
-  C:0E97H         LINE#         81
-  C:0EA3H         LINE#         82
-  C:0EA5H         LINE#         84
-  C:0EA5H         LINE#         85
-  C:0EA7H         LINE#         86
-  C:0EA7H         LINE#         88
-  C:0EA7H         LINE#         89
+  C:0E73H         LINE#         76
+  C:0E73H         LINE#         77
+  C:0E7AH         LINE#         78
+  C:0E7CH         LINE#         79
+  C:0E80H         LINE#         80
+  C:0E80H         LINE#         81
+  C:0E8CH         LINE#         82
+  C:0E8EH         LINE#         84
+  C:0E8EH         LINE#         85
+  C:0E90H         LINE#         86
+  C:0E90H         LINE#         88
+  C:0E90H         LINE#         89
   -------         ENDPROC       _UNSIGNEDCHARTODECIMAL
   -------         PROC          _WEIGHTTYPETOSTRING
   X:01C9H         SYMBOL        weightTypeIndex
   -------         DO            
   X:01CCH         SYMBOL        result
   -------         ENDDO         
-  C:0AE6H         LINE#         92
-  C:0AF1H         LINE#         103
-  C:0AF1H         LINE#         106
-  C:0AF7H         LINE#         107
-  C:0AF7H         LINE#         108
-  C:0B05H         LINE#         109
-  C:0B07H         LINE#         110
-  C:0B0BH         LINE#         111
-  C:0B0BH         LINE#         112
-  C:0B19H         LINE#         113
-  C:0B1BH         LINE#         114
-  C:0B22H         LINE#         115
-  C:0B22H         LINE#         116
-  C:0B2DH         LINE#         117
-  C:0B2FH         LINE#         119
-  C:0B2FH         LINE#         120
-  C:0B3AH         LINE#         121
-  C:0B3AH         LINE#         123
-  C:0B45H         LINE#         124
+  C:0ACFH         LINE#         92
+  C:0ADAH         LINE#         103
+  C:0ADAH         LINE#         106
+  C:0AE0H         LINE#         107
+  C:0AE0H         LINE#         108
+  C:0AEEH         LINE#         109
+  C:0AF0H         LINE#         110
+  C:0AF4H         LINE#         111
+  C:0AF4H         LINE#         112
+  C:0B02H         LINE#         113
+  C:0B04H         LINE#         114
+  C:0B0BH         LINE#         115
+  C:0B0BH         LINE#         116
+  C:0B16H         LINE#         117
+  C:0B18H         LINE#         119
+  C:0B18H         LINE#         120
+  C:0B23H         LINE#         121
+  C:0B23H         LINE#         123
+  C:0B2EH         LINE#         124
   -------         ENDPROC       _WEIGHTTYPETOSTRING
   -------         PROC          _HALFCHARTOHEXADECIMAL
   D:0001H         SYMBOL        numberToEvaluate
   -------         DO            
   D:0007H         SYMBOL        result
   -------         ENDDO         
-  C:0ED2H         LINE#         127
-  C:0ED2H         LINE#         137
-  C:0ED2H         LINE#         140
-  C:0EDBH         LINE#         141
-  C:0EDBH         LINE#         142
-  C:0EDFH         LINE#         143
-  C:0EE1H         LINE#         144
-  C:0EEAH         LINE#         145
-  C:0EEAH         LINE#         146
-  C:0EEEH         LINE#         147
-  C:0EF0H         LINE#         149
-  C:0EF0H         LINE#         150
-  C:0EF2H         LINE#         151
-  C:0EF2H         LINE#         153
-  C:0EF2H         LINE#         154
+  C:0EBBH         LINE#         127
+  C:0EBBH         LINE#         137
+  C:0EBBH         LINE#         140
+  C:0EC4H         LINE#         141
+  C:0EC4H         LINE#         142
+  C:0EC8H         LINE#         143
+  C:0ECAH         LINE#         144
+  C:0ED3H         LINE#         145
+  C:0ED3H         LINE#         146
+  C:0ED7H         LINE#         147
+  C:0ED9H         LINE#         149
+  C:0ED9H         LINE#         150
+  C:0EDBH         LINE#         151
+  C:0EDBH         LINE#         153
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  22:03:21  PAGE 20
+
+
+  C:0EDBH         LINE#         154
   -------         ENDPROC       _HALFCHARTOHEXADECIMAL
   -------         ENDMOD        TYPECONVERSION
-
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/02/2019  21:43:58  PAGE 20
-
 
   -------         MODULE        ?C?CLDPTR
   C:056BH         PUBLIC        ?C?CLDPTR
@@ -1179,5 +1183,5 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (CIRCULARBUFFER_RX)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RX
 
-Program Size: data=9.0 xdata=513 code=4061
+Program Size: data=9.0 xdata=513 code=4038
 LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

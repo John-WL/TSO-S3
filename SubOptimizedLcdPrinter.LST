@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 21:43:57 PAGE 1   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 22:03:21 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SUBOPTIMIZEDLCDPRINTER
@@ -62,7 +62,7 @@ line level    source
   43   1          vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->grip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_PO
              -SITION_1);
   44   1      }
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 21:43:57 PAGE 2   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 22:03:21 PAGE 2   
 
   45          
   46          // *************************************************************************************************
@@ -112,71 +112,72 @@ line level    source
   81          //
   82          // *************************************************************************************************
   83          {
-  84   1          vLcdEcrireCaract(weightTypeToString(weightType)[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
-  85   1          vLcdEcrireCaract(weightTypeToString(weightType)[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
-  86   1          vLcdEcrireCaract(weightTypeToString(weightType)[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
-  87   1          vLcdEcrireCaract(weightTypeToString(weightType)[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
-  88   1          vLcdEcrireCaract(weightTypeToString(weightType)[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
-  89   1      }
-  90          
-  91          // *************************************************************************************************
-  92          void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSettings)
-  93          //
-  94          //  Auteur: John-William Lebel
-  95          //
-  96          //  Description: prints at the right place on the LCD the current setted values for the manual control of 
-             -the arm
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 21:43:57 PAGE 3   
+  84   1          unsigned char* weightString = weightTypeToString(weightType);
+  85   1          vLcdEcrireCaract(weightString[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
+  86   1          vLcdEcrireCaract(weightString[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
+  87   1          vLcdEcrireCaract(weightString[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
+  88   1          vLcdEcrireCaract(weightString[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
+  89   1          vLcdEcrireCaract(weightString[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
+  90   1      }
+  91          
+  92          // *************************************************************************************************
+  93          void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSettings)
+  94          //
+  95          //  Auteur: John-William Lebel
+  96          //
+  97          //  Description: prints at the right place on the LCD the current setted values for the manual control of 
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/02/2019 22:03:21 PAGE 3   
 
-  97          //  Paramètres d'entrées  : keyboardManualSettings
-  98          //  Paramètres de sortie  : None
-  99          //  Notes                 : Aucune
- 100          //
- 101          // *************************************************************************************************
- 102          {
- 103   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 1), LCD_LINE3, LCD_
+             -the arm
+  98          //  Paramètres d'entrées  : keyboardManualSettings
+  99          //  Paramètres de sortie  : None
+ 100          //  Notes                 : Aucune
+ 101          //
+ 102          // *************************************************************************************************
+ 103          {
+ 104   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 1), LCD_LINE3, LCD_
              -MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
- 104   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 2), LCD_LINE3, LCD_
+ 105   1          vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 2), LCD_LINE3, LCD_
              -MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
- 105   1      }
- 106          
- 107          // *************************************************************************************************
- 108          void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes)
- 109          //
- 110          //  Auteur: John-William Lebel
- 111          //
- 112          //  Description: prints at the right place on the LCD the current sequence and step the arm is performing
- 113          //  Paramètres d'entrées  : currentSequenceIndexes
- 114          //  Paramètres de sortie  : None
- 115          //  Notes                 : Aucune
- 116          //
- 117          // *************************************************************************************************
- 118          {
- 119   1          vLcdEcrireCaract(currentSequenceIndexes->sequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
- 120   1          vLcdEcrireCaract(currentSequenceIndexes->step + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
- 121   1      }
- 122          
- 123          // *************************************************************************************************
- 124          void printLcdDeltaConnectionState(unsigned char connectionStateString[])
- 125          //
- 126          //  Auteur: John-William Lebel
- 127          //
- 128          //  Description: prints at the right place on the LCD the current connection state, wheither it's OffL or 
+ 106   1      }
+ 107          
+ 108          // *************************************************************************************************
+ 109          void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes)
+ 110          //
+ 111          //  Auteur: John-William Lebel
+ 112          //
+ 113          //  Description: prints at the right place on the LCD the current sequence and step the arm is performing
+ 114          //  Paramètres d'entrées  : currentSequenceIndexes
+ 115          //  Paramètres de sortie  : None
+ 116          //  Notes                 : Aucune
+ 117          //
+ 118          // *************************************************************************************************
+ 119          {
+ 120   1          vLcdEcrireCaract(currentSequenceIndexes->sequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
+ 121   1          vLcdEcrireCaract(currentSequenceIndexes->step + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
+ 122   1      }
+ 123          
+ 124          // *************************************************************************************************
+ 125          void printLcdDeltaConnectionState(unsigned char connectionStateString[])
+ 126          //
+ 127          //  Auteur: John-William Lebel
+ 128          //
+ 129          //  Description: prints at the right place on the LCD the current connection state, wheither it's OffL or 
              -OnL
- 129          //  Paramètres d'entrées  : connectionStateString[]
- 130          //  Paramètres de sortie  : None
- 131          //  Notes                 : Aucune
- 132          //
- 133          // *************************************************************************************************
- 134          {
- 135   1          vLcdEcrireCaract(connectionStateString[0], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_0);
- 136   1          vLcdEcrireCaract(connectionStateString[1], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_1);
- 137   1          vLcdEcrireCaract(connectionStateString[2], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_2);
- 138   1      }
+ 130          //  Paramètres d'entrées  : connectionStateString[]
+ 131          //  Paramètres de sortie  : None
+ 132          //  Notes                 : Aucune
+ 133          //
+ 134          // *************************************************************************************************
+ 135          {
+ 136   1          vLcdEcrireCaract(connectionStateString[0], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_0);
+ 137   1          vLcdEcrireCaract(connectionStateString[1], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_1);
+ 138   1          vLcdEcrireCaract(connectionStateString[2], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_2);
+ 139   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    866    ----
+   CODE SIZE        =    843    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----      18
    PDATA SIZE       =   ----    ----

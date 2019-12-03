@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 21:43:56 PAGE 1   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 22:03:20 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CIRCULARBUFFER_RX
@@ -62,7 +62,7 @@ line level    source
   52          //  Version 1.0
   53          //
   54          //  Description: remet les flag du port serie a 0 et call RX
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 21:43:56 PAGE 2   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 22:03:20 PAGE 2   
 
   55          //  Paramètres d'entrées : -
   56          //  Paramètres de sortie : vrai ou faux
@@ -126,7 +126,7 @@ line level    source
  114   3            
  115   3              if(ucRecu == 'G')
  116   3              {
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 21:43:56 PAGE 3   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 22:03:20 PAGE 3   
 
  117   4                ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
  118   4      //          ucTx('G');
@@ -190,7 +190,7 @@ line level    source
  176          void ucTx(unsigned char ucTransmi)
  177          //
  178          //  Auteur: Hugo Pellerin   
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 21:43:56 PAGE 4   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RX                                                 12/02/2019 22:03:20 PAGE 4   
 
  179          //  Date de création :  19-11-08
  180          //  Version 1.0

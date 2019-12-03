@@ -81,11 +81,12 @@ void printLcdDeltaWeightType(unsigned char* weightType)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(weightTypeToString(weightType)[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
-		vLcdEcrireCaract(weightTypeToString(weightType)[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
-		vLcdEcrireCaract(weightTypeToString(weightType)[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
-		vLcdEcrireCaract(weightTypeToString(weightType)[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
-		vLcdEcrireCaract(weightTypeToString(weightType)[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
+    unsigned char* weightString = weightTypeToString(weightType);
+		vLcdEcrireCaract(weightString[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
+		vLcdEcrireCaract(weightString[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
+		vLcdEcrireCaract(weightString[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
+		vLcdEcrireCaract(weightString[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
+		vLcdEcrireCaract(weightString[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
 }
 
 // *************************************************************************************************
