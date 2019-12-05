@@ -14,7 +14,8 @@ D
 *****************************************************************************************/
 
 //-------------- header files  -----------------
-#include "ds89c450.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include "RxTx232.h"
 
 

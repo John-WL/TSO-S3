@@ -6,6 +6,7 @@
 "SubOptimizedLcdPrinter.obj",
 "Timer0.obj",
 "TypeConversion.obj",
-"CircularBuffer_RxTx.obj" 
+"CircularBuffer_RxTx.obj",
+"SequenceHandler.obj" 
 TO "tso_s3_projet_final" 
 RAMSIZE(256) 

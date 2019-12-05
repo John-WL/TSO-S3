@@ -9,7 +9,8 @@
 
 
 *****************************************************************************************/
-#include "ds89c450.h"
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include "ProjectDefinitions.h"
 #include "KeyboardI2C.h"
 #include "I2C.h"
@@ -32,14 +33,14 @@ unsigned char* readKeyboardI2C()
     
     if(!P1_2)
     {
-        vI2CStartBit();
+        vStartBitI2C();
         ackValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
         if(ackValue)
         {
             return &key; // return space if noAcks were detected
         }
         key = ucLire8BitsI2C(0xFF);  // read with noAck
-        vI2CStopBit();
+        vStopBitI2C();
         
         key = keyboardCharacters[key % 16];
     }
@@ -47,7 +48,7 @@ unsigned char* readKeyboardI2C()
     return &key;
 }
 
-void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState)
+void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState, struct SequenceStep* currentSequenceIndexes)
 {
     switch(*key)
     {
@@ -87,6 +88,15 @@ void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManual
             currentArmState->wrist = 0xA0;
             currentArmState->grip = 0x00;
             break;
+        
+        case 'C':
+            currentSequenceIndexes->sequence = (currentSequenceIndexes->sequence + 1) % 7;
+            currentSequenceIndexes->step = 0;
+            break;
+        case 'D':
+            currentSequenceIndexes->step = (currentSequenceIndexes->step + 1) % 10;
+            break;
+            
     }
 }
 

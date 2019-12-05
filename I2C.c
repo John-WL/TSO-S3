@@ -1,269 +1,113 @@
 /**************************************************************************************************
 Nom du fichier : I2C.c
-Auteur : Stéphane Deschênes                  
-Date de création : 01-09-2019
-Version 1.0
-	 
-	Contient les fonctions I2C
-			
+Auteur : Hugo Pellerin                 
+Date de création : 30-08-2019
+Code et definition pour les fonctions de traitement du I2C.
 ***************************************************************************************************/
-
-// *************************************************************************************************
-//  INCLUDES
-// *************************************************************************************************	
-#include "ds89c450.h"				// Définition des bits et des registres du microcontrôleur
+	
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include "I2C.h"
-#include <stdio.h>          // Prototype de declarations des fonctions I/O
 
+void vInitPortSerie_0(void);
+void vDelaiI2C(UI uiTemps);
 
-// *************************************************************************************************
-//  CONSTANTES
-// *************************************************************************************************
-
-/* VIDE */
-
-// *************************************************************************************************
-//  FONCTIONS LOCALES
-// *************************************************************************************************
-void vI2CDelai(unsigned int tmp);
-void vEcrire1BitI2C(unsigned char ucBitOut);
-unsigned char ucLire1BitI2C(void);
-
-
-// *************************************************************************************************
-//  STRUCTURES ET UNIONS
-// *************************************************************************************************
-/* VIDE */
-
-// *************************************************************************************************
-// VARIABLES GLOBALES
-// *************************************************************************************************
-/* VIDE */
-
-// *************************************************************************************************
-// VARIABLES LOCALES
-// *************************************************************************************************
-/* VIDE */
-
-
-
-//********************************vDelaiI2C*****************************
-//	Nom de la fonction : vDelaiI2C
-//	Auteur : Alain Champagne		
-//       Date de création : 30-05-2007				      
-//	Description : 	Routine de délai pour la communication I2C. 
-//							
-//	Fonctions appelées : 	Aucune		
-//	Paramètres d'entrée : 	Aucun		
-//  Paramètres de sortie : 	Aucun		
-//	Variables utilisées : 	Aucune
-//	Equate : 		Aucun	
-//	#Define : 		Aucun	
-// 						
-//**********************************************************************
-void vI2CDelai (unsigned int tmp)
-{   
-	while (tmp>0)
-  {
-		tmp--;
-	}   
-}
-
-
-//*********************************************************************
-void vI2CStartBit(void)			
-//	Auteur : Alain Champagne		
-//  Date de création : 30-05-2007				      
-//	Description : 	Fonction qui effectue un start bit avec les lignes SDA et SCL 
-//		
-//	Paramètres d'entrée : 	Aucun		
-//	Paramètres de sortie : 	Aucun		
-//	Notes: Passage de 1 à 0 de la ligne SDA durant un niveau haut de SCL
-//**********************************************************************
-{
+void vStartBitI2C()
+{ 
   SDA = 1;
-	SCL = 1;
-  vI2CDelai (dDelai);
+  SCL = 1;
+  
+  vDelaiI2C(2);
   SDA = 0;
-  vI2CDelai (dDelai);
+  vDelaiI2C(2);
   SCL = 0;
-  vI2CDelai(dDelai);
+  vDelaiI2C(2);
 }
 
-
-//**********************************************************************
-void vI2CStopBit(void)
-//	Auteur : Alain Champagne		
-//       Date de création : 30-05-2007				      
-//	Description : 	Routine de clôture d'une communication série
-//			I2C. Doit être appelée à la fin de toutes 
-//			opérations.
-//
-//	Paramètres d'entrée : 	Aucun		
-//	Paramètres de sortie : 	Aucun		
-//	Variables utilisées : 	Aucune
-// 						
-//**********************************************************************
+void vStopBitI2C()
 {
-	//Passage de 0 à 1 sur la ligne SDA durant
-	//un niveau 1 sur la ligne SCL initie un 
-	//STOP BIT.
-  SDA = 0;			  		// Donnée à zéro et
-  SCL = 0;						// clock aussi.
-  vI2CDelai (dDelai);	// Légère attente.
-  SCL = 1;						// SCL à 1.
-  vI2CDelai (dDelai);	// Légère attente.
-  SDA = 1;						// SDA à 1.
-  vI2CDelai (dDelai);	// Légère attente.  
+  SDA = 0;
+  SCL = 0;
+  
+  vDelaiI2C(2);
+  SCL = 1;  
+  vDelaiI2C(2);
+  SDA = 1;
+  vDelaiI2C(2);
 }
 
-
-
-//**********************************************************************
-void vEcrire1BitI2C(unsigned char ucBitOut)
-//	Auteur : Alain Champagne		
-//      Date de création : 30-05-2007				      
-//	Description : 	Routine d'émission d'un bit de communication 
-//			I2C.  La routine prend le bit de la variable
-//			vBitOut et ajuste la ligne SDA en fonction de cette 
-//			 variable. Les lignes SDA et SCL sont activée à tour
-//			 de rôle pour communiquer l'information 
-//			 du maître à l'esclave.
-//							
-//	Fonctions appelées : 	Aucune		
-//	Paramètres d'entrée : 	La valeur du bit à envoyer		
-//	Paramètres de sortie : 	Aucun		
-//	Variables utilisées : 	ucBitVar
-//	Equate : 		Aucun	
-//	#Define : 		SDA, SCL	
-// 						
-//**********************************************************************
+void vEcrire1BitI2C(UC ucBitASortir)
 {
-	SCL = 0;
-	// On assume le bit à 0.
-  if (ucBitOut == 0xFF)	// Vérifier et ajuster l'état du bit à sortir.
+  if(ucBitASortir)
     SDA = 1;
-	else
-		SDA = 0;	
-  vI2CDelai(dDelai);	// Légère attente.
-  SCL = 1;						// Aller activer la ligne SCL.
-  vI2CDelai(dDelai);	// Légère attente.
-  SCL = 0;						// On replace la ligne SCL à 0.
-  vI2CDelai(dDelai);	// Légère attente.
+  else
+    SDA = 0;
+  
+  vDelaiI2C(2);
+  SCL = 1;
+  vDelaiI2C(2);
+  SCL = 0;
+  vDelaiI2C(2);
 }
 
-
-
-
-//**********************************************************************
-unsigned char ucLire1BitI2C(void)
-//	Auteur : Alain Champagne		
-//      Date de création : 30-05-2006				      
-//	Description : 	Routine de réception d'un bit de communication 
-//			I2C.  La routine prend le bit de la ligne SDA
-//			après avoir activé la ligne SCL. Le bit de 
-//			donnée est placé temporairement dans une va-
-//			riable ucBitIn et sera réutilisé dans 
-//			une routine de traitement d'octets.
-//							
-//	Fonctions appelées : 		Aucune		
-//	Paramètres d'entrée : 	Aucun		
-//	Paramètres de sortie : 	Retourne la valeur du bit lu	
-//
-//**********************************************************************
+UC ucLire1BitI2C()
 {
-  unsigned char ucBitIn;
+  UC ucBitLu = 1;
   
-	ucBitIn = 0xFF;	  		// On assume le bit à lire à 1.
-	SDA = 1;							// La ligne SDA est en entrée.
-	vI2CDelai(dDelai);		// Légère attente.
-	SCL = 1;							// On lève la ligne SCL.
-	vI2CDelai(dDelai);		// Légère attente.
-	if (!SDA)							// Vérifier et ajuster le bit de donnée.
-	  ucBitIn = 0x00;
-	SCL = 0;							// On replace la ligne SCL à 0.
-	vI2CDelai(dDelai);		// Légère attente.
+  SDA = 1;
+  vDelaiI2C(2);
+  SCL = 1;
+  vDelaiI2C(2);
+    
+  if(!SDA)
+    ucBitLu = 0;
   
-	return (ucBitIn);			// Retourner l'état du bit.
+  SCL = 0;
+  vDelaiI2C(2);
+    
+  return ucBitLu;  
 }
 
-
-
-// *************************************************************************************************
-unsigned char ucEcrire8BitsI2C (unsigned char ucTxData)
-//  Auteur: Alain Champagne	
-//  Date de création :  30-05-2007
-//  
-//	Modification: 	Ajout du ACK.
-//	30-07-2019  Ajout du retour du ACK
-//
-//  Description: Routine de réception de 8 bits de données en I2C.
-//  Paramètres d'entrées : Octet que l'on veut envoyer
-//  Paramètres de sortie : État du ack venant du slave
-//  Notes     		 			 : Aucune
-//
-// *************************************************************************************************
+unsigned char ucEcrire8BitsI2C(UC ucTxData)
 {
-	int i;
-	unsigned char ucI2C, ucI2CBit;
-  
-  for (i=0; i<8; i++)		   		
+  int i;
+  for(i = 0; i < 8; i++)
   {
-    ucI2CBit = 0x00;		   		
-		ucI2C = ucTxData & 0x80;
-    if (ucI2C == 0x80)				
-		{
-      ucI2CBit = 0xFF;		 		
-		}
-    vEcrire1BitI2C(ucI2CBit);	
-		vI2CDelai(dDelai);		  	
-    ucTxData = ucTxData << 1; 
-  }  
-  return(ucLire1BitI2C());		   	
+    if((ucTxData & 0x80) == 0x80) //7e bit a 1?
+    {
+      vEcrire1BitI2C(1);
+    }
+    else
+    {
+      vEcrire1BitI2C(0);
+    }
+    ucTxData = ucTxData << 1;
+  }
+  SCL = 1;
+  return ucLire1BitI2C();
 }
 
-
-//**********************************************************************
-unsigned char ucLire8BitsI2C (unsigned char ucAckValue)
-//	Auteur : Alain Champagne		
-//      Date de création : 30-05-2001				      
-//	Description : 	Routine de réception de 8 bits de donnée 
-//			provenant d'une communication I2C.
-//
-//	Modification - Stéphane Deschênes 	
-//	30-07-2019  Ajout de la valeur du ACK en paramètre
-//
-//	Paramètres d'entrée : 	Valeur du ack voulu.		
-//	Paramètres de sortie : 	ucRxData.		
-//	Variables utilisées : 	ucI2C, i.
-//  Variable globale :      Aucune.
-//	Equate : 		Aucun	
-//	#Define : 		Aucun	
-// 						
-//**********************************************************************
+UC ucLire8BitsI2C(UC ucAck)
 {
-	unsigned char ucRxData, ucI2C;
-	int i;
-  ucRxData = 0x00;			 			// Remise à zéro de la variable d'entrée.
-  for (i=0; i<8; i++)					// Faire 8 fois pour un octet.
+  UC ucRecu = 0x00;
+  int i;
+  for(i=0; i<8; i++)
   {
-    ucRxData = ucRxData << 1;	// Décaler la donnée reçue.
-		ucI2C = ucLire1BitI2C();	// Appel de la fonction de lecture d'un bit.
-		vI2CDelai(dDelai);				// Légère attente.
-		if (ucI2C==0xFF)					// Traitement et ajustement de la variable.
-	  ucRxData = ucRxData | 0x01;  
-  } 
-	vEcrire1BitI2C(ucAckValue);		  // Envoyer la valeur du ack à la fin
-	return (ucRxData);					// Retour de la variable.
+    ucRecu = ucRecu << 1;
+    if(ucLire1BitI2C())
+    {
+      ucRecu++;
+    }
+  }
+  vEcrire1BitI2C(ucAck);
+  return ucRecu;
 }
-
-
-
-unsigned char ucLireMemI2C(unsigned int uiAdr)
-{
-  unsigned char ucVal = 0x00;
   
-  vI2CStartBit();
+UC ucLireMemI2C(UI uiAdr)
+{
+  UC ucVal = 0x00;
+  
+  vStartBitI2C();
   
   ucEcrire8BitsI2C(0xA0);
   
@@ -273,23 +117,22 @@ unsigned char ucLireMemI2C(unsigned int uiAdr)
   ucVal = uiAdr;
   ucEcrire8BitsI2C(ucVal);
   
-  vI2CStartBit();
+  vStartBitI2C();
   
   ucEcrire8BitsI2C(0xA1);
   ucVal = ucLire8BitsI2C(1);
   
-  vI2CStopBit();
+  vStopBitI2C();
   
   return ucVal;
 }
 
-
-
-void vEcrireMemI2C(unsigned char ucData, unsigned int uiAdr)
+void vEcrireMemI2C(UC ucData, UI uiAdr)
 {
-  unsigned char ucVal = 0x00;
   
-  vI2CStartBit();
+  UC ucVal = 0x00;
+  
+  vStartBitI2C();
   
   ucEcrire8BitsI2C(0xA0);
   
@@ -301,8 +144,23 @@ void vEcrireMemI2C(unsigned char ucData, unsigned int uiAdr)
   
   ucEcrire8BitsI2C(ucData);
   
-  vI2CStopBit();
+  vStopBitI2C();
   
-  vI2CDelai(4000);
+  vDelaiI2C(4000);
+  
 }
-
+// *************************************************************************************************
+//  Auteur: Hugo Pellerin
+//  Date de creation :  30-08-2019
+//
+//  Description: Bloque le programme pendant un temps donnee
+//  Parametres d'entrees : uiTemps
+//  Parametres de sortie : Aucun
+//  Notes     		 	 : Aucune
+//
+void vDelaiI2C(UI uiTemps)
+{
+  int i;
+  for(i = 0; i < uiTemps; i++){}
+}
+// *************************************************************************************************

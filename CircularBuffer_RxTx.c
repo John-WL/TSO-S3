@@ -12,7 +12,8 @@ Fonction necessaire pour reception la trame du PIC
 *****************************************************************************************/
 #include <stdio.h>   
 #include "RxTx232.h"
-#include "ds89c450.h"	
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include "ProjectDefinitions.h"
 #include "CircularBuffer_RxTx.h"
 

@@ -15,7 +15,8 @@
 // *************************************************************************************************
 //  INCLUDES
 // *************************************************************************************************	
-#include "ds89c450.h"				// Déf	inition des bits et des registres du microcontrôleur
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include "LCD.h"
 
 // *************************************************************************************************

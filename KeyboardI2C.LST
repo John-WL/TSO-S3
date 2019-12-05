@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 1   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/05/2019 16:48:52 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYBOARDI2C
@@ -18,140 +18,150 @@ line level    source
    9          
   10          
   11          *****************************************************************************************/
-  12          #include "ds89c450.h"
-  13          #include "ProjectDefinitions.h"
-  14          #include "KeyboardI2C.h"
-  15          #include "I2C.h"
-  16          
-  17          // Prototypes privés
-  18          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
+  12          #include "_DS89C450Modifie.h"       // Définition des bits et des registres du microcontrôleur
+  13          #include "_DeclarationGenerale.h"
+  14          #include "ProjectDefinitions.h"
+  15          #include "KeyboardI2C.h"
+  16          #include "I2C.h"
+  17          
+  18          // Prototypes privés
+  19          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
              -rmState, char direction);
-  19          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction);
-  20          
-  21          unsigned char keyboardCharacters[16] = {'1', '2', '3', 'A',
-  22                                                  '4', '5', '6', 'B',
-  23                                                  '7', '8', '9', 'C',
-  24                                                  '*', '0', '#', 'D'};
-  25          
+  20          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction);
+  21          
+  22          unsigned char keyboardCharacters[16] = {'1', '2', '3', 'A',
+  23                                                  '4', '5', '6', 'B',
+  24                                                  '7', '8', '9', 'C',
+  25                                                  '*', '0', '#', 'D'};
   26          
-  27          // Implémentation fonctions
-  28          unsigned char* readKeyboardI2C()
-  29          {
-  30   1          unsigned char key = ' ';
-  31   1          unsigned char ackValue = 0;
-  32   1          
-  33   1          if(!P1_2)
-  34   1          {
-  35   2              vI2CStartBit();
-  36   2              ackValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
-  37   2              if(ackValue)
-  38   2              {
-  39   3                  return &key; // return space if noAcks were detected
-  40   3              }
-  41   2              key = ucLire8BitsI2C(0xFF);  // read with noAck
-  42   2              vI2CStopBit();
-  43   2              
-  44   2              key = keyboardCharacters[key % 16];
-  45   2          }
-  46   1          
-  47   1          return &key;
-  48   1      }
-  49          
-  50          void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState*
-             - currentArmState)
-  51          {
-  52   1          switch(*key)
-  53   1          {
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 2   
+  27          
+  28          // Implémentation fonctions
+  29          unsigned char* readKeyboardI2C()
+  30          {
+  31   1          unsigned char key = ' ';
+  32   1          unsigned char ackValue = 0;
+  33   1          
+  34   1          if(!P1_2)
+  35   1          {
+  36   2              vStartBitI2C();
+  37   2              ackValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
+  38   2              if(ackValue)
+  39   2              {
+  40   3                  return &key; // return space if noAcks were detected
+  41   3              }
+  42   2              key = ucLire8BitsI2C(0xFF);  // read with noAck
+  43   2              vStopBitI2C();
+  44   2              
+  45   2              key = keyboardCharacters[key % 16];
+  46   2          }
+  47   1          
+  48   1          return &key;
+  49   1      }
+  50          
+  51          void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState*
+             - currentArmState, struct SequenceStep* currentSequenceIndexes)
+  52          {
+  53   1          switch(*key)
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/05/2019 16:48:52 PAGE 2   
 
-  54   2              case '1':
-  55   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_0;
-  56   2                  break;
-  57   2              case '2':
-  58   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_1;
-  59   2                  break;
-  60   2              case '3':
-  61   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_2;
-  62   2                  break;
-  63   2              case '4':
-  64   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_3;
-  65   2                  break;
-  66   2              case '5':
-  67   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_4;
-  68   2                  break;
-  69   2              case '0':
-  70   2                  keyboardManualSettings->manualMovingSpeed = (keyboardManualSettings->manualMovingSpeed + 4) % 
+  54   1          {
+  55   2              case '1':
+  56   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_0;
+  57   2                  break;
+  58   2              case '2':
+  59   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_1;
+  60   2                  break;
+  61   2              case '3':
+  62   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_2;
+  63   2                  break;
+  64   2              case '4':
+  65   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_3;
+  66   2                  break;
+  67   2              case '5':
+  68   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_4;
+  69   2                  break;
+  70   2              case '0':
+  71   2                  keyboardManualSettings->manualMovingSpeed = (keyboardManualSettings->manualMovingSpeed + 4) % 
              -20;
-  71   2                  break;
-  72   2              
-  73   2              case '*':
-  74   2                  manualIncrementMotor(keyboardManualSettings, currentArmState, -1);
-  75   2                  break;
-  76   2              case '#':
-  77   2                  manualIncrementMotor(keyboardManualSettings, currentArmState, 1);
-  78   2                  break;
-  79   2              case 'A':
-  80   2                  // NEEDING IMPLEMENTATION! This line is supposed to make the robot arm warm up
-  81   2                  break;
-  82   2              
-  83   2              case 'B':
-  84   2                  currentArmState->base = 0x10;
-  85   2                  currentArmState->shoulder = 0x4C;
-  86   2                  currentArmState->elbow = 0x00;
-  87   2                  currentArmState->wrist = 0xA0;
-  88   2                  currentArmState->grip = 0x00;
-  89   2                  break;
-  90   2          }
-  91   1      }
-  92          
-  93          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
+  72   2                  break;
+  73   2              
+  74   2              case '*':
+  75   2                  manualIncrementMotor(keyboardManualSettings, currentArmState, -1);
+  76   2                  break;
+  77   2              case '#':
+  78   2                  manualIncrementMotor(keyboardManualSettings, currentArmState, 1);
+  79   2                  break;
+  80   2              case 'A':
+  81   2                  // NEEDING IMPLEMENTATION! This line is supposed to make the robot arm warm up
+  82   2                  break;
+  83   2              
+  84   2              case 'B':
+  85   2                  currentArmState->base = 0x10;
+  86   2                  currentArmState->shoulder = 0x4C;
+  87   2                  currentArmState->elbow = 0x00;
+  88   2                  currentArmState->wrist = 0xA0;
+  89   2                  currentArmState->grip = 0x00;
+  90   2                  break;
+  91   2              
+  92   2              case 'C':
+  93   2                  currentSequenceIndexes->sequence = (currentSequenceIndexes->sequence + 1) % 7;
+  94   2                  currentSequenceIndexes->step = 0;
+  95   2                  break;
+  96   2              case 'D':
+  97   2                  currentSequenceIndexes->step = (currentSequenceIndexes->step + 1) % 10;
+  98   2                  break;
+  99   2                  
+ 100   2          }
+ 101   1      }
+ 102          
+ 103          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
              -rmState, char direction)
-  94          {
-  95   1          switch(keyboardManualSettings->manualySelectedMotor)
-  96   1          {
-  97   2            case MOTOR_0:
-  98   2                currentArmState->base += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-  99   2                handleMotorValueOverflow(&(currentArmState->base), &direction);
- 100   2                break;
- 101   2            case MOTOR_1:
- 102   2                currentArmState->shoulder += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction
+ 104          {
+ 105   1          switch(keyboardManualSettings->manualySelectedMotor)
+ 106   1          {
+ 107   2            case MOTOR_0:
+ 108   2                currentArmState->base += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 109   2                handleMotorValueOverflow(&(currentArmState->base), &direction);
+ 110   2                break;
+ 111   2            case MOTOR_1:
+ 112   2                currentArmState->shoulder += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction
              -);
- 103   2                handleMotorValueOverflow(&(currentArmState->shoulder), &direction);
- 104   2                break;
- 105   2            case MOTOR_2:
- 106   2                currentArmState->elbow += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
- 107   2                handleMotorValueOverflow(&(currentArmState->elbow), &direction);
- 108   2                break;
- 109   2            case MOTOR_3:
- 110   2                currentArmState->wrist += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
- 111   2                handleMotorValueOverflow(&(currentArmState->wrist), &direction);
- 112   2                break;
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 3   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/05/2019 16:48:52 PAGE 3   
 
- 113   2            case MOTOR_4:
- 114   2                currentArmState->grip += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
- 115   2                handleMotorValueOverflow(&(currentArmState->grip), &direction);
- 116   2                break;
- 117   2          }
- 118   1      }
- 119          
- 120          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
- 121          {
- 122   1          if(*direction == 1 && *motorValue > 205)
- 123   1          {
- 124   2              *motorValue = 205;
- 125   2          }
- 126   1          else if(*direction == -1 && *motorValue > 205)
- 127   1          {
- 128   2              *motorValue = 0;
- 129   2          }
- 130   1      }
+ 113   2                handleMotorValueOverflow(&(currentArmState->shoulder), &direction);
+ 114   2                break;
+ 115   2            case MOTOR_2:
+ 116   2                currentArmState->elbow += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 117   2                handleMotorValueOverflow(&(currentArmState->elbow), &direction);
+ 118   2                break;
+ 119   2            case MOTOR_3:
+ 120   2                currentArmState->wrist += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 121   2                handleMotorValueOverflow(&(currentArmState->wrist), &direction);
+ 122   2                break;
+ 123   2            case MOTOR_4:
+ 124   2                currentArmState->grip += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 125   2                handleMotorValueOverflow(&(currentArmState->grip), &direction);
+ 126   2                break;
+ 127   2          }
+ 128   1      }
+ 129          
+ 130          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
+ 131          {
+ 132   1          if(*direction == 1 && *motorValue > 205)
+ 133   1          {
+ 134   2              *motorValue = 205;
+ 135   2          }
+ 136   1          else if(*direction == -1 && *motorValue > 205)
+ 137   1          {
+ 138   2              *motorValue = 0;
+ 139   2          }
+ 140   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    801    ----
+   CODE SIZE        =    884    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     16      23
+   XDATA SIZE       =     16      26
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

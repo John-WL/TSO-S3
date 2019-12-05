@@ -12,18 +12,19 @@ Versions:
 //  INCLUDES
 // *************************************************************************************************	
 
-#include "ds89c450.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"
 #include <stdio.h>          // Prototype de declarations des fonctions I/O	
 #include "I2C.h"						// I2C functions handling
 #include "RxTx232.h"				// RxTx232 functions handling
 #include "LCD.h"						// LCD functions handling
 #include "Timer0.h"					// Timer0 initialization handling
 #include "TypeConversion.h"	// Fonctions useful when it comes to converting values between type representations and/or types
-//#include "MemoryI2C.h"
 #include "ProjectDefinitions.h"
 #include "SubOptimizedLcdPrinter.h"
 #include "KeyboardI2C.h"
 #include "CircularBuffer_RxTx.h"
+#include "SequenceHandler.h"
 
 // *************************************************************************************************
 //  CONSTANTES
@@ -70,10 +71,6 @@ struct SequenceStep currentSequenceIndexes = {0, 0};				// this is to store the 
 unsigned char* connectionStateString = LCD_DELTA_OFFLINE_VALUE;
 																														// OffL/OnL. It's a variable storing the changes to print to the
 																														// lcd in case we lose contact with the exterior... 
-
-unsigned char isOperating = 0;															// variable that tells if we're in manual or automatic funtionning
-																														// of the robotic arm.
-
 
 unsigned char lcdInitializationContent[4][21] = {	{"1:66 2:66 3:66 4:66 "},
 																									{"5:66 X:FF Y:FF P:FF "},
@@ -177,7 +174,6 @@ void main(void)
 {
     vInitPortSerie();			// init the serial port to utilize the RxTx232 comunication with the pic16F88
 		vInitLCD();						// init the lcd
-		//writeSequencesToMemoryI2C();	// that function might be misimplemented... gotta look into how to write 350 values to the I2C memory in an optimized fashion
 		initTimer50ms();			// init the timer0
     vAfficheLCDComplet(lcdInitializationContent);					// initialize the content of the lcd
     vInitInterrupt();     // init interrupt on serial 0
@@ -185,28 +181,20 @@ void main(void)
 		while(1)
 		{
       
-        if(isOperating)		// the movements of the robot arm are automatic
+        if(isOperating())		// the movements of the robot arm are automatic
         {
-						/*currentArmState.base = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, BASE);
-						currentArmState.shoulder = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, SHOULDER);
-						currentArmState.elbow = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, ELBOW);
-						currentArmState.wrist = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, WRIST);
-						currentArmState.grip = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, GRIP);*/
-          
-            currentArmState.base = sequences[currentSequenceIndexes.sequence][currentSequenceIndexes.step][BASE];
-						currentArmState.shoulder = sequences[currentSequenceIndexes.sequence][currentSequenceIndexes.step][SHOULDER];
-						currentArmState.elbow = sequences[currentSequenceIndexes.sequence][currentSequenceIndexes.step][ELBOW];
-						currentArmState.wrist = sequences[currentSequenceIndexes.sequence][currentSequenceIndexes.step][WRIST];
-						currentArmState.grip = sequences[currentSequenceIndexes.sequence][currentSequenceIndexes.step][GRIP];
+            if(isTrameReceived())
+            {
+                currentArmState.base = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, BASE);
+                currentArmState.shoulder = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, SHOULDER);
+                currentArmState.elbow = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, ELBOW);
+                currentArmState.wrist = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, WRIST);
+                currentArmState.grip = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIndexes.step, GRIP);
+            }
 				}
 				else							// the movements of the robot arm are manual; we need to read the keyboard
 				{
-						handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState);		// read the keyboard and update the variables accordingly
-            
-            if(trame.adcSensors.touchScreen.x != 0xFF && trame.adcSensors.touchScreen.y != 0xFF)
-            {
-                //if(isIn)
-            }
+						handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState, &currentSequenceIndexes);		// read the keyboard and update the variables accordingly
 				}
 				
 				// ... gotta finish what happens next!
@@ -230,6 +218,7 @@ void main(void)
         if(stCompteur.ucCompteur2sec > 39)
         {
             stCompteur.ucCompteur2sec = 0;
+            handleSequence(&trame, &currentSequenceIndexes, &weightType);
         }
         
         if(isTrameReceived())
@@ -257,11 +246,6 @@ void printLcdDeltaCharacters()
 
 unsigned char readMemoryI2C(unsigned char* sequence, unsigned char* step, unsigned char armIndex)
 {
-    int memoryAddress = *sequence + (*step << 4) + (armIndex << 8);
+    unsigned int memoryAddress = ((((unsigned int)*sequence) * 50) + (*step * 5) + armIndex);
     return ucLireMemI2C(memoryAddress);
 }
-
-//void writeSequencesToMemoryI2C()
-//{
-	//writeMemoryI2C(sequences);
-//}

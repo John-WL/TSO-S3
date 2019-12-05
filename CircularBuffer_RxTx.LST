@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/04/2019 19:28:20 PAGE 1   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/05/2019 16:48:54 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CIRCULARBUFFER_RXTX
@@ -22,240 +22,241 @@ line level    source
   12          *****************************************************************************************/
   13          #include <stdio.h>   
   14          #include "RxTx232.h"
-  15          #include "ds89c450.h" 
-  16          #include "ProjectDefinitions.h"
-  17          #include "CircularBuffer_RxTx.h"
-  18          
-  19          unsigned char ucRx(void);
-  20          unsigned char ucHandleCS(struct ArmState *statePtr);
-  21          void ucTx(unsigned char ucTransmi);
-  22          
-  23          unsigned char ucIndiceIN = 0;
-  24          unsigned char ucIndiceOUT = 0;
-  25          unsigned char ucIndiceTrame = 0;
-  26          unsigned char ucData = 0;
-  27          unsigned char ucIsTrameReceived = 0;
-  28          
-  29          unsigned char ucCircularBuffer[8];
-  30          
+  15          #include "_DS89C450Modifie.h"       // Définition des bits et des registres du microcontrôleur
+  16          #include "_DeclarationGenerale.h"
+  17          #include "ProjectDefinitions.h"
+  18          #include "CircularBuffer_RxTx.h"
+  19          
+  20          unsigned char ucRx(void);
+  21          unsigned char ucHandleCS(struct ArmState *statePtr);
+  22          void ucTx(unsigned char ucTransmi);
+  23          
+  24          unsigned char ucIndiceIN = 0;
+  25          unsigned char ucIndiceOUT = 0;
+  26          unsigned char ucIndiceTrame = 0;
+  27          unsigned char ucData = 0;
+  28          unsigned char ucIsTrameReceived = 0;
+  29          
+  30          unsigned char ucCircularBuffer[8];
   31          
-  32          void vInitInterrupt(void)
-  33          //
-  34          //  Auteur: Hugo Pellerin   
-  35          //  Date de création :  19-11-08
-  36          //  Version 1.0
-  37          //
-  38          //  Description: initialise les interruption (general, SERIAL0)
-  39          //               
-  40          //  Paramètres d'entrées : -
-  41          //  Paramètres de sortie : -
-  42          //  Notes                : Aucune
-  43          //
-  44          // *************************************************************************************************
-  45          {
-  46   1          ES0 = 1;    // Permettre interruption du Serial 0
-  47   1          EA = 1;     // Permettre les interruptions générale
-  48   1      }
-  49          
-  50          void InterruptionSerie0 (void) interrupt 4
-  51          //
-  52          //  Auteur: Hugo Pellerin   
-  53          //  Date de création :  19-11-08
-  54          //  Version 1.0
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/04/2019 19:28:20 PAGE 2   
+  32          
+  33          void vInitInterrupt(void)
+  34          //
+  35          //  Auteur: Hugo Pellerin   
+  36          //  Date de création :  19-11-08
+  37          //  Version 1.0
+  38          //
+  39          //  Description: initialise les interruption (general, SERIAL0)
+  40          //               
+  41          //  Paramètres d'entrées : -
+  42          //  Paramètres de sortie : -
+  43          //  Notes                : Aucune
+  44          //
+  45          // *************************************************************************************************
+  46          {
+  47   1          ES0 = 1;    // Permettre interruption du Serial 0
+  48   1          EA = 1;     // Permettre les interruptions générale
+  49   1      }
+  50          
+  51          void InterruptionSerie0 (void) interrupt 4
+  52          //
+  53          //  Auteur: Hugo Pellerin   
+  54          //  Date de création :  19-11-08
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/05/2019 16:48:54 PAGE 2   
 
-  55          //
-  56          //  Description: remet les flag du port serie a 0 et call RX
-  57          //  Paramètres d'entrées : -
-  58          //  Paramètres de sortie : vrai ou faux
-  59          //  Notes                : Aucune
-  60          //
-  61          // *************************************************************************************************
-  62          {
-  63   1          if(RI_0 == 1)
-  64   1          {
-  65   2              ucData = ucRx();
-  66   2              ucCircularBuffer[ucIndiceIN] = ucData;
-  67   2              ucIndiceIN = ((ucIndiceIN + 1) & 0x07);
-  68   2              RI_0 = 0;
-  69   2          }
-  70   1          if(TI_0 == 1)
-  71   1          {
-  72   2              TI_0 = 0;
-  73   2          }
-  74   1      }
-  75          
-  76          unsigned char ucRx()
-  77          //
-  78          //  Auteur: Hugo Pellerin   
-  79          //  Date de création :  19-11-08
-  80          //  Version 1.0
-  81          //
-  82          //  Description: met la valeur de SBUF0 dans une varible et appel des fonction pour l'affichage LCD
-  83          //  Paramètres d'entrées : -
-  84          //  Paramètres de sortie : -
-  85          //  Notes                : Aucune
-  86          //
-  87          // *************************************************************************************************
-  88          {
-  89   1          unsigned char ucTemp;
-  90   1          ucTemp = SBUF0;
-  91   1          return ucTemp;
-  92   1      }
-  93          
-  94          void vCircularBuffer(struct TramePIC *tramePtr)
-  95          //
-  96          //  Auteur: Hugo Pellerin   
-  97          //  Date de création :  19-12-02
-  98          //  Version 1.0
-  99          //
- 100          //  Description: 
- 101          //  Paramètres d'entrées : -
- 102          //  Paramètres de sortie : -
- 103          //  Notes                : Aucune
- 104          //
- 105          // *************************************************************************************************
- 106          {
- 107   1          unsigned char ucRecu = 0;
- 108   1          if(ucIndiceIN != ucIndiceOUT)
- 109   1          {
- 110   2              switch(ucIndiceTrame)
- 111   2              {
- 112   3                  case 0:
- 113   3                      ucRecu = ucCircularBuffer[ucIndiceOUT];
- 114   3                      ucCircularBuffer[ucIndiceOUT] = 0x00;
- 115   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 116   3                    
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/04/2019 19:28:20 PAGE 3   
+  55          //  Version 1.0
+  56          //
+  57          //  Description: remet les flag du port serie a 0 et call RX
+  58          //  Paramètres d'entrées : -
+  59          //  Paramètres de sortie : vrai ou faux
+  60          //  Notes                : Aucune
+  61          //
+  62          // *************************************************************************************************
+  63          {
+  64   1          if(RI_0 == 1)
+  65   1          {
+  66   2              ucData = ucRx();
+  67   2              ucCircularBuffer[ucIndiceIN] = ucData;
+  68   2              ucIndiceIN = ((ucIndiceIN + 1) & 0x07);
+  69   2              RI_0 = 0;
+  70   2          }
+  71   1          if(TI_0 == 1)
+  72   1          {
+  73   2              TI_0 = 0;
+  74   2          }
+  75   1      }
+  76          
+  77          unsigned char ucRx()
+  78          //
+  79          //  Auteur: Hugo Pellerin   
+  80          //  Date de création :  19-11-08
+  81          //  Version 1.0
+  82          //
+  83          //  Description: met la valeur de SBUF0 dans une varible et appel des fonction pour l'affichage LCD
+  84          //  Paramètres d'entrées : -
+  85          //  Paramètres de sortie : -
+  86          //  Notes                : Aucune
+  87          //
+  88          // *************************************************************************************************
+  89          {
+  90   1          unsigned char ucTemp;
+  91   1          ucTemp = SBUF0;
+  92   1          return ucTemp;
+  93   1      }
+  94          
+  95          void vCircularBuffer(struct TramePIC *tramePtr)
+  96          //
+  97          //  Auteur: Hugo Pellerin   
+  98          //  Date de création :  19-12-02
+  99          //  Version 1.0
+ 100          //
+ 101          //  Description: 
+ 102          //  Paramètres d'entrées : -
+ 103          //  Paramètres de sortie : -
+ 104          //  Notes                : Aucune
+ 105          //
+ 106          // *************************************************************************************************
+ 107          {
+ 108   1          unsigned char ucRecu = 0;
+ 109   1          if(ucIndiceIN != ucIndiceOUT)
+ 110   1          {
+ 111   2              switch(ucIndiceTrame)
+ 112   2              {
+ 113   3                  case 0:
+ 114   3                      ucRecu = ucCircularBuffer[ucIndiceOUT];
+ 115   3                      ucCircularBuffer[ucIndiceOUT] = 0x00;
+ 116   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/05/2019 16:48:54 PAGE 3   
 
- 117   3                      if(ucRecu == 'G')
- 118   3                      {
- 119   4                          ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 120   4                      }
- 121   3                      
- 122   3                      break;
- 123   3                  case 1:
- 124   3                      ucRecu = ucCircularBuffer[ucIndiceOUT];
- 125   3                      ucCircularBuffer[ucIndiceOUT] = 0x00;
- 126   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 127   3                    
- 128   3                      if(ucRecu == 'O')
- 129   3                      {
- 130   4                          ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 131   4                      }
- 132   3                      else 
- 133   3                      {
- 134   4                          ucIndiceTrame = ((ucIndiceTrame - 1) & 0x07);
- 135   4                      }
- 136   3                      break;
- 137   3                  case 2:
- 138   3                      tramePtr->adcSensors.touchScreen.x = ucCircularBuffer[ucIndiceOUT];
- 139   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 140   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 141   3                      break;
- 142   3                  case 3:
- 143   3                      tramePtr->adcSensors.touchScreen.y = ucCircularBuffer[ucIndiceOUT];
- 144   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 145   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 146   3                      break;
- 147   3                  case 4:
- 148   3                      tramePtr->adcSensors.gripIntensity = ucCircularBuffer[ucIndiceOUT];
- 149   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 150   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 151   3                      break;
- 152   3                  case 5:
- 153   3                      tramePtr->adcSensors.weightSensor = ucCircularBuffer[ucIndiceOUT];
- 154   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 155   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 156   3                      break;
- 157   3                  case 6:
- 158   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 159   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 160   3                      break;
- 161   3                  case 7:
- 162   3                      tramePtr->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
- 163   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
- 164   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
- 165   3                      ucIsTrameReceived = 1;    // circular buffer is full and trame is read to be read
- 166   3                      break;
- 167   3              }
- 168   2          }
- 169   1      }
- 170          
- 171          void vSendTrame(struct ArmState *statePtr)
- 172          {
- 173   1          ucTx('G');
- 174   1          ucTx('O');
- 175   1          ucTx(statePtr->base);
- 176   1          ucTx(statePtr->shoulder);
- 177   1          ucTx(statePtr->elbow);
- 178   1          ucTx(statePtr->wrist);
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/04/2019 19:28:20 PAGE 4   
+ 117   3                    
+ 118   3                      if(ucRecu == 'G')
+ 119   3                      {
+ 120   4                          ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 121   4                      }
+ 122   3                      
+ 123   3                      break;
+ 124   3                  case 1:
+ 125   3                      ucRecu = ucCircularBuffer[ucIndiceOUT];
+ 126   3                      ucCircularBuffer[ucIndiceOUT] = 0x00;
+ 127   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 128   3                    
+ 129   3                      if(ucRecu == 'O')
+ 130   3                      {
+ 131   4                          ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 132   4                      }
+ 133   3                      else 
+ 134   3                      {
+ 135   4                          ucIndiceTrame = ((ucIndiceTrame - 1) & 0x07);
+ 136   4                      }
+ 137   3                      break;
+ 138   3                  case 2:
+ 139   3                      tramePtr->adcSensors.touchScreen.x = ucCircularBuffer[ucIndiceOUT];
+ 140   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 141   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 142   3                      break;
+ 143   3                  case 3:
+ 144   3                      tramePtr->adcSensors.touchScreen.y = ucCircularBuffer[ucIndiceOUT];
+ 145   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 146   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 147   3                      break;
+ 148   3                  case 4:
+ 149   3                      tramePtr->adcSensors.gripIntensity = ucCircularBuffer[ucIndiceOUT];
+ 150   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 151   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 152   3                      break;
+ 153   3                  case 5:
+ 154   3                      tramePtr->adcSensors.weightSensor = ucCircularBuffer[ucIndiceOUT];
+ 155   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 156   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 157   3                      break;
+ 158   3                  case 6:
+ 159   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 160   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 161   3                      break;
+ 162   3                  case 7:
+ 163   3                      tramePtr->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
+ 164   3                      ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
+ 165   3                      ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+ 166   3                      ucIsTrameReceived = 1;    // circular buffer is full and trame is read to be read
+ 167   3                      break;
+ 168   3              }
+ 169   2          }
+ 170   1      }
+ 171          
+ 172          void vSendTrame(struct ArmState *statePtr)
+ 173          {
+ 174   1          ucTx('G');
+ 175   1          ucTx('O');
+ 176   1          ucTx(statePtr->base);
+ 177   1          ucTx(statePtr->shoulder);
+ 178   1          ucTx(statePtr->elbow);
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/05/2019 16:48:54 PAGE 4   
 
- 179   1          ucTx(statePtr->grip);
- 180   1          ucTx(ucHandleCS(statePtr));
- 181   1      }
- 182          
- 183          unsigned char ucHandleCS(struct ArmState *statePtr)
- 184          {
- 185   1          unsigned char ucCheckSum;
- 186   1          ucCheckSum = (0x47 + 0x4F + statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + 
+ 179   1          ucTx(statePtr->wrist);
+ 180   1          ucTx(statePtr->grip);
+ 181   1          ucTx(ucHandleCS(statePtr));
+ 182   1      }
+ 183          
+ 184          unsigned char ucHandleCS(struct ArmState *statePtr)
+ 185          {
+ 186   1          unsigned char ucCheckSum;
+ 187   1          ucCheckSum = (0x47 + 0x4F + statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + 
              -statePtr->grip);  
- 187   1          return ucCheckSum;
- 188   1      }
- 189          
- 190          void ucTx(unsigned char ucTransmi)
- 191          //
- 192          //  Auteur: Hugo Pellerin   
- 193          //  Date de création :  19-11-08
- 194          //  Version 1.0
- 195          //
- 196          //  Description: envoie une donner sur UART
- 197          //  Paramètres d'entrées : donne a envoyer unsigned char
- 198          //  Paramètres de sortie : -
- 199          //  Notes                : Aucune
- 200          //
- 201          // *************************************************************************************************
- 202          {
- 203   1          ES0 = 0;
- 204   1          SBUF0 = ucTransmi;
- 205   1          while(TI_0 == 0);
- 206   1          TI_0 = 0;
- 207   1          ES0 = 1;
- 208   1      }
- 209          
- 210          unsigned char ucKbHit()
- 211          //
- 212          //  Auteur: Hugo Pellerin   
- 213          //  Date de création :  19-10-11
- 214          //  Version 1.0
- 215          //
- 216          //  Description: Test si le flag du port serie est lever
- 217          //  Paramètres d'entrées : -
- 218          //  Paramètres de sortie : vrai ou faux
- 219          //  Notes                : Aucune
- 220          //
- 221          // *************************************************************************************************
- 222          {
- 223   1          return (unsigned char) RI_0;
- 224   1      }
- 225          
- 226          unsigned char isTrameReceived()
- 227          {
- 228   1          return ucIsTrameReceived;
- 229   1      }
- 230          
- 231          void resetIsTrameReceived()
- 232          {
- 233   1          ucIsTrameReceived = 0;
- 234   1      }
+ 188   1          return ucCheckSum;
+ 189   1      }
+ 190          
+ 191          void ucTx(unsigned char ucTransmi)
+ 192          //
+ 193          //  Auteur: Hugo Pellerin   
+ 194          //  Date de création :  19-11-08
+ 195          //  Version 1.0
+ 196          //
+ 197          //  Description: envoie une donner sur UART
+ 198          //  Paramètres d'entrées : donne a envoyer unsigned char
+ 199          //  Paramètres de sortie : -
+ 200          //  Notes                : Aucune
+ 201          //
+ 202          // *************************************************************************************************
+ 203          {
+ 204   1          ES0 = 0;
+ 205   1          SBUF0 = ucTransmi;
+ 206   1          while(TI_0 == 0);
+ 207   1          TI_0 = 0;
+ 208   1          ES0 = 1;
+ 209   1      }
+ 210          
+ 211          unsigned char ucKbHit()
+ 212          //
+ 213          //  Auteur: Hugo Pellerin   
+ 214          //  Date de création :  19-10-11
+ 215          //  Version 1.0
+ 216          //
+ 217          //  Description: Test si le flag du port serie est lever
+ 218          //  Paramètres d'entrées : -
+ 219          //  Paramètres de sortie : vrai ou faux
+ 220          //  Notes                : Aucune
+ 221          //
+ 222          // *************************************************************************************************
+ 223          {
+ 224   1          return (unsigned char) RI_0;
+ 225   1      }
+ 226          
+ 227          unsigned char isTrameReceived()
+ 228          {
+ 229   1          return ucIsTrameReceived;
+ 230   1      }
+ 231          
+ 232          void resetIsTrameReceived()
+ 233          {
+ 234   1          ucIsTrameReceived = 0;
+ 235   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    645    ----
-   CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/04/2019 19:28:20 PAGE 5   
+C51 COMPILER V9.53.0.0   CIRCULARBUFFER_RXTX                                               12/05/2019 16:48:54 PAGE 5   
 
+   CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     13       3
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
