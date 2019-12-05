@@ -24,6 +24,7 @@ unsigned char ucIndiceIN = 0;
 unsigned char ucIndiceOUT = 0;
 unsigned char ucIndiceTrame = 0;
 unsigned char ucData = 0;
+unsigned char ucIsTrameReceived = 0;
 
 unsigned char ucCircularBuffer[8];
 
@@ -161,15 +162,14 @@ void vCircularBuffer(struct TramePIC *tramePtr)
                 tramePtr->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
+                ucIsTrameReceived = 1;    // circular buffer is full and trame is read to be read
                 break;
         }
     }
 }
 
-void vHandleTrame(struct TramePIC *tramePtr, struct ArmState *statePtr)
+void vSendTrame(struct ArmState *statePtr)
 {
-    vCircularBuffer(tramePtr);
-    
     ucTx('G');
     ucTx('O');
     ucTx(statePtr->base);
@@ -183,7 +183,7 @@ void vHandleTrame(struct TramePIC *tramePtr, struct ArmState *statePtr)
 unsigned char ucHandleCS(struct ArmState *statePtr)
 {
     unsigned char ucCheckSum;
-    ucCheckSum = statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + statePtr->grip;  
+    ucCheckSum = (0x47 + 0x4F + statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + statePtr->grip);  
     return ucCheckSum;
 }
 
@@ -221,4 +221,14 @@ unsigned char ucKbHit()
 // *************************************************************************************************
 {
     return (unsigned char) RI_0;
+}
+
+unsigned char isTrameReceived()
+{
+    return ucIsTrameReceived;
+}
+
+void resetIsTrameReceived()
+{
+    ucIsTrameReceived = 0;
 }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   LCD                                                               12/03/2019 18:09:13 PAGE 1   
+C51 COMPILER V9.53.0.0   LCD                                                               12/04/2019 19:28:19 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE LCD
@@ -62,7 +62,7 @@ line level    source
   53          //
   54          //  Auteur: Stéphane Deschênes  
   55          //  Date de création :  01-09-2019
-C51 COMPILER V9.53.0.0   LCD                                                               12/03/2019 18:09:13 PAGE 2   
+C51 COMPILER V9.53.0.0   LCD                                                               12/04/2019 19:28:19 PAGE 2   
 
   56          //  Version 1.0
   57          //
@@ -126,7 +126,7 @@ line level    source
  115          //
  116          //  Description: Écrit un caractère sur le LCD, sur la ligne et la colonne voulue.
  117          //  Paramètres d'entrées : ucCaract: Caractère que l'on veut écrire
-C51 COMPILER V9.53.0.0   LCD                                                               12/03/2019 18:09:13 PAGE 3   
+C51 COMPILER V9.53.0.0   LCD                                                               12/04/2019 19:28:19 PAGE 3   
 
  118          //                         ucLigne:  Ligne où l'on veut écrire (o à 3)
  119          //                         ucCase:  Colonne où l'on veut écrire (0 à 19)
@@ -190,7 +190,7 @@ line level    source
  177          //  Description : Efface le LCD au complet           
  178          //  Date de création :  1-09-2019
  179          //  Version 1.0
-C51 COMPILER V9.53.0.0   LCD                                                               12/03/2019 18:09:13 PAGE 4   
+C51 COMPILER V9.53.0.0   LCD                                                               12/04/2019 19:28:19 PAGE 4   
 
  180          //  Paramètres d'entrée :  Aucun
  181          //  Paramètres de sortie : Aucun                
@@ -254,7 +254,7 @@ line level    source
  239   1        return ucTemp;
  240   1      }
  241          
-C51 COMPILER V9.53.0.0   LCD                                                               12/03/2019 18:09:13 PAGE 5   
+C51 COMPILER V9.53.0.0   LCD                                                               12/04/2019 19:28:19 PAGE 5   
 
  242          
 

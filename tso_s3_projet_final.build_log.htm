@@ -34,83 +34,31 @@ compiling TypeConversion.c...
 compiling CircularBuffer_RxTx.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RXTX
-Program Size: data=9.0 xdata=513 code=4202
-creating hex file from "tso_s3_projet_final"...
-"tso_s3_projet_final" - 0 Error(s), 1 Warning(s).
-R)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  STCOMPTEUR
-    MODULE:  Timer0.obj (TIMER0)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  STCOMPTEUR
-    MODULE:  CircularBuffer_RxTx.obj (CIRCULARBUFFER_RXTX)
+    SEGMENT: ?PR?_VECRIREMEMI2C?I2C
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READMEMORYI2C?PROJETFINALMAIN
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RXTX
-Program Size: data=9.0 xdata=525 code=4218
-Target not created.
-BHIT?CIRCULARBUFFER_RXTX
-Program Size: data=9.0 xdata=525 code=4224
-Target not created.
-ESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?_HANDLEKEY?KEYBOARDI2C
-    LENGTH:  0009H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?_MANUALINCREMENTMOTOR?KEYBOARDI2C
-    LENGTH:  0007H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?_HANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
-    LENGTH:  0006H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?LCD
-    LENGTH:  0006H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?_VCIRCULARBUFFER?CIRCULARBUFFER_RX
-    LENGTH:  0003H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?READKEYBOARDI2C?KEYBOARDI2C
-    LENGTH:  0001H
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  UCCIRCULARBUFFER
-    SEGMENT: ?DT?CIRCULARBUFFER_RX
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  UCDATA
-    SEGMENT: ?DT?CIRCULARBUFFER_RX
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  UCINDICEIN
-    SEGMENT: ?DT?CIRCULARBUFFER_RX
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  UCINDICETRAME
-    SEGMENT: ?DT?CIRCULARBUFFER_RX
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  UCINDICEOUT
-    SEGMENT: ?DT?CIRCULARBUFFER_RX
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  KEYBOARDCHARACTERS
-    SEGMENT: ?DT?KEYBOARDI2C
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  ?_HANDLEMOTORVALUEOVERFLOW?BYTE
-    SEGMENT: ?DT?_HANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  ?_MANUALINCREMENTMOTOR?BYTE
-    SEGMENT: ?DT?_MANUALINCREMENTMOTOR?KEYBOARDI2C
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  ?_HANDLEKEY?BYTE
-    SEGMENT: ?DT?_HANDLEKEY?KEYBOARDI2C
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  PTRLCDCONFIG
-    SEGMENT: ?DT?LCD
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  PTRLCDBUSY
-    SEGMENT: ?DT?LCD
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  PTRLCDCHAR
-    SEGMENT: ?DT?LCD
-Program Size: data=189.0 xdata=350 code=3280
+Program Size: data=9.0 xdata=524 code=4740
+creating hex file from "tso_s3_projet_final"...
+"tso_s3_projet_final" - 0 Error(s), 3 Warning(s).
+</pre>
+</body>
+</html>
+
+ProjetFinalMain.c(62): error C244: 'keyboardManualSettings': can't initialize, bad type or class
+ProjetFinalMain.c(62): error C132: 'keyboardManualSettings': not in formal parameter list
+ProjetFinalMain.c(65): error C244: 'currentSequenceIndexes': can't initialize, bad type or class
+ProjetFinalMain.c(65): error C132: 'currentSequenceIndexes': not in formal parameter list
+ProjetFinalMain.c(70): error C244: 'connectionStateString': can't initialize, bad type or class
+ProjetFinalMain.c(70): error C132: 'connectionStateString': not in formal parameter list
+ProjetFinalMain.c(74): error C244: 'isOperating': can't initialize, bad type or class
+ProjetFinalMain.c(74): error C132: 'isOperating': not in formal parameter list
+ProjetFinalMain.c(78): error C244: 'lcdInitializationContent': can't initialize, bad type or class
+ProjetFinalMain.c(81): error C132: 'lcdInitializationContent': not in formal parameter list
+compiling RxTx232.c...
+compiling SubOptimizedLcdPrinter.c...
+compiling Timer0.c...
+compiling TypeConversion.c...
+compiling CircularBuffer_RxTx.c...
 Target not created.

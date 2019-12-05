@@ -11,6 +11,8 @@
 // Prédéclarations
 void vInitInterrupt(void);
 void vCircularBuffer(struct TramePIC *tramePtr);
-void vHandleTrame(struct TramePIC *tramePtr, struct ArmState *statePtr);
-unsigned char ucKbHit();
+void vSendTrame(struct ArmState *statePtr);
+unsigned char isTrameReceived(void);
+void resetIsTrameReceived(void);
+unsigned char ucKbHit(void);
 #endif

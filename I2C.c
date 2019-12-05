@@ -259,3 +259,50 @@ unsigned char ucLire8BitsI2C (unsigned char ucAckValue)
 
 
 
+unsigned char ucLireMemI2C(unsigned int uiAdr)
+{
+  unsigned char ucVal = 0x00;
+  
+  vI2CStartBit();
+  
+  ucEcrire8BitsI2C(0xA0);
+  
+  ucVal = uiAdr >> 8;
+  ucEcrire8BitsI2C(ucVal);
+  
+  ucVal = uiAdr;
+  ucEcrire8BitsI2C(ucVal);
+  
+  vI2CStartBit();
+  
+  ucEcrire8BitsI2C(0xA1);
+  ucVal = ucLire8BitsI2C(1);
+  
+  vI2CStopBit();
+  
+  return ucVal;
+}
+
+
+
+void vEcrireMemI2C(unsigned char ucData, unsigned int uiAdr)
+{
+  unsigned char ucVal = 0x00;
+  
+  vI2CStartBit();
+  
+  ucEcrire8BitsI2C(0xA0);
+  
+  ucVal = uiAdr >> 8;
+  ucEcrire8BitsI2C(ucVal);
+  
+  ucVal = uiAdr;
+  ucEcrire8BitsI2C(ucVal);
+  
+  ucEcrire8BitsI2C(ucData);
+  
+  vI2CStopBit();
+  
+  vI2CDelai(4000);
+}
+

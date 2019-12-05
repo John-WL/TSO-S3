@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 1   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYBOARDI2C
@@ -62,7 +62,7 @@ line level    source
   51          {
   52   1          switch(*key)
   53   1          {
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 2   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 2   
 
   54   2              case '1':
   55   2                  keyboardManualSettings->manualySelectedMotor = MOTOR_0;
@@ -93,55 +93,63 @@ line level    source
   79   2              case 'A':
   80   2                  // NEEDING IMPLEMENTATION! This line is supposed to make the robot arm warm up
   81   2                  break;
-  82   2          }
-  83   1      }
-  84          
-  85          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
+  82   2              
+  83   2              case 'B':
+  84   2                  currentArmState->base = 0x10;
+  85   2                  currentArmState->shoulder = 0x4C;
+  86   2                  currentArmState->elbow = 0x00;
+  87   2                  currentArmState->wrist = 0xA0;
+  88   2                  currentArmState->grip = 0x00;
+  89   2                  break;
+  90   2          }
+  91   1      }
+  92          
+  93          void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentA
              -rmState, char direction)
-  86          {
-  87   1          switch(keyboardManualSettings->manualySelectedMotor)
-  88   1          {
-  89   2            case MOTOR_0:
-  90   2                currentArmState->base += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-  91   2                handleMotorValueOverflow(&(currentArmState->base), &direction);
-  92   2                break;
-  93   2            case MOTOR_1:
-  94   2                currentArmState->shoulder += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction
-             -);
-  95   2                handleMotorValueOverflow(&(currentArmState->shoulder), &direction);
-  96   2                break;
-  97   2            case MOTOR_2:
-  98   2                currentArmState->elbow += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-  99   2                handleMotorValueOverflow(&(currentArmState->elbow), &direction);
+  94          {
+  95   1          switch(keyboardManualSettings->manualySelectedMotor)
+  96   1          {
+  97   2            case MOTOR_0:
+  98   2                currentArmState->base += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+  99   2                handleMotorValueOverflow(&(currentArmState->base), &direction);
  100   2                break;
- 101   2            case MOTOR_3:
- 102   2                currentArmState->wrist += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
- 103   2                handleMotorValueOverflow(&(currentArmState->wrist), &direction);
+ 101   2            case MOTOR_1:
+ 102   2                currentArmState->shoulder += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction
+             -);
+ 103   2                handleMotorValueOverflow(&(currentArmState->shoulder), &direction);
  104   2                break;
- 105   2            case MOTOR_4:
- 106   2                currentArmState->grip += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
- 107   2                handleMotorValueOverflow(&(currentArmState->grip), &direction);
+ 105   2            case MOTOR_2:
+ 106   2                currentArmState->elbow += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 107   2                handleMotorValueOverflow(&(currentArmState->elbow), &direction);
  108   2                break;
- 109   2          }
- 110   1      }
- 111          
- 112          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/03/2019 18:09:13 PAGE 3   
+ 109   2            case MOTOR_3:
+ 110   2                currentArmState->wrist += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 111   2                handleMotorValueOverflow(&(currentArmState->wrist), &direction);
+ 112   2                break;
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/04/2019 19:28:19 PAGE 3   
 
- 113          {
- 114   1          if(*direction == 1 && *motorValue > 205)
- 115   1          {
- 116   2              *motorValue = 205;
+ 113   2            case MOTOR_4:
+ 114   2                currentArmState->grip += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
+ 115   2                handleMotorValueOverflow(&(currentArmState->grip), &direction);
+ 116   2                break;
  117   2          }
- 118   1          else if(*direction == -1 && *motorValue > 205)
- 119   1          {
- 120   2              *motorValue = 0;
- 121   2          }
- 122   1      }
+ 118   1      }
+ 119          
+ 120          void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
+ 121          {
+ 122   1          if(*direction == 1 && *motorValue > 205)
+ 123   1          {
+ 124   2              *motorValue = 205;
+ 125   2          }
+ 126   1          else if(*direction == -1 && *motorValue > 205)
+ 127   1          {
+ 128   2              *motorValue = 0;
+ 129   2          }
+ 130   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    749    ----
+   CODE SIZE        =    801    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     16      23
    PDATA SIZE       =   ----    ----

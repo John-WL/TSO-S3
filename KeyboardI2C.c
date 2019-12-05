@@ -79,6 +79,14 @@ void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManual
         case 'A':
             // NEEDING IMPLEMENTATION! This line is supposed to make the robot arm warm up
             break;
+        
+        case 'B':
+            currentArmState->base = 0x10;
+            currentArmState->shoulder = 0x4C;
+            currentArmState->elbow = 0x00;
+            currentArmState->wrist = 0xA0;
+            currentArmState->grip = 0x00;
+            break;
     }
 }
 

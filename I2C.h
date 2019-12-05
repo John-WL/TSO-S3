@@ -27,6 +27,8 @@ void vI2CStartBit(void);
 void vI2CStopBit(void);
 unsigned char ucLire8BitsI2C (unsigned char ucAckValue);
 unsigned char ucEcrire8BitsI2C (unsigned char ucTxData);
+unsigned char ucLireMemI2C(unsigned int uiAdr);
+void vEcrireMemI2C(unsigned char ucData, unsigned int uiAdr);
 
 #endif 
 
