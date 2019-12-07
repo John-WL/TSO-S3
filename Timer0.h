@@ -9,6 +9,22 @@
 #define TIMER0_H
 
 // Prédéclaration
-void initTimer50ms(void);
-void vUpdateCompteurTimer0(struct Compteur* stCompteur);
+
+//**************************************************************
+void vInitTimer50ms(void);
+/*  Auteur: John-William Lebel
+    
+    Behaviour:  initialise le timer 0 à 50ms
+    Parameters: void
+    Return:     void
+***************************************************************/
+
+//**************************************************************
+void vUpdateCompteurTimer0(struct STCompteur* stCompteur);
+/*  Auteur: Hugo Pellerin
+    
+    Behaviour:  initialise le timer 0 à 50ms
+    Parameters: void
+    Return:     void
+***************************************************************/
 #endif

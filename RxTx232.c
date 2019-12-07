@@ -22,7 +22,7 @@ D
 
 // *************************************************************************************************
 void vInitPortSerie(void)
-//   Auteur : Alain Champagne                  
+//   Auteur : Alain Champagne
 //      Date de création : 22-06-06   
 //   Description : Cette fonction initialise les SFRs pour permettre une communication série
 //                 à 57600 bauds sans interruptions. La communication série utilise le timer
@@ -30,7 +30,7 @@ void vInitPortSerie(void)
 //                 sera employée.
 //          
 //   Paramètres d'entrée : Aucun.
-//   Paramètres de sortie : Aucun.                
+//   Paramètres de sortie : Aucun.
 //   Variables utilisées : Aucun.
 //***************************************************************************************************
 {

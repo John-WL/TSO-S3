@@ -1,18 +1,22 @@
 /**************************************************************************************************
-Nom du fichier : I2C.c
-Auteur : Hugo Pellerin                 
-Date de création : 30-08-2019
-Code et definition pour les fonctions de traitement du I2C.
+  Nom du fichier : I2C.c
+    
+    Auteur: Hugo Pellerin
+    Modifications:
+      - John-William Lebel (2019-12-06) => ajout de commentaires
+    Date de création : 30-08-2019
+    Code et definition pour les fonctions de traitement du I2C.
 ***************************************************************************************************/
 	
-#include "_DS89C450Modifie.h"				// Définition des bits et des registres du microcontrôleur
-#include "_DeclarationGenerale.h"
-#include "I2C.h"
+#include "_DS89C450Modifie.h"				// définition des bits et des registres du microcontrôleur
+#include "_DeclarationGenerale.h"   // déclaration pour coder de façon peu conventionnelle
+#include "I2C.h"                    // fichier .h associé à celui-ci
 
 void vInitPortSerie_0(void);
 void vDelaiI2C(UI uiTemps);
 
 void vStartBitI2C()
+
 { 
   SDA = 1;
   SCL = 1;
@@ -127,28 +131,6 @@ UC ucLireMemI2C(UI uiAdr)
   return ucVal;
 }
 
-void vEcrireMemI2C(UC ucData, UI uiAdr)
-{
-  
-  UC ucVal = 0x00;
-  
-  vStartBitI2C();
-  
-  ucEcrire8BitsI2C(0xA0);
-  
-  ucVal = uiAdr >> 8;
-  ucEcrire8BitsI2C(ucVal);
-  
-  ucVal = uiAdr;
-  ucEcrire8BitsI2C(ucVal);
-  
-  ucEcrire8BitsI2C(ucData);
-  
-  vStopBitI2C();
-  
-  vDelaiI2C(4000);
-  
-}
 // *************************************************************************************************
 //  Auteur: Hugo Pellerin
 //  Date de creation :  30-08-2019

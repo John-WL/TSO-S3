@@ -363,6 +363,11 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
+              <FileName>ProjetFinalMain.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ProjetFinalMain.c</FilePath>
+            </File>
+            <File>
               <FileName>I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\I2C.c</FilePath>
@@ -376,11 +381,6 @@
               <FileName>LCD.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LCD.c</FilePath>
-            </File>
-            <File>
-              <FileName>ProjetFinalMain.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ProjetFinalMain.c</FilePath>
             </File>
             <File>
               <FileName>RxTx232.c</FileName>
@@ -401,11 +401,6 @@
               <FileName>TypeConversion.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\TypeConversion.c</FilePath>
-            </File>
-            <File>
-              <FileName>ds89c450.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\ds89c450.h</FilePath>
             </File>
             <File>
               <FileName>I2C.h</FileName>

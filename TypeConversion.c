@@ -16,11 +16,11 @@
 #include "TypeConversion.h"
 
 // Prédéclarations privées
-unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate);
+void vHalfCharToHexaDecimal(unsigned char* ucpNumberToEvaluate);
 
 
 // *************************************************************************************************
-unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex)
+unsigned char* ucpUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -33,27 +33,27 @@ unsigned char unsignedCharToHexaDecimal(unsigned char* numberToEvaluate, unsigne
 //
 // *************************************************************************************************
 {
-		unsigned char result;
+		unsigned char* ucpResult;
 	
-		if(digitIndex == 0)		// need to change the 0 for the "define", and include the right file
+		if(ucDigitIndex == 0)		// need to change the 0 for the "define", and include the right file
 		{
-			result = *numberToEvaluate >> 4;
+        *ucpResult = *ucpNumberToEvaluate >> 4;
 		}
-		else if(digitIndex == 1)
+		else if(ucDigitIndex == 1)
 		{
-			result = (*numberToEvaluate) & 0x0F;
+        *ucpResult = (*ucpNumberToEvaluate) & 0x0F;
 		}
 		else
 		{
-				result = ' ';
+				*ucpResult = ' ';
 		}
-		result = halfCharToHexaDecimal(&result);
+		vHalfCharToHexaDecimal(ucpResult);
 		
-		return result;
+		return ucpResult;
 }
 
 // *************************************************************************************************
-unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned char digitIndex)
+unsigned char* ucpUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -67,30 +67,30 @@ unsigned char unsignedCharToDecimal(unsigned char* numberToEvaluate, unsigned ch
 //
 // *************************************************************************************************
 {
-		unsigned char result;
+		unsigned char* ucpResult;
 	
-		if(digitIndex == 0)
+		if(ucDigitIndex == 0)
 		{
-			result = '0' + (*numberToEvaluate / 100);
+        *ucpResult = '0' + (*ucpNumberToEvaluate / 100);
 		}
-		else if(digitIndex == 1)
+		else if(ucDigitIndex == 1)
 		{
-			result = '0' + (*numberToEvaluate / 10);
+        *ucpResult = '0' + (*ucpNumberToEvaluate / 10);
 		}
-		else if(digitIndex == 2)
+		else if(ucDigitIndex == 2)
 		{
-			result = '0' + (*numberToEvaluate % 10);
+        *ucpResult = '0' + (*ucpNumberToEvaluate % 10);
 		}
 		else
 		{
-				result = ' ';
+				*ucpResult = ' ';
 		}
 		
-		return result;
+		return ucpResult;
 }
 
 // *************************************************************************************************
-unsigned char* weightTypeToString(unsigned char* weightTypeIndex)
+unsigned char* ucpWeightTypeToString(unsigned char* ucpWeightTypeIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -102,30 +102,30 @@ unsigned char* weightTypeToString(unsigned char* weightTypeIndex)
 //
 // *************************************************************************************************
 {
-		unsigned char* result;
+		unsigned char* ucpResult;
 		
-		if(*weightTypeIndex == BLUE_WEIGHT)
+		if(*ucpWeightTypeIndex == BLUE_WEIGHT)
 		{
-				result = "Bleu ";
+				ucpResult = "Bleu ";
 		}
-		else if(*weightTypeIndex == GREEN_WEIGHT)
+		else if(*ucpWeightTypeIndex == GREEN_WEIGHT)
 		{
-				result = "Vert ";
+				ucpResult = "Vert ";
 		}
-		else if(*weightTypeIndex == RED_WEIGHT)
+		else if(*ucpWeightTypeIndex == RED_WEIGHT)
 		{
-				result = "Rouge";
+				ucpResult = "Rouge";
 		}
 		else
 		{
-				result = "Aucun";
+				ucpResult = "Aucun";
 		}
 		
-		return result;
+    return ucpResult;
 }
 
 // *************************************************************************************************
-unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate)
+void vHalfCharToHexaDecimal(unsigned char* ucpNumberToEvaluate)
 //
 //  Auteur: John-William Lebel
 //
@@ -136,20 +136,16 @@ unsigned char halfCharToHexaDecimal(unsigned char* numberToEvaluate)
 //
 // *************************************************************************************************
 {
-		unsigned char result;
-		
-		if(*numberToEvaluate <= 9)
+		if(*ucpNumberToEvaluate <= 9)
 		{
-			result = '0' + *numberToEvaluate;
+        *ucpNumberToEvaluate = '0' + *ucpNumberToEvaluate;
 		}
-		else if(*numberToEvaluate <= 0x0F)
+		else if(*ucpNumberToEvaluate <= 0x0F)
 		{
-			result = 'A' + (*numberToEvaluate - 0x0A);
+        *ucpNumberToEvaluate = 'A' + (*ucpNumberToEvaluate - 0x0A);
 		}
 		else
 		{
-				result = ' ';
+				*ucpNumberToEvaluate = ' ';
 		}
-		
-		return result;
 }

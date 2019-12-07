@@ -1,7 +1,7 @@
+"ProjetFinalMain.obj",
 "I2C.obj",
 "KeyboardI2C.obj",
 "LCD.obj",
-"ProjetFinalMain.obj",
 "RxTx232.obj",
 "SubOptimizedLcdPrinter.obj",
 "Timer0.obj",

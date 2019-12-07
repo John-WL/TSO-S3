@@ -52,7 +52,7 @@ unsigned char xdata *PtrLCDChar = 0x8002;
 // *************************************************************************************************
 void vInitLCD(void)
 //
-//  Auteur: Stéphane Deschênes 	
+//  Auteur: Stéphane Deschênes
 //  Date de création :  01-09-2019
 //  Version 1.0
 //

@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        12/05/2019  16:48:54  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/06/2019  19:24:08  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE I2C.obj, KeyboardI2C.obj, LCD.obj, ProjetFinalMain.obj, RxTx232.obj, SubOptimizedLcdPrinter.
+C:\KEIL_V5\C51\BIN\BL51.EXE ProjetFinalMain.obj, I2C.obj, KeyboardI2C.obj, LCD.obj, RxTx232.obj, SubOptimizedLcdPrinter.
 >> obj, Timer0.obj, TypeConversion.obj, CircularBuffer_RxTx.obj, SequenceHandler.obj TO tso_s3_projet_final RAMSIZE (256
 >> )
 
@@ -11,10 +11,10 @@ MEMORY MODEL: LARGE
 
 
 INPUT MODULES INCLUDED:
+  ProjetFinalMain.obj (PROJETFINALMAIN)
   I2C.obj (I2C)
   KeyboardI2C.obj (KEYBOARDI2C)
   LCD.obj (LCD)
-  ProjetFinalMain.obj (PROJETFINALMAIN)
   RxTx232.obj (RXTX232)
   SubOptimizedLcdPrinter.obj (SUBOPTIMIZEDLCDPRINTER)
   Timer0.obj (TIMER0)
@@ -34,7 +34,7 @@ INPUT MODULES INCLUDED:
   C:\KEIL_V5\C51\LIB\C51L.LIB (?C_INIT)
 
 
-LINK MAP OF MODULE:  tso_s3_projet_final (I2C)
+LINK MAP OF MODULE:  tso_s3_projet_final (PROJETFINALMAIN)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -45,83 +45,81 @@ LINK MAP OF MODULE:  tso_s3_projet_final (I2C)
             IDATA   0008H     0001H     UNIT         ?STACK
 
             * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
-            XDATA   0000H     01C7H     UNIT         ?XD?PROJETFINALMAIN
-            XDATA   01C7H     0019H     UNIT         _XDATA_GROUP_
-            XDATA   01E0H     0010H     UNIT         ?XD?KEYBOARDI2C
-            XDATA   01F0H     000DH     UNIT         ?XD?CIRCULARBUFFER_RXTX
-            XDATA   01FDH     0006H     UNIT         ?XD?LCD
-            XDATA   0203H     0003H     UNIT         ?XD?_VECRIREMEMI2C?I2C
-            XDATA   0206H     0001H     UNIT         ?XD?SEQUENCEHANDLER
+            XDATA   0000H     0069H     UNIT         ?XD?PROJETFINALMAIN
+            XDATA   0069H     0019H     UNIT         _XDATA_GROUP_
+            XDATA   0082H     0010H     UNIT         ?XD?KEYBOARDI2C
+            XDATA   0092H     000DH     UNIT         ?XD?CIRCULARBUFFER_RXTX
+            XDATA   009FH     0006H     UNIT         ?XD?LCD
+            XDATA   00A5H     0001H     UNIT         ?XD?SEQUENCEHANDLER
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
             CODE    0003H     001FH     UNIT         ?PR?_UCDONNEVALEURLIGNE?LCD
                     0022H     0001H                  *** GAP ***
             CODE    0023H     0003H     ABSOLUTE     
-            CODE    0026H     021FH     UNIT         ?C_INITSEG
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 2
+            CODE    0026H     0243H     UNIT         ?PR?_VHANDLESEQUENCE?SEQUENCEHANDLER
+            CODE    0269H     0184H     UNIT         ?PR?_VMANUALINCREMENTMOTOR?KEYBOARDI2C
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 2
 
 
-            CODE    0245H     0184H     UNIT         ?PR?_MANUALINCREMENTMOTOR?KEYBOARDI2C
-            CODE    03C9H     0162H     UNIT         ?PR?_HANDLEKEY?KEYBOARDI2C
-            CODE    052BH     0160H     UNIT         ?PR?MAIN?PROJETFINALMAIN
-            CODE    068BH     015CH     UNIT         ?C?LIB_CODE
-            CODE    07E7H     0157H     UNIT         ?PR?_VCIRCULARBUFFER?CIRCULARBUFFER_RXTX
-            CODE    093EH     014BH     UNIT         ?PR?_HANDLESEQUENCE?SEQUENCEHANDLER
-            CODE    0A89H     0119H     UNIT         ?PR?_PRINTLCDDELTAMOTORS?SUBOPTIMIZEDLCDPRINTER
-            CODE    0BA2H     00E1H     UNIT         ?PR?_PRINTLCDDELTATRAME?SUBOPTIMIZEDLCDPRINTER
-            CODE    0C83H     00D8H     UNIT         ?PR?_HANDLETOUCHSCREEN?SEQUENCEHANDLER
-            CODE    0D5BH     008CH     UNIT         ?C_C51STARTUP
-            CODE    0DE7H     007DH     UNIT         ?PR?_PRINTLCDDELTAWEIGHTTYPE?SUBOPTIMIZEDLCDPRINTER
-            CODE    0E64H     007AH     UNIT         ?PR?_VSENDTRAME?CIRCULARBUFFER_RXTX
-            CODE    0EDEH     0062H     UNIT         ?PR?INTERRUPTIONSERIE0?CIRCULARBUFFER_RXTX
-            CODE    0F40H     0060H     UNIT         ?PR?_WEIGHTTYPETOSTRING?TYPECONVERSION
-            CODE    0FA0H     0053H     UNIT         ?PR?_PRINTLCDDELTACONNECTIONSTATE?SUBOPTIMIZEDLCDPRINTER
-            CODE    0FF3H     004EH     UNIT         ?PR?_HANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
-            CODE    1041H     004DH     UNIT         ?PR?_UCLIRE8BITSI2C?I2C
-            CODE    108EH     0047H     UNIT         ?PR?_UCECRIRE8BITSI2C?I2C
-            CODE    10D5H     0045H     UNIT         ?PR?_UCLIREMEMI2C?I2C
-            CODE    111AH     0045H     UNIT         ?PR?VINITLCD?LCD
-            CODE    115FH     0043H     UNIT         ?PR?_PRINTLCDDELTAMANUALSETTINGS?SUBOPTIMIZEDLCDPRINTER
-            CODE    11A2H     0042H     UNIT         ?PR?_VAFFICHELIGNELCD?LCD
-            CODE    11E4H     0040H     UNIT         ?PR?READKEYBOARDI2C?KEYBOARDI2C
-            CODE    1224H     0040H     UNIT         ?PR?_READMEMORYI2C?PROJETFINALMAIN
-            CODE    1264H     003FH     UNIT         ?PR?_VLCDECRIRECARACT?LCD
-            CODE    12A3H     003EH     UNIT         ?PR?_PRINTLCDCURRENTSEQUENCESTEP?SUBOPTIMIZEDLCDPRINTER
-            CODE    12E1H     003DH     UNIT         ?PR?_VAFFICHELCDCOMPLET?LCD
-            CODE    131EH     003BH     UNIT         ?PR?PRINTLCDDELTACHARACTERS?PROJETFINALMAIN
-            CODE    1359H     0038H     UNIT         ?PR?_VECRIREMEMI2C?I2C
-            CODE    1391H     0030H     UNIT         ?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECONVERSION
-            CODE    13C1H     002DH     UNIT         ?PR?_UNSIGNEDCHARTODECIMAL?TYPECONVERSION
-            CODE    13EEH     0027H     UNIT         ?PR?_UCHANDLECS?CIRCULARBUFFER_RXTX
-            CODE    1415H     0021H     UNIT         ?PR?UCLIRE1BITI2C?I2C
-            CODE    1436H     0021H     UNIT         ?PR?_HALFCHARTOHEXADECIMAL?TYPECONVERSION
-            CODE    1457H     001AH     UNIT         ?PR?_GETSORTINGSEQUENCEFROMWHEIGHTSAMPLING?SEQUENCEHANDLER
-            CODE    1471H     0018H     UNIT         ?PR?_VECRIRE1BITI2C?I2C
-            CODE    1489H     0018H     UNIT         ?PR?_VDELAII2C?I2C
-            CODE    14A1H     0018H     UNIT         ?CO?TYPECONVERSION
-            CODE    14B9H     0017H     UNIT         ?PR?VATTENDREBUSYLCD?LCD
-            CODE    14D0H     0017H     UNIT         ?PR?_VUPDATECOMPTEURTIMER0?TIMER0
-            CODE    14E7H     0013H     UNIT         ?PR?VSTARTBITI2C?I2C
-            CODE    14FAH     0013H     UNIT         ?PR?VSTOPBITI2C?I2C
-            CODE    150DH     0012H     UNIT         ?PR?VEFFACELCD?LCD
-            CODE    151FH     0011H     UNIT         ?PR?VINITPORTSERIE?RXTX232
-            CODE    1530H     0011H     UNIT         ?PR?_UCTX?CIRCULARBUFFER_RXTX
-            CODE    1541H     000FH     UNIT         ?PR?INITTIMER50MS?TIMER0
-            CODE    1550H     0008H     UNIT         ?CO?PROJETFINALMAIN
-            CODE    1558H     0006H     UNIT         ?PR?UCKBHIT?CIRCULARBUFFER_RXTX
-            CODE    155EH     0006H     UNIT         ?PR?ISTRAMERECEIVED?CIRCULARBUFFER_RXTX
-            CODE    1564H     0006H     UNIT         ?PR?RESETISTRAMERECEIVED?CIRCULARBUFFER_RXTX
-            CODE    156AH     0006H     UNIT         ?PR?ISOPERATING?SEQUENCEHANDLER
-            CODE    1570H     0005H     UNIT         ?PR?VINITINTERRUPT?CIRCULARBUFFER_RXTX
-            CODE    1575H     0003H     UNIT         ?PR?UCRX?CIRCULARBUFFER_RXTX
+            CODE    03EDH     016AH     UNIT         ?PR?_VHANDLEKEY?KEYBOARDI2C
+            CODE    0557H     0160H     UNIT         ?PR?MAIN?PROJETFINALMAIN
+            CODE    06B7H     015CH     UNIT         ?C?LIB_CODE
+            CODE    0813H     0159H     UNIT         ?PR?_VCIRCULARBUFFER?CIRCULARBUFFER_RXTX
+            CODE    096CH     0141H     UNIT         ?PR?_VPRINTLCDDELTAMOTORS?SUBOPTIMIZEDLCDPRINTER
+            CODE    0AADH     0101H     UNIT         ?PR?_VPRINTLCDDELTATRAME?SUBOPTIMIZEDLCDPRINTER
+            CODE    0BAEH     00D5H     UNIT         ?PR?_VHANDLETOUCHSCREEN?SEQUENCEHANDLER
+            CODE    0C83H     00BDH     UNIT         ?C_INITSEG
+            CODE    0D40H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0DCCH     007EH     UNIT         ?PR?_UCPUNSIGNEDCHARTOASCIIDECIMAL?TYPECONVERSION
+            CODE    0E4AH     007DH     UNIT         ?PR?_VPRINTLCDDELTAWEIGHTTYPE?SUBOPTIMIZEDLCDPRINTER
+            CODE    0EC7H     007AH     UNIT         ?PR?_VSENDTRAME?CIRCULARBUFFER_RXTX
+            CODE    0F41H     006CH     UNIT         ?PR?_UCPUNSIGNEDCHARTOASCIIHEXADECIMAL?TYPECONVERSION
+            CODE    0FADH     0062H     UNIT         ?PR?INTERRUPTIONSERIE0?CIRCULARBUFFER_RXTX
+            CODE    100FH     0060H     UNIT         ?PR?_UCPWEIGHTTYPETOSTRING?TYPECONVERSION
+            CODE    106FH     0053H     UNIT         ?PR?_VPRINTLCDDELTACONNECTIONSTATE?SUBOPTIMIZEDLCDPRINTER
+            CODE    10C2H     004EH     UNIT         ?PR?_VHANDLEMOTORVALUEOVERFLOW?KEYBOARDI2C
+            CODE    1110H     004DH     UNIT         ?PR?_UCLIRE8BITSI2C?I2C
+            CODE    115DH     004BH     UNIT         ?PR?_VPRINTLCDDELTAMANUALSETTINGS?SUBOPTIMIZEDLCDPRINTER
+            CODE    11A8H     0047H     UNIT         ?PR?_UCECRIRE8BITSI2C?I2C
+            CODE    11EFH     0045H     UNIT         ?PR?_UCLIREMEMI2C?I2C
+            CODE    1234H     0045H     UNIT         ?PR?VINITLCD?LCD
+            CODE    1279H     0042H     UNIT         ?PR?_VAFFICHELIGNELCD?LCD
+            CODE    12BBH     0040H     UNIT         ?PR?_UCREADMEMORYI2C?PROJETFINALMAIN
+            CODE    12FBH     0040H     UNIT         ?PR?UCPREADKEYBOARDI2C?KEYBOARDI2C
+            CODE    133BH     003FH     UNIT         ?PR?_VLCDECRIRECARACT?LCD
+            CODE    137AH     003EH     UNIT         ?PR?_VPRINTLCDCURRENTSEQUENCESTEP?SUBOPTIMIZEDLCDPRINTER
+            CODE    13B8H     003DH     UNIT         ?PR?_VAFFICHELCDCOMPLET?LCD
+            CODE    13F5H     003BH     UNIT         ?PR?VPRINTLCDDELTACHARACTERS?PROJETFINALMAIN
+            CODE    1430H     0027H     UNIT         ?PR?_UCHANDLECS?CIRCULARBUFFER_RXTX
+            CODE    1457H     0022H     UNIT         ?PR?_VHALFCHARTOHEXADECIMAL?TYPECONVERSION
+            CODE    1479H     0021H     UNIT         ?PR?UCLIRE1BITI2C?I2C
+            CODE    149AH     001AH     UNIT         ?PR?_UCGETSORTINGSEQUENCEFROMWHEIGHTSAMPLING?SEQUENCEHANDLER
+            CODE    14B4H     0018H     UNIT         ?PR?_VECRIRE1BITI2C?I2C
+            CODE    14CCH     0018H     UNIT         ?PR?_VDELAII2C?I2C
+            CODE    14E4H     0018H     UNIT         ?CO?TYPECONVERSION
+            CODE    14FCH     0017H     UNIT         ?PR?VATTENDREBUSYLCD?LCD
+            CODE    1513H     0017H     UNIT         ?PR?_VUPDATECOMPTEURTIMER0?TIMER0
+            CODE    152AH     0013H     UNIT         ?PR?VSTARTBITI2C?I2C
+            CODE    153DH     0013H     UNIT         ?PR?VSTOPBITI2C?I2C
+            CODE    1550H     0012H     UNIT         ?PR?VEFFACELCD?LCD
+            CODE    1562H     0011H     UNIT         ?PR?VINITPORTSERIE?RXTX232
+            CODE    1573H     0011H     UNIT         ?PR?_VTX?CIRCULARBUFFER_RXTX
+            CODE    1584H     000FH     UNIT         ?PR?VINITTIMER50MS?TIMER0
+            CODE    1593H     0008H     UNIT         ?CO?PROJETFINALMAIN
+            CODE    159BH     0006H     UNIT         ?PR?UCISTRAMERECEIVED?CIRCULARBUFFER_RXTX
+            CODE    15A1H     0006H     UNIT         ?PR?VRESETISTRAMERECEIVED?CIRCULARBUFFER_RXTX
+            CODE    15A7H     0006H     UNIT         ?PR?_VSETOPERATINGSTATE?SEQUENCEHANDLER
+            CODE    15ADH     0006H     UNIT         ?PR?UCISOPERATING?SEQUENCEHANDLER
+            CODE    15B3H     0005H     UNIT         ?PR?VINITINTERRUPT?CIRCULARBUFFER_RXTX
+            CODE    15B8H     0003H     UNIT         ?PR?UCRX?CIRCULARBUFFER_RXTX
 
 
 
-OVERLAY MAP OF MODULE:   tso_s3_projet_final (I2C)
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 3
+OVERLAY MAP OF MODULE:   tso_s3_projet_final (PROJETFINALMAIN)
 
 
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 3
 
 
 SEGMENT                                            XDATA_GROUP
@@ -139,19 +137,19 @@ SEGMENT                                            XDATA_GROUP
 ?PR?MAIN?PROJETFINALMAIN                         -----    -----
   +--> ?PR?VINITPORTSERIE?RXTX232
   +--> ?PR?VINITLCD?LCD
-  +--> ?PR?INITTIMER50MS?TIMER0
+  +--> ?PR?VINITTIMER50MS?TIMER0
   +--> ?PR?_VAFFICHELCDCOMPLET?LCD
   +--> ?PR?VINITINTERRUPT?CIRCULARBUFFER_RXTX
-  +--> ?PR?ISOPERATING?SEQUENCEHANDLER
-  +--> ?PR?ISTRAMERECEIVED?CIRCULARBUFFER_RXTX
-  +--> ?PR?_READMEMORYI2C?PROJETFINALMAIN
-  +--> ?PR?READKEYBOARDI2C?KEYBOARDI2C
-  +--> ?PR?_HANDLEKEY?KEYBOARDI2C
+  +--> ?PR?UCISOPERATING?SEQUENCEHANDLER
+  +--> ?PR?UCISTRAMERECEIVED?CIRCULARBUFFER_...
+  +--> ?PR?_UCREADMEMORYI2C?PROJETFINALMAIN
+  +--> ?PR?UCPREADKEYBOARDI2C?KEYBOARDI2C
+  +--> ?PR?_VHANDLEKEY?KEYBOARDI2C
   +--> ?PR?_VUPDATECOMPTEURTIMER0?TIMER0
   +--> ?CO?PROJETFINALMAIN
-  +--> ?PR?PRINTLCDDELTACHARACTERS?PROJETFIN...
-  +--> ?PR?_HANDLESEQUENCE?SEQUENCEHANDLER
-  +--> ?PR?RESETISTRAMERECEIVED?CIRCULARBUFF...
+  +--> ?PR?VPRINTLCDDELTACHARACTERS?PROJETFI...
+  +--> ?PR?_VHANDLESEQUENCE?SEQUENCEHANDLER
+  +--> ?PR?VRESETISTRAMERECEIVED?CIRCULARBUF...
   +--> ?PR?_VSENDTRAME?CIRCULARBUFFER_RXTX
   +--> ?PR?_VCIRCULARBUFFER?CIRCULARBUFFER_RXTX
 
@@ -162,109 +160,112 @@ SEGMENT                                            XDATA_GROUP
 ?PR?VEFFACELCD?LCD                               -----    -----
   +--> ?PR?VATTENDREBUSYLCD?LCD
 
-?PR?_VAFFICHELCDCOMPLET?LCD                      01C7H    0004H
+?PR?_VAFFICHELCDCOMPLET?LCD                      0069H    0004H
   +--> ?PR?_VAFFICHELIGNELCD?LCD
 
-?PR?_VAFFICHELIGNELCD?LCD                        01CBH    0005H
+?PR?_VAFFICHELIGNELCD?LCD                        006DH    0005H
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_VLCDECRIRECARACT?LCD                        01D0H    0003H
+?PR?_VLCDECRIRECARACT?LCD                        0072H    0003H
   +--> ?PR?VATTENDREBUSYLCD?LCD
   +--> ?PR?_UCDONNEVALEURLIGNE?LCD
 
-?PR?_READMEMORYI2C?PROJETFINALMAIN               01C7H    0007H
+?PR?_UCREADMEMORYI2C?PROJETFINALMAIN             0069H    0007H
   +--> ?PR?_UCLIREMEMI2C?I2C
 
-?PR?_UCLIREMEMI2C?I2C                            01CEH    0003H
+?PR?_UCLIREMEMI2C?I2C                            0070H    0003H
   +--> ?PR?VSTARTBITI2C?I2C
   +--> ?PR?_UCECRIRE8BITSI2C?I2C
   +--> ?PR?_UCLIRE8BITSI2C?I2C
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 4
-
-
   +--> ?PR?VSTOPBITI2C?I2C
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 4
+
 
 ?PR?VSTARTBITI2C?I2C                             -----    -----
   +--> ?PR?_VDELAII2C?I2C
 
-?PR?_UCECRIRE8BITSI2C?I2C                        01D1H    0003H
+?PR?_UCECRIRE8BITSI2C?I2C                        0073H    0003H
   +--> ?PR?_VECRIRE1BITI2C?I2C
   +--> ?PR?UCLIRE1BITI2C?I2C
 
 ?PR?_VECRIRE1BITI2C?I2C                          -----    -----
   +--> ?PR?_VDELAII2C?I2C
 
-?PR?UCLIRE1BITI2C?I2C                            01D5H    0001H
+?PR?UCLIRE1BITI2C?I2C                            0077H    0001H
   +--> ?PR?_VDELAII2C?I2C
 
-?PR?_UCLIRE8BITSI2C?I2C                          01D1H    0004H
+?PR?_UCLIRE8BITSI2C?I2C                          0073H    0004H
   +--> ?PR?UCLIRE1BITI2C?I2C
   +--> ?PR?_VECRIRE1BITI2C?I2C
 
 ?PR?VSTOPBITI2C?I2C                              -----    -----
   +--> ?PR?_VDELAII2C?I2C
 
-?PR?READKEYBOARDI2C?KEYBOARDI2C                  01C7H    0001H
+?PR?UCPREADKEYBOARDI2C?KEYBOARDI2C               0069H    0001H
   +--> ?PR?VSTARTBITI2C?I2C
   +--> ?PR?_UCECRIRE8BITSI2C?I2C
   +--> ?PR?_UCLIRE8BITSI2C?I2C
   +--> ?PR?VSTOPBITI2C?I2C
 
-?PR?_HANDLEKEY?KEYBOARDI2C                       01C7H    000CH
-  +--> ?PR?_MANUALINCREMENTMOTOR?KEYBOARDI2C
+?PR?_VHANDLEKEY?KEYBOARDI2C                      0069H    000CH
+  +--> ?PR?_VMANUALINCREMENTMOTOR?KEYBOARDI2C
+  +--> ?PR?_VSETOPERATINGSTATE?SEQUENCEHANDLER
 
-?PR?_MANUALINCREMENTMOTOR?KEYBOARDI2C            01D3H    0007H
-  +--> ?PR?_HANDLEMOTORVALUEOVERFLOW?KEYBOAR...
+?PR?_VMANUALINCREMENTMOTOR?KEYBOARDI2C           0075H    0007H
+  +--> ?PR?_VHANDLEMOTORVALUEOVERFLOW?KEYBOA...
 
-?PR?_HANDLEMOTORVALUEOVERFLOW?KEYBOAR...         01DAH    0006H
+?PR?_VHANDLEMOTORVALUEOVERFLOW?KEYBOA...         007CH    0006H
 
-?PR?PRINTLCDDELTACHARACTERS?PROJETFIN...         -----    -----
-  +--> ?PR?_PRINTLCDDELTAMOTORS?SUBOPTIMIZED...
-  +--> ?PR?_PRINTLCDDELTATRAME?SUBOPTIMIZEDL...
-  +--> ?PR?_PRINTLCDDELTAWEIGHTTYPE?SUBOPTIM...
-  +--> ?PR?_PRINTLCDDELTAMANUALSETTINGS?SUBO...
-  +--> ?PR?_PRINTLCDCURRENTSEQUENCESTEP?SUBO...
-  +--> ?PR?_PRINTLCDDELTACONNECTIONSTATE?SUB...
+?PR?VPRINTLCDDELTACHARACTERS?PROJETFI...         -----    -----
+  +--> ?PR?_VPRINTLCDDELTAMOTORS?SUBOPTIMIZE...
+  +--> ?PR?_VPRINTLCDDELTATRAME?SUBOPTIMIZED...
+  +--> ?PR?_VPRINTLCDDELTAWEIGHTTYPE?SUBOPTI...
+  +--> ?PR?_VPRINTLCDDELTAMANUALSETTINGS?SUB...
+  +--> ?PR?_VPRINTLCDCURRENTSEQUENCESTEP?SUB...
+  +--> ?PR?_VPRINTLCDDELTACONNECTIONSTATE?SU...
 
-?PR?_PRINTLCDDELTAMOTORS?SUBOPTIMIZED...         01C7H    0003H
-  +--> ?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECO...
+?PR?_VPRINTLCDDELTAMOTORS?SUBOPTIMIZE...         0069H    0003H
+  +--> ?PR?_UCPUNSIGNEDCHARTOASCIIHEXADECIMA...
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECO...         01CAH    0001H
-  +--> ?PR?_HALFCHARTOHEXADECIMAL?TYPECONVER...
+?PR?_UCPUNSIGNEDCHARTOASCIIHEXADECIMA...         006CH    0006H
+  +--> ?PR?_VHALFCHARTOHEXADECIMAL?TYPECONVE...
 
-?PR?_PRINTLCDDELTATRAME?SUBOPTIMIZEDL...         01C7H    0003H
-  +--> ?PR?_UNSIGNEDCHARTOHEXADECIMAL?TYPECO...
+?PR?_VPRINTLCDDELTATRAME?SUBOPTIMIZED...         0069H    0003H
+  +--> ?PR?_UCPUNSIGNEDCHARTOASCIIHEXADECIMA...
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_PRINTLCDDELTAWEIGHTTYPE?SUBOPTIM...         01C7H    0003H
-  +--> ?PR?_WEIGHTTYPETOSTRING?TYPECONVERSION
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 5
-
-
+?PR?_VPRINTLCDDELTAWEIGHTTYPE?SUBOPTI...         0069H    0003H
+  +--> ?PR?_UCPWEIGHTTYPETOSTRING?TYPECONVER...
   +--> ?PR?_VLCDECRIRECARACT?LCD
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 5
 
-?PR?_WEIGHTTYPETOSTRING?TYPECONVERSION           01CAH    0006H
+
+
+?PR?_UCPWEIGHTTYPETOSTRING?TYPECONVER...         006CH    0006H
   +--> ?CO?TYPECONVERSION
 
-?PR?_PRINTLCDDELTAMANUALSETTINGS?SUBO...         01C7H    0003H
-  +--> ?PR?_UNSIGNEDCHARTODECIMAL?TYPECONVER...
+?PR?_VPRINTLCDDELTAMANUALSETTINGS?SUB...         0069H    0003H
+  +--> ?PR?_UCPUNSIGNEDCHARTOASCIIDECIMAL?TY...
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_PRINTLCDCURRENTSEQUENCESTEP?SUBO...         01C7H    0003H
+?PR?_UCPUNSIGNEDCHARTOASCIIDECIMAL?TY...         006CH    0006H
+
+?PR?_VPRINTLCDCURRENTSEQUENCESTEP?SUB...         0069H    0003H
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_PRINTLCDDELTACONNECTIONSTATE?SUB...         01C7H    0003H
+?PR?_VPRINTLCDDELTACONNECTIONSTATE?SU...         0069H    0003H
   +--> ?PR?_VLCDECRIRECARACT?LCD
 
-?PR?_HANDLESEQUENCE?SEQUENCEHANDLER              01C7H    0009H
-  +--> ?PR?_HANDLETOUCHSCREEN?SEQUENCEHANDLER
-  +--> ?PR?_GETSORTINGSEQUENCEFROMWHEIGHTSAM...
+?PR?_VHANDLESEQUENCE?SEQUENCEHANDLER             0069H    0009H
+  +--> ?PR?_VHANDLETOUCHSCREEN?SEQUENCEHANDLER
+  +--> ?PR?_UCGETSORTINGSEQUENCEFROMWHEIGHTS...
 
-?PR?_HANDLETOUCHSCREEN?SEQUENCEHANDLER           01D0H    0006H
+?PR?_VHANDLETOUCHSCREEN?SEQUENCEHANDLER          0072H    0006H
 
-?PR?_VSENDTRAME?CIRCULARBUFFER_RXTX              01C7H    0003H
-  +--> ?PR?_UCTX?CIRCULARBUFFER_RXTX
+?PR?_VSENDTRAME?CIRCULARBUFFER_RXTX              0069H    0003H
+  +--> ?PR?_VTX?CIRCULARBUFFER_RXTX
   +--> ?PR?_UCHANDLECS?CIRCULARBUFFER_RXTX
 
 ?C_INITSEG                                       -----    -----
@@ -272,194 +273,290 @@ SEGMENT                                            XDATA_GROUP
 
 
 
-SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
+SYMBOL TABLE OF MODULE:  tso_s3_projet_final (PROJETFINALMAIN)
 
   VALUE           TYPE          NAME
   ----------------------------------
 
+  -------         MODULE        PROJETFINALMAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A8H         PUBLIC        IE
+  D:00F8H         PUBLIC        EIP0
+  C:13F5H         PUBLIC        vPrintLcdDeltaCharacters
+  C:12C3H         PUBLIC        _ucReadMemoryI2C
+  X:0000H         PUBLIC        ucLcdInitializationContent
+  C:0557H         PUBLIC        main
+  D:0088H         PUBLIC        TCON
+  X:0054H         PUBLIC        stCompteur
+  D:00B8H         PUBLIC        IP0
+  B:0088H.5       PUBLIC        TF0
+  D:00E8H         PUBLIC        EIE
+  X:0057H         PUBLIC        stKeyboardManualSettings
+  X:0059H         PUBLIC        ucpConnectionStateString
+  X:005CH         PUBLIC        stTrame
+  D:0098H         PUBLIC        SCON0
+  X:0061H         PUBLIC        stCurrentSequenceIndexes
+  D:00C0H         PUBLIC        SCON1
+  D:00C8H         PUBLIC        T2CON
+  X:0063H         PUBLIC        ucWeightType
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 6
+
+
+  X:0064H         PUBLIC        stCurrentArmState
+  D:00D0H         PUBLIC        PSW
+  D:00D8H         PUBLIC        WDCON
+  -------         PROC          MAIN
+  C:0557H         LINE#         86
+  C:0557H         LINE#         96
+  C:0557H         LINE#         97
+  C:055AH         LINE#         98
+  C:055DH         LINE#         99
+  C:0560H         LINE#         100
+  C:0569H         LINE#         101
+  C:056CH         LINE#         103
+  C:056CH         LINE#         104
+  C:056CH         LINE#         106
+  C:0575H         LINE#         107
+  C:0575H         LINE#         108
+  C:057EH         LINE#         109
+  C:057EH         LINE#         110
+  C:0595H         LINE#         111
+  C:05B0H         LINE#         112
+  C:05C8H         LINE#         113
+  C:05E0H         LINE#         114
+  C:05F9H         LINE#         115
+  C:05F9H         LINE#         116
+  C:05FBH         LINE#         118
+  C:05FBH         LINE#         119
+  C:0627H         LINE#         120
+  C:0627H         LINE#         123
+  C:062AH         LINE#         124
+  C:062AH         LINE#         125
+  C:0633H         LINE#         126
+  C:0633H         LINE#         128
+  C:063CH         LINE#         129
+  C:063CH         LINE#         130
+  C:063EH         LINE#         131
+  C:064CH         LINE#         132
+  C:064CH         LINE#         134
+  C:0655H         LINE#         135
+  C:0655H         LINE#         136
+  C:0657H         LINE#         137
+  C:065AH         LINE#         138
+  C:065AH         LINE#         140
+  C:0663H         LINE#         141
+  C:0663H         LINE#         142
+  C:0665H         LINE#         143
+  C:0686H         LINE#         144
+  C:0686H         LINE#         146
+  C:068CH         LINE#         147
+  C:068CH         LINE#         148
+  C:0691H         LINE#         149
+  C:069FH         LINE#         151
+  C:06A2H         LINE#         152
+  C:06ABH         LINE#         153
+  C:06ABH         LINE#         155
+  C:06B4H         LINE#         156
+  -------         ENDPROC       MAIN
+  -------         PROC          VPRINTLCDDELTACHARACTERS
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 7
+
+
+  C:13F5H         LINE#         159
+  C:13F5H         LINE#         160
+  C:13F5H         LINE#         161
+  C:13FEH         LINE#         162
+  C:1407H         LINE#         163
+  C:1410H         LINE#         164
+  C:1419H         LINE#         165
+  C:1422H         LINE#         166
+  -------         ENDPROC       VPRINTLCDDELTACHARACTERS
+  C:12BBH         SYMBOL        L?0015
+  C:12BCH         SYMBOL        L?0016
+  C:12BFH         SYMBOL        L?0017
+  -------         PROC          L?0014
+  -------         ENDPROC       L?0014
+  C:12BBH         SYMBOL        L?0015
+  C:12BCH         SYMBOL        L?0016
+  C:12BFH         SYMBOL        L?0017
+  -------         PROC          _UCREADMEMORYI2C
+  D:0001H         SYMBOL        ucpSequence
+  X:006CH         SYMBOL        ucpStep
+  X:006FH         SYMBOL        ucArmIndex
+  -------         DO            
+  D:0006H         SYMBOL        uiMemoryAddress
+  -------         ENDDO         
+  C:12C3H         LINE#         169
+  C:12C3H         LINE#         170
+  C:12C3H         LINE#         171
+  C:12F7H         LINE#         172
+  C:12FAH         LINE#         173
+  -------         ENDPROC       _UCREADMEMORYI2C
+  -------         ENDMOD        PROJETFINALMAIN
+
   -------         MODULE        I2C
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:14FAH         PUBLIC        vStopBitI2C
+  C:153DH         PUBLIC        vStopBitI2C
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   B:0090H.4       PUBLIC        P1_4
   B:0090H.5       PUBLIC        P1_5
-  C:148FH         PUBLIC        _vDelaiI2C
-  C:1359H         PUBLIC        _vEcrireMemI2C
+  C:14D2H         PUBLIC        _vDelaiI2C
   D:0088H         PUBLIC        TCON
-  C:108EH         PUBLIC        _ucEcrire8BitsI2C
-  C:10D5H         PUBLIC        _ucLireMemI2C
+  C:11A8H         PUBLIC        _ucEcrire8BitsI2C
+  C:11EFH         PUBLIC        _ucLireMemI2C
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
-  C:1471H         PUBLIC        _vEcrire1BitI2C
+  C:14B4H         PUBLIC        _vEcrire1BitI2C
   D:00C8H         PUBLIC        T2CON
-  C:14E7H         PUBLIC        vStartBitI2C
-  C:1041H         PUBLIC        _ucLire8BitsI2C
-  C:1415H         PUBLIC        ucLire1BitI2C
+  C:152AH         PUBLIC        vStartBitI2C
+  C:1110H         PUBLIC        _ucLire8BitsI2C
+  C:1479H         PUBLIC        ucLire1BitI2C
   D:00D0H         PUBLIC        PSW
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 6
-
-
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VSTARTBITI2C
-  C:14E7H         LINE#         15
-  C:14E7H         LINE#         16
-  C:14E7H         LINE#         17
-  C:14E9H         LINE#         18
-  C:14E9H         LINE#         20
-  C:14ECH         LINE#         21
-  C:14EEH         LINE#         22
-  C:14F1H         LINE#         23
-  C:14F3H         LINE#         24
+  C:152AH         LINE#         18
+  C:152AH         LINE#         20
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 8
+
+
+  C:152AH         LINE#         21
+  C:152CH         LINE#         22
+  C:152CH         LINE#         24
+  C:152FH         LINE#         25
+  C:1531H         LINE#         26
+  C:1534H         LINE#         27
+  C:1536H         LINE#         28
   -------         ENDPROC       VSTARTBITI2C
   -------         PROC          VSTOPBITI2C
-  C:14FAH         LINE#         27
-  C:14FAH         LINE#         28
-  C:14FAH         LINE#         29
-  C:14FCH         LINE#         30
-  C:14FEH         LINE#         32
-  C:1501H         LINE#         33
-  C:1501H         LINE#         34
-  C:1504H         LINE#         35
-  C:1506H         LINE#         36
+  C:153DH         LINE#         31
+  C:153DH         LINE#         32
+  C:153DH         LINE#         33
+  C:153FH         LINE#         34
+  C:1541H         LINE#         36
+  C:1544H         LINE#         37
+  C:1544H         LINE#         38
+  C:1547H         LINE#         39
+  C:1549H         LINE#         40
   -------         ENDPROC       VSTOPBITI2C
   -------         PROC          _VECRIRE1BITI2C
   D:0007H         SYMBOL        ucBitASortir
-  C:1471H         LINE#         39
-  C:1471H         LINE#         40
-  C:1471H         LINE#         41
-  C:1474H         LINE#         42
-  C:1478H         LINE#         44
-  C:147AH         LINE#         46
-  C:147DH         LINE#         47
-  C:147DH         LINE#         48
-  C:1480H         LINE#         49
-  C:1482H         LINE#         50
+  C:14B4H         LINE#         43
+  C:14B4H         LINE#         44
+  C:14B4H         LINE#         45
+  C:14B7H         LINE#         46
+  C:14BBH         LINE#         48
+  C:14BDH         LINE#         50
+  C:14C0H         LINE#         51
+  C:14C0H         LINE#         52
+  C:14C3H         LINE#         53
+  C:14C5H         LINE#         54
   -------         ENDPROC       _VECRIRE1BITI2C
   -------         PROC          UCLIRE1BITI2C
   -------         DO            
-  X:01D5H         SYMBOL        ucBitLu
+  X:0077H         SYMBOL        ucBitLu
   -------         ENDDO         
-  C:1415H         LINE#         53
-  C:1415H         LINE#         54
-  C:1415H         LINE#         55
-  C:141BH         LINE#         57
-  C:141DH         LINE#         58
-  C:1420H         LINE#         59
-  C:1420H         LINE#         60
-  C:1423H         LINE#         62
-  C:1426H         LINE#         63
-  C:142BH         LINE#         65
-  C:142DH         LINE#         66
-  C:1430H         LINE#         68
-  C:1435H         LINE#         69
+  C:1479H         LINE#         57
+  C:1479H         LINE#         58
+  C:1479H         LINE#         59
+  C:147FH         LINE#         61
+  C:1481H         LINE#         62
+  C:1484H         LINE#         63
+  C:1484H         LINE#         64
+  C:1487H         LINE#         66
+  C:148AH         LINE#         67
+  C:148FH         LINE#         69
+  C:1491H         LINE#         70
+  C:1494H         LINE#         72
+  C:1499H         LINE#         73
   -------         ENDPROC       UCLIRE1BITI2C
   -------         PROC          _UCECRIRE8BITSI2C
-  X:01D1H         SYMBOL        ucTxData
+  X:0073H         SYMBOL        ucTxData
   -------         DO            
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 7
-
-
-  X:01D2H         SYMBOL        i
+  X:0074H         SYMBOL        i
   -------         ENDDO         
-  C:108EH         LINE#         71
-  C:1093H         LINE#         72
-  C:1093H         LINE#         74
-  C:1098H         LINE#         75
-  C:1098H         LINE#         76
-  C:109FH         LINE#         77
-  C:109FH         LINE#         78
-  C:10A1H         LINE#         79
-  C:10A3H         LINE#         81
-  C:10A3H         LINE#         82
-  C:10A8H         LINE#         83
-  C:10A8H         LINE#         84
-  C:10B0H         LINE#         85
-  C:10CFH         LINE#         86
-  C:10D1H         LINE#         87
-  C:10D4H         LINE#         88
+  C:11A8H         LINE#         75
+  C:11ADH         LINE#         76
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 9
+
+
+  C:11ADH         LINE#         78
+  C:11B2H         LINE#         79
+  C:11B2H         LINE#         80
+  C:11B9H         LINE#         81
+  C:11B9H         LINE#         82
+  C:11BBH         LINE#         83
+  C:11BDH         LINE#         85
+  C:11BDH         LINE#         86
+  C:11C2H         LINE#         87
+  C:11C2H         LINE#         88
+  C:11CAH         LINE#         89
+  C:11E9H         LINE#         90
+  C:11EBH         LINE#         91
+  C:11EEH         LINE#         92
   -------         ENDPROC       _UCECRIRE8BITSI2C
   -------         PROC          _UCLIRE8BITSI2C
-  X:01D1H         SYMBOL        ucAck
+  X:0073H         SYMBOL        ucAck
   -------         DO            
-  X:01D2H         SYMBOL        ucRecu
-  X:01D3H         SYMBOL        i
+  X:0074H         SYMBOL        ucRecu
+  X:0075H         SYMBOL        i
   -------         ENDDO         
-  C:1041H         LINE#         90
-  C:1046H         LINE#         91
-  C:1046H         LINE#         92
-  C:1049H         LINE#         94
-  C:104DH         LINE#         95
-  C:104DH         LINE#         96
-  C:1055H         LINE#         97
-  C:105BH         LINE#         98
-  C:105BH         LINE#         99
-  C:1061H         LINE#         100
-  C:1061H         LINE#         101
-  C:1080H         LINE#         102
-  C:1088H         LINE#         103
-  C:108DH         LINE#         104
+  C:1110H         LINE#         94
+  C:1115H         LINE#         95
+  C:1115H         LINE#         96
+  C:1118H         LINE#         98
+  C:111CH         LINE#         99
+  C:111CH         LINE#         100
+  C:1124H         LINE#         101
+  C:112AH         LINE#         102
+  C:112AH         LINE#         103
+  C:1130H         LINE#         104
+  C:1130H         LINE#         105
+  C:114FH         LINE#         106
+  C:1157H         LINE#         107
+  C:115CH         LINE#         108
   -------         ENDPROC       _UCLIRE8BITSI2C
   -------         PROC          _UCLIREMEMI2C
-  X:01CEH         SYMBOL        uiAdr
+  X:0070H         SYMBOL        uiAdr
   -------         DO            
-  X:01D0H         SYMBOL        ucVal
+  X:0072H         SYMBOL        ucVal
   -------         ENDDO         
-  C:10D5H         LINE#         106
-  C:10DDH         LINE#         107
-  C:10DDH         LINE#         108
-  C:10E0H         LINE#         110
-  C:10E3H         LINE#         112
-  C:10E8H         LINE#         114
-  C:10F1H         LINE#         115
-  C:10F4H         LINE#         117
-  C:10FCH         LINE#         118
-  C:10FFH         LINE#         120
-  C:1102H         LINE#         122
-  C:1107H         LINE#         123
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 8
-
-
-  C:1111H         LINE#         125
-  C:1114H         LINE#         127
-  C:1119H         LINE#         128
+  C:11EFH         LINE#         110
+  C:11F7H         LINE#         111
+  C:11F7H         LINE#         112
+  C:11FAH         LINE#         114
+  C:11FDH         LINE#         116
+  C:1202H         LINE#         118
+  C:120BH         LINE#         119
+  C:120EH         LINE#         121
+  C:1216H         LINE#         122
+  C:1219H         LINE#         124
+  C:121CH         LINE#         126
+  C:1221H         LINE#         127
+  C:122BH         LINE#         129
+  C:122EH         LINE#         131
+  C:1233H         LINE#         132
   -------         ENDPROC       _UCLIREMEMI2C
-  -------         PROC          _VECRIREMEMI2C
-  X:0203H         SYMBOL        ucData
-  X:0204H         SYMBOL        uiAdr
-  -------         DO            
-  D:0007H         SYMBOL        ucVal
-  -------         ENDDO         
-  C:1359H         LINE#         130
-  C:1364H         LINE#         131
-  C:1364H         LINE#         133
-  C:1366H         LINE#         135
-  C:1369H         LINE#         137
-  C:136EH         LINE#         139
-  C:1373H         LINE#         140
-  C:1376H         LINE#         142
-  C:137CH         LINE#         143
-  C:137FH         LINE#         145
-  C:1387H         LINE#         147
-  C:138AH         LINE#         149
-  -------         ENDPROC       _VECRIREMEMI2C
-  C:1489H         SYMBOL        L?0030
-  C:148BH         SYMBOL        L?0031
-  -------         PROC          L?0029
-  -------         ENDPROC       L?0029
-  C:1489H         SYMBOL        L?0030
-  C:148BH         SYMBOL        L?0031
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 10
+
+
+  C:14CCH         SYMBOL        L?0029
+  C:14CEH         SYMBOL        L?0030
+  -------         PROC          L?0028
+  -------         ENDPROC       L?0028
+  C:14CCH         SYMBOL        L?0029
+  C:14CEH         SYMBOL        L?0030
   -------         PROC          _VDELAII2C
   D:0006H         SYMBOL        uiTemps
   -------         DO            
   D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:148FH         LINE#         161
-  C:148FH         LINE#         162
-  C:148FH         LINE#         164
-  C:14A0H         LINE#         165
+  C:14D2H         LINE#         143
+  C:14D2H         LINE#         144
+  C:14D2H         LINE#         146
+  C:14E3H         LINE#         147
   -------         ENDPROC       _VDELAII2C
   -------         ENDMOD        I2C
 
@@ -468,249 +565,250 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   B:0090H.2       PUBLIC        P1_2
-  C:11E4H         PUBLIC        readKeyboardI2C
-  C:03C9H         PUBLIC        _handleKey
+  X:0082H         PUBLIC        ucKeyboardCharacters
+  C:0269H         PUBLIC        _vManualIncrementMotor
   D:0088H         PUBLIC        TCON
-  C:0245H         PUBLIC        _manualIncrementMotor
+  C:10C2H         PUBLIC        _vHandleMotorValueOverflow
+  C:12FBH         PUBLIC        ucpReadKeyboardI2C
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
-  X:01E0H         PUBLIC        keyboardCharacters
-  C:0FF3H         PUBLIC        _handleMotorValueOverflow
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 9
-
-
+  C:03EDH         PUBLIC        _vHandleKey
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
-  -------         PROC          READKEYBOARDI2C
+  -------         PROC          UCPREADKEYBOARDI2C
   -------         DO            
-  X:01C7H         SYMBOL        key
-  D:0007H         SYMBOL        ackValue
+  X:0069H         SYMBOL        ucKey
+  D:0007H         SYMBOL        ucAckValue
   -------         ENDDO         
-  C:11E4H         LINE#         29
-  C:11E4H         LINE#         30
-  C:11E4H         LINE#         31
-  C:11EAH         LINE#         32
-  C:11ECH         LINE#         34
-  C:11EFH         LINE#         35
-  C:11EFH         LINE#         36
-  C:11F2H         LINE#         37
-  C:11F7H         LINE#         38
-  C:11FAH         LINE#         39
-  C:11FAH         LINE#         40
-  C:11FCH         LINE#         41
-  C:11FCH         LINE#         42
-  C:1206H         LINE#         43
-  C:1209H         LINE#         45
-  C:121DH         LINE#         46
-  C:121DH         LINE#         48
-  C:1223H         LINE#         49
-  -------         ENDPROC       READKEYBOARDI2C
-  -------         PROC          _HANDLEKEY
-  D:0001H         SYMBOL        key
-  X:01CAH         SYMBOL        keyboardManualSettings
-  X:01CDH         SYMBOL        currentArmState
-  X:01D0H         SYMBOL        currentSequenceIndexes
-  C:03C9H         LINE#         51
-  C:03C9H         LINE#         52
-  C:03C9H         LINE#         53
-  C:03F4H         LINE#         54
-  C:03F4H         LINE#         55
-  C:03F4H         LINE#         56
-  C:0400H         LINE#         57
-  C:0402H         LINE#         58
-  C:0402H         LINE#         59
-  C:040FH         LINE#         60
-  C:0411H         LINE#         61
-  C:0411H         LINE#         62
-  C:041EH         LINE#         63
-  C:0420H         LINE#         64
-  C:0420H         LINE#         65
-  C:042DH         LINE#         66
-  C:042FH         LINE#         67
-  C:042FH         LINE#         68
-  C:043FH         LINE#         69
-  C:043FH         LINE#         70
-  C:043FH         LINE#         71
-  C:045AH         LINE#         72
-  C:045DH         LINE#         74
-  C:045DH         LINE#         75
-  C:0475H         LINE#         76
-  C:0477H         LINE#         77
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 10
+  C:12FBH         LINE#         30
+  C:12FBH         LINE#         31
+  C:12FBH         LINE#         32
+  C:1301H         LINE#         33
+  C:1303H         LINE#         35
+  C:1306H         LINE#         36
+  C:1306H         LINE#         37
+  C:1309H         LINE#         38
+  C:130EH         LINE#         39
+  C:1311H         LINE#         40
+  C:1311H         LINE#         41
+  C:1313H         LINE#         42
+  C:1313H         LINE#         43
+  C:131DH         LINE#         44
+  C:1320H         LINE#         46
+  C:1334H         LINE#         47
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 11
 
 
-  C:0477H         LINE#         78
+  C:1334H         LINE#         49
+  C:133AH         LINE#         50
+  -------         ENDPROC       UCPREADKEYBOARDI2C
+  -------         PROC          _VHANDLEKEY
+  D:0001H         SYMBOL        ucpKey
+  X:006CH         SYMBOL        stpKeyboardManualSettings
+  X:006FH         SYMBOL        stpCurrentArmState
+  X:0072H         SYMBOL        stpCurrentSequenceIndexes
+  C:03EDH         LINE#         52
+  C:03EDH         LINE#         53
+  C:03EDH         LINE#         54
+  C:041BH         LINE#         55
+  C:041BH         LINE#         56
+  C:041BH         LINE#         57
+  C:0427H         LINE#         58
+  C:0429H         LINE#         59
+  C:0429H         LINE#         60
+  C:0436H         LINE#         61
+  C:0438H         LINE#         62
+  C:0438H         LINE#         63
+  C:0445H         LINE#         64
+  C:0447H         LINE#         65
+  C:0447H         LINE#         66
+  C:0454H         LINE#         67
+  C:0456H         LINE#         68
+  C:0456H         LINE#         69
+  C:0466H         LINE#         70
+  C:0466H         LINE#         71
+  C:0466H         LINE#         72
+  C:0481H         LINE#         73
+  C:0484H         LINE#         75
+  C:0484H         LINE#         76
+  C:049CH         LINE#         77
+  C:049EH         LINE#         78
   C:049EH         LINE#         79
-  C:049EH         LINE#         80
-  C:049EH         LINE#         82
-  C:049EH         LINE#         84
-  C:049EH         LINE#         85
-  C:04AEH         LINE#         86
-  C:04C1H         LINE#         87
-  C:04C8H         LINE#         88
-  C:04D0H         LINE#         89
-  C:04D3H         LINE#         90
-  C:04D5H         LINE#         92
-  C:04D5H         LINE#         93
-  C:04F4H         LINE#         94
-  C:0503H         LINE#         95
-  C:0505H         LINE#         96
-  C:0505H         LINE#         97
-  C:052AH         LINE#         98
-  C:052AH         LINE#         100
-  C:052AH         LINE#         101
-  -------         ENDPROC       _HANDLEKEY
-  -------         PROC          _MANUALINCREMENTMOTOR
-  X:01D3H         SYMBOL        keyboardManualSettings
-  X:01D6H         SYMBOL        currentArmState
-  X:01D9H         SYMBOL        direction
-  C:0245H         LINE#         103
-  C:0250H         LINE#         104
-  C:0250H         LINE#         105
-  C:027AH         LINE#         106
-  C:027AH         LINE#         107
-  C:027AH         LINE#         108
-  C:029AH         LINE#         109
-  C:02AEH         LINE#         110
-  C:02B1H         LINE#         111
-  C:02B1H         LINE#         112
-  C:02DFH         LINE#         113
-  C:02F4H         LINE#         114
-  C:02F7H         LINE#         115
-  C:02F7H         LINE#         116
-  C:0325H         LINE#         117
-  C:033AH         LINE#         118
-  C:033DH         LINE#         119
-  C:033DH         LINE#         120
-  C:036BH         LINE#         121
-  C:0380H         LINE#         122
-  C:0382H         LINE#         123
-  C:0382H         LINE#         124
-  C:03B0H         LINE#         125
-  C:03C8H         LINE#         126
-  C:03C8H         LINE#         127
-  C:03C8H         LINE#         128
-  -------         ENDPROC       _MANUALINCREMENTMOTOR
-  -------         PROC          _HANDLEMOTORVALUEOVERFLOW
-  X:01DAH         SYMBOL        motorValue
-  X:01DDH         SYMBOL        direction
-  C:0FF3H         LINE#         130
-  C:0FFEH         LINE#         131
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 11
+  C:04C5H         LINE#         80
+  C:04C5H         LINE#         82
+  C:04C5H         LINE#         83
+  C:04CAH         LINE#         84
+  C:04CAH         LINE#         85
+  C:04CAH         LINE#         86
+  C:04DAH         LINE#         87
+  C:04EDH         LINE#         88
+  C:04F4H         LINE#         89
+  C:04FCH         LINE#         90
+  C:04FFH         LINE#         91
+  C:0501H         LINE#         93
+  C:0501H         LINE#         94
+  C:0520H         LINE#         95
+  C:052FH         LINE#         96
+  C:0531H         LINE#         97
+  C:0531H         LINE#         98
+  C:0556H         LINE#         99
+  C:0556H         LINE#         101
+  C:0556H         LINE#         102
+  -------         ENDPROC       _VHANDLEKEY
+  -------         PROC          _VMANUALINCREMENTMOTOR
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 12
 
 
-  C:0FFEH         LINE#         132
-  C:1021H         LINE#         133
-  C:1021H         LINE#         134
-  C:1023H         LINE#         135
-  C:1025H         LINE#         136
-  C:103CH         LINE#         137
-  C:103CH         LINE#         138
-  C:1040H         LINE#         139
-  C:1040H         LINE#         140
-  -------         ENDPROC       _HANDLEMOTORVALUEOVERFLOW
+  X:0075H         SYMBOL        stpKeyboardManualSettings
+  X:0078H         SYMBOL        stpCurrentArmState
+  X:007BH         SYMBOL        cDirection
+  C:0269H         LINE#         104
+  C:0274H         LINE#         105
+  C:0274H         LINE#         106
+  C:029EH         LINE#         107
+  C:029EH         LINE#         108
+  C:029EH         LINE#         109
+  C:02BEH         LINE#         110
+  C:02D2H         LINE#         111
+  C:02D5H         LINE#         112
+  C:02D5H         LINE#         113
+  C:0303H         LINE#         114
+  C:0318H         LINE#         115
+  C:031BH         LINE#         116
+  C:031BH         LINE#         117
+  C:0349H         LINE#         118
+  C:035EH         LINE#         119
+  C:0361H         LINE#         120
+  C:0361H         LINE#         121
+  C:038FH         LINE#         122
+  C:03A4H         LINE#         123
+  C:03A6H         LINE#         124
+  C:03A6H         LINE#         125
+  C:03D4H         LINE#         126
+  C:03ECH         LINE#         127
+  C:03ECH         LINE#         128
+  C:03ECH         LINE#         129
+  -------         ENDPROC       _VMANUALINCREMENTMOTOR
+  -------         PROC          _VHANDLEMOTORVALUEOVERFLOW
+  X:007CH         SYMBOL        ucpMotorValue
+  X:007FH         SYMBOL        cpDirection
+  C:10C2H         LINE#         131
+  C:10CDH         LINE#         132
+  C:10CDH         LINE#         133
+  C:10F0H         LINE#         134
+  C:10F0H         LINE#         135
+  C:10F2H         LINE#         136
+  C:10F4H         LINE#         137
+  C:110BH         LINE#         138
+  C:110BH         LINE#         139
+  C:110FH         LINE#         140
+  C:110FH         LINE#         141
+  -------         ENDPROC       _VHANDLEMOTORVALUEOVERFLOW
   -------         ENDMOD        KEYBOARDI2C
 
   -------         MODULE        LCD
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:150DH         PUBLIC        vEffaceLCD
-  X:01FDH         PUBLIC        PtrLCDChar
+  C:1550H         PUBLIC        vEffaceLCD
+  X:009FH         PUBLIC        PtrLCDChar
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
-  X:01FFH         PUBLIC        PtrLCDBusy
+  X:00A1H         PUBLIC        PtrLCDBusy
   D:0088H         PUBLIC        TCON
   C:0003H         PUBLIC        _ucDonneValeurLigne
-  C:1264H         PUBLIC        _vLcdEcrireCaract
+  C:133BH         PUBLIC        _vLcdEcrireCaract
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 13
+
+
   D:00B8H         PUBLIC        IP0
-  C:12E1H         PUBLIC        _vAfficheLCDComplet
+  C:13B8H         PUBLIC        _vAfficheLCDComplet
   D:00E8H         PUBLIC        EIE
-  C:111AH         PUBLIC        vInitLCD
+  C:1234H         PUBLIC        vInitLCD
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
-  X:0201H         PUBLIC        PtrLCDConfig
+  X:00A3H         PUBLIC        PtrLCDConfig
   D:00C8H         PUBLIC        T2CON
-  C:11A2H         PUBLIC        _vAfficheLigneLCD
-  C:14B9H         PUBLIC        vAttendreBusyLcd
+  C:1279H         PUBLIC        _vAfficheLigneLCD
+  C:14FCH         PUBLIC        vAttendreBusyLcd
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITLCD
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:111AH         LINE#         53
-  C:111AH         LINE#         65
-  C:111AH         LINE#         67
-  C:1128H         LINE#         68
-  C:112BH         LINE#         69
-  C:1139H         LINE#         70
-  C:113CH         LINE#         71
-  C:114AH         LINE#         72
-  C:114DH         LINE#         73
-  C:1150H         LINE#         74
-  C:115EH         LINE#         75
+  C:1234H         LINE#         53
+  C:1234H         LINE#         65
+  C:1234H         LINE#         67
+  C:1242H         LINE#         68
+  C:1245H         LINE#         69
+  C:1253H         LINE#         70
+  C:1256H         LINE#         71
+  C:1264H         LINE#         72
+  C:1267H         LINE#         73
+  C:126AH         LINE#         74
+  C:1278H         LINE#         75
   -------         ENDPROC       VINITLCD
   -------         PROC          _VLCDECRIRECARACT
-  X:01D0H         SYMBOL        ucCaract
-  X:01D1H         SYMBOL        ucLigne
-  X:01D2H         SYMBOL        ucCase
-  C:1264H         LINE#         111
-  C:126FH         LINE#         124
-  C:126FH         LINE#         125
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 12
-
-
-  C:1272H         LINE#         126
-  C:128DH         LINE#         127
-  C:1290H         LINE#         128
-  C:12A2H         LINE#         129
+  X:0072H         SYMBOL        ucCaract
+  X:0073H         SYMBOL        ucLigne
+  X:0074H         SYMBOL        ucCase
+  C:133BH         LINE#         111
+  C:1346H         LINE#         124
+  C:1346H         LINE#         125
+  C:1349H         LINE#         126
+  C:1364H         LINE#         127
+  C:1367H         LINE#         128
+  C:1379H         LINE#         129
   -------         ENDPROC       _VLCDECRIRECARACT
   -------         PROC          _VAFFICHELIGNELCD
-  X:01CBH         SYMBOL        ucTab
-  X:01CEH         SYMBOL        ucLine
+  X:006DH         SYMBOL        ucTab
+  X:0070H         SYMBOL        ucLine
   -------         DO            
-  X:01CFH         SYMBOL        i
+  X:0071H         SYMBOL        i
   -------         ENDDO         
-  C:11A2H         LINE#         133
-  C:11B0H         LINE#         144
-  C:11B0H         LINE#         145
-  C:11B3H         LINE#         147
-  C:11B4H         LINE#         148
-  C:11B4H         LINE#         149
-  C:11D7H         LINE#         150
-  C:11E3H         LINE#         151
+  C:1279H         LINE#         133
+  C:1287H         LINE#         144
+  C:1287H         LINE#         145
+  C:128AH         LINE#         147
+  C:128BH         LINE#         148
+  C:128BH         LINE#         149
+  C:12AEH         LINE#         150
+  C:12BAH         LINE#         151
   -------         ENDPROC       _VAFFICHELIGNELCD
   -------         PROC          _VAFFICHELCDCOMPLET
-  X:01C7H         SYMBOL        ucTab
+  X:0069H         SYMBOL        ucTab
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 14
+
+
   -------         DO            
-  X:01CAH         SYMBOL        i
+  X:006CH         SYMBOL        i
   -------         ENDDO         
-  C:12E1H         LINE#         155
-  C:12ECH         LINE#         166
-  C:12ECH         LINE#         168
-  C:12F9H         LINE#         169
-  C:12F9H         LINE#         170
-  C:1315H         LINE#         171
-  C:131DH         LINE#         172
+  C:13B8H         LINE#         155
+  C:13C3H         LINE#         166
+  C:13C3H         LINE#         168
+  C:13D0H         LINE#         169
+  C:13D0H         LINE#         170
+  C:13ECH         LINE#         171
+  C:13F4H         LINE#         172
   -------         ENDPROC       _VAFFICHELCDCOMPLET
   -------         PROC          VEFFACELCD
-  C:150DH         LINE#         175
-  C:150DH         LINE#         186
-  C:150DH         LINE#         187
-  C:1510H         LINE#         188
-  C:151EH         LINE#         189
+  C:1550H         LINE#         175
+  C:1550H         LINE#         186
+  C:1550H         LINE#         187
+  C:1553H         LINE#         188
+  C:1561H         LINE#         189
   -------         ENDPROC       VEFFACELCD
   -------         PROC          VATTENDREBUSYLCD
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
-  C:14B9H         LINE#         193
-  C:14B9H         LINE#         205
-  C:14B9H         LINE#         207
-  C:14C8H         LINE#         208
-  C:14CFH         LINE#         209
+  C:14FCH         LINE#         193
+  C:14FCH         LINE#         205
+  C:14FCH         LINE#         207
+  C:150BH         LINE#         208
+  C:1512H         LINE#         209
   -------         ENDPROC       VATTENDREBUSYLCD
   -------         PROC          _UCDONNEVALEURLIGNE
   D:0007H         SYMBOL        ucLine
@@ -719,9 +817,6 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   -------         ENDDO         
   C:0003H         LINE#         212
   C:0003H         LINE#         223
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 13
-
-
   C:0003H         LINE#         225
   C:0011H         LINE#         226
   C:0011H         LINE#         227
@@ -742,129 +837,15 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   -------         ENDPROC       _UCDONNEVALEURLIGNE
   -------         ENDMOD        LCD
 
-  -------         MODULE        PROJETFINALMAIN
-  C:0000H         SYMBOL        _ICE_DUMMY_
-  D:00A8H         PUBLIC        IE
-  D:00F8H         PUBLIC        EIP0
-  X:0000H         PUBLIC        keyboardManualSettings
-  X:0002H         PUBLIC        trame
-  X:0007H         PUBLIC        currentSequenceIndexes
-  C:052BH         PUBLIC        main
-  X:0009H         PUBLIC        currentArmState
-  X:000EH         PUBLIC        weightType
-  D:0088H         PUBLIC        TCON
-  X:000FH         PUBLIC        connectionStateString
-  C:131EH         PUBLIC        printLcdDeltaCharacters
-  X:0012H         PUBLIC        stCompteur
-  D:00B8H         PUBLIC        IP0
-  B:0088H.5       PUBLIC        TF0
-  X:0015H         PUBLIC        sequences
-  D:00E8H         PUBLIC        EIE
-  C:122CH         PUBLIC        _readMemoryI2C
-  D:0098H         PUBLIC        SCON0
-  D:00C0H         PUBLIC        SCON1
-  D:00C8H         PUBLIC        T2CON
-  X:0173H         PUBLIC        lcdInitializationContent
-  D:00D0H         PUBLIC        PSW
-  D:00D8H         PUBLIC        WDCON
-  -------         PROC          MAIN
-  C:052BH         LINE#         164
-  C:052BH         LINE#         174
-  C:052BH         LINE#         175
-  C:052EH         LINE#         176
-  C:0531H         LINE#         177
-  C:0534H         LINE#         178
-  C:053DH         LINE#         179
-  C:0540H         LINE#         181
-  C:0540H         LINE#         182
-  C:0540H         LINE#         184
-  C:0549H         LINE#         185
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 14
-
-
-  C:0549H         LINE#         186
-  C:0552H         LINE#         187
-  C:0552H         LINE#         188
-  C:0569H         LINE#         189
-  C:0584H         LINE#         190
-  C:059CH         LINE#         191
-  C:05B4H         LINE#         192
-  C:05CDH         LINE#         193
-  C:05CDH         LINE#         194
-  C:05CFH         LINE#         196
-  C:05CFH         LINE#         197
-  C:05FBH         LINE#         198
-  C:05FBH         LINE#         201
-  C:05FEH         LINE#         202
-  C:05FEH         LINE#         203
-  C:0607H         LINE#         204
-  C:0607H         LINE#         206
-  C:0610H         LINE#         207
-  C:0610H         LINE#         208
-  C:0612H         LINE#         209
-  C:0620H         LINE#         210
-  C:0620H         LINE#         212
-  C:0629H         LINE#         213
-  C:0629H         LINE#         214
-  C:062BH         LINE#         215
-  C:062EH         LINE#         216
-  C:062EH         LINE#         218
-  C:0637H         LINE#         219
-  C:0637H         LINE#         220
-  C:0639H         LINE#         221
-  C:065AH         LINE#         222
-  C:065AH         LINE#         224
-  C:0660H         LINE#         225
-  C:0660H         LINE#         226
-  C:0665H         LINE#         227
-  C:0673H         LINE#         229
-  C:0676H         LINE#         230
-  C:067FH         LINE#         231
-  C:067FH         LINE#         233
-  C:0688H         LINE#         234
-  -------         ENDPROC       MAIN
-  -------         PROC          PRINTLCDDELTACHARACTERS
-  C:131EH         LINE#         237
-  C:131EH         LINE#         238
-  C:131EH         LINE#         239
-  C:1327H         LINE#         240
-  C:1330H         LINE#         241
-  C:1339H         LINE#         242
-  C:1342H         LINE#         243
-  C:134BH         LINE#         244
-  -------         ENDPROC       PRINTLCDDELTACHARACTERS
-  C:1224H         SYMBOL        L?0015
-  C:1225H         SYMBOL        L?0016
-  C:1228H         SYMBOL        L?0017
-  -------         PROC          L?0014
-  -------         ENDPROC       L?0014
-  C:1224H         SYMBOL        L?0015
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 15
-
-
-  C:1225H         SYMBOL        L?0016
-  C:1228H         SYMBOL        L?0017
-  -------         PROC          _READMEMORYI2C
-  D:0001H         SYMBOL        sequence
-  X:01CAH         SYMBOL        step
-  X:01CDH         SYMBOL        armIndex
-  -------         DO            
-  D:0006H         SYMBOL        memoryAddress
-  -------         ENDDO         
-  C:122CH         LINE#         247
-  C:122CH         LINE#         248
-  C:122CH         LINE#         249
-  C:1260H         LINE#         250
-  C:1263H         LINE#         251
-  -------         ENDPROC       _READMEMORYI2C
-  -------         ENDMOD        PROJETFINALMAIN
-
   -------         MODULE        RXTX232
   C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 15
+
+
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   B:0098H.1       PUBLIC        TI_0
-  C:151FH         PUBLIC        vInitPortSerie
+  C:1562H         PUBLIC        vInitPortSerie
   D:0087H         PUBLIC        PCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
@@ -878,101 +859,97 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITPORTSERIE
-  C:151FH         LINE#         24
-  C:151FH         LINE#         36
-  C:151FH         LINE#         37
-  C:1522H         LINE#         38
-  C:1525H         LINE#         39
-  C:1528H         LINE#         40
-  C:152BH         LINE#         41
-  C:152DH         LINE#         42
-  C:152FH         LINE#         43
+  C:1562H         LINE#         24
+  C:1562H         LINE#         36
+  C:1562H         LINE#         37
+  C:1565H         LINE#         38
+  C:1568H         LINE#         39
+  C:156BH         LINE#         40
+  C:156EH         LINE#         41
+  C:1570H         LINE#         42
+  C:1572H         LINE#         43
   -------         ENDPROC       VINITPORTSERIE
   -------         ENDMOD        RXTX232
 
   -------         MODULE        SUBOPTIMIZEDLCDPRINTER
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:12A3H         PUBLIC        _printLcdCurrentSequenceStep
-  C:0BA2H         PUBLIC        _printLcdDeltaTrame
-  C:0A89H         PUBLIC        _printLcdDeltaMotors
-  C:0DE7H         PUBLIC        _printLcdDeltaWeightType
-  C:0FA0H         PUBLIC        _printLcdDeltaConnectionState
-  C:115FH         PUBLIC        _printLcdDeltaManualSettings
-  -------         PROC          _PRINTLCDDELTAMOTORS
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 16
+  C:0AADH         PUBLIC        _vPrintLcdDeltaTrame
+  C:096CH         PUBLIC        _vPrintLcdDeltaMotors
+  C:0E4AH         PUBLIC        _vPrintLcdDeltaWeightType
+  C:106FH         PUBLIC        _vPrintLcdDeltaConnectionState
+  C:115DH         PUBLIC        _vPrintLcdDeltaManualSettings
+  C:137AH         PUBLIC        _vPrintLcdCurrentSequenceStep
+  -------         PROC          _VPRINTLCDDELTAMOTORS
+  X:0069H         SYMBOL        stpCurrentArmState
+  C:096CH         LINE#         19
+  C:0977H         LINE#         29
+  C:0977H         LINE#         30
+  C:0992H         LINE#         31
+  C:09ADH         LINE#         33
+  C:09CDH         LINE#         34
+  C:09EDH         LINE#         36
+  C:0A0DH         LINE#         37
+  C:0A2DH         LINE#         39
+  C:0A4DH         LINE#         40
+  C:0A6DH         LINE#         42
+  C:0A8DH         LINE#         43
+  -------         ENDPROC       _VPRINTLCDDELTAMOTORS
+  -------         PROC          _VPRINTLCDDELTATRAME
+  X:0069H         SYMBOL        stpTrame
+  C:0AADH         LINE#         47
+  C:0AB8H         LINE#         57
+  C:0AB8H         LINE#         58
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 16
 
 
-  X:01C7H         SYMBOL        currentArmState
-  C:0A89H         LINE#         19
-  C:0A94H         LINE#         29
-  C:0A94H         LINE#         30
-  C:0AABH         LINE#         31
-  C:0AC2H         LINE#         33
-  C:0ADEH         LINE#         34
-  C:0AFAH         LINE#         36
-  C:0B16H         LINE#         37
-  C:0B32H         LINE#         39
-  C:0B4EH         LINE#         40
-  C:0B6AH         LINE#         42
-  C:0B86H         LINE#         43
-  -------         ENDPROC       _PRINTLCDDELTAMOTORS
-  -------         PROC          _PRINTLCDDELTATRAME
-  X:01C7H         SYMBOL        trame
-  C:0BA2H         LINE#         47
-  C:0BADH         LINE#         57
-  C:0BADH         LINE#         58
-  C:0BC4H         LINE#         59
-  C:0BDBH         LINE#         61
-  C:0BF7H         LINE#         62
-  C:0C13H         LINE#         64
-  C:0C2FH         LINE#         65
-  C:0C4BH         LINE#         67
-  C:0C67H         LINE#         68
-  -------         ENDPROC       _PRINTLCDDELTATRAME
-  -------         PROC          _PRINTLCDDELTAWEIGHTTYPE
-  D:0001H         SYMBOL        weightType
+  C:0AD3H         LINE#         59
+  C:0AEEH         LINE#         61
+  C:0B0EH         LINE#         62
+  C:0B2EH         LINE#         64
+  C:0B4EH         LINE#         65
+  C:0B6EH         LINE#         67
+  C:0B8EH         LINE#         68
+  -------         ENDPROC       _VPRINTLCDDELTATRAME
+  -------         PROC          _VPRINTLCDDELTAWEIGHTTYPE
+  D:0001H         SYMBOL        ucpWeightType
   -------         DO            
-  X:01C7H         SYMBOL        weightString
+  X:0069H         SYMBOL        ucpWeightTypeString
   -------         ENDDO         
-  C:0DE7H         LINE#         72
-  C:0DE7H         LINE#         83
-  C:0DE7H         LINE#         84
-  C:0DF5H         LINE#         85
-  C:0E00H         LINE#         86
-  C:0E19H         LINE#         87
-  C:0E32H         LINE#         88
-  C:0E4BH         LINE#         89
-  -------         ENDPROC       _PRINTLCDDELTAWEIGHTTYPE
-  -------         PROC          _PRINTLCDDELTAMANUALSETTINGS
-  X:01C7H         SYMBOL        keyboardManualSettings
-  C:115FH         LINE#         93
-  C:116AH         LINE#         103
-  C:116AH         LINE#         104
-  C:1186H         LINE#         105
-  -------         ENDPROC       _PRINTLCDDELTAMANUALSETTINGS
-  -------         PROC          _PRINTLCDCURRENTSEQUENCESTEP
-  X:01C7H         SYMBOL        currentSequenceIndexes
-  C:12A3H         LINE#         109
-  C:12AEH         LINE#         119
-  C:12AEH         LINE#         120
-  C:12C6H         LINE#         121
-  -------         ENDPROC       _PRINTLCDCURRENTSEQUENCESTEP
-  -------         PROC          _PRINTLCDDELTACONNECTIONSTATE
-  X:01C7H         SYMBOL        connectionStateString
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 17
-
-
-  C:0FA0H         LINE#         125
-  C:0FABH         LINE#         135
-  C:0FABH         LINE#         136
-  C:0FC1H         LINE#         137
-  C:0FDAH         LINE#         138
-  -------         ENDPROC       _PRINTLCDDELTACONNECTIONSTATE
+  C:0E4AH         LINE#         72
+  C:0E4AH         LINE#         83
+  C:0E4AH         LINE#         84
+  C:0E58H         LINE#         85
+  C:0E63H         LINE#         86
+  C:0E7CH         LINE#         87
+  C:0E95H         LINE#         88
+  C:0EAEH         LINE#         89
+  -------         ENDPROC       _VPRINTLCDDELTAWEIGHTTYPE
+  -------         PROC          _VPRINTLCDDELTAMANUALSETTINGS
+  X:0069H         SYMBOL        stpKeyboardManualSettings
+  C:115DH         LINE#         93
+  C:1168H         LINE#         103
+  C:1168H         LINE#         104
+  C:1188H         LINE#         105
+  -------         ENDPROC       _VPRINTLCDDELTAMANUALSETTINGS
+  -------         PROC          _VPRINTLCDCURRENTSEQUENCESTEP
+  X:0069H         SYMBOL        stpCurrentSequenceIndexes
+  C:137AH         LINE#         109
+  C:1385H         LINE#         119
+  C:1385H         LINE#         120
+  C:139DH         LINE#         121
+  -------         ENDPROC       _VPRINTLCDCURRENTSEQUENCESTEP
+  -------         PROC          _VPRINTLCDDELTACONNECTIONSTATE
+  X:0069H         SYMBOL        ucConnectionStateString
+  C:106FH         LINE#         125
+  C:107AH         LINE#         135
+  C:107AH         LINE#         136
+  C:1090H         LINE#         137
+  C:10A9H         LINE#         138
+  -------         ENDPROC       _VPRINTLCDDELTACONNECTIONSTATE
   -------         ENDMOD        SUBOPTIMIZEDLCDPRINTER
 
   -------         MODULE        TIMER0
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:1541H         PUBLIC        initTimer50ms
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
   D:0089H         PUBLIC        TMOD
@@ -982,31 +959,35 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   D:008CH         PUBLIC        TH0
   D:008AH         PUBLIC        TL0
   D:00E8H         PUBLIC        EIE
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 17
+
+
   B:0088H.4       PUBLIC        TR0
+  C:1584H         PUBLIC        vInitTimer50ms
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
-  C:14D0H         PUBLIC        _vUpdateCompteurTimer0
+  C:1513H         PUBLIC        _vUpdateCompteurTimer0
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
-  -------         PROC          INITTIMER50MS
-  C:1541H         LINE#         22
-  C:1541H         LINE#         32
-  C:1541H         LINE#         33
-  C:1544H         LINE#         34
-  C:1547H         LINE#         35
-  C:154AH         LINE#         36
-  C:154DH         LINE#         37
-  C:154FH         LINE#         38
-  -------         ENDPROC       INITTIMER50MS
+  -------         PROC          VINITTIMER50MS
+  C:1584H         LINE#         22
+  C:1584H         LINE#         32
+  C:1584H         LINE#         33
+  C:1587H         LINE#         34
+  C:158AH         LINE#         35
+  C:158DH         LINE#         36
+  C:1590H         LINE#         37
+  C:1592H         LINE#         38
+  -------         ENDPROC       VINITTIMER50MS
   -------         PROC          _VUPDATECOMPTEURTIMER0
-  D:0001H         SYMBOL        stCompteur
-  C:14D0H         LINE#         40
-  C:14D0H         LINE#         41
-  C:14D0H         LINE#         42
-  C:14D2H         LINE#         43
-  C:14D7H         LINE#         44
-  C:14DFH         LINE#         45
+  D:0001H         SYMBOL        stpCompteur
+  C:1513H         LINE#         40
+  C:1513H         LINE#         41
+  C:1513H         LINE#         42
+  C:1515H         LINE#         43
+  C:151AH         LINE#         44
+  C:1522H         LINE#         45
   -------         ENDPROC       _VUPDATECOMPTEURTIMER0
   -------         ENDMOD        TIMER0
 
@@ -1014,476 +995,497 @@ SYMBOL TABLE OF MODULE:  tso_s3_projet_final (I2C)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
-  C:1436H         PUBLIC        _halfCharToHexaDecimal
+  C:100FH         PUBLIC        _ucpWeightTypeToString
   D:0088H         PUBLIC        TCON
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
-  C:13C1H         PUBLIC        _unsignedCharToDecimal
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 18
-
-
   D:0098H         PUBLIC        SCON0
-  C:1391H         PUBLIC        _unsignedCharToHexaDecimal
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
-  C:0F40H         PUBLIC        _weightTypeToString
+  C:0DCCH         PUBLIC        _ucpUnsignedCharToAsciiDecimal
+  C:1457H         PUBLIC        _vHalfCharToHexaDecimal
   D:00D0H         PUBLIC        PSW
+  C:0F41H         PUBLIC        _ucpUnsignedCharToAsciiHexaDecimal
   D:00D8H         PUBLIC        WDCON
-  -------         PROC          _UNSIGNEDCHARTOHEXADECIMAL
-  D:0001H         SYMBOL        numberToEvaluate
-  D:0005H         SYMBOL        digitIndex
+  -------         PROC          _UCPUNSIGNEDCHARTOASCIIHEXADECIMAL
+  X:006CH         SYMBOL        ucpNumberToEvaluate
+  D:0005H         SYMBOL        ucDigitIndex
   -------         DO            
-  X:01CAH         SYMBOL        result
+  X:006FH         SYMBOL        ucpResult
   -------         ENDDO         
-  C:1391H         LINE#         23
-  C:1391H         LINE#         35
-  C:1391H         LINE#         38
-  C:1394H         LINE#         39
-  C:1394H         LINE#         40
-  C:1399H         LINE#         41
-  C:139BH         LINE#         42
-  C:139FH         LINE#         43
-  C:139FH         LINE#         44
-  C:13A8H         LINE#         45
-  C:13AAH         LINE#         47
-  C:13AAH         LINE#         48
-  C:13B0H         LINE#         49
-  C:13B0H         LINE#         50
-  C:13BEH         LINE#         52
-  C:13C0H         LINE#         53
-  -------         ENDPROC       _UNSIGNEDCHARTOHEXADECIMAL
-  -------         PROC          _UNSIGNEDCHARTODECIMAL
-  D:0001H         SYMBOL        numberToEvaluate
-  D:0005H         SYMBOL        digitIndex
-  -------         DO            
-  D:0007H         SYMBOL        result
-  -------         ENDDO         
-  C:13C1H         LINE#         56
-  C:13C1H         LINE#         69
-  C:13C1H         LINE#         72
-  C:13C4H         LINE#         73
-  C:13C4H         LINE#         74
-  C:13CAH         LINE#         75
-  C:13CCH         LINE#         76
-  C:13D0H         LINE#         77
-  C:13D0H         LINE#         78
-  C:13D7H         LINE#         79
-  C:13D9H         LINE#         80
-  C:13DDH         LINE#         81
-  C:13DDH         LINE#         82
-  C:13E9H         LINE#         83
-  C:13EBH         LINE#         85
-  C:13EBH         LINE#         86
-  C:13EDH         LINE#         87
-  C:13EDH         LINE#         89
-  C:13EDH         LINE#         90
-  -------         ENDPROC       _UNSIGNEDCHARTODECIMAL
-  -------         PROC          _WEIGHTTYPETOSTRING
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 19
+  C:0F41H         LINE#         23
+  C:0F4CH         LINE#         35
+  C:0F4CH         LINE#         38
+  C:0F4FH         LINE#         39
+  C:0F4FH         LINE#         40
+  C:0F5EH         LINE#         41
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 18
 
 
-  X:01CAH         SYMBOL        weightTypeIndex
+  C:0F60H         LINE#         42
+  C:0F64H         LINE#         43
+  C:0F64H         LINE#         44
+  C:0F81H         LINE#         45
+  C:0F83H         LINE#         47
+  C:0F83H         LINE#         48
+  C:0F93H         LINE#         49
+  C:0F93H         LINE#         50
+  C:0FA1H         LINE#         52
+  C:0FACH         LINE#         53
+  -------         ENDPROC       _UCPUNSIGNEDCHARTOASCIIHEXADECIMAL
+  -------         PROC          _UCPUNSIGNEDCHARTOASCIIDECIMAL
+  X:006CH         SYMBOL        ucpNumberToEvaluate
+  D:0005H         SYMBOL        ucDigitIndex
   -------         DO            
-  X:01CDH         SYMBOL        result
+  X:006FH         SYMBOL        ucpResult
   -------         ENDDO         
-  C:0F40H         LINE#         93
-  C:0F4BH         LINE#         104
-  C:0F4BH         LINE#         107
-  C:0F51H         LINE#         108
-  C:0F51H         LINE#         109
-  C:0F5FH         LINE#         110
-  C:0F61H         LINE#         111
-  C:0F65H         LINE#         112
-  C:0F65H         LINE#         113
-  C:0F73H         LINE#         114
-  C:0F75H         LINE#         115
-  C:0F7CH         LINE#         116
-  C:0F7CH         LINE#         117
-  C:0F87H         LINE#         118
-  C:0F89H         LINE#         120
-  C:0F89H         LINE#         121
-  C:0F94H         LINE#         122
-  C:0F94H         LINE#         124
-  C:0F9FH         LINE#         125
-  -------         ENDPROC       _WEIGHTTYPETOSTRING
-  -------         PROC          _HALFCHARTOHEXADECIMAL
-  D:0001H         SYMBOL        numberToEvaluate
+  C:0DCCH         LINE#         56
+  C:0DD7H         LINE#         69
+  C:0DD7H         LINE#         72
+  C:0DDAH         LINE#         73
+  C:0DDAH         LINE#         74
+  C:0DEBH         LINE#         75
+  C:0DEDH         LINE#         76
+  C:0DF1H         LINE#         77
+  C:0DF1H         LINE#         78
+  C:0E03H         LINE#         79
+  C:0E05H         LINE#         80
+  C:0E09H         LINE#         81
+  C:0E09H         LINE#         82
+  C:0E2CH         LINE#         83
+  C:0E2EH         LINE#         85
+  C:0E2EH         LINE#         86
+  C:0E3EH         LINE#         87
+  C:0E3EH         LINE#         89
+  C:0E49H         LINE#         90
+  -------         ENDPROC       _UCPUNSIGNEDCHARTOASCIIDECIMAL
+  -------         PROC          _UCPWEIGHTTYPETOSTRING
+  X:006CH         SYMBOL        ucpWeightTypeIndex
   -------         DO            
-  D:0007H         SYMBOL        result
+  X:006FH         SYMBOL        ucpResult
   -------         ENDDO         
-  C:1436H         LINE#         128
-  C:1436H         LINE#         138
-  C:1436H         LINE#         141
-  C:143FH         LINE#         142
-  C:143FH         LINE#         143
-  C:1443H         LINE#         144
-  C:1445H         LINE#         145
-  C:144EH         LINE#         146
-  C:144EH         LINE#         147
-  C:1452H         LINE#         148
-  C:1454H         LINE#         150
-  C:1454H         LINE#         151
-  C:1456H         LINE#         152
-  C:1456H         LINE#         154
-  C:1456H         LINE#         155
-  -------         ENDPROC       _HALFCHARTOHEXADECIMAL
+  C:100FH         LINE#         93
+  C:101AH         LINE#         104
+  C:101AH         LINE#         107
+  C:1020H         LINE#         108
+  C:1020H         LINE#         109
+  C:102EH         LINE#         110
+  C:1030H         LINE#         111
+  C:1034H         LINE#         112
+  C:1034H         LINE#         113
+  C:1042H         LINE#         114
+  C:1044H         LINE#         115
+  C:104BH         LINE#         116
+  C:104BH         LINE#         117
+  C:1056H         LINE#         118
+  C:1058H         LINE#         120
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 19
+
+
+  C:1058H         LINE#         121
+  C:1063H         LINE#         122
+  C:1063H         LINE#         124
+  C:106EH         LINE#         125
+  -------         ENDPROC       _UCPWEIGHTTYPETOSTRING
+  -------         PROC          _VHALFCHARTOHEXADECIMAL
+  D:0001H         SYMBOL        ucpNumberToEvaluate
+  C:1457H         LINE#         128
+  C:1457H         LINE#         138
+  C:1457H         LINE#         139
+  C:1460H         LINE#         140
+  C:1460H         LINE#         141
+  C:1463H         LINE#         142
+  C:1465H         LINE#         143
+  C:146EH         LINE#         144
+  C:146EH         LINE#         145
+  C:1471H         LINE#         146
+  C:1473H         LINE#         148
+  C:1473H         LINE#         149
+  C:1478H         LINE#         150
+  C:1478H         LINE#         151
+  -------         ENDPROC       _VHALFCHARTOHEXADECIMAL
   -------         ENDMOD        TYPECONVERSION
 
   -------         MODULE        CIRCULARBUFFER_RXTX
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0E64H         PUBLIC        _vSendTrame
+  C:0EC7H         PUBLIC        _vSendTrame
+  X:0092H         PUBLIC        ucTrameReceived
   B:00A8H.7       PUBLIC        EA
-  C:155EH         PUBLIC        isTrameReceived
-  C:1564H         PUBLIC        resetIsTrameReceived
   D:00A8H         PUBLIC        IE
   D:00F8H         PUBLIC        EIP0
-  C:07E7H         PUBLIC        _vCircularBuffer
-  X:01F0H         PUBLIC        ucIndiceOUT
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 20
-
-
-  C:1575H         PUBLIC        ucRx
-  X:01F1H         PUBLIC        ucIndiceTrame
-  C:1535H         PUBLIC        _ucTx
+  C:0813H         PUBLIC        _vCircularBuffer
+  X:0093H         PUBLIC        ucIndiceOUT
+  C:15B8H         PUBLIC        ucRx
+  X:0094H         PUBLIC        ucIndiceTrame
   B:0098H.0       PUBLIC        RI_0
   B:0098H.1       PUBLIC        TI_0
-  C:1558H         PUBLIC        ucKbHit
   D:0088H         PUBLIC        TCON
-  X:01F2H         PUBLIC        ucIsTrameReceived
-  C:13EEH         PUBLIC        _ucHandleCS
-  X:01F3H         PUBLIC        ucIndiceIN
-  C:0EDEH         PUBLIC        InterruptionSerie0
+  C:1430H         PUBLIC        _ucHandleCS
+  C:159BH         PUBLIC        ucIsTrameReceived
+  X:0095H         PUBLIC        ucIndiceIN
+  C:1578H         PUBLIC        _vTx
+  C:0FADH         PUBLIC        InterruptionSerie0
   B:00A8H.4       PUBLIC        ES0
   D:00B8H         PUBLIC        IP0
   D:00E8H         PUBLIC        EIE
-  X:01F4H         PUBLIC        ucData
-  C:1570H         PUBLIC        vInitInterrupt
+  X:0096H         PUBLIC        ucData
+  C:15B3H         PUBLIC        vInitInterrupt
   D:0099H         PUBLIC        SBUF0
+  C:15A1H         PUBLIC        vResetIsTrameReceived
   D:0098H         PUBLIC        SCON0
   D:00C0H         PUBLIC        SCON1
   D:00C8H         PUBLIC        T2CON
-  X:01F5H         PUBLIC        ucCircularBuffer
+  X:0097H         PUBLIC        ucCircularBuffer
   D:00D0H         PUBLIC        PSW
   D:00D8H         PUBLIC        WDCON
   -------         PROC          VINITINTERRUPT
-  C:1570H         LINE#         33
-  C:1570H         LINE#         46
-  C:1570H         LINE#         47
-  C:1572H         LINE#         48
-  C:1574H         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 20
+
+
+  C:15B3H         LINE#         33
+  C:15B3H         LINE#         46
+  C:15B3H         LINE#         47
+  C:15B5H         LINE#         48
+  C:15B7H         LINE#         49
   -------         ENDPROC       VINITINTERRUPT
   -------         PROC          INTERRUPTIONSERIE0
-  C:0EDEH         LINE#         51
-  C:0EFBH         LINE#         64
-  C:0EFEH         LINE#         65
-  C:0EFEH         LINE#         66
-  C:0F06H         LINE#         67
-  C:0F16H         LINE#         68
-  C:0F1EH         LINE#         69
-  C:0F20H         LINE#         70
-  C:0F20H         LINE#         71
-  C:0F23H         LINE#         72
-  C:0F23H         LINE#         73
-  C:0F25H         LINE#         74
-  C:0F25H         LINE#         75
+  C:0FADH         LINE#         51
+  C:0FCAH         LINE#         64
+  C:0FCDH         LINE#         65
+  C:0FCDH         LINE#         66
+  C:0FD5H         LINE#         67
+  C:0FE5H         LINE#         68
+  C:0FEDH         LINE#         69
+  C:0FEFH         LINE#         70
+  C:0FEFH         LINE#         71
+  C:0FF2H         LINE#         72
+  C:0FF2H         LINE#         73
+  C:0FF4H         LINE#         74
+  C:0FF4H         LINE#         75
   -------         ENDPROC       INTERRUPTIONSERIE0
   -------         PROC          UCRX
   -------         DO            
   D:0007H         SYMBOL        ucTemp
   -------         ENDDO         
-  C:1575H         LINE#         77
-  C:1575H         LINE#         89
-  C:1575H         LINE#         91
-  C:1577H         LINE#         92
-  C:1577H         LINE#         93
+  C:15B8H         LINE#         77
+  C:15B8H         LINE#         89
+  C:15B8H         LINE#         91
+  C:15BAH         LINE#         92
+  C:15BAH         LINE#         93
   -------         ENDPROC       UCRX
   -------         PROC          _VCIRCULARBUFFER
-  D:0001H         SYMBOL        tramePtr
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 21
-
-
+  D:0001H         SYMBOL        stpTrame
   -------         DO            
   D:0007H         SYMBOL        ucRecu
   -------         ENDDO         
-  C:07E7H         LINE#         95
-  C:07E7H         LINE#         107
-  C:07E7H         LINE#         108
-  C:07E9H         LINE#         109
-  C:07F8H         LINE#         110
-  C:07F8H         LINE#         111
-  C:0823H         LINE#         112
-  C:0823H         LINE#         113
-  C:0823H         LINE#         114
-  C:0833H         LINE#         115
-  C:083FH         LINE#         116
-  C:0847H         LINE#         118
-  C:084FH         LINE#         119
-  C:084FH         LINE#         120
-  C:084FH         LINE#         121
-  C:084FH         LINE#         123
-  C:0851H         LINE#         124
-  C:0851H         LINE#         125
-  C:0861H         LINE#         126
-  C:086DH         LINE#         127
-  C:0875H         LINE#         129
-  C:0879H         LINE#         130
-  C:0879H         LINE#         131
-  C:0879H         LINE#         132
-  C:087BH         LINE#         134
-  C:087BH         LINE#         135
-  C:0880H         LINE#         136
-  C:0880H         LINE#         137
-  C:0883H         LINE#         138
-  C:0883H         LINE#         139
-  C:0894H         LINE#         140
-  C:089CH         LINE#         141
-  C:089FH         LINE#         142
-  C:08A1H         LINE#         143
-  C:08A1H         LINE#         144
-  C:08B6H         LINE#         145
-  C:08BEH         LINE#         146
-  C:08C1H         LINE#         147
-  C:08C3H         LINE#         148
-  C:08C3H         LINE#         149
-  C:08D8H         LINE#         150
-  C:08E0H         LINE#         151
-  C:08E3H         LINE#         152
-  C:08E5H         LINE#         153
-  C:08E5H         LINE#         154
-  C:08FAH         LINE#         155
-  C:0902H         LINE#         156
-  C:0905H         LINE#         157
-  C:0907H         LINE#         158
-  C:0907H         LINE#         159
-  C:090FH         LINE#         160
-  C:0915H         LINE#         161
-  C:0916H         LINE#         162
-  C:0916H         LINE#         163
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 22
+  C:0813H         LINE#         95
+  C:0813H         LINE#         107
+  C:0813H         LINE#         108
+  C:0815H         LINE#         109
+  C:0824H         LINE#         110
+  C:0824H         LINE#         111
+  C:084FH         LINE#         112
+  C:084FH         LINE#         113
+  C:084FH         LINE#         114
+  C:085FH         LINE#         115
+  C:086BH         LINE#         116
+  C:0873H         LINE#         118
+  C:087BH         LINE#         119
+  C:087BH         LINE#         120
+  C:087BH         LINE#         121
+  C:087BH         LINE#         123
+  C:087DH         LINE#         124
+  C:087DH         LINE#         125
+  C:088DH         LINE#         126
+  C:0899H         LINE#         127
+  C:08A1H         LINE#         129
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 21
 
 
-  C:092BH         LINE#         164
-  C:0933H         LINE#         165
-  C:0939H         LINE#         166
-  C:093DH         LINE#         167
-  C:093DH         LINE#         168
-  C:093DH         LINE#         169
-  C:093DH         LINE#         170
+  C:08A5H         LINE#         130
+  C:08A5H         LINE#         131
+  C:08A5H         LINE#         132
+  C:08A7H         LINE#         134
+  C:08A7H         LINE#         135
+  C:08ACH         LINE#         136
+  C:08ACH         LINE#         137
+  C:08AFH         LINE#         138
+  C:08AFH         LINE#         139
+  C:08C0H         LINE#         140
+  C:08C8H         LINE#         141
+  C:08CBH         LINE#         142
+  C:08CDH         LINE#         143
+  C:08CDH         LINE#         144
+  C:08E2H         LINE#         145
+  C:08EAH         LINE#         146
+  C:08EDH         LINE#         147
+  C:08EFH         LINE#         148
+  C:08EFH         LINE#         149
+  C:0904H         LINE#         150
+  C:090CH         LINE#         151
+  C:090FH         LINE#         152
+  C:0911H         LINE#         153
+  C:0911H         LINE#         154
+  C:0926H         LINE#         155
+  C:092EH         LINE#         156
+  C:0931H         LINE#         157
+  C:0933H         LINE#         158
+  C:0933H         LINE#         159
+  C:093BH         LINE#         160
+  C:0941H         LINE#         161
+  C:0942H         LINE#         162
+  C:0942H         LINE#         163
+  C:0957H         LINE#         164
+  C:095FH         LINE#         165
+  C:0965H         LINE#         166
+  C:096BH         LINE#         167
+  C:096BH         LINE#         168
+  C:096BH         LINE#         169
+  C:096BH         LINE#         170
   -------         ENDPROC       _VCIRCULARBUFFER
   -------         PROC          _VSENDTRAME
-  X:01C7H         SYMBOL        statePtr
-  C:0E64H         LINE#         172
-  C:0E6FH         LINE#         173
-  C:0E6FH         LINE#         174
-  C:0E74H         LINE#         175
-  C:0E79H         LINE#         176
-  C:0E8BH         LINE#         177
-  C:0E9BH         LINE#         178
-  C:0EABH         LINE#         179
-  C:0EBCH         LINE#         180
-  C:0ECDH         LINE#         181
+  X:0069H         SYMBOL        stpCurrentArmState
+  C:0EC7H         LINE#         172
+  C:0ED2H         LINE#         173
+  C:0ED2H         LINE#         174
+  C:0ED7H         LINE#         175
+  C:0EDCH         LINE#         176
+  C:0EEEH         LINE#         177
+  C:0EFEH         LINE#         178
+  C:0F0EH         LINE#         179
+  C:0F1FH         LINE#         180
+  C:0F30H         LINE#         181
   -------         ENDPROC       _VSENDTRAME
   -------         PROC          _UCHANDLECS
-  D:0001H         SYMBOL        statePtr
+  D:0001H         SYMBOL        stpCurrentArmState
   -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 22
+
+
   D:0007H         SYMBOL        ucCheckSum
   -------         ENDDO         
-  C:13EEH         LINE#         184
-  C:13EEH         LINE#         185
-  C:13EEH         LINE#         187
-  C:1414H         LINE#         188
-  C:1414H         LINE#         189
+  C:1430H         LINE#         184
+  C:1430H         LINE#         185
+  C:1430H         LINE#         187
+  C:1456H         LINE#         188
+  C:1456H         LINE#         189
   -------         ENDPROC       _UCHANDLECS
-  C:1531H         SYMBOL        L?0038
-  -------         PROC          L?0037
-  -------         ENDPROC       L?0037
-  C:1531H         SYMBOL        L?0038
-  -------         PROC          _UCTX
+  C:1574H         SYMBOL        L?0037
+  -------         PROC          L?0036
+  -------         ENDPROC       L?0036
+  C:1574H         SYMBOL        L?0037
+  -------         PROC          _VTX
   D:0007H         SYMBOL        ucTransmi
-  C:1535H         LINE#         191
-  C:1535H         LINE#         203
-  C:1535H         LINE#         204
-  C:1537H         LINE#         205
-  C:1539H         LINE#         206
-  C:153CH         LINE#         207
-  C:153EH         LINE#         208
-  C:1540H         LINE#         209
-  -------         ENDPROC       _UCTX
-  -------         PROC          UCKBHIT
-  C:1558H         LINE#         211
-  C:1558H         LINE#         223
-  C:1558H         LINE#         224
-  C:155DH         LINE#         225
-  -------         ENDPROC       UCKBHIT
-  -------         PROC          ISTRAMERECEIVED
-  C:155EH         LINE#         227
-  C:155EH         LINE#         228
-  C:155EH         LINE#         229
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 23
-
-
-  C:1563H         LINE#         230
-  -------         ENDPROC       ISTRAMERECEIVED
-  -------         PROC          RESETISTRAMERECEIVED
-  C:1564H         LINE#         232
-  C:1564H         LINE#         233
-  C:1564H         LINE#         234
-  C:1569H         LINE#         235
-  -------         ENDPROC       RESETISTRAMERECEIVED
+  C:1578H         LINE#         191
+  C:1578H         LINE#         203
+  C:1578H         LINE#         204
+  C:157AH         LINE#         205
+  C:157CH         LINE#         206
+  C:157FH         LINE#         207
+  C:1581H         LINE#         208
+  C:1583H         LINE#         209
+  -------         ENDPROC       _VTX
+  -------         PROC          UCISTRAMERECEIVED
+  C:159BH         LINE#         211
+  C:159BH         LINE#         212
+  C:159BH         LINE#         213
+  C:15A0H         LINE#         214
+  -------         ENDPROC       UCISTRAMERECEIVED
+  -------         PROC          VRESETISTRAMERECEIVED
+  C:15A1H         LINE#         216
+  C:15A1H         LINE#         217
+  C:15A1H         LINE#         218
+  C:15A6H         LINE#         219
+  -------         ENDPROC       VRESETISTRAMERECEIVED
   -------         ENDMOD        CIRCULARBUFFER_RXTX
 
   -------         MODULE        SEQUENCEHANDLER
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:156AH         PUBLIC        isOperating
-  C:1457H         PUBLIC        _getSortingSequenceFromWheightSampling
-  C:093EH         PUBLIC        _handleSequence
-  X:0206H         PUBLIC        currentOperatingState
-  C:0C83H         PUBLIC        _handleTouchScreen
-  -------         PROC          _HANDLESEQUENCE
-  X:01C7H         SYMBOL        trame
-  X:01CAH         SYMBOL        currentSequenceIndexes
-  X:01CDH         SYMBOL        weightType
-  C:093EH         LINE#         20
-  C:0949H         LINE#         21
-  C:0949H         LINE#         22
-  C:0969H         LINE#         23
-  C:0969H         LINE#         24
-  C:0969H         LINE#         25
-  C:098CH         LINE#         26
-  C:098CH         LINE#         27
-  C:098CH         LINE#         28
-  C:099FH         LINE#         29
-  C:09ACH         LINE#         30
-  C:09ACH         LINE#         31
-  C:09BCH         LINE#         32
-  C:09CEH         LINE#         33
-  C:09D4H         LINE#         34
-  C:09D4H         LINE#         35
-  C:09D5H         LINE#         36
-  C:09D5H         LINE#         37
-  C:09E8H         LINE#         38
-  C:09F5H         LINE#         39
-  C:09F5H         LINE#         40
-  C:09FBH         LINE#         41
-  C:09FBH         LINE#         42
-  C:09FCH         LINE#         43
-  C:09FCH         LINE#         44
-  C:0A1EH         LINE#         45
-  C:0A3EH         LINE#         46
-  C:0A50H         LINE#         47
-  C:0A56H         LINE#         48
-  C:0A57H         LINE#         49
-  C:0A57H         LINE#         50
-  C:0A6AH         LINE#         51
-  C:0A73H         LINE#         52
-  C:0A73H         LINE#         53
-  C:0A78H         LINE#         54
-  C:0A88H         LINE#         55
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 24
+  C:0026H         PUBLIC        _vHandleSequence
+  C:0BAEH         PUBLIC        _vHandleTouchScreen
+  C:15ADH         PUBLIC        ucIsOperating
+  C:149AH         PUBLIC        _ucGetSortingSequenceFromWheightSampling
+  C:15A7H         PUBLIC        _vSetOperatingState
+  X:00A5H         PUBLIC        ucCurrentOperatingState
+  -------         PROC          _VHANDLESEQUENCE
+  X:0069H         SYMBOL        stpTrame
+  X:006CH         SYMBOL        stpCurrentSequenceIndexes
+  X:006FH         SYMBOL        ucpWeightType
+  C:0026H         LINE#         27
+  C:0031H         LINE#         28
+  C:0031H         LINE#         29
+  C:0059H         LINE#         30
+  C:0059H         LINE#         31
+  C:0059H         LINE#         32
+  C:007CH         LINE#         33
+  C:007CH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 23
 
 
-  C:0A88H         LINE#         56
-  C:0A88H         LINE#         57
-  C:0A88H         LINE#         58
-  -------         ENDPROC       _HANDLESEQUENCE
-  -------         PROC          _HANDLETOUCHSCREEN
-  X:01D0H         SYMBOL        touchScreen
-  X:01D3H         SYMBOL        currentSequenceIndexes
-  C:0C83H         LINE#         60
-  C:0C8EH         LINE#         61
-  C:0C8EH         LINE#         73
-  C:0CBBH         LINE#         75
-  C:0CBBH         LINE#         76
-  C:0CC7H         LINE#         77
-  C:0CC7H         LINE#         78
-  C:0CC7H         LINE#         79
-  C:0CC9H         LINE#         81
-  C:0CF6H         LINE#         83
-  C:0CF6H         LINE#         84
-  C:0D03H         LINE#         85
-  C:0D03H         LINE#         86
-  C:0D03H         LINE#         87
-  C:0D05H         LINE#         89
-  C:0D32H         LINE#         91
-  C:0D32H         LINE#         92
-  C:0D42H         LINE#         93
-  C:0D54H         LINE#         94
-  C:0D5AH         LINE#         95
-  C:0D5AH         LINE#         96
-  -------         ENDPROC       _HANDLETOUCHSCREEN
-  -------         PROC          _GETSORTINGSEQUENCEFROMWHEIGHTSAMPLING
-  D:0001H         SYMBOL        weightSensor
+  C:007CH         LINE#         35
+  C:008FH         LINE#         36
+  C:009CH         LINE#         37
+  C:009CH         LINE#         38
+  C:00ACH         LINE#         39
+  C:00BEH         LINE#         40
+  C:00C4H         LINE#         41
+  C:00DDH         LINE#         42
+  C:00DDH         LINE#         43
+  C:00EDH         LINE#         44
+  C:00FDH         LINE#         45
+  C:00FDH         LINE#         46
+  C:00FDH         LINE#         47
+  C:00FDH         LINE#         48
+  C:00FFH         LINE#         49
+  C:00FFH         LINE#         50
+  C:0112H         LINE#         51
+  C:011FH         LINE#         52
+  C:011FH         LINE#         53
+  C:0125H         LINE#         54
+  C:0125H         LINE#         55
+  C:0126H         LINE#         56
+  C:0126H         LINE#         57
+  C:0148H         LINE#         58
+  C:0168H         LINE#         59
+  C:017AH         LINE#         60
+  C:0180H         LINE#         61
+  C:0181H         LINE#         62
+  C:0181H         LINE#         63
+  C:0194H         LINE#         64
+  C:01A1H         LINE#         65
+  C:01A1H         LINE#         66
+  C:01A5H         LINE#         67
+  C:01B5H         LINE#         68
+  C:01B5H         LINE#         69
+  C:01B5H         LINE#         70
+  C:01B5H         LINE#         71
+  C:01C4H         LINE#         72
+  C:01D6H         LINE#         73
+  C:01DCH         LINE#         74
+  C:01DDH         LINE#         75
+  C:01DDH         LINE#         76
+  C:01F0H         LINE#         77
+  C:01FBH         LINE#         78
+  C:01FBH         LINE#         79
+  C:020BH         LINE#         80
+  C:0212H         LINE#         81
+  C:0212H         LINE#         82
+  C:0224H         LINE#         83
+  C:0224H         LINE#         84
+  C:0229H         LINE#         85
+  C:023CH         LINE#         86
+  C:023CH         LINE#         87
+  C:0242H         LINE#         88
+  C:0242H         LINE#         89
+  C:0251H         LINE#         90
+  C:0263H         LINE#         91
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 24
+
+
+  C:0268H         LINE#         92
+  C:0268H         LINE#         93
+  C:0268H         LINE#         94
+  C:0268H         LINE#         95
+  -------         ENDPROC       _VHANDLESEQUENCE
+  -------         PROC          _VHANDLETOUCHSCREEN
+  X:0072H         SYMBOL        stpTouchScreen
+  X:0075H         SYMBOL        stpCurrentSequenceIndexes
+  C:0BAEH         LINE#         97
+  C:0BB9H         LINE#         98
+  C:0BB9H         LINE#         110
+  C:0BE5H         LINE#         112
+  C:0BE5H         LINE#         113
+  C:0BF1H         LINE#         114
+  C:0BF1H         LINE#         115
+  C:0BF1H         LINE#         116
+  C:0BF3H         LINE#         118
+  C:0C1FH         LINE#         120
+  C:0C1FH         LINE#         121
+  C:0C2CH         LINE#         122
+  C:0C2CH         LINE#         123
+  C:0C2CH         LINE#         124
+  C:0C2EH         LINE#         126
+  C:0C5AH         LINE#         128
+  C:0C5AH         LINE#         129
+  C:0C6AH         LINE#         130
+  C:0C7CH         LINE#         131
+  C:0C82H         LINE#         132
+  C:0C82H         LINE#         133
+  -------         ENDPROC       _VHANDLETOUCHSCREEN
+  -------         PROC          _UCGETSORTINGSEQUENCEFROMWHEIGHTSAMPLING
+  D:0001H         SYMBOL        ucpWeightSensor
   -------         DO            
-  D:0007H         SYMBOL        sequenceIndex
+  D:0007H         SYMBOL        ucSequenceIndex
   -------         ENDDO         
-  C:1457H         LINE#         98
-  C:1457H         LINE#         99
-  C:1457H         LINE#         102
-  C:1460H         LINE#         103
-  C:1460H         LINE#         104
-  C:1462H         LINE#         105
-  C:1464H         LINE#         106
-  C:146AH         LINE#         107
-  C:146AH         LINE#         108
-  C:146CH         LINE#         109
-  C:146EH         LINE#         111
-  C:146EH         LINE#         112
-  C:1470H         LINE#         113
-  C:1470H         LINE#         115
-  C:1470H         LINE#         116
-  -------         ENDPROC       _GETSORTINGSEQUENCEFROMWHEIGHTSAMPLING
-  -------         PROC          ISOPERATING
-  C:156AH         LINE#         118
-  C:156AH         LINE#         119
-  C:156AH         LINE#         120
-  C:156FH         LINE#         121
-  -------         ENDPROC       ISOPERATING
+  C:149AH         LINE#         135
+  C:149AH         LINE#         136
+  C:149AH         LINE#         139
+  C:14A3H         LINE#         140
+  C:14A3H         LINE#         141
+  C:14A5H         LINE#         142
+  C:14A7H         LINE#         143
+  C:14ADH         LINE#         144
+  C:14ADH         LINE#         145
+  C:14AFH         LINE#         146
+  C:14B1H         LINE#         148
+  C:14B1H         LINE#         149
+  C:14B3H         LINE#         150
+  C:14B3H         LINE#         152
+  C:14B3H         LINE#         153
+  -------         ENDPROC       _UCGETSORTINGSEQUENCEFROMWHEIGHTSAMPLING
+  -------         PROC          _VSETOPERATINGSTATE
+  D:0007H         SYMBOL        ucNewOperatingState
+  C:15A7H         LINE#         155
+  C:15A7H         LINE#         156
+  C:15A7H         LINE#         157
+  C:15ACH         LINE#         158
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/06/2019  19:24:08  PAGE 25
+
+
+  -------         ENDPROC       _VSETOPERATINGSTATE
+  -------         PROC          UCISOPERATING
+  C:15ADH         LINE#         160
+  C:15ADH         LINE#         161
+  C:15ADH         LINE#         162
+  C:15B2H         LINE#         163
+  -------         ENDPROC       UCISOPERATING
   -------         ENDMOD        SEQUENCEHANDLER
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2019  16:48:54  PAGE 25
-
-
 
   -------         MODULE        ?C?CLDPTR
-  C:068BH         PUBLIC        ?C?CLDPTR
+  C:06B7H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
   -------         MODULE        ?C?CLDOPTR
-  C:06A4H         PUBLIC        ?C?CLDOPTR
+  C:06D0H         PUBLIC        ?C?CLDOPTR
   -------         ENDMOD        ?C?CLDOPTR
 
   -------         MODULE        ?C?CILDPTR
-  C:06D1H         PUBLIC        ?C?CILDPTR
+  C:06FDH         PUBLIC        ?C?CILDPTR
   -------         ENDMOD        ?C?CILDPTR
 
   -------         MODULE        ?C?CILDOPTR
-  C:06F3H         PUBLIC        ?C?CILDOPTR
+  C:071FH         PUBLIC        ?C?CILDOPTR
   -------         ENDMOD        ?C?CILDOPTR
 
   -------         MODULE        ?C?CSTPTR
-  C:0726H         PUBLIC        ?C?CSTPTR
+  C:0752H         PUBLIC        ?C?CSTPTR
   -------         ENDMOD        ?C?CSTPTR
 
   -------         MODULE        ?C?CSTOPTR
-  C:0738H         PUBLIC        ?C?CSTOPTR
+  C:0764H         PUBLIC        ?C?CSTOPTR
   -------         ENDMOD        ?C?CSTOPTR
 
   -------         MODULE        ?C?IMUL
-  C:075AH         PUBLIC        ?C?IMUL
+  C:0786H         PUBLIC        ?C?IMUL
   -------         ENDMOD        ?C?IMUL
 
   -------         MODULE        ?C?UIDIV
-  C:076CH         PUBLIC        ?C?UIDIV
+  C:0798H         PUBLIC        ?C?UIDIV
   -------         ENDMOD        ?C?UIDIV
 
   -------         MODULE        ?C?CCASE
-  C:07C1H         PUBLIC        ?C?CCASE
+  C:07EDH         PUBLIC        ?C?CCASE
   -------         ENDMOD        ?C?CCASE
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_VECRIREMEMI2C?I2C
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?UCKBHIT?CIRCULARBUFFER_RXTX
-
-Program Size: data=9.0 xdata=519 code=5495
-LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)
+Program Size: data=9.0 xdata=166 code=5562
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -457,6 +457,16 @@
               <FileType>1</FileType>
               <FilePath>.\CircularBuffer_RxTx.c</FilePath>
             </File>
+            <File>
+              <FileName>SequenceHandler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SequenceHandler.c</FilePath>
+            </File>
+            <File>
+              <FileName>SequenceHandler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SequenceHandler.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

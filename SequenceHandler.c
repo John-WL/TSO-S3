@@ -9,55 +9,92 @@
 #include "SequenceHandler.h"
 #include "ProjectDefinitions.h"
 
+// définitions
+#define WEIGHT_POSITIONING_OPERATING_STATE 2  // va mettre le poid sur la balance
+#define WEIGHT_SAMPLING_OPERATING_STATE 3     // calcul la couleur du poid en fonction de ce que la balance indique
+#define WEIGHT_SORTING_OPERATING_STATE 4      // va porter le poid dans la bonne case
+
+#define WARM_UP_OPERATING_STATE 6             // fait quelques mouvements pour s'échauffer
+
 // variables
-unsigned char currentOperatingState = STAND_BY_OPERATING_STATE;
+unsigned char ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
 
 // prototypes
-void handleTouchScreen(struct TouchScreen* toucheScreen, struct SequenceStep* currentSequenceIndexes);
-unsigned char getSortingSequenceFromWheightSampling(unsigned char* weightSensor);
+void vHandleTouchScreen(struct STTouchScreen* stpTouchScreen, struct STSequenceStep* stpCurrentSequenceIndexes);
+unsigned char ucGetSortingSequenceFromWheightSampling(unsigned char* ucpWeightSensor);
 
 // function implementations
-void handleSequence(struct TramePIC* trame, struct SequenceStep* currentSequenceIndexes, unsigned char* weightType)
+void vHandleSequence(struct STTramePIC* stpTrame, struct STSequenceStep* stpCurrentSequenceIndexes, unsigned char* ucpWeightType)
 {
-    switch(currentOperatingState)
+    switch(ucCurrentOperatingState)
     {
       case STAND_BY_OPERATING_STATE:
-          handleTouchScreen(&(trame->adcSensors.touchScreen), currentSequenceIndexes);
+          vHandleTouchScreen(&(stpTrame->stAdcSensors.stTouchScreen), stpCurrentSequenceIndexes);
           break;
       case WEIGHT_GRABING_OPERATING_STATE:
-          currentSequenceIndexes->step++;
-          if(currentSequenceIndexes->step == 4)
+          stpCurrentSequenceIndexes->ucStep++;
+          if(stpCurrentSequenceIndexes->ucStep == 4)
           {
-              currentSequenceIndexes->sequence = 3;
-              currentSequenceIndexes->step = 0;
-              currentOperatingState = WEIGHT_POSITIONING_OPERATING_STATE;
+              stpCurrentSequenceIndexes->ucSequence = 3;
+              stpCurrentSequenceIndexes->ucStep = 0;
+              ucCurrentOperatingState = WEIGHT_POSITIONING_OPERATING_STATE;
+              if(stpTrame->stAdcSensors.ucGripIntensity > 0xC7)
+              {
+                stpCurrentSequenceIndexes->ucSequence = 4;
+                stpCurrentSequenceIndexes->ucStep = 5;
+                ucCurrentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
+              }
           }
           break;
       case WEIGHT_POSITIONING_OPERATING_STATE:
-          currentSequenceIndexes->step++;
-          if(currentSequenceIndexes->step == 2)
+          stpCurrentSequenceIndexes->ucStep++;
+          if(stpCurrentSequenceIndexes->ucStep == 2)
           {
-              currentOperatingState = WEIGHT_SAMPLING_OPERATING_STATE;
+              ucCurrentOperatingState = WEIGHT_SAMPLING_OPERATING_STATE;
           }
           break;
       case WEIGHT_SAMPLING_OPERATING_STATE:
-          currentSequenceIndexes->sequence = getSortingSequenceFromWheightSampling(&(trame->adcSensors.weightSensor));
-          *weightType = currentSequenceIndexes->sequence - 4;
-          currentSequenceIndexes->step = 0;
-          currentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
+          stpCurrentSequenceIndexes->ucSequence = ucGetSortingSequenceFromWheightSampling(&(stpTrame->stAdcSensors.ucWeightSensor));
+          *ucpWeightType = stpCurrentSequenceIndexes->ucSequence - 4;
+          stpCurrentSequenceIndexes->ucStep = 0;
+          ucCurrentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
           break;
       case WEIGHT_SORTING_OPERATING_STATE:
-          currentSequenceIndexes->step++;
-          if(currentSequenceIndexes->step == 6)
+          stpCurrentSequenceIndexes->ucStep++;
+          if(stpCurrentSequenceIndexes->ucStep == 6)
           {
-              currentOperatingState = STAND_BY_OPERATING_STATE;
-              *weightType = 4;
+              ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
+              *ucpWeightType = 4;
+          }
+          break;
+      case WARM_UP_SETUP_OPERATING_STATE:
+          stpCurrentSequenceIndexes->ucSequence = 0;
+          stpCurrentSequenceIndexes->ucStep = 0;
+          ucCurrentOperatingState = WARM_UP_OPERATING_STATE;
+          break;
+      case WARM_UP_OPERATING_STATE:
+          stpCurrentSequenceIndexes->ucStep++;
+          if(stpCurrentSequenceIndexes->ucStep >= 4)
+          {
+              stpCurrentSequenceIndexes->ucSequence++;
+              stpCurrentSequenceIndexes->ucStep = 0;
+          }
+          if(stpCurrentSequenceIndexes->ucSequence == 3)
+          {
+              stpCurrentSequenceIndexes->ucSequence = 4;
+              stpCurrentSequenceIndexes->ucStep = 5;
+          }
+          else if(stpCurrentSequenceIndexes->ucSequence >= 4)
+          {
+              stpCurrentSequenceIndexes->ucSequence = 0;
+              stpCurrentSequenceIndexes->ucStep = 0;
+              ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
           }
           break;
     }
 }
 
-void handleTouchScreen(struct TouchScreen* touchScreen, struct SequenceStep* currentSequenceIndexes)
+void vHandleTouchScreen(struct STTouchScreen* stpTouchScreen, struct STSequenceStep* stpCurrentSequenceIndexes)
 {
     //A6::
       //x:0x00 à 0x60
@@ -70,52 +107,57 @@ void handleTouchScreen(struct TouchScreen* touchScreen, struct SequenceStep* cur
       //y:0x70 à 0xC0
 
     // A6 appuyé?
-    if(touchScreen->x >= 0x00 && touchScreen->x <= 0x60
-        && touchScreen->y >= 0x00 && touchScreen->x <= 0x70)
+    if(stpTouchScreen->ucX >= 0x00 && stpTouchScreen->ucX <= 0x60
+        && stpTouchScreen->ucY >= 0x00 && stpTouchScreen->ucY <= 0x70)
     {
-        currentSequenceIndexes->sequence = 0;
-        currentSequenceIndexes->step = 0;
-        currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+        stpCurrentSequenceIndexes->ucSequence = 0;
+        stpCurrentSequenceIndexes->ucStep = 0;
+        ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
     }
     // B2 appuyé?
-    else if(touchScreen->x >= 0x60 && touchScreen->x <= 0xA0
-        && touchScreen->y >= 0xC0 && touchScreen->x <= 0xFF)
+    else if(stpTouchScreen->ucX >= 0x60 && stpTouchScreen->ucX <= 0xA0
+        && stpTouchScreen->ucY >= 0xC0 && stpTouchScreen->ucY <= 0xFF)
     {
-        currentSequenceIndexes->sequence = 1;
-        currentSequenceIndexes->step = 0;
-        currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+        stpCurrentSequenceIndexes->ucSequence = 1;
+        stpCurrentSequenceIndexes->ucStep = 0;
+        ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
     }
     // C5 appuyé?
-    else if(touchScreen->x >= 0xA0 && touchScreen->x <= 0xFF
-        && touchScreen->y >= 0x70 && touchScreen->x <= 0xC0)
+    else if(stpTouchScreen->ucX >= 0xA0 && stpTouchScreen->ucX <= 0xFF
+        && stpTouchScreen->ucY >= 0x70 && stpTouchScreen->ucY <= 0xC0)
     {
-        currentSequenceIndexes->sequence = 2;
-        currentSequenceIndexes->step = 0;
-        currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+        stpCurrentSequenceIndexes->ucSequence = 2;
+        stpCurrentSequenceIndexes->ucStep = 0;
+        ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
     }
 }
 
-unsigned char getSortingSequenceFromWheightSampling(unsigned char* weightSensor)
+unsigned char ucGetSortingSequenceFromWheightSampling(unsigned char* ucpWeightSensor)
 {
-    unsigned char sequenceIndex;
+    unsigned char ucSequenceIndex;
   
-    if(*weightSensor < 0x40)
+    if(*ucpWeightSensor < 0x40)
     {
-        sequenceIndex = 4;
+        ucSequenceIndex = 4;
     }
-    else if(*weightSensor < 0x70)
+    else if(*ucpWeightSensor < 0x70)
     {
-        sequenceIndex = 5;
+        ucSequenceIndex = 5;
     }
     else
     {
-        sequenceIndex = 6;
+        ucSequenceIndex = 6;
     }
     
-    return sequenceIndex;
+    return ucSequenceIndex;
 }
 
-unsigned char isOperating(void)
+void vSetOperatingState(unsigned char ucNewOperatingState)
 {
-    return currentOperatingState;
+    ucCurrentOperatingState = ucNewOperatingState;
+}
+
+unsigned char ucIsOperating(void)
+{
+    return ucCurrentOperatingState;
 }

@@ -10,6 +10,14 @@
 #define RxTx232H
 
 //Predeclaration des fonctions.
+
+//**************************************************************
 void vInitPortSerie(void);
+/*  Auteur: Alain Champagne
+    
+    Behaviour: initialisation du port série RS-232
+    Parameters: void
+    Return: void
+***************************************************************/
 
 #endif

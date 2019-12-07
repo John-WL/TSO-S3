@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   LCD                                                               12/05/2019 16:48:52 PAGE 1   
+C51 COMPILER V9.53.0.0   LCD                                                               12/06/2019 19:24:07 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE LCD
@@ -61,8 +61,8 @@ line level    source
   52          // *************************************************************************************************
   53          void vInitLCD(void)
   54          //
-  55          //  Auteur: Stéphane Deschênes  
-C51 COMPILER V9.53.0.0   LCD                                                               12/05/2019 16:48:52 PAGE 2   
+  55          //  Auteur: Stéphane Deschênes
+C51 COMPILER V9.53.0.0   LCD                                                               12/06/2019 19:24:07 PAGE 2   
 
   56          //  Date de création :  01-09-2019
   57          //  Version 1.0
@@ -126,7 +126,7 @@ line level    source
  115          //  Version 1.0
  116          //
  117          //  Description: Écrit un caractère sur le LCD, sur la ligne et la colonne voulue.
-C51 COMPILER V9.53.0.0   LCD                                                               12/05/2019 16:48:52 PAGE 3   
+C51 COMPILER V9.53.0.0   LCD                                                               12/06/2019 19:24:07 PAGE 3   
 
  118          //  Paramètres d'entrées : ucCaract: Caractère que l'on veut écrire
  119          //                         ucLigne:  Ligne où l'on veut écrire (o à 3)
@@ -190,7 +190,7 @@ line level    source
  177          //  Auteur : Stéphane Deschênes                                     
  178          //  Description : Efface le LCD au complet           
  179          //  Date de création :  1-09-2019
-C51 COMPILER V9.53.0.0   LCD                                                               12/05/2019 16:48:52 PAGE 4   
+C51 COMPILER V9.53.0.0   LCD                                                               12/06/2019 19:24:07 PAGE 4   
 
  180          //  Version 1.0
  181          //  Paramètres d'entrée :  Aucun
@@ -254,7 +254,7 @@ line level    source
  239   2        }
  240   1        return ucTemp;
  241   1      }
-C51 COMPILER V9.53.0.0   LCD                                                               12/05/2019 16:48:52 PAGE 5   
+C51 COMPILER V9.53.0.0   LCD                                                               12/06/2019 19:24:07 PAGE 5   
 
  242          
  243          

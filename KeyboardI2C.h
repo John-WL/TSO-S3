@@ -12,9 +12,33 @@
 #define KEYBOARD_ADDRESS_I2C 0x28
 
 // Prototypes
-unsigned char* readKeyboardI2C(void);
-void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState, struct SequenceStep* currentSequenceIndexes);
+//**************************************************************
+unsigned char* ucpReadKeyboardI2C(void);
+/*  Auteur: John-William Lebel
+    
+    Behaviour: lis une touche du clavier I2C
+    Parameters: void
+    Return: unsigned char
+***************************************************************/
 
-
+//**************************************************************
+void vHandleKey(unsigned char* ucpKey,
+    struct STKeyboardManualSettings* strpKeyboardManualSettings,
+    struct STArmState* strpCurrentArmState,
+    struct STSequenceStep* strpCurrentSequenceIndexes);
+/*  Auteur: John-William Lebel
+    
+    Behaviour: en fonction du charactère reçu avec ucReadKeyboardI2C,
+                cette fonction choisi le moteur qui sera contrôlé manuellement,
+                la vitesse des mouvements manuels,
+                une éxecution spécifique pour réchauffer les moteurs
+                ou remet le bras à sa position de base
+    
+    Parameters: unsigned char* ucpKey,
+                struct KeyboardManualSettings* stpKeyboardManualSettings,
+                struct ArmState* stpCurrentArmState,
+                struct SequenceStep* stpCurrentSequenceIndexes
+    Return: void
+***************************************************************/
 
 #endif

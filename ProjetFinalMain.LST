@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/05/2019 16:48:53 PAGE 1   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
@@ -47,8 +47,9 @@ line level    source
   36          //  FONCTIONS LOCALES
   37          // *************************************************************************************************
   38          
-  39          void printLcdDeltaCharacters(void);
-  40          unsigned char readMemoryI2C(unsigned char* sequence, unsigned char* step, unsigned char armIndex);
+  39          void vPrintLcdDeltaCharacters(void);
+  40          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+             -);
   41          //void writeSequencesToMemoryI2C(void);     // only needed once when we'll fill up the memory
   42          
   43          // *************************************************************************************************
@@ -61,226 +62,146 @@ line level    source
   50          // VARIABLES GLOBALES
   51          // *************************************************************************************************
   52          
-  53          struct ArmState currentArmState = { MIDDLE_POSITION,      // base starting position
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/05/2019 16:48:53 PAGE 2   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 2   
 
+  53          struct STArmState stCurrentArmState = { MIDDLE_POSITION,      // base starting position
   54                                              MIDDLE_POSITION,      // shoulder starting position
   55                                              MIDDLE_POSITION,      // elbow starting position
   56                                              MIDDLE_POSITION,      // wrist starting position
   57                                              MAXIMUM_POSITION };   // grip starting position (open)
   58          
-  59          struct Compteur stCompteur = {0, 0, 0};
+  59          struct STCompteur stCompteur = {0, 0, 0};
   60          
-  61          struct TramePIC trame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
-  62          unsigned char weightType = NONE_WEIGHT;                   // default to "no weight"
-  63          struct KeyboardManualSettings keyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
+  61          struct STTramePIC stTrame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
+  62          unsigned char ucWeightType = NONE_WEIGHT;                   // default to "no weight"
+  63          struct STKeyboardManualSettings stKeyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
   64                                                                                // and default manual speed is
   65                                                                                // set to an arbitrary value.
-  66          struct SequenceStep currentSequenceIndexes = {0, 0};        // this is to store the current sequence
+  66          struct STSequenceStep stCurrentSequenceIndexes = {0, 0};        // this is to store the current sequence
   67                                                                      // the arm is executing with two indexes:
   68                                                                      // "sequence" and "step". It probably needs
   69                                                                      // a better name... plz be charitable to the community much luv thx.
   70          
-  71          unsigned char* connectionStateString = LCD_DELTA_OFFLINE_VALUE;
+  71          unsigned char* ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
   72                                                                      // OffL/OnL. It's a variable storing the changes to print to the
   73                                                                      // lcd in case we lose contact with the exterior... 
   74          
-  75          unsigned char lcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
+  75          unsigned char ucLcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
   76                                                            {"5:66 X:FF Y:FF P:FF "},
   77                                                            {"B:FF Poid:Aucun     "},
   78                                                            {"05 seq:0 step:0 OffL"} };
   79          
-  80                // that stupid and massive array might be useful to fill up the I2C memory... just a thought
-  81          unsigned char xdata sequences[7][10][5] = { { {0x0C, 0x4C, 0x1C, 0x51, 0x00},
-  82                                                        {0x0C, 0x73, 0x1C, 0x51, 0x00},
-  83                                                        {0x0C, 0x78, 0x23, 0x51, 0x00},
-  84                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF}, // position A6 sur le touchscreen
-  85                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF},
-  86                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF},
-  87                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF},
-  88                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF},
-  89                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF},
-  90                                                        {0x0C, 0x78, 0x23, 0x51, 0xFF} }, 
-  91          
-  92                                                      { {0x11, 0x4C, 0x05, 0x4D, 0x00},
-  93                                                        {0x11, 0x5E, 0x00, 0x4D, 0x00},
-  94                                                        {0x11, 0x69, 0x0C, 0x4D, 0x00},
-  95                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF}, // position B2 sur le touchscreen
-  96                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF},
-  97                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF},
-  98                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF},
-  99                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF},
- 100                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF},
- 101                                                        {0x11, 0x69, 0x0C, 0x4D, 0xFF} },
- 102          
- 103                                                      { {0x15, 0x4C, 0x13, 0x51, 0x00},
- 104                                                        {0x15, 0x6B, 0x13, 0x51, 0x00},
- 105                                                        {0x15, 0x75, 0x1E, 0x51, 0x00},
- 106                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF}, // position C5 sur le touchscreen
- 107                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF},
- 108                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF},
- 109                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF},
- 110                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF},
- 111                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF},
- 112                                                        {0x15, 0x75, 0x1E, 0x51, 0xFF} },
- 113          
- 114                                                      { {0x0B, 0x64, 0x4A, 0x66, 0xFF},
- 115                                                        {0x0B, 0x81, 0x39, 0x66, 0xFF},
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/05/2019 16:48:53 PAGE 3   
+  80          // *************************************************************************************************
+  81          // VARIABLES LOCALES
+  82          // *************************************************************************************************
+  83          
+  84          
+  85          // *************************************************************************************************
+  86          void main(void)
+  87          //
+  88          //  Auteur: John-William Lebel
+  89          //
+  90          //  Description: Appelé lorsque le programme démarre
+  91          //  Paramètres d'entrées  : Aucun
+  92          //  Paramètres de sortie  : Aucun
+  93          //  Notes                 : Aucune
+  94          //
+  95          // *************************************************************************************************
+  96          {
+  97   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
+  98   1          vInitLCD();           // init the lcd
+  99   1          vInitTimer50ms();     // init the timer0
+ 100   1          vAfficheLCDComplet(ucLcdInitializationContent);         // initialize the content of the lcd
+ 101   1          vInitInterrupt();     // init interrupt on serial 0
+ 102   1          
+ 103   1          while(1)
+ 104   1          {
+ 105   2            
+ 106   2              if(ucIsOperating())   // the movements of the robot arm are automatic
+ 107   2              {
+ 108   3                  if(ucIsTrameReceived())
+ 109   3                  {
+ 110   4                      stCurrentArmState.ucBase = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+             -tSequenceIndexes.ucStep, BASE);
+ 111   4                      stCurrentArmState.ucShoulder = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCu
+             -rrentSequenceIndexes.ucStep, SHOULDER);
+ 112   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 3   
 
- 116                                                        {0x0B, 0x81, 0x39, 0x66, 0x00}, // position balance
- 117                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 118                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 119                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 120                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 121                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 122                                                        {0x0B, 0x81, 0x39, 0x66, 0x00},
- 123                                                        {0x0B, 0x81, 0x39, 0x66, 0x00} }, // position balance PINCE RELÂCHÉE (on fait comme
-             -nt pour prendre des mesures sinon)
- 124          
- 125                                                      { {0x0B, 0x81, 0x39, 0x66, 0xFF}, // position balance (pince fermée)
- 126                                                        {0x20, 0x60, 0x37, 0x5C, 0xFF},
- 127                                                        {0x20, 0x82, 0x37, 0x5C, 0xFF},
- 128                                                        {0x20, 0x82, 0x37, 0x5C, 0x00}, // position bleu (AA)
- 129                                                        {0x20, 0x4C, 0x37, 0xA0, 0x00},
- 130                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00}, // position DE REPOS 
- 131                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 132                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 133                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 134                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00} },
- 135                                                      
- 136                                                      { {0x0B, 0x81, 0x39, 0x66, 0xFF}, // position balance (pince fermée)
- 137                                                        {0x1C, 0x60, 0x31, 0x5C, 0xFF},
- 138                                                        {0x1C, 0x7E, 0x31, 0x5C, 0xFF},
- 139                                                        {0x1C, 0x7E, 0x31, 0x5C, 0x00}, // position vert (C)
- 140                                                        {0x1C, 0x4C, 0x31, 0xA0, 0x00},
- 141                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00}, // position DE REPOS
- 142                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 143                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 144                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 145                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00} },
- 146          
- 147                                                      { {0x0B, 0x81, 0x39, 0x66, 0xFF}, // position balance (pince fermée)
- 148                                                        {0x18, 0x60, 0x2D, 0x5C, 0xFF},
- 149                                                        {0x18, 0x7C, 0x2D, 0x5C, 0xFF},
- 150                                                        {0x18, 0x7C, 0x2D, 0x5C, 0x00}, // position rouge (9V)
- 151                                                        {0x18, 0x4C, 0x2D, 0xA0, 0x00},
- 152                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00}, // position DE REPOS
- 153                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 154                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 155                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00},
- 156                                                        {0x10, 0x4C, 0x00, 0xA0, 0x00} } };
- 157          
- 158          // *************************************************************************************************
- 159          // VARIABLES LOCALES
- 160          // *************************************************************************************************
- 161          
- 162          
- 163          // *************************************************************************************************
- 164          void main(void)
- 165          //
- 166          //  Auteur: John-William Lebel
- 167          //
- 168          //  Description: Appelé lorsque le programme démarre
- 169          //  Paramètres d'entrées  : Aucun
- 170          //  Paramètres de sortie  : Aucun
- 171          //  Notes                 : Aucune
- 172          //
- 173          // *************************************************************************************************
- 174          {
- 175   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
- 176   1          vInitLCD();           // init the lcd
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/05/2019 16:48:53 PAGE 4   
+             -ntSequenceIndexes.ucStep, ELBOW);
+ 113   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
+             -ntSequenceIndexes.ucStep, WRIST);
+ 114   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+             -tSequenceIndexes.ucStep, GRIP);
+ 115   4                  }
+ 116   3              }
+ 117   2              else              // the movements of the robot arm are manual; we need to read the keyboard
+ 118   2              {
+ 119   3                  vHandleKey(ucpReadKeyboardI2C(), &stKeyboardManualSettings, &stCurrentArmState, &stCurrentSequenceIn
+             -dexes);    // read the keyboard and update the variables accordingly
+ 120   3              }
+ 121   2              
+ 122   2              // ... gotta finish what happens next!
+ 123   2              if(TF0 == 1)
+ 124   2              {
+ 125   3                  vUpdateCompteurTimer0(&stCompteur);
+ 126   3              }
+ 127   2              
+ 128   2              if(stCompteur.ucCompteur300ms > 5)
+ 129   2              {
+ 130   3                  stCompteur.ucCompteur300ms = 0;
+ 131   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+ 132   3              }
+ 133   2              
+ 134   2              if(stCompteur.ucCompteur200ms > 3)
+ 135   2              {
+ 136   3                  stCompteur.ucCompteur200ms = 0;
+ 137   3                  vPrintLcdDeltaCharacters();
+ 138   3              }
+ 139   2              
+ 140   2              if(stCompteur.ucCompteur2sec > 39)
+ 141   2              {
+ 142   3                  stCompteur.ucCompteur2sec = 0;
+ 143   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
+ 144   3              }
+ 145   2              
+ 146   2              if(ucIsTrameReceived())
+ 147   2              {
+ 148   3                  stCompteur.ucCompteur300ms = 0;
+ 149   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
+ 150   3                
+ 151   3                  vResetIsTrameReceived();
+ 152   3                  vSendTrame(&stCurrentArmState);
+ 153   3              }
+ 154   2              
+ 155   2              vCircularBuffer(&stTrame);
+ 156   2          }
+ 157   1      }
+ 158          
+ 159          void vPrintLcdDeltaCharacters()
+ 160          {
+ 161   1          vPrintLcdDeltaMotors(&stCurrentArmState);
+ 162   1          vPrintLcdDeltaTrame(&stTrame);
+ 163   1          vPrintLcdDeltaWeightType(&ucWeightType);
+ 164   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
+ 165   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
+ 166   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
+ 167   1      }
+ 168          
+ 169          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+             -)
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 4   
 
- 177   1          initTimer50ms();      // init the timer0
- 178   1          vAfficheLCDComplet(lcdInitializationContent);         // initialize the content of the lcd
- 179   1          vInitInterrupt();     // init interrupt on serial 0
- 180   1          
- 181   1          while(1)
- 182   1          {
- 183   2            
- 184   2              if(isOperating())   // the movements of the robot arm are automatic
- 185   2              {
- 186   3                  if(isTrameReceived())
- 187   3                  {
- 188   4                      currentArmState.base = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceInd
-             -exes.step, BASE);
- 189   4                      currentArmState.shoulder = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenc
-             -eIndexes.step, SHOULDER);
- 190   4                      currentArmState.elbow = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIn
-             -dexes.step, ELBOW);
- 191   4                      currentArmState.wrist = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceIn
-             -dexes.step, WRIST);
- 192   4                      currentArmState.grip = readMemoryI2C(&currentSequenceIndexes.sequence, &currentSequenceInd
-             -exes.step, GRIP);
- 193   4                  }
- 194   3              }
- 195   2              else              // the movements of the robot arm are manual; we need to read the keyboard
- 196   2              {
- 197   3                  handleKey(readKeyboardI2C(), &keyboardManualSettings, &currentArmState, &currentSequenceIndexes);   /
-             -/ read the keyboard and update the variables accordingly
- 198   3              }
- 199   2              
- 200   2              // ... gotta finish what happens next!
- 201   2              if(TF0 == 1)
- 202   2              {
- 203   3                  vUpdateCompteurTimer0(&stCompteur);
- 204   3              }
- 205   2              
- 206   2              if(stCompteur.ucCompteur300ms > 5)
- 207   2              {
- 208   3                  stCompteur.ucCompteur300ms = 0;
- 209   3                  connectionStateString = LCD_DELTA_OFFLINE_VALUE;
- 210   3              }
- 211   2              
- 212   2              if(stCompteur.ucCompteur200ms > 3)
- 213   2              {
- 214   3                  stCompteur.ucCompteur200ms = 0;
- 215   3                  printLcdDeltaCharacters();
- 216   3              }
- 217   2              
- 218   2              if(stCompteur.ucCompteur2sec > 39)
- 219   2              {
- 220   3                  stCompteur.ucCompteur2sec = 0;
- 221   3                  handleSequence(&trame, &currentSequenceIndexes, &weightType);
- 222   3              }
- 223   2              
- 224   2              if(isTrameReceived())
- 225   2              {
- 226   3                  stCompteur.ucCompteur300ms = 0;
- 227   3                  connectionStateString = LCD_DELTA_ONLINE_VALUE;
- 228   3                
- 229   3                  resetIsTrameReceived();
- 230   3                  vSendTrame(&currentArmState);
- 231   3              }
- 232   2              
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/05/2019 16:48:53 PAGE 5   
-
- 233   2              vCircularBuffer(&trame);
- 234   2          }
- 235   1      }
- 236          
- 237          void printLcdDeltaCharacters()
- 238          {
- 239   1          printLcdDeltaMotors(&currentArmState);
- 240   1          printLcdDeltaTrame(&trame);
- 241   1          printLcdDeltaWeightType(&weightType);
- 242   1          printLcdDeltaManualSettings(&keyboardManualSettings);
- 243   1          printLcdCurrentSequenceStep(&currentSequenceIndexes);
- 244   1          printLcdDeltaConnectionState(connectionStateString);
- 245   1      }
- 246          
- 247          unsigned char readMemoryI2C(unsigned char* sequence, unsigned char* step, unsigned char armIndex)
- 248          {
- 249   1          unsigned int memoryAddress = ((((unsigned int)*sequence) * 50) + (*step * 5) + armIndex);
- 250   1          return ucLireMemI2C(memoryAddress);
- 251   1      }
+ 170          {
+ 171   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
+ 172   1          return ucLireMemI2C(uiMemoryAddress);
+ 173   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    475    ----
    CONSTANT SIZE    =      8    ----
-   XDATA SIZE       =    455       7
+   XDATA SIZE       =    105       7
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

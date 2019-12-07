@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/05/2019 16:48:54 PAGE 1   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/06/2019 19:24:08 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SEQUENCEHANDLER
@@ -19,132 +19,179 @@ line level    source
    9          #include "SequenceHandler.h"
   10          #include "ProjectDefinitions.h"
   11          
-  12          // variables
-  13          unsigned char currentOperatingState = STAND_BY_OPERATING_STATE;
-  14          
-  15          // prototypes
-  16          void handleTouchScreen(struct TouchScreen* toucheScreen, struct SequenceStep* currentSequenceIndexes);
-  17          unsigned char getSortingSequenceFromWheightSampling(unsigned char* weightSensor);
+  12          // définitions
+  13          #define WEIGHT_POSITIONING_OPERATING_STATE 2  // va mettre le poid sur la balance
+  14          #define WEIGHT_SAMPLING_OPERATING_STATE 3     // calcul la couleur du poid en fonction de ce que la balanc
+             -e indique
+  15          #define WEIGHT_SORTING_OPERATING_STATE 4      // va porter le poid dans la bonne case
+  16          
+  17          #define WARM_UP_OPERATING_STATE 6             // fait quelques mouvements pour s'échauffer
   18          
-  19          // function implementations
-  20          void handleSequence(struct TramePIC* trame, struct SequenceStep* currentSequenceIndexes, unsigned char* we
-             -ightType)
-  21          {
-  22   1          switch(currentOperatingState)
-  23   1          {
-  24   2            case STAND_BY_OPERATING_STATE:
-  25   2                handleTouchScreen(&(trame->adcSensors.touchScreen), currentSequenceIndexes);
-  26   2                break;
-  27   2            case WEIGHT_GRABING_OPERATING_STATE:
-  28   2                currentSequenceIndexes->step++;
-  29   2                if(currentSequenceIndexes->step == 4)
-  30   2                {
-  31   3                    currentSequenceIndexes->sequence = 3;
-  32   3                    currentSequenceIndexes->step = 0;
-  33   3                    currentOperatingState = WEIGHT_POSITIONING_OPERATING_STATE;
-  34   3                }
-  35   2                break;
-  36   2            case WEIGHT_POSITIONING_OPERATING_STATE:
-  37   2                currentSequenceIndexes->step++;
-  38   2                if(currentSequenceIndexes->step == 2)
-  39   2                {
-  40   3                    currentOperatingState = WEIGHT_SAMPLING_OPERATING_STATE;
-  41   3                }
-  42   2                break;
-  43   2            case WEIGHT_SAMPLING_OPERATING_STATE:
-  44   2                currentSequenceIndexes->sequence = getSortingSequenceFromWheightSampling(&(trame->adcSensors.wei
-             -ghtSensor));
-  45   2                *weightType = currentSequenceIndexes->sequence - 4;
-  46   2                currentSequenceIndexes->step = 0;
-  47   2                currentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
+  19          // variables
+  20          unsigned char ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
+  21          
+  22          // prototypes
+  23          void vHandleTouchScreen(struct STTouchScreen* stpTouchScreen, struct STSequenceStep* stpCurrentSequenceInd
+             -exes);
+  24          unsigned char ucGetSortingSequenceFromWheightSampling(unsigned char* ucpWeightSensor);
+  25          
+  26          // function implementations
+  27          void vHandleSequence(struct STTramePIC* stpTrame, struct STSequenceStep* stpCurrentSequenceIndexes, unsign
+             -ed char* ucpWeightType)
+  28          {
+  29   1          switch(ucCurrentOperatingState)
+  30   1          {
+  31   2            case STAND_BY_OPERATING_STATE:
+  32   2                vHandleTouchScreen(&(stpTrame->stAdcSensors.stTouchScreen), stpCurrentSequenceIndexes);
+  33   2                break;
+  34   2            case WEIGHT_GRABING_OPERATING_STATE:
+  35   2                stpCurrentSequenceIndexes->ucStep++;
+  36   2                if(stpCurrentSequenceIndexes->ucStep == 4)
+  37   2                {
+  38   3                    stpCurrentSequenceIndexes->ucSequence = 3;
+  39   3                    stpCurrentSequenceIndexes->ucStep = 0;
+  40   3                    ucCurrentOperatingState = WEIGHT_POSITIONING_OPERATING_STATE;
+  41   3                    if(stpTrame->stAdcSensors.ucGripIntensity > 0xC7)
+  42   3                    {
+  43   4                      stpCurrentSequenceIndexes->ucSequence = 4;
+  44   4                      stpCurrentSequenceIndexes->ucStep = 5;
+  45   4                      ucCurrentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
+  46   4                    }
+  47   3                }
   48   2                break;
-  49   2            case WEIGHT_SORTING_OPERATING_STATE:
-  50   2                currentSequenceIndexes->step++;
-  51   2                if(currentSequenceIndexes->step == 6)
+  49   2            case WEIGHT_POSITIONING_OPERATING_STATE:
+  50   2                stpCurrentSequenceIndexes->ucStep++;
+  51   2                if(stpCurrentSequenceIndexes->ucStep == 2)
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/06/2019 19:24:08 PAGE 2   
+
   52   2                {
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/05/2019 16:48:54 PAGE 2   
+  53   3                    ucCurrentOperatingState = WEIGHT_SAMPLING_OPERATING_STATE;
+  54   3                }
+  55   2                break;
+  56   2            case WEIGHT_SAMPLING_OPERATING_STATE:
+  57   2                stpCurrentSequenceIndexes->ucSequence = ucGetSortingSequenceFromWheightSampling(&(stpTrame->stAd
+             -cSensors.ucWeightSensor));
+  58   2                *ucpWeightType = stpCurrentSequenceIndexes->ucSequence - 4;
+  59   2                stpCurrentSequenceIndexes->ucStep = 0;
+  60   2                ucCurrentOperatingState = WEIGHT_SORTING_OPERATING_STATE;
+  61   2                break;
+  62   2            case WEIGHT_SORTING_OPERATING_STATE:
+  63   2                stpCurrentSequenceIndexes->ucStep++;
+  64   2                if(stpCurrentSequenceIndexes->ucStep == 6)
+  65   2                {
+  66   3                    ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
+  67   3                    *ucpWeightType = 4;
+  68   3                }
+  69   2                break;
+  70   2            case WARM_UP_SETUP_OPERATING_STATE:
+  71   2                stpCurrentSequenceIndexes->ucSequence = 0;
+  72   2                stpCurrentSequenceIndexes->ucStep = 0;
+  73   2                ucCurrentOperatingState = WARM_UP_OPERATING_STATE;
+  74   2                break;
+  75   2            case WARM_UP_OPERATING_STATE:
+  76   2                stpCurrentSequenceIndexes->ucStep++;
+  77   2                if(stpCurrentSequenceIndexes->ucStep >= 4)
+  78   2                {
+  79   3                    stpCurrentSequenceIndexes->ucSequence++;
+  80   3                    stpCurrentSequenceIndexes->ucStep = 0;
+  81   3                }
+  82   2                if(stpCurrentSequenceIndexes->ucSequence == 3)
+  83   2                {
+  84   3                    stpCurrentSequenceIndexes->ucSequence = 4;
+  85   3                    stpCurrentSequenceIndexes->ucStep = 5;
+  86   3                }
+  87   2                else if(stpCurrentSequenceIndexes->ucSequence >= 4)
+  88   2                {
+  89   3                    stpCurrentSequenceIndexes->ucSequence = 0;
+  90   3                    stpCurrentSequenceIndexes->ucStep = 0;
+  91   3                    ucCurrentOperatingState = STAND_BY_OPERATING_STATE;
+  92   3                }
+  93   2                break;
+  94   2          }
+  95   1      }
+  96          
+  97          void vHandleTouchScreen(struct STTouchScreen* stpTouchScreen, struct STSequenceStep* stpCurrentSequenceInd
+             -exes)
+  98          {
+  99   1          //A6::
+ 100   1            //x:0x00 à 0x60
+ 101   1            //y:0x00 à 0x70
+ 102   1          //B2::
+ 103   1            //x:0x60 à 0xA0
+ 104   1            //y:0xC0 à 0xFF
+ 105   1          //C5::
+ 106   1            //x:0xA0 à 0xFF
+ 107   1            //y:0x70 à 0xC0
+ 108   1      
+ 109   1          // A6 appuyé?
+ 110   1          if(stpTouchScreen->ucX >= 0x00 && stpTouchScreen->ucX <= 0x60
+ 111   1              && stpTouchScreen->ucY >= 0x00 && stpTouchScreen->ucY <= 0x70)
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/06/2019 19:24:08 PAGE 3   
 
-  53   3                    currentOperatingState = STAND_BY_OPERATING_STATE;
-  54   3                    *weightType = 4;
-  55   3                }
-  56   2                break;
-  57   2          }
-  58   1      }
-  59          
-  60          void handleTouchScreen(struct TouchScreen* touchScreen, struct SequenceStep* currentSequenceIndexes)
-  61          {
-  62   1          //A6::
-  63   1            //x:0x00 à 0x60
-  64   1            //y:0x00 à 0x70
-  65   1          //B2::
-  66   1            //x:0x60 à 0xA0
-  67   1            //y:0xC0 à 0xFF
-  68   1          //C5::
-  69   1            //x:0xA0 à 0xFF
-  70   1            //y:0x70 à 0xC0
-  71   1      
-  72   1          // A6 appuyé?
-  73   1          if(touchScreen->x >= 0x00 && touchScreen->x <= 0x60
-  74   1              && touchScreen->y >= 0x00 && touchScreen->x <= 0x70)
-  75   1          {
-  76   2              currentSequenceIndexes->sequence = 0;
-  77   2              currentSequenceIndexes->step = 0;
-  78   2              currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
-  79   2          }
-  80   1          // B2 appuyé?
-  81   1          else if(touchScreen->x >= 0x60 && touchScreen->x <= 0xA0
-  82   1              && touchScreen->y >= 0xC0 && touchScreen->x <= 0xFF)
-  83   1          {
-  84   2              currentSequenceIndexes->sequence = 1;
-  85   2              currentSequenceIndexes->step = 0;
-  86   2              currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
-  87   2          }
-  88   1          // C5 appuyé?
-  89   1          else if(touchScreen->x >= 0xA0 && touchScreen->x <= 0xFF
-  90   1              && touchScreen->y >= 0x70 && touchScreen->x <= 0xC0)
-  91   1          {
-  92   2              currentSequenceIndexes->sequence = 2;
-  93   2              currentSequenceIndexes->step = 0;
-  94   2              currentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
-  95   2          }
-  96   1      }
-  97          
-  98          unsigned char getSortingSequenceFromWheightSampling(unsigned char* weightSensor)
-  99          {
- 100   1          unsigned char sequenceIndex;
- 101   1        
- 102   1          if(*weightSensor < 0x40)
- 103   1          {
- 104   2              sequenceIndex = 4;
- 105   2          }
- 106   1          else if(*weightSensor < 0x70)
- 107   1          {
- 108   2              sequenceIndex = 5;
- 109   2          }
- 110   1          else
- 111   1          {
- 112   2              sequenceIndex = 6;
- 113   2          }
- 114   1          
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/05/2019 16:48:54 PAGE 3   
-
- 115   1          return sequenceIndex;
- 116   1      }
- 117          
- 118          unsigned char isOperating(void)
- 119          {
- 120   1          return currentOperatingState;
- 121   1      }
+ 112   1          {
+ 113   2              stpCurrentSequenceIndexes->ucSequence = 0;
+ 114   2              stpCurrentSequenceIndexes->ucStep = 0;
+ 115   2              ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+ 116   2          }
+ 117   1          // B2 appuyé?
+ 118   1          else if(stpTouchScreen->ucX >= 0x60 && stpTouchScreen->ucX <= 0xA0
+ 119   1              && stpTouchScreen->ucY >= 0xC0 && stpTouchScreen->ucY <= 0xFF)
+ 120   1          {
+ 121   2              stpCurrentSequenceIndexes->ucSequence = 1;
+ 122   2              stpCurrentSequenceIndexes->ucStep = 0;
+ 123   2              ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+ 124   2          }
+ 125   1          // C5 appuyé?
+ 126   1          else if(stpTouchScreen->ucX >= 0xA0 && stpTouchScreen->ucX <= 0xFF
+ 127   1              && stpTouchScreen->ucY >= 0x70 && stpTouchScreen->ucY <= 0xC0)
+ 128   1          {
+ 129   2              stpCurrentSequenceIndexes->ucSequence = 2;
+ 130   2              stpCurrentSequenceIndexes->ucStep = 0;
+ 131   2              ucCurrentOperatingState = WEIGHT_GRABING_OPERATING_STATE;
+ 132   2          }
+ 133   1      }
+ 134          
+ 135          unsigned char ucGetSortingSequenceFromWheightSampling(unsigned char* ucpWeightSensor)
+ 136          {
+ 137   1          unsigned char ucSequenceIndex;
+ 138   1        
+ 139   1          if(*ucpWeightSensor < 0x40)
+ 140   1          {
+ 141   2              ucSequenceIndex = 4;
+ 142   2          }
+ 143   1          else if(*ucpWeightSensor < 0x70)
+ 144   1          {
+ 145   2              ucSequenceIndex = 5;
+ 146   2          }
+ 147   1          else
+ 148   1          {
+ 149   2              ucSequenceIndex = 6;
+ 150   2          }
+ 151   1          
+ 152   1          return ucSequenceIndex;
+ 153   1      }
+ 154          
+ 155          void vSetOperatingState(unsigned char ucNewOperatingState)
+ 156          {
+ 157   1          ucCurrentOperatingState = ucNewOperatingState;
+ 158   1      }
+ 159          
+ 160          unsigned char ucIsOperating(void)
+ 161          {
+ 162   1          return ucCurrentOperatingState;
+ 163   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    579    ----
+   CODE SIZE        =    830    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =      1      15
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/06/2019 19:24:08 PAGE 4   
+
 END OF MODULE INFORMATION.
 
 

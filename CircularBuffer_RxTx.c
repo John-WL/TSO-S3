@@ -18,14 +18,14 @@ Fonction necessaire pour reception la trame du PIC
 #include "CircularBuffer_RxTx.h"
 
 unsigned char ucRx(void);
-unsigned char ucHandleCS(struct ArmState *statePtr);
-void ucTx(unsigned char ucTransmi);
+unsigned char ucHandleCS(struct STArmState *stpCurrentArmState);
+void vTx(unsigned char ucTransmi);
 
 unsigned char ucIndiceIN = 0;
 unsigned char ucIndiceOUT = 0;
 unsigned char ucIndiceTrame = 0;
 unsigned char ucData = 0;
-unsigned char ucIsTrameReceived = 0;
+unsigned char ucTrameReceived = 0;
 
 unsigned char ucCircularBuffer[8];
 
@@ -92,7 +92,7 @@ unsigned char ucRx()
     return ucTemp;
 }
 
-void vCircularBuffer(struct TramePIC *tramePtr)
+void vCircularBuffer(struct STTramePIC *stpTrame)
 //
 //  Auteur: Hugo Pellerin 	
 //  Date de création :  19-12-02
@@ -136,22 +136,22 @@ void vCircularBuffer(struct TramePIC *tramePtr)
                 }
                 break;
             case 2:
-                tramePtr->adcSensors.touchScreen.x = ucCircularBuffer[ucIndiceOUT];
+                stpTrame->stAdcSensors.stTouchScreen.ucX = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
                 break;
             case 3:
-                tramePtr->adcSensors.touchScreen.y = ucCircularBuffer[ucIndiceOUT];
+                stpTrame->stAdcSensors.stTouchScreen.ucY = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
                 break;
             case 4:
-                tramePtr->adcSensors.gripIntensity = ucCircularBuffer[ucIndiceOUT];
+                stpTrame->stAdcSensors.ucGripIntensity = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
                 break;
             case 5:
-                tramePtr->adcSensors.weightSensor = ucCircularBuffer[ucIndiceOUT];
+                stpTrame->stAdcSensors.ucWeightSensor = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
                 break;
@@ -160,35 +160,35 @@ void vCircularBuffer(struct TramePIC *tramePtr)
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
                 break;
             case 7:
-                tramePtr->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
+                stpTrame->ucCheckSum = ucCircularBuffer[ucIndiceOUT];
                 ucIndiceOUT = ((ucIndiceOUT + 1) & 0x07);
                 ucIndiceTrame = ((ucIndiceTrame + 1) & 0x07);
-                ucIsTrameReceived = 1;    // circular buffer is full and trame is read to be read
+                ucTrameReceived = 1;    // circular buffer is full and trame is read to be read
                 break;
         }
     }
 }
 
-void vSendTrame(struct ArmState *statePtr)
+void vSendTrame(struct STArmState *stpCurrentArmState)
 {
-    ucTx('G');
-    ucTx('O');
-    ucTx(statePtr->base);
-    ucTx(statePtr->shoulder);
-    ucTx(statePtr->elbow);
-    ucTx(statePtr->wrist);
-    ucTx(statePtr->grip);
-    ucTx(ucHandleCS(statePtr));
+    vTx('G');
+    vTx('O');
+    vTx(stpCurrentArmState->ucBase);
+    vTx(stpCurrentArmState->ucShoulder);
+    vTx(stpCurrentArmState->ucElbow);
+    vTx(stpCurrentArmState->ucWrist);
+    vTx(stpCurrentArmState->ucGrip);
+    vTx(ucHandleCS(stpCurrentArmState));
 }
 
-unsigned char ucHandleCS(struct ArmState *statePtr)
+unsigned char ucHandleCS(struct STArmState *stpCurrentArmState)
 {
     unsigned char ucCheckSum;
-    ucCheckSum = (0x47 + 0x4F + statePtr->base + statePtr->shoulder + statePtr->elbow + statePtr->wrist + statePtr->grip);  
+    ucCheckSum = (0x47 + 0x4F + stpCurrentArmState->ucBase + stpCurrentArmState->ucShoulder + stpCurrentArmState->ucElbow + stpCurrentArmState->ucWrist + stpCurrentArmState->ucGrip);  
     return ucCheckSum;
 }
 
-void ucTx(unsigned char ucTransmi)
+void vTx(unsigned char ucTransmi)
 //
 //  Auteur: Hugo Pellerin 	
 //  Date de création :  19-11-08
@@ -208,28 +208,12 @@ void ucTx(unsigned char ucTransmi)
     ES0 = 1;
 }
 
-unsigned char ucKbHit()
-//
-//  Auteur: Hugo Pellerin 	
-//  Date de création :  19-10-11
-//  Version 1.0
-//
-//  Description: Test si le flag du port serie est lever
-//  Paramètres d'entrées : -
-//  Paramètres de sortie : vrai ou faux
-//  Notes     		       : Aucune
-//
-// *************************************************************************************************
+unsigned char ucIsTrameReceived()
 {
-    return (unsigned char) RI_0;
+    return ucTrameReceived;
 }
 
-unsigned char isTrameReceived()
+void vResetIsTrameReceived()
 {
-    return ucIsTrameReceived;
-}
-
-void resetIsTrameReceived()
-{
-    ucIsTrameReceived = 0;
+    ucTrameReceived = 0;
 }

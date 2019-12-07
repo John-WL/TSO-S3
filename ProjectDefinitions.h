@@ -79,46 +79,46 @@
 #define LCD_CONNECTION_STATE_DIGIT_POSITION_2 19
 
 // structs
-struct ArmState
+struct STArmState
 {
-		unsigned char base;
-		unsigned char shoulder;
-		unsigned char elbow;
-		unsigned char wrist;
-		unsigned char grip;
+		unsigned char ucBase;
+		unsigned char ucShoulder;
+		unsigned char ucElbow;
+		unsigned char ucWrist;
+		unsigned char ucGrip;
 };
 
-struct TouchScreen
+struct STTouchScreen
 {
-		unsigned char x;
-		unsigned char y;
+		unsigned char ucX;
+		unsigned char ucY;
 };
 
-struct AdcSensors
+struct STAdcSensors
 {
-		struct TouchScreen touchScreen;
-		unsigned char gripIntensity;
-		unsigned char weightSensor;
+		struct STTouchScreen stTouchScreen;
+		unsigned char ucGripIntensity;
+		unsigned char ucWeightSensor;
 };
 
-struct TramePIC
+struct STTramePIC
 {
-  struct AdcSensors adcSensors;
+  struct STAdcSensors stAdcSensors;
   unsigned char ucCheckSum;
 };
 
-struct SequenceStep
+struct STSequenceStep
 {
-		unsigned char sequence;
-		unsigned char step;
+		unsigned char ucSequence;
+		unsigned char ucStep;
 };
 
-struct KeyboardManualSettings
+struct STKeyboardManualSettings
 {
-		unsigned char manualySelectedMotor;
-		unsigned char manualMovingSpeed;
+		unsigned char ucManualySelectedMotor;
+		unsigned char ucManualMovingSpeed;
 };
-struct Compteur
+struct STCompteur
 {
   unsigned char ucCompteur300ms;
   unsigned char ucCompteur200ms;

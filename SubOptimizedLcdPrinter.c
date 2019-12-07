@@ -16,7 +16,7 @@
 
 // implémentations
 // *************************************************************************************************
-void printLcdDeltaMotors(struct ArmState* currentArmState)
+void vPrintLcdDeltaMotors(struct STArmState* stpCurrentArmState)
 //
 //  Auteur: John-William Lebel
 //
@@ -27,24 +27,24 @@ void printLcdDeltaMotors(struct ArmState* currentArmState)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->base), 0), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->base), 1), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 0), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 1), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->shoulder), 0), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->shoulder), 1), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 0), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 1), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->elbow), 0), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->elbow), 1), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 0), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 1), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->wrist), 0), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->wrist), 1), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 0), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 1), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->grip), 0), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(currentArmState->grip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 0), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
-void printLcdDeltaTrame(struct TramePIC* trame)
+void vPrintLcdDeltaTrame(struct STTramePIC* stpTrame)
 //
 //  Auteur: John-William Lebel
 //
@@ -55,21 +55,21 @@ void printLcdDeltaTrame(struct TramePIC* trame)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.x), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.x), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.y), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.touchScreen.y), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.gripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.gripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
 		
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.weightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToHexaDecimal(&(trame->adcSensors.weightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
-void printLcdDeltaWeightType(unsigned char* weightType)
+void vPrintLcdDeltaWeightType(unsigned char* ucpWeightType)
 //
 //  Auteur: John-William Lebel
 //
@@ -81,16 +81,16 @@ void printLcdDeltaWeightType(unsigned char* weightType)
 //
 // *************************************************************************************************
 {
-    unsigned char* weightString = weightTypeToString(weightType);
-		vLcdEcrireCaract(weightString[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
-		vLcdEcrireCaract(weightString[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
-		vLcdEcrireCaract(weightString[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
-		vLcdEcrireCaract(weightString[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
-		vLcdEcrireCaract(weightString[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
+    unsigned char* ucpWeightTypeString = ucpWeightTypeToString(ucpWeightType);
+		vLcdEcrireCaract(ucpWeightTypeString[0], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucpWeightTypeString[1], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucpWeightTypeString[2], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_2);
+		vLcdEcrireCaract(ucpWeightTypeString[3], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_3);
+		vLcdEcrireCaract(ucpWeightTypeString[4], LCD_LINE2, LCD_WEIGHT_TYPE_DIGIT_POSITION_4);
 }
 
 // *************************************************************************************************
-void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSettings)
+void vPrintLcdDeltaManualSettings(struct STKeyboardManualSettings* stpKeyboardManualSettings)
 //
 //  Auteur: John-William Lebel
 //
@@ -101,12 +101,12 @@ void printLcdDeltaManualSettings(struct KeyboardManualSettings* keyboardManualSe
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 1), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
-		vLcdEcrireCaract(unsignedCharToDecimal(&(keyboardManualSettings->manualMovingSpeed), 2), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 1), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
+		vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 2), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
-void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes)
+void vPrintLcdCurrentSequenceStep(struct STSequenceStep* stpCurrentSequenceIndexes)
 //
 //  Auteur: John-William Lebel
 //
@@ -117,12 +117,12 @@ void printLcdCurrentSequenceStep(struct SequenceStep* currentSequenceIndexes)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(currentSequenceIndexes->sequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
-		vLcdEcrireCaract(currentSequenceIndexes->step + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
+		vLcdEcrireCaract(stpCurrentSequenceIndexes->ucSequence + '0', LCD_LINE3, LCD_SEQ_DIGIT_POSITION);
+		vLcdEcrireCaract(stpCurrentSequenceIndexes->ucStep + '0', LCD_LINE3, LCD_STEP_DIGIT_POSITION);
 }
 
 // *************************************************************************************************
-void printLcdDeltaConnectionState(unsigned char connectionStateString[])
+void vPrintLcdDeltaConnectionState(unsigned char ucConnectionStateString[])
 //
 //  Auteur: John-William Lebel
 //
@@ -133,7 +133,7 @@ void printLcdDeltaConnectionState(unsigned char connectionStateString[])
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(connectionStateString[0], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_0);
-		vLcdEcrireCaract(connectionStateString[1], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_1);
-		vLcdEcrireCaract(connectionStateString[2], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_2);
+		vLcdEcrireCaract(ucConnectionStateString[0], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucConnectionStateString[1], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucConnectionStateString[2], LCD_LINE3, LCD_CONNECTION_STATE_DIGIT_POSITION_2);
 }

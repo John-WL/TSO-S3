@@ -19,7 +19,7 @@
   
 
 // *************************************************************************************************
-void initTimer50ms(void)
+void vInitTimer50ms(void)
 //
 //  Auteur: John-William Lebel
 //
@@ -37,10 +37,10 @@ void initTimer50ms(void)
 		TR0 = 1;                      // Start the timer
 }
 
-void vUpdateCompteurTimer0(struct Compteur* stCompteur)
+void vUpdateCompteurTimer0(struct STCompteur* stpCompteur)
 {
   TF0 = 0;
-  stCompteur->ucCompteur300ms++;
-  stCompteur->ucCompteur200ms++;
-  stCompteur->ucCompteur2sec++;
+  stpCompteur->ucCompteur300ms++;
+  stpCompteur->ucCompteur200ms++;
+  stpCompteur->ucCompteur2sec++;
 }

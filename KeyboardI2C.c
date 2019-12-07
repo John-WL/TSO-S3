@@ -14,127 +14,131 @@
 #include "ProjectDefinitions.h"
 #include "KeyboardI2C.h"
 #include "I2C.h"
+#include "SequenceHandler.h"
 
 // Prototypes privés
-void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState, char direction);
-void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction);
+void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* stpCurrentArmState, char cDirection);
+void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection);
 
-unsigned char keyboardCharacters[16] = {'1', '2', '3', 'A',
+unsigned char ucKeyboardCharacters[16] = {'1', '2', '3', 'A',
                                         '4', '5', '6', 'B',
                                         '7', '8', '9', 'C',
                                         '*', '0', '#', 'D'};
 
 
 // Implémentation fonctions
-unsigned char* readKeyboardI2C()
+unsigned char* ucpReadKeyboardI2C()
 {
-    unsigned char key = ' ';
-    unsigned char ackValue = 0;
+    unsigned char ucKey = ' ';
+    unsigned char ucAckValue = 0;
     
     if(!P1_2)
     {
         vStartBitI2C();
-        ackValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
-        if(ackValue)
+        ucAckValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
+        if(ucAckValue)
         {
-            return &key; // return space if noAcks were detected
+            return &ucKey; // return space if noAcks were detected
         }
-        key = ucLire8BitsI2C(0xFF);  // read with noAck
+        ucKey = ucLire8BitsI2C(0xFF);  // read with noAck
         vStopBitI2C();
         
-        key = keyboardCharacters[key % 16];
+        ucKey = ucKeyboardCharacters[ucKey % 16];
     }
     
-    return &key;
+    return &ucKey;
 }
 
-void handleKey(unsigned char* key, struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState, struct SequenceStep* currentSequenceIndexes)
+void vHandleKey(unsigned char* ucpKey,
+    struct STKeyboardManualSettings* stpKeyboardManualSettings,
+    struct STArmState* stpCurrentArmState,
+    struct STSequenceStep* stpCurrentSequenceIndexes)
 {
-    switch(*key)
+    switch(*ucpKey)
     {
         case '1':
-            keyboardManualSettings->manualySelectedMotor = MOTOR_0;
+            stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_0;
             break;
         case '2':
-            keyboardManualSettings->manualySelectedMotor = MOTOR_1;
+            stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_1;
             break;
         case '3':
-            keyboardManualSettings->manualySelectedMotor = MOTOR_2;
+            stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_2;
             break;
         case '4':
-            keyboardManualSettings->manualySelectedMotor = MOTOR_3;
+            stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_3;
             break;
         case '5':
-            keyboardManualSettings->manualySelectedMotor = MOTOR_4;
+            stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_4;
             break;
         case '0':
-            keyboardManualSettings->manualMovingSpeed = (keyboardManualSettings->manualMovingSpeed + 4) % 20;
+            stpKeyboardManualSettings->ucManualMovingSpeed = (stpKeyboardManualSettings->ucManualMovingSpeed + 4) % 20;
             break;
         
         case '*':
-            manualIncrementMotor(keyboardManualSettings, currentArmState, -1);
+            vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, -1);
             break;
         case '#':
-            manualIncrementMotor(keyboardManualSettings, currentArmState, 1);
-            break;
-        case 'A':
-            // NEEDING IMPLEMENTATION! This line is supposed to make the robot arm warm up
+            vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, 1);
             break;
         
+        case 'A':
+            vSetOperatingState(WARM_UP_SETUP_OPERATING_STATE);
+            break;
         case 'B':
-            currentArmState->base = 0x10;
-            currentArmState->shoulder = 0x4C;
-            currentArmState->elbow = 0x00;
-            currentArmState->wrist = 0xA0;
-            currentArmState->grip = 0x00;
+            stpCurrentArmState->ucBase = 0x10;
+            stpCurrentArmState->ucShoulder = 0x4C;
+            stpCurrentArmState->ucElbow = 0x00;
+            stpCurrentArmState->ucWrist = 0x55;
+            stpCurrentArmState->ucGrip = 0x00;
             break;
         
         case 'C':
-            currentSequenceIndexes->sequence = (currentSequenceIndexes->sequence + 1) % 7;
-            currentSequenceIndexes->step = 0;
+            stpCurrentSequenceIndexes->ucSequence = (stpCurrentSequenceIndexes->ucSequence + 1) % 7;
+            stpCurrentSequenceIndexes->ucStep = 0;
             break;
         case 'D':
-            currentSequenceIndexes->step = (currentSequenceIndexes->step + 1) % 10;
+            stpCurrentSequenceIndexes->ucStep = (stpCurrentSequenceIndexes->ucStep + 1) % 10;
             break;
             
     }
 }
 
-void manualIncrementMotor(struct KeyboardManualSettings* keyboardManualSettings, struct ArmState* currentArmState, char direction)
+void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* stpCurrentArmState, char cDirection)
 {
-    switch(keyboardManualSettings->manualySelectedMotor)
+    switch(stpKeyboardManualSettings->ucManualySelectedMotor)
     {
       case MOTOR_0:
-          currentArmState->base += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-          handleMotorValueOverflow(&(currentArmState->base), &direction);
+          stpCurrentArmState->ucBase += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+          vHandleMotorValueOverflow(&(stpCurrentArmState->ucBase), &cDirection);
           break;
       case MOTOR_1:
-          currentArmState->shoulder += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-          handleMotorValueOverflow(&(currentArmState->shoulder), &direction);
+          stpCurrentArmState->ucShoulder += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+          vHandleMotorValueOverflow(&(stpCurrentArmState->ucShoulder), &cDirection);
           break;
       case MOTOR_2:
-          currentArmState->elbow += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-          handleMotorValueOverflow(&(currentArmState->elbow), &direction);
+          stpCurrentArmState->ucElbow += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+          vHandleMotorValueOverflow(&(stpCurrentArmState->ucElbow), &cDirection);
           break;
       case MOTOR_3:
-          currentArmState->wrist += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-          handleMotorValueOverflow(&(currentArmState->wrist), &direction);
+          stpCurrentArmState->ucWrist += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+          vHandleMotorValueOverflow(&(stpCurrentArmState->ucWrist), &cDirection);
           break;
       case MOTOR_4:
-          currentArmState->grip += (char)(((int)keyboardManualSettings->manualMovingSpeed) * direction);
-          handleMotorValueOverflow(&(currentArmState->grip), &direction);
+          stpCurrentArmState->ucGrip += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+          vHandleMotorValueOverflow(&(stpCurrentArmState->ucGrip), &cDirection);
           break;
     }
 }
 
-void handleMotorValueOverflow(unsigned char* motorValue, unsigned char* direction)
+void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection)
 {
-    if(*direction == 1 && *motorValue > 205)
+    if(*cpDirection == 1 && *ucpMotorValue > 205)
     {
-        *motorValue = 205;
+        *ucpMotorValue = 205;
     }
-    else if(*direction == -1 && *motorValue > 205)
+    else if(*cpDirection == -1 && *ucpMotorValue > 205)
     {
-        *motorValue = 0;
+        *ucpMotorValue = 0;
     }
 }
