@@ -23,9 +23,9 @@ unsigned char* ucpReadKeyboardI2C(void);
 
 //**************************************************************
 void vHandleKey(unsigned char* ucpKey,
-    struct STKeyboardManualSettings* strpKeyboardManualSettings,
-    struct STArmState* strpCurrentArmState,
-    struct STSequenceStep* strpCurrentSequenceIndexes);
+    struct STKeyboardManualSettings* stpKeyboardManualSettings,
+    struct STArmState* stpCurrentArmState,
+    struct STSequenceStep* stpCurrentSequenceIndexes);
 /*  Auteur: John-William Lebel
     
     Behaviour: en fonction du charactère reçu avec ucReadKeyboardI2C,

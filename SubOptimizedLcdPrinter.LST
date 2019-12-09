@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 1   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 16:05:17 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SUBOPTIMIZEDLCDPRINTER
@@ -37,32 +37,32 @@ line level    source
   27          //
   28          // *************************************************************************************************
   29          {
-  30   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 0), LCD_LINE0, LCD_MO
-             -TOR_0_DIGIT_POSITION_0);
-  31   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 1), LCD_LINE0, LCD_MO
-             -TOR_0_DIGIT_POSITION_1);
+  30   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 0), LCD_LINE0, LCD_MOTO
+             -R_0_DIGIT_POSITION_0);
+  31   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 1), LCD_LINE0, LCD_MOTO
+             -R_0_DIGIT_POSITION_1);
   32   1                                                      
-  33   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 0), LCD_LINE0, LC
-             -D_MOTOR_1_DIGIT_POSITION_0);
-  34   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 1), LCD_LINE0, LC
-             -D_MOTOR_1_DIGIT_POSITION_1);
+  33   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 0), LCD_LINE0, LCD_
+             -MOTOR_1_DIGIT_POSITION_0);
+  34   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 1), LCD_LINE0, LCD_
+             -MOTOR_1_DIGIT_POSITION_1);
   35   1                                                      
-  36   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 0), LCD_LINE0, LCD_M
-             -OTOR_2_DIGIT_POSITION_0);
-  37   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 1), LCD_LINE0, LCD_M
-             -OTOR_2_DIGIT_POSITION_1);
+  36   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 0), LCD_LINE0, LCD_MOT
+             -OR_2_DIGIT_POSITION_0);
+  37   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 1), LCD_LINE0, LCD_MOT
+             -OR_2_DIGIT_POSITION_1);
   38   1                                                      
-  39   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 0), LCD_LINE0, LCD_M
-             -OTOR_3_DIGIT_POSITION_0);
-  40   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 1), LCD_LINE0, LCD_M
-             -OTOR_3_DIGIT_POSITION_1);
+  39   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 0), LCD_LINE0, LCD_MOT
+             -OR_3_DIGIT_POSITION_0);
+  40   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 1), LCD_LINE0, LCD_MOT
+             -OR_3_DIGIT_POSITION_1);
   41   1                                                      
-  42   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 0), LCD_LINE1, LCD_MO
-             -TOR_4_DIGIT_POSITION_0);
-  43   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MO
-             -TOR_4_DIGIT_POSITION_1);
+  42   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 0), LCD_LINE1, LCD_MOTO
+             -R_4_DIGIT_POSITION_0);
+  43   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MOTO
+             -R_4_DIGIT_POSITION_1);
   44   1      }
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 2   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 16:05:17 PAGE 2   
 
   45          
   46          // *************************************************************************************************
@@ -78,25 +78,25 @@ line level    source
   55          //
   56          // *************************************************************************************************
   57          {
-  58   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 0), LCD
-             -_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
-  59   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 1), LCD
-             -_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
+  58   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 0), LCD_L
+             -INE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
+  59   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 1), LCD_L
+             -INE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
   60   1                                                      
-  61   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 0), LCD
-             -_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
-  62   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 1), LCD
-             -_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
+  61   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 0), LCD_L
+             -INE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
+  62   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 1), LCD_L
+             -INE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
   63   1                                                      
-  64   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 0), LCD_L
-             -INE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
-  65   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 1), LCD_L
-             -INE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
+  64   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 0), LCD_LIN
+             -E1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
+  65   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 1), LCD_LIN
+             -E1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
   66   1          
-  67   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 0), LCD_LI
-             -NE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
-  68   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 1), LCD_LI
-             -NE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
+  67   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 0), LCD_LINE
+             -2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
+  68   1          vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 1), LCD_LINE
+             -2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
   69   1      }
   70          
   71          // *************************************************************************************************
@@ -126,7 +126,7 @@ line level    source
   95          //  Auteur: John-William Lebel
   96          //
   97          //  Description: prints at the right place on the LCD the current setted values for the manual control of 
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 3   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 16:05:17 PAGE 3   
 
              -the arm
   98          //  Paramètres d'entrées  : keyboardManualSettings
@@ -135,10 +135,10 @@ line level    source
  101          //
  102          // *************************************************************************************************
  103          {
- 104   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 1), L
-             -CD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
- 105   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 2), L
-             -CD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
+ 104   1          vLcdEcrireCaract(ucUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 1), LCD
+             -_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
+ 105   1          vLcdEcrireCaract(ucUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 2), LCD
+             -_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
  106   1      }
  107          
  108          // *************************************************************************************************
@@ -177,7 +177,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    923    ----
+   CODE SIZE        =    843    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----      18
    PDATA SIZE       =   ----    ----

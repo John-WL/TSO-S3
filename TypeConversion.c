@@ -16,11 +16,11 @@
 #include "TypeConversion.h"
 
 // Prédéclarations privées
-void vHalfCharToHexaDecimal(unsigned char* ucpNumberToEvaluate);
+unsigned char ucHalfCharToHexaDecimal(unsigned char ucNumberToEvaluate);
 
 
 // *************************************************************************************************
-unsigned char* ucpUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
+unsigned char ucUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -33,27 +33,27 @@ unsigned char* ucpUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvalu
 //
 // *************************************************************************************************
 {
-		unsigned char* ucpResult;
+		unsigned char ucResult;
 	
 		if(ucDigitIndex == 0)		// need to change the 0 for the "define", and include the right file
 		{
-        *ucpResult = *ucpNumberToEvaluate >> 4;
+        ucResult = *ucpNumberToEvaluate >> 4;
 		}
 		else if(ucDigitIndex == 1)
 		{
-        *ucpResult = (*ucpNumberToEvaluate) & 0x0F;
+        ucResult = (*ucpNumberToEvaluate) & 0x0F;
 		}
 		else
 		{
-				*ucpResult = ' ';
+				ucResult = ' ';
 		}
-		vHalfCharToHexaDecimal(ucpResult);
+		ucResult = ucHalfCharToHexaDecimal(ucResult);
 		
-		return ucpResult;
+		return ucResult;
 }
 
 // *************************************************************************************************
-unsigned char* ucpUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
+unsigned char ucUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex)
 //
 //  Auteur: John-William Lebel
 //
@@ -67,26 +67,26 @@ unsigned char* ucpUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate,
 //
 // *************************************************************************************************
 {
-		unsigned char* ucpResult;
+		unsigned char ucResult;
 	
 		if(ucDigitIndex == 0)
 		{
-        *ucpResult = '0' + (*ucpNumberToEvaluate / 100);
+        ucResult = '0' + (*ucpNumberToEvaluate / 100);
 		}
 		else if(ucDigitIndex == 1)
 		{
-        *ucpResult = '0' + (*ucpNumberToEvaluate / 10);
+        ucResult = '0' + (*ucpNumberToEvaluate / 10);
 		}
 		else if(ucDigitIndex == 2)
 		{
-        *ucpResult = '0' + (*ucpNumberToEvaluate % 10);
+        ucResult = '0' + (*ucpNumberToEvaluate % 10);
 		}
 		else
 		{
-				*ucpResult = ' ';
+				ucResult = ' ';
 		}
 		
-		return ucpResult;
+		return ucResult;
 }
 
 // *************************************************************************************************
@@ -125,7 +125,7 @@ unsigned char* ucpWeightTypeToString(unsigned char* ucpWeightTypeIndex)
 }
 
 // *************************************************************************************************
-void vHalfCharToHexaDecimal(unsigned char* ucpNumberToEvaluate)
+unsigned char ucHalfCharToHexaDecimal(unsigned char ucNumberToEvaluate)
 //
 //  Auteur: John-William Lebel
 //
@@ -136,16 +136,18 @@ void vHalfCharToHexaDecimal(unsigned char* ucpNumberToEvaluate)
 //
 // *************************************************************************************************
 {
-		if(*ucpNumberToEvaluate <= 9)
+		if(ucNumberToEvaluate <= 9)
 		{
-        *ucpNumberToEvaluate = '0' + *ucpNumberToEvaluate;
+        ucNumberToEvaluate = '0' + ucNumberToEvaluate;
 		}
-		else if(*ucpNumberToEvaluate <= 0x0F)
+		else if(ucNumberToEvaluate <= 0x0F)
 		{
-        *ucpNumberToEvaluate = 'A' + (*ucpNumberToEvaluate - 0x0A);
+        ucNumberToEvaluate = 'A' + (ucNumberToEvaluate - 0x0A);
 		}
 		else
 		{
-				*ucpNumberToEvaluate = ' ';
+				ucNumberToEvaluate = ' ';
 		}
+    
+    return ucNumberToEvaluate;
 }

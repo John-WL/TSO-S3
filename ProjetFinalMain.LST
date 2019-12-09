@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 1   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
@@ -62,7 +62,7 @@ line level    source
   50          // VARIABLES GLOBALES
   51          // *************************************************************************************************
   52          
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 2   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 2   
 
   53          struct STArmState stCurrentArmState = { MIDDLE_POSITION,      // base starting position
   54                                              MIDDLE_POSITION,      // shoulder starting position
@@ -126,7 +126,7 @@ line level    source
  110   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
              -ntSequenceIndexes.ucStep, ELBOW);
  111   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 3   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 3   
 
              -ntSequenceIndexes.ucStep, WRIST);
  112   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
@@ -139,61 +139,60 @@ line level    source
              -dexes);    // read the keyboard and update the variables accordingly
  118   3              }
  119   2              
- 120   2              // ... gotta finish what happens next!
- 121   2              if(TF0 == 1)
- 122   2              {
- 123   3                  vUpdateCompteurTimer0(&stCompteur);
- 124   3              }
- 125   2              
- 126   2              if(stCompteur.ucCompteur300ms > 5)
- 127   2              {
- 128   3                  stCompteur.ucCompteur300ms = 0;
- 129   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
- 130   3              }
- 131   2              
- 132   2              if(stCompteur.ucCompteur200ms > 3)
- 133   2              {
- 134   3                  stCompteur.ucCompteur200ms = 0;
- 135   3                  vPrintLcdDeltaCharacters();
- 136   3              }
- 137   2              
- 138   2              if(stCompteur.ucCompteur2sec > 39)
- 139   2              {
- 140   3                  stCompteur.ucCompteur2sec = 0;
- 141   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
- 142   3              }
- 143   2              
- 144   2              if(ucIsTrameReceived())
- 145   2              {
- 146   3                  stCompteur.ucCompteur300ms = 0;
- 147   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
- 148   3                
- 149   3                  vResetIsTrameReceived();
- 150   3                  vSendTrame(&stCurrentArmState);
- 151   3              }
- 152   2              
- 153   2              vCircularBuffer(&stTrame);
- 154   2          }
- 155   1      }
- 156          
- 157          void vPrintLcdDeltaCharacters()
- 158          {
- 159   1          vPrintLcdDeltaMotors(&stCurrentArmState);
- 160   1          vPrintLcdDeltaTrame(&stTrame);
- 161   1          vPrintLcdDeltaWeightType(&ucWeightType);
- 162   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
- 163   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
- 164   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
- 165   1      }
- 166          
- 167          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+ 120   2              if(TF0 == 1)
+ 121   2              {
+ 122   3                  vUpdateCompteurTimer0(&stCompteur);
+ 123   3              }
+ 124   2              
+ 125   2              if(stCompteur.ucCompteur300ms > 5)
+ 126   2              {
+ 127   3                  stCompteur.ucCompteur300ms = 0;
+ 128   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+ 129   3              }
+ 130   2              
+ 131   2              if(stCompteur.ucCompteur200ms > 3)
+ 132   2              {
+ 133   3                  stCompteur.ucCompteur200ms = 0;
+ 134   3                  vPrintLcdDeltaCharacters();
+ 135   3              }
+ 136   2              
+ 137   2              if(stCompteur.ucCompteur2sec > 39)
+ 138   2              {
+ 139   3                  stCompteur.ucCompteur2sec = 0;
+ 140   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
+ 141   3              }
+ 142   2              
+ 143   2              if(ucIsTrameReceived())
+ 144   2              {
+ 145   3                  stCompteur.ucCompteur300ms = 0;
+ 146   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
+ 147   3                
+ 148   3                  vResetIsTrameReceived();
+ 149   3                  vSendTrame(&stCurrentArmState);
+ 150   3              }
+ 151   2              
+ 152   2              vCircularBuffer(&stTrame);
+ 153   2          }
+ 154   1      }
+ 155          
+ 156          void vPrintLcdDeltaCharacters()
+ 157          {
+ 158   1          vPrintLcdDeltaMotors(&stCurrentArmState);
+ 159   1          vPrintLcdDeltaTrame(&stTrame);
+ 160   1          vPrintLcdDeltaWeightType(&ucWeightType);
+ 161   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
+ 162   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
+ 163   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
+ 164   1      }
+ 165          
+ 166          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
              -)
- 168          {
- 169   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 4   
+ 167          {
+ 168   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
+ 169   1          return ucLireMemI2C(uiMemoryAddress);
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 4   
 
- 170   1          return ucLireMemI2C(uiMemoryAddress);
- 171   1      }
+ 170   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

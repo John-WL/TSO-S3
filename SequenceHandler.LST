@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 15:01:06 PAGE 1   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 16:05:17 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SEQUENCEHANDLER
@@ -62,7 +62,7 @@ line level    source
   45                          à la case du poid bleu est retourné, de même pour les autres poids. 
   46                          
   47              Parameters: unsigned char* ucpWeightSensor
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 15:01:06 PAGE 2   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 16:05:17 PAGE 2   
 
   48              Return:     unsigned char
   49          ***************************************************************/
@@ -126,7 +126,7 @@ line level    source
              - dans le if et remet ucCurrentOperatingState
   91   4                            // à STAND_BY_OPERATING_STATE. Tadaa. Tout ça parce que je suis lâche. 
   92   4                                                                              
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 15:01:06 PAGE 3   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 16:05:17 PAGE 3   
 
   93   4                    }
   94   3                }
@@ -190,7 +190,7 @@ line level    source
  150   1          //B2::
  151   1            //x:0x60 à 0xA0
  152   1            //y:0xC0 à 0xFF
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 15:01:06 PAGE 4   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 16:05:17 PAGE 4   
 
  153   1          //C5::
  154   1            //x:0xA0 à 0xFF
@@ -254,7 +254,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 15:01:06 PAGE 5   
+C51 COMPILER V9.53.0.0   SEQUENCEHANDLER                                                   12/09/2019 16:05:17 PAGE 5   
 
    CODE SIZE        =    830    ----
    CONSTANT SIZE    =   ----    ----

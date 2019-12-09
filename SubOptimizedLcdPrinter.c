@@ -27,20 +27,20 @@ void vPrintLcdDeltaMotors(struct STArmState* stpCurrentArmState)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 0), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 1), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 0), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucBase), 1), LCD_LINE0, LCD_MOTOR_0_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 0), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 1), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 0), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucShoulder), 1), LCD_LINE0, LCD_MOTOR_1_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 0), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 1), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 0), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucElbow), 1), LCD_LINE0, LCD_MOTOR_2_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 0), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 1), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 0), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucWrist), 1), LCD_LINE0, LCD_MOTOR_3_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 0), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 0), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MOTOR_4_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
@@ -55,17 +55,17 @@ void vPrintLcdDeltaTrame(struct STTramePIC* stpTrame)
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 0), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucX), 1), LCD_LINE1, LCD_TOUCH_SCREEN_X_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 0), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.stTouchScreen.ucY), 1), LCD_LINE1, LCD_TOUCH_SCREEN_Y_DIGIT_POSITION_1);
 																								
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 0), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucGripIntensity), 1), LCD_LINE1, LCD_GRIP_INTENSITY_DIGIT_POSITION_1);
 		
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 0), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiHexaDecimal(&(stpTrame->stAdcSensors.ucWeightSensor), 1), LCD_LINE2, LCD_WEIGHT_SENSOR_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************
@@ -101,8 +101,8 @@ void vPrintLcdDeltaManualSettings(struct STKeyboardManualSettings* stpKeyboardMa
 //
 // *************************************************************************************************
 {
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 1), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
-		vLcdEcrireCaract(*ucpUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 2), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 1), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_0);
+		vLcdEcrireCaract(ucUnsignedCharToAsciiDecimal(&(stpKeyboardManualSettings->ucManualMovingSpeed), 2), LCD_LINE3, LCD_MANUAL_MOTOR_SPEED_DIGIT_POSITION_1);
 }
 
 // *************************************************************************************************

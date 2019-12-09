@@ -16,7 +16,7 @@
 
 // Prédéclarations
 //**************************************************************
-unsigned char* ucpUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex);
+unsigned char ucUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex);
 /*  Auteur: John-William Lebel
     
     Behaviour:  transforme un nombre de 8 bits en ascii hexadecimal.
@@ -50,7 +50,7 @@ unsigned char* ucpUnsignedCharToAsciiHexaDecimal(unsigned char* ucpNumberToEvalu
 ***************************************************************/
 
 //**************************************************************
-unsigned char* ucpUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex);
+unsigned char ucUnsignedCharToAsciiDecimal(unsigned char* ucpNumberToEvaluate, unsigned char ucDigitIndex);
 /*  Auteur: John-William Lebel
     
     Behaviour:  transforme un nombre de 8 bits en ascii decimal.
