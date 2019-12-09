@@ -30,6 +30,7 @@ unsigned char ucTrameReceived = 0;
 unsigned char ucCircularBuffer[8];
 
 
+// *************************************************************************************************
 void vInitInterrupt(void)
 //
 //  Auteur: Hugo Pellerin 	
@@ -48,6 +49,7 @@ void vInitInterrupt(void)
     EA = 1;     // Permettre les interruptions générale
 }
 
+// *************************************************************************************************
 void InterruptionSerie0 (void) interrupt 4
 //
 //  Auteur: Hugo Pellerin 	
@@ -74,6 +76,7 @@ void InterruptionSerie0 (void) interrupt 4
     }
 }
 
+// *************************************************************************************************
 unsigned char ucRx()
 //
 //  Auteur: Hugo Pellerin 	
@@ -92,6 +95,7 @@ unsigned char ucRx()
     return ucTemp;
 }
 
+// *************************************************************************************************
 void vCircularBuffer(struct STTramePIC *stpTrame)
 //
 //  Auteur: Hugo Pellerin 	
@@ -169,7 +173,19 @@ void vCircularBuffer(struct STTramePIC *stpTrame)
     }
 }
 
+// *************************************************************************************************
 void vSendTrame(struct STArmState *stpCurrentArmState)
+//
+//  Auteur: Hugo Pellerin 	
+//  Date de création :  19-12-02
+//  Version 1.0
+//
+//  Description: envoie la séquence sur le port série
+//  Paramètres d'entrées : adresse de la structure CurrentArmState
+//  Paramètres de sortie : -
+//  Notes     		       : Aucune
+//
+// *************************************************************************************************
 {
     vTx('G');
     vTx('O');
@@ -181,13 +197,26 @@ void vSendTrame(struct STArmState *stpCurrentArmState)
     vTx(ucHandleCS(stpCurrentArmState));
 }
 
+// *************************************************************************************************
 unsigned char ucHandleCS(struct STArmState *stpCurrentArmState)
+//
+//  Auteur: Hugo Pellerin 	
+//  Date de création :  19-12-02
+//  Version 1.0
+//
+//  Description: Additionne les valeurs des moteurs + GO et return le resultat
+//  Paramètres d'entrées : adresse de la structure CurrentArmState
+//  Paramètres de sortie : CheckSum
+//  Notes     		       : Aucune
+//
+// *************************************************************************************************
 {
     unsigned char ucCheckSum;
     ucCheckSum = (0x47 + 0x4F + stpCurrentArmState->ucBase + stpCurrentArmState->ucShoulder + stpCurrentArmState->ucElbow + stpCurrentArmState->ucWrist + stpCurrentArmState->ucGrip);  
     return ucCheckSum;
 }
 
+// *************************************************************************************************
 void vTx(unsigned char ucTransmi)
 //
 //  Auteur: Hugo Pellerin 	

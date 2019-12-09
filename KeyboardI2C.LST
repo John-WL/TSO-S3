@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:05:16 PAGE 1   
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:32:03 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE KEYBOARDI2C
@@ -26,148 +26,172 @@ line level    source
   17          #include "SequenceHandler.h"
   18          
   19          // Prototypes privés
-  20          void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* 
-             -stpCurrentArmState, char cDirection);
-  21          void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection);
-  22          
-  23          unsigned char ucKeyboardCharacters[16] = {'1', '2', '3', 'A',
-  24                                                  '4', '5', '6', 'B',
-  25                                                  '7', '8', '9', 'C',
-  26                                                  '*', '0', '#', 'D'};
-  27          
-  28          
-  29          // Implémentation fonctions
-  30          unsigned char* ucpReadKeyboardI2C()
-  31          {
-  32   1          unsigned char ucKey = ' ';
-  33   1          unsigned char ucAckValue = 0;
-  34   1          
-  35   1          if(!P1_2)
-  36   1          {
-  37   2              vStartBitI2C();
-  38   2              ucAckValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
-  39   2              if(ucAckValue)
-  40   2              {
-  41   3                  return &ucKey; // return space if noAcks were detected
-  42   3              }
-  43   2              ucKey = ucLire8BitsI2C(0xFF);  // read with noAck
-  44   2              vStopBitI2C();
-  45   2              
-  46   2              ucKey = ucKeyboardCharacters[ucKey % 16];
-  47   2          }
-  48   1          
-  49   1          return &ucKey;
-  50   1      }
+  20          
+  21          //**************************************************************
+  22          void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings,
+  23              struct STArmState* stpCurrentArmState,
+  24              char cDirection);
+  25          /*  Auteur: John-William Lebel
+  26              
+  27              Behaviour:  incrémente le moteur sélectionné à l'aide du calvier de la
+  28                          quantitée sélectionnée avec le clavier
+  29                          
+  30              Parameters: struct STKeyboardManualSettings* stpKeyboardManualSettings,
+  31                          struct STArmState* stpCurrentArmState,
+  32                          char cDirection
+  33              Return:     void
+  34          ***************************************************************/
+  35          
+  36          //**************************************************************
+  37          void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection);
+  38          /*  Auteur: John-William Lebel
+  39              
+  40              Behaviour:  empêche la valeur manuelle des moteurs de dépasser 205 ou d'aller en dessous de 0
+  41                          
+  42              Parameters: unsigned char* ucpMotorValue, char* cpDirection
+  43              Return:     void
+  44          ***************************************************************/
+  45          
+  46          unsigned char ucKeyboardCharacters[16] = {'1', '2', '3', 'A',
+  47                                                    '4', '5', '6', 'B',
+  48                                                    '7', '8', '9', 'C',
+  49                                                    '*', '0', '#', 'D'};
+  50          
   51          
-  52          void vHandleKey(unsigned char* ucpKey,
-  53              struct STKeyboardManualSettings* stpKeyboardManualSettings,
-  54              struct STArmState* stpCurrentArmState,
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:05:16 PAGE 2   
+  52          // Implémentation fonctions
+  53          unsigned char* ucpReadKeyboardI2C()
+  54          {
+  55   1          unsigned char ucKey = ' ';
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:32:03 PAGE 2   
 
-  55              struct STSequenceStep* stpCurrentSequenceIndexes)
-  56          {
-  57   1          switch(*ucpKey)
-  58   1          {
-  59   2              case '1':
-  60   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_0;
-  61   2                  break;
-  62   2              case '2':
-  63   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_1;
-  64   2                  break;
-  65   2              case '3':
-  66   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_2;
-  67   2                  break;
-  68   2              case '4':
-  69   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_3;
-  70   2                  break;
-  71   2              case '5':
-  72   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_4;
-  73   2                  break;
-  74   2              case '0':
-  75   2                  stpKeyboardManualSettings->ucManualMovingSpeed = (stpKeyboardManualSettings->ucManualMovingSpe
-             -ed + 4) % 20;
-  76   2                  break;
-  77   2              
-  78   2              case '*':
-  79   2                  vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, -1);
-  80   2                  break;
-  81   2              case '#':
-  82   2                  vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, 1);
-  83   2                  break;
-  84   2              
-  85   2              case 'A':
-  86   2                  vSetOperatingState(WARM_UP_SETUP_OPERATING_STATE);
+  56   1          unsigned char ucAckValue = 0;
+  57   1          
+  58   1          if(!P1_2)
+  59   1          {
+  60   2              vStartBitI2C();
+  61   2              ucAckValue = ucEcrire8BitsI2C(KEYBOARD_ADDRESS_I2C + 1);
+  62   2              if(ucAckValue)
+  63   2              {
+  64   3                  return &ucKey; // return space if noAcks were detected
+  65   3              }
+  66   2              ucKey = ucLire8BitsI2C(0xFF);  // read with noAck
+  67   2              vStopBitI2C();
+  68   2              
+  69   2              ucKey = ucKeyboardCharacters[ucKey % 16];
+  70   2          }
+  71   1          
+  72   1          return &ucKey;
+  73   1      }
+  74          
+  75          void vHandleKey(unsigned char* ucpKey,
+  76              struct STKeyboardManualSettings* stpKeyboardManualSettings,
+  77              struct STArmState* stpCurrentArmState,
+  78              struct STSequenceStep* stpCurrentSequenceIndexes)
+  79          {
+  80   1          switch(*ucpKey)
+  81   1          {
+  82   2              case '1':
+  83   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_0;
+  84   2                  break;
+  85   2              case '2':
+  86   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_1;
   87   2                  break;
-  88   2              case 'B':
-  89   2                  stpCurrentArmState->ucBase = 0x10;
-  90   2                  stpCurrentArmState->ucShoulder = 0x4C;
-  91   2                  stpCurrentArmState->ucElbow = 0x00;
-  92   2                  stpCurrentArmState->ucWrist = 0x55;
-  93   2                  stpCurrentArmState->ucGrip = 0x00;
-  94   2                  break;
-  95   2              
-  96   2              case 'C':
-  97   2                  stpCurrentSequenceIndexes->ucSequence = (stpCurrentSequenceIndexes->ucSequence + 1) % 7;
-  98   2                  stpCurrentSequenceIndexes->ucStep = 0;
+  88   2              case '3':
+  89   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_2;
+  90   2                  break;
+  91   2              case '4':
+  92   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_3;
+  93   2                  break;
+  94   2              case '5':
+  95   2                  stpKeyboardManualSettings->ucManualySelectedMotor = MOTOR_4;
+  96   2                  break;
+  97   2              case '0':
+  98   2                  stpKeyboardManualSettings->ucManualMovingSpeed = (stpKeyboardManualSettings->ucManualMovingSpe
+             -ed + 4) % 20;
   99   2                  break;
- 100   2              case 'D':
- 101   2                  stpCurrentSequenceIndexes->ucStep = (stpCurrentSequenceIndexes->ucStep + 1) % 10;
- 102   2                  break;
- 103   2                  
- 104   2          }
- 105   1      }
- 106          
- 107          void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* 
-             -stpCurrentArmState, char cDirection)
- 108          {
- 109   1          switch(stpKeyboardManualSettings->ucManualySelectedMotor)
- 110   1          {
- 111   2              case MOTOR_0:
- 112   2                  stpCurrentArmState->ucBase += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * c
-             -Direction);
- 113   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucBase), &cDirection);
-C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:05:16 PAGE 3   
+ 100   2              
+ 101   2              case '*':
+ 102   2                  vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, -1);
+ 103   2                  break;
+ 104   2              case '#':
+ 105   2                  vManualIncrementMotor(stpKeyboardManualSettings, stpCurrentArmState, 1);
+ 106   2                  break;
+ 107   2              
+ 108   2              case 'A':
+ 109   2                  vSetOperatingState(WARM_UP_SETUP_OPERATING_STATE);
+ 110   2                  break;
+ 111   2              case 'B':
+ 112   2                  stpCurrentArmState->ucBase = 0x10;
+ 113   2                  stpCurrentArmState->ucShoulder = 0x4C;
+ 114   2                  stpCurrentArmState->ucElbow = 0x00;
+ 115   2                  stpCurrentArmState->ucWrist = 0x55;
+ 116   2                  stpCurrentArmState->ucGrip = 0x00;
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:32:03 PAGE 3   
 
- 114   2                  break;
- 115   2              case MOTOR_1:
- 116   2                  stpCurrentArmState->ucShoulder += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed)
-             - * cDirection);
- 117   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucShoulder), &cDirection);
- 118   2                  break;
- 119   2              case MOTOR_2:
- 120   2                  stpCurrentArmState->ucElbow += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * 
-             -cDirection);
- 121   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucElbow), &cDirection);
+ 117   2                  break;
+ 118   2              
+ 119   2              case 'C':
+ 120   2                  stpCurrentSequenceIndexes->ucSequence = (stpCurrentSequenceIndexes->ucSequence + 1) % 7;
+ 121   2                  stpCurrentSequenceIndexes->ucStep = 0;
  122   2                  break;
- 123   2              case MOTOR_3:
- 124   2                  stpCurrentArmState->ucWrist += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * 
-             -cDirection);
- 125   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucWrist), &cDirection);
- 126   2                  break;
- 127   2              case MOTOR_4:
- 128   2                  stpCurrentArmState->ucGrip += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * c
+ 123   2              case 'D':
+ 124   2                  stpCurrentSequenceIndexes->ucStep = (stpCurrentSequenceIndexes->ucStep + 1) % 10;
+ 125   2                  break;
+ 126   2                  
+ 127   2          }
+ 128   1      }
+ 129          
+ 130          void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* 
+             -stpCurrentArmState, char cDirection)
+ 131          {
+ 132   1          switch(stpKeyboardManualSettings->ucManualySelectedMotor)
+ 133   1          {
+ 134   2              case MOTOR_0:
+ 135   2                  stpCurrentArmState->ucBase += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * c
              -Direction);
- 129   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucGrip), &cDirection);
- 130   2                  break;
- 131   2          }
- 132   1      }
- 133          
- 134          void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection)
- 135          {
- 136   1          if(*cpDirection == 1 && *ucpMotorValue > 205)
- 137   1          {
- 138   2              *ucpMotorValue = 205;
- 139   2          }
- 140   1          else if(*cpDirection == -1 && *ucpMotorValue > 205)
- 141   1          {
- 142   2              *ucpMotorValue = 0;
- 143   2          }
- 144   1      }
+ 136   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucBase), &cDirection);
+ 137   2                  break;
+ 138   2              case MOTOR_1:
+ 139   2                  stpCurrentArmState->ucShoulder += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed)
+             - * cDirection);
+ 140   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucShoulder), &cDirection);
+ 141   2                  break;
+ 142   2              case MOTOR_2:
+ 143   2                  stpCurrentArmState->ucElbow += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * 
+             -cDirection);
+ 144   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucElbow), &cDirection);
+ 145   2                  break;
+ 146   2              case MOTOR_3:
+ 147   2                  stpCurrentArmState->ucWrist += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * 
+             -cDirection);
+ 148   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucWrist), &cDirection);
+ 149   2                  break;
+ 150   2              case MOTOR_4:
+ 151   2                  stpCurrentArmState->ucGrip += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * c
+             -Direction);
+ 152   2                  vHandleMotorValueOverflow(&(stpCurrentArmState->ucGrip), &cDirection);
+ 153   2                  break;
+ 154   2          }
+ 155   1      }
+ 156          
+ 157          void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection)
+ 158          {
+ 159   1          if(*cpDirection == 1 && *ucpMotorValue > 205)
+ 160   1          {
+ 161   2              *ucpMotorValue = 205;
+ 162   2          }
+ 163   1          else if(*cpDirection == -1 && *ucpMotorValue > 205)
+ 164   1          {
+ 165   2              *ucpMotorValue = 0;
+ 166   2          }
+ 167   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    892    ----
    CONSTANT SIZE    =   ----    ----
+C51 COMPILER V9.53.0.0   KEYBOARDI2C                                                       12/09/2019 16:32:03 PAGE 4   
+
    XDATA SIZE       =     16      26
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

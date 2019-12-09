@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 1   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
@@ -62,7 +62,7 @@ line level    source
   50          // VARIABLES GLOBALES
   51          // *************************************************************************************************
   52          
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 2   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 2   
 
   53          struct STArmState stCurrentArmState = { MIDDLE_POSITION,      // base starting position
   54                                              MIDDLE_POSITION,      // shoulder starting position
@@ -126,7 +126,7 @@ line level    source
  110   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
              -ntSequenceIndexes.ucStep, ELBOW);
  111   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 3   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 3   
 
              -ntSequenceIndexes.ucStep, WRIST);
  112   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
@@ -190,7 +190,7 @@ line level    source
  167          {
  168   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
  169   1          return ucLireMemI2C(uiMemoryAddress);
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:05:16 PAGE 4   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 4   
 
  170   1      }
 

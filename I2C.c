@@ -12,11 +12,9 @@
 #include "_DeclarationGenerale.h"   // déclaration pour coder de façon peu conventionnelle
 #include "I2C.h"                    // fichier .h associé à celui-ci
 
-void vInitPortSerie_0(void);
 void vDelaiI2C(UI uiTemps);
 
 void vStartBitI2C()
-
 { 
   SDA = 1;
   SCL = 1;

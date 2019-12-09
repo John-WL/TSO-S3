@@ -16,7 +16,15 @@
 #include "TypeConversion.h"
 
 // Prédéclarations privées
+
+//**************************************************************
 unsigned char ucHalfCharToHexaDecimal(unsigned char ucNumberToEvaluate);
+/*  Auteur: John-William Lebel
+    
+    Behaviour:  transforme une valeur unsigned char de 4 bits enn valeur ascii hexadécimale
+    Parameters: unsigned char ucNumberToEvaluate
+    Return:     unsigned char
+***************************************************************/
 
 
 // *************************************************************************************************

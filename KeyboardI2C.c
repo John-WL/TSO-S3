@@ -17,13 +17,36 @@
 #include "SequenceHandler.h"
 
 // Prototypes privés
-void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings, struct STArmState* stpCurrentArmState, char cDirection);
+
+//**************************************************************
+void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSettings,
+    struct STArmState* stpCurrentArmState,
+    char cDirection);
+/*  Auteur: John-William Lebel
+    
+    Behaviour:  incrémente le moteur sélectionné à l'aide du calvier de la
+                quantitée sélectionnée avec le clavier
+                
+    Parameters: struct STKeyboardManualSettings* stpKeyboardManualSettings,
+                struct STArmState* stpCurrentArmState,
+                char cDirection
+    Return:     void
+***************************************************************/
+
+//**************************************************************
 void vHandleMotorValueOverflow(unsigned char* ucpMotorValue, char* cpDirection);
+/*  Auteur: John-William Lebel
+    
+    Behaviour:  empêche la valeur manuelle des moteurs de dépasser 205 ou d'aller en dessous de 0
+                
+    Parameters: unsigned char* ucpMotorValue, char* cpDirection
+    Return:     void
+***************************************************************/
 
 unsigned char ucKeyboardCharacters[16] = {'1', '2', '3', 'A',
-                                        '4', '5', '6', 'B',
-                                        '7', '8', '9', 'C',
-                                        '*', '0', '#', 'D'};
+                                          '4', '5', '6', 'B',
+                                          '7', '8', '9', 'C',
+                                          '*', '0', '#', 'D'};
 
 
 // Implémentation fonctions
