@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/06/2019 19:24:07 PAGE 1   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SUBOPTIMIZEDLCDPRINTER
@@ -62,7 +62,7 @@ line level    source
   43   1          vLcdEcrireCaract(*ucpUnsignedCharToAsciiHexaDecimal(&(stpCurrentArmState->ucGrip), 1), LCD_LINE1, LCD_MO
              -TOR_4_DIGIT_POSITION_1);
   44   1      }
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/06/2019 19:24:07 PAGE 2   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 2   
 
   45          
   46          // *************************************************************************************************
@@ -126,7 +126,7 @@ line level    source
   95          //  Auteur: John-William Lebel
   96          //
   97          //  Description: prints at the right place on the LCD the current setted values for the manual control of 
-C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/06/2019 19:24:07 PAGE 3   
+C51 COMPILER V9.53.0.0   SUBOPTIMIZEDLCDPRINTER                                            12/09/2019 15:01:05 PAGE 3   
 
              -the arm
   98          //  Paramètres d'entrées  : keyboardManualSettings

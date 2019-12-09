@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 1   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
@@ -62,140 +62,138 @@ line level    source
   50          // VARIABLES GLOBALES
   51          // *************************************************************************************************
   52          
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 2   
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 2   
 
   53          struct STArmState stCurrentArmState = { MIDDLE_POSITION,      // base starting position
   54                                              MIDDLE_POSITION,      // shoulder starting position
   55                                              MIDDLE_POSITION,      // elbow starting position
   56                                              MIDDLE_POSITION,      // wrist starting position
   57                                              MAXIMUM_POSITION };   // grip starting position (open)
-  58          
-  59          struct STCompteur stCompteur = {0, 0, 0};
-  60          
-  61          struct STTramePIC stTrame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
-  62          unsigned char ucWeightType = NONE_WEIGHT;                   // default to "no weight"
-  63          struct STKeyboardManualSettings stKeyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
-  64                                                                                // and default manual speed is
-  65                                                                                // set to an arbitrary value.
-  66          struct STSequenceStep stCurrentSequenceIndexes = {0, 0};        // this is to store the current sequence
-  67                                                                      // the arm is executing with two indexes:
-  68                                                                      // "sequence" and "step". It probably needs
-  69                                                                      // a better name... plz be charitable to the community much luv thx.
-  70          
-  71          unsigned char* ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
-  72                                                                      // OffL/OnL. It's a variable storing the changes to print to the
-  73                                                                      // lcd in case we lose contact with the exterior... 
-  74          
-  75          unsigned char ucLcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
-  76                                                            {"5:66 X:FF Y:FF P:FF "},
-  77                                                            {"B:FF Poid:Aucun     "},
-  78                                                            {"05 seq:0 step:0 OffL"} };
-  79          
+  58          struct STCompteur stCompteur = {0, 0, 0};
+  59          struct STTramePIC stTrame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
+  60          unsigned char ucWeightType = NONE_WEIGHT;                   // default to "no weight"
+  61          struct STKeyboardManualSettings stKeyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
+  62                                                                                // and default manual speed is
+  63                                                                                // set to an arbitrary value.
+  64          struct STSequenceStep stCurrentSequenceIndexes = {0, 0};        // this is to store the current sequence
+  65                                                                      // the arm is executing with two indexes:
+  66                                                                      // "sequence" and "step". It probably needs
+  67                                                                      // a better name... plz be charitable to the community much luv thx.
+  68          
+  69          unsigned char* ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+  70                                                                      // OffL/OnL. It's a variable storing the changes to print to the
+  71                                                                      // lcd in case we lose contact with the exterior... 
+  72          
+  73          unsigned char ucLcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
+  74                                                            {"5:66 X:FF Y:FF P:FF "},
+  75                                                            {"B:FF Poid:Aucun     "},
+  76                                                            {"05 seq:0 step:0 OffL"} };
+  77          
+  78          // *************************************************************************************************
+  79          // VARIABLES LOCALES
   80          // *************************************************************************************************
-  81          // VARIABLES LOCALES
-  82          // *************************************************************************************************
-  83          
-  84          
-  85          // *************************************************************************************************
-  86          void main(void)
+  81          
+  82          
+  83          // *************************************************************************************************
+  84          void main(void)
+  85          //
+  86          //  Auteur: John-William Lebel
   87          //
-  88          //  Auteur: John-William Lebel
-  89          //
-  90          //  Description: Appelé lorsque le programme démarre
-  91          //  Paramètres d'entrées  : Aucun
-  92          //  Paramètres de sortie  : Aucun
-  93          //  Notes                 : Aucune
-  94          //
-  95          // *************************************************************************************************
-  96          {
-  97   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
-  98   1          vInitLCD();           // init the lcd
-  99   1          vInitTimer50ms();     // init the timer0
- 100   1          vAfficheLCDComplet(ucLcdInitializationContent);         // initialize the content of the lcd
- 101   1          vInitInterrupt();     // init interrupt on serial 0
- 102   1          
- 103   1          while(1)
- 104   1          {
- 105   2            
- 106   2              if(ucIsOperating())   // the movements of the robot arm are automatic
- 107   2              {
- 108   3                  if(ucIsTrameReceived())
- 109   3                  {
- 110   4                      stCurrentArmState.ucBase = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+  88          //  Description: Appelé lorsque le programme démarre
+  89          //  Paramètres d'entrées  : Aucun
+  90          //  Paramètres de sortie  : Aucun
+  91          //  Notes                 : Aucune
+  92          //
+  93          // *************************************************************************************************
+  94          {
+  95   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
+  96   1          vInitLCD();           // init the lcd
+  97   1          vInitTimer50ms();     // init the timer0
+  98   1          vAfficheLCDComplet(ucLcdInitializationContent);         // initialize the content of the lcd
+  99   1          vInitInterrupt();     // init interrupt on serial 0
+ 100   1          
+ 101   1          while(1)
+ 102   1          {
+ 103   2            
+ 104   2              if(ucIsOperating())   // the movements of the robot arm are automatic
+ 105   2              {
+ 106   3                  if(ucIsTrameReceived())
+ 107   3                  {
+ 108   4                      stCurrentArmState.ucBase = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
              -tSequenceIndexes.ucStep, BASE);
- 111   4                      stCurrentArmState.ucShoulder = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCu
+ 109   4                      stCurrentArmState.ucShoulder = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCu
              -rrentSequenceIndexes.ucStep, SHOULDER);
- 112   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 3   
-
+ 110   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
              -ntSequenceIndexes.ucStep, ELBOW);
- 113   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
-             -ntSequenceIndexes.ucStep, WRIST);
- 114   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
-             -tSequenceIndexes.ucStep, GRIP);
- 115   4                  }
- 116   3              }
- 117   2              else              // the movements of the robot arm are manual; we need to read the keyboard
- 118   2              {
- 119   3                  vHandleKey(ucpReadKeyboardI2C(), &stKeyboardManualSettings, &stCurrentArmState, &stCurrentSequenceIn
-             -dexes);    // read the keyboard and update the variables accordingly
- 120   3              }
- 121   2              
- 122   2              // ... gotta finish what happens next!
- 123   2              if(TF0 == 1)
- 124   2              {
- 125   3                  vUpdateCompteurTimer0(&stCompteur);
- 126   3              }
- 127   2              
- 128   2              if(stCompteur.ucCompteur300ms > 5)
- 129   2              {
- 130   3                  stCompteur.ucCompteur300ms = 0;
- 131   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
- 132   3              }
- 133   2              
- 134   2              if(stCompteur.ucCompteur200ms > 3)
- 135   2              {
- 136   3                  stCompteur.ucCompteur200ms = 0;
- 137   3                  vPrintLcdDeltaCharacters();
- 138   3              }
- 139   2              
- 140   2              if(stCompteur.ucCompteur2sec > 39)
- 141   2              {
- 142   3                  stCompteur.ucCompteur2sec = 0;
- 143   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
- 144   3              }
- 145   2              
- 146   2              if(ucIsTrameReceived())
- 147   2              {
- 148   3                  stCompteur.ucCompteur300ms = 0;
- 149   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
- 150   3                
- 151   3                  vResetIsTrameReceived();
- 152   3                  vSendTrame(&stCurrentArmState);
- 153   3              }
- 154   2              
- 155   2              vCircularBuffer(&stTrame);
- 156   2          }
- 157   1      }
- 158          
- 159          void vPrintLcdDeltaCharacters()
- 160          {
- 161   1          vPrintLcdDeltaMotors(&stCurrentArmState);
- 162   1          vPrintLcdDeltaTrame(&stTrame);
- 163   1          vPrintLcdDeltaWeightType(&ucWeightType);
- 164   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
- 165   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
- 166   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
- 167   1      }
- 168          
- 169          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
-             -)
-C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/06/2019 19:24:07 PAGE 4   
+ 111   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 3   
 
- 170          {
- 171   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
- 172   1          return ucLireMemI2C(uiMemoryAddress);
- 173   1      }
+             -ntSequenceIndexes.ucStep, WRIST);
+ 112   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+             -tSequenceIndexes.ucStep, GRIP);
+ 113   4                  }
+ 114   3              }
+ 115   2              else              // the movements of the robot arm are manual; we need to read the keyboard
+ 116   2              {
+ 117   3                  vHandleKey(ucpReadKeyboardI2C(), &stKeyboardManualSettings, &stCurrentArmState, &stCurrentSequenceIn
+             -dexes);    // read the keyboard and update the variables accordingly
+ 118   3              }
+ 119   2              
+ 120   2              // ... gotta finish what happens next!
+ 121   2              if(TF0 == 1)
+ 122   2              {
+ 123   3                  vUpdateCompteurTimer0(&stCompteur);
+ 124   3              }
+ 125   2              
+ 126   2              if(stCompteur.ucCompteur300ms > 5)
+ 127   2              {
+ 128   3                  stCompteur.ucCompteur300ms = 0;
+ 129   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+ 130   3              }
+ 131   2              
+ 132   2              if(stCompteur.ucCompteur200ms > 3)
+ 133   2              {
+ 134   3                  stCompteur.ucCompteur200ms = 0;
+ 135   3                  vPrintLcdDeltaCharacters();
+ 136   3              }
+ 137   2              
+ 138   2              if(stCompteur.ucCompteur2sec > 39)
+ 139   2              {
+ 140   3                  stCompteur.ucCompteur2sec = 0;
+ 141   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
+ 142   3              }
+ 143   2              
+ 144   2              if(ucIsTrameReceived())
+ 145   2              {
+ 146   3                  stCompteur.ucCompteur300ms = 0;
+ 147   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
+ 148   3                
+ 149   3                  vResetIsTrameReceived();
+ 150   3                  vSendTrame(&stCurrentArmState);
+ 151   3              }
+ 152   2              
+ 153   2              vCircularBuffer(&stTrame);
+ 154   2          }
+ 155   1      }
+ 156          
+ 157          void vPrintLcdDeltaCharacters()
+ 158          {
+ 159   1          vPrintLcdDeltaMotors(&stCurrentArmState);
+ 160   1          vPrintLcdDeltaTrame(&stTrame);
+ 161   1          vPrintLcdDeltaWeightType(&ucWeightType);
+ 162   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
+ 163   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
+ 164   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
+ 165   1      }
+ 166          
+ 167          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+             -)
+ 168          {
+ 169   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 15:01:04 PAGE 4   
+
+ 170   1          return ucLireMemI2C(uiMemoryAddress);
+ 171   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

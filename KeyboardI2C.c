@@ -108,26 +108,26 @@ void vManualIncrementMotor(struct STKeyboardManualSettings* stpKeyboardManualSet
 {
     switch(stpKeyboardManualSettings->ucManualySelectedMotor)
     {
-      case MOTOR_0:
-          stpCurrentArmState->ucBase += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
-          vHandleMotorValueOverflow(&(stpCurrentArmState->ucBase), &cDirection);
-          break;
-      case MOTOR_1:
-          stpCurrentArmState->ucShoulder += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
-          vHandleMotorValueOverflow(&(stpCurrentArmState->ucShoulder), &cDirection);
-          break;
-      case MOTOR_2:
-          stpCurrentArmState->ucElbow += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
-          vHandleMotorValueOverflow(&(stpCurrentArmState->ucElbow), &cDirection);
-          break;
-      case MOTOR_3:
-          stpCurrentArmState->ucWrist += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
-          vHandleMotorValueOverflow(&(stpCurrentArmState->ucWrist), &cDirection);
-          break;
-      case MOTOR_4:
-          stpCurrentArmState->ucGrip += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
-          vHandleMotorValueOverflow(&(stpCurrentArmState->ucGrip), &cDirection);
-          break;
+        case MOTOR_0:
+            stpCurrentArmState->ucBase += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+            vHandleMotorValueOverflow(&(stpCurrentArmState->ucBase), &cDirection);
+            break;
+        case MOTOR_1:
+            stpCurrentArmState->ucShoulder += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+            vHandleMotorValueOverflow(&(stpCurrentArmState->ucShoulder), &cDirection);
+            break;
+        case MOTOR_2:
+            stpCurrentArmState->ucElbow += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+            vHandleMotorValueOverflow(&(stpCurrentArmState->ucElbow), &cDirection);
+            break;
+        case MOTOR_3:
+            stpCurrentArmState->ucWrist += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+            vHandleMotorValueOverflow(&(stpCurrentArmState->ucWrist), &cDirection);
+            break;
+        case MOTOR_4:
+            stpCurrentArmState->ucGrip += (char)(((int)stpKeyboardManualSettings->ucManualMovingSpeed) * cDirection);
+            vHandleMotorValueOverflow(&(stpCurrentArmState->ucGrip), &cDirection);
+            break;
     }
 }
 

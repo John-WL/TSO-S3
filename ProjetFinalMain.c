@@ -116,8 +116,7 @@ void main(void)
 				{
 						vHandleKey(ucpReadKeyboardI2C(), &stKeyboardManualSettings, &stCurrentArmState, &stCurrentSequenceIndexes);		// read the keyboard and update the variables accordingly
 				}
-				
-				// ... gotta finish what happens next!
+        
         if(TF0 == 1)
         {
             vUpdateCompteurTimer0(&stCompteur);
