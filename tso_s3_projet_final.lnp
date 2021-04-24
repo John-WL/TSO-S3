@@ -1,0 +1,12 @@
+"ProjetFinalMain.obj",
+"I2C.obj",
+"KeyboardI2C.obj",
+"LCD.obj",
+"RxTx232.obj",
+"SubOptimizedLcdPrinter.obj",
+"Timer0.obj",
+"TypeConversion.obj",
+"CircularBuffer_RxTx.obj",
+"SequenceHandler.obj" 
+TO "tso_s3_projet_final" 
+RAMSIZE(256) 

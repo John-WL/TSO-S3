@@ -1,0 +1,209 @@
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE PROJETFINALMAIN
+OBJECT MODULE PLACED IN ProjetFinalMain.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ProjetFinalMain.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS
+                    -(2)
+
+line level    source
+
+   1          /**************************************************************************************************
+   2          Nom du fichier: ProjetFinalMain.c
+   3          Auteur: John-William Lebel
+   4          Date de création: 2019-11-26
+   5          
+   6          Versions:
+   7          0.1 -> Code base
+   8          
+   9          ***************************************************************************************************/
+  10          
+  11          // *************************************************************************************************
+  12          //  INCLUDES
+  13          // *************************************************************************************************  
+  14          
+  15          #include "_DS89C450Modifie.h"       // Définition des bits et des registres du microcontrôleur
+  16          #include "_DeclarationGenerale.h"
+  17          #include <stdio.h>          // Prototype de declarations des fonctions I/O  
+  18          #include "I2C.h"            // I2C functions handling
+  19          #include "RxTx232.h"        // RxTx232 functions handling
+  20          #include "LCD.h"            // LCD functions handling
+  21          #include "Timer0.h"         // Timer0 initialization handling
+  22          #include "TypeConversion.h" // Fonctions useful when it comes to converting values between type representa
+             -tions and/or types
+  23          #include "ProjectDefinitions.h"
+  24          #include "SubOptimizedLcdPrinter.h"
+  25          #include "KeyboardI2C.h"
+  26          #include "CircularBuffer_RxTx.h"
+  27          #include "SequenceHandler.h"
+  28          
+  29          // *************************************************************************************************
+  30          //  CONSTANTES
+  31          // *************************************************************************************************
+  32          
+  33          // in "ProjectDefinitions.h"
+  34          
+  35          // *************************************************************************************************
+  36          //  FONCTIONS LOCALES
+  37          // *************************************************************************************************
+  38          
+  39          void vPrintLcdDeltaCharacters(void);
+  40          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+             -);
+  41          //void writeSequencesToMemoryI2C(void);     // only needed once when we'll fill up the memory
+  42          
+  43          // *************************************************************************************************
+  44          //  STRUCTURES ET UNIONS
+  45          // *************************************************************************************************
+  46          
+  47          // in "ProjectDefinitions.h"
+  48          
+  49          // *************************************************************************************************
+  50          // VARIABLES GLOBALES
+  51          // *************************************************************************************************
+  52          
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 2   
+
+  53          struct STArmState stCurrentArmState = { MIDDLE_POSITION,      // base starting position
+  54                                              MIDDLE_POSITION,      // shoulder starting position
+  55                                              MIDDLE_POSITION,      // elbow starting position
+  56                                              MIDDLE_POSITION,      // wrist starting position
+  57                                              MAXIMUM_POSITION };   // grip starting position (open)
+  58          struct STCompteur stCompteur = {0, 0, 0};
+  59          struct STTramePIC stTrame = {{{0xFF, 0xFF}, 0xFF, 0xFF}, 0xFF};   // default readings
+  60          unsigned char ucWeightType = NONE_WEIGHT;                   // default to "no weight"
+  61          struct STKeyboardManualSettings stKeyboardManualSettings = {MOTOR_0, 5};  // defaultselected motor = base
+  62                                                                                // and default manual speed is
+  63                                                                                // set to an arbitrary value.
+  64          struct STSequenceStep stCurrentSequenceIndexes = {0, 0};        // this is to store the current sequence
+  65                                                                      // the arm is executing with two indexes:
+  66                                                                      // "sequence" and "step". It probably needs
+  67                                                                      // a better name... plz be charitable to the community much luv thx.
+  68          
+  69          unsigned char* ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+  70                                                                      // OffL/OnL. It's a variable storing the changes to print to the
+  71                                                                      // lcd in case we lose contact with the exterior... 
+  72          
+  73          unsigned char ucLcdInitializationContent[4][21] = { {"1:66 2:66 3:66 4:66 "},
+  74                                                            {"5:66 X:FF Y:FF P:FF "},
+  75                                                            {"B:FF Poid:Aucun     "},
+  76                                                            {"05 seq:0 step:0 OffL"} };
+  77          
+  78          // *************************************************************************************************
+  79          // VARIABLES LOCALES
+  80          // *************************************************************************************************
+  81          
+  82          
+  83          // *************************************************************************************************
+  84          void main(void)
+  85          //
+  86          //  Auteur: John-William Lebel
+  87          //
+  88          //  Description: Appelé lorsque le programme démarre
+  89          //  Paramètres d'entrées  : Aucun
+  90          //  Paramètres de sortie  : Aucun
+  91          //  Notes                 : Aucune
+  92          //
+  93          // *************************************************************************************************
+  94          {
+  95   1          vInitPortSerie();     // init the serial port to utilize the RxTx232 comunication with the pic16F88
+  96   1          vInitLCD();           // init the lcd
+  97   1          vInitTimer50ms();     // init the timer0
+  98   1          vAfficheLCDComplet(ucLcdInitializationContent);         // initialize the content of the lcd
+  99   1          vInitInterrupt();     // init interrupt on serial 0
+ 100   1          
+ 101   1          while(1)
+ 102   1          {
+ 103   2            
+ 104   2              if(ucIsOperating())   // the movements of the robot arm are automatic
+ 105   2              {
+ 106   3                  if(ucIsTrameReceived())
+ 107   3                  {
+ 108   4                      stCurrentArmState.ucBase = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+             -tSequenceIndexes.ucStep, BASE);
+ 109   4                      stCurrentArmState.ucShoulder = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCu
+             -rrentSequenceIndexes.ucStep, SHOULDER);
+ 110   4                      stCurrentArmState.ucElbow = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
+             -ntSequenceIndexes.ucStep, ELBOW);
+ 111   4                      stCurrentArmState.ucWrist = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurre
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 3   
+
+             -ntSequenceIndexes.ucStep, WRIST);
+ 112   4                      stCurrentArmState.ucGrip = ucReadMemoryI2C(&stCurrentSequenceIndexes.ucSequence, &stCurren
+             -tSequenceIndexes.ucStep, GRIP);
+ 113   4                  }
+ 114   3              }
+ 115   2              else              // the movements of the robot arm are manual; we need to read the keyboard
+ 116   2              {
+ 117   3                  vHandleKey(ucpReadKeyboardI2C(), &stKeyboardManualSettings, &stCurrentArmState, &stCurrentSequenceIn
+             -dexes);    // read the keyboard and update the variables accordingly
+ 118   3              }
+ 119   2              
+ 120   2              if(TF0 == 1)
+ 121   2              {
+ 122   3                  vUpdateCompteurTimer0(&stCompteur);
+ 123   3              }
+ 124   2              
+ 125   2              if(stCompteur.ucCompteur300ms > 5)
+ 126   2              {
+ 127   3                  stCompteur.ucCompteur300ms = 0;
+ 128   3                  ucpConnectionStateString = LCD_DELTA_OFFLINE_VALUE;
+ 129   3              }
+ 130   2              
+ 131   2              if(stCompteur.ucCompteur200ms > 3)
+ 132   2              {
+ 133   3                  stCompteur.ucCompteur200ms = 0;
+ 134   3                  vPrintLcdDeltaCharacters();
+ 135   3              }
+ 136   2              
+ 137   2              if(stCompteur.ucCompteur2sec > 39)
+ 138   2              {
+ 139   3                  stCompteur.ucCompteur2sec = 0;
+ 140   3                  vHandleSequence(&stTrame, &stCurrentSequenceIndexes, &ucWeightType);
+ 141   3              }
+ 142   2              
+ 143   2              if(ucIsTrameReceived())
+ 144   2              {
+ 145   3                  stCompteur.ucCompteur300ms = 0;
+ 146   3                  ucpConnectionStateString = LCD_DELTA_ONLINE_VALUE;
+ 147   3                
+ 148   3                  vResetIsTrameReceived();
+ 149   3                  vSendTrame(&stCurrentArmState);
+ 150   3              }
+ 151   2              
+ 152   2              vCircularBuffer(&stTrame);
+ 153   2          }
+ 154   1      }
+ 155          
+ 156          void vPrintLcdDeltaCharacters()
+ 157          {
+ 158   1          vPrintLcdDeltaMotors(&stCurrentArmState);
+ 159   1          vPrintLcdDeltaTrame(&stTrame);
+ 160   1          vPrintLcdDeltaWeightType(&ucWeightType);
+ 161   1          vPrintLcdDeltaManualSettings(&stKeyboardManualSettings);
+ 162   1          vPrintLcdCurrentSequenceStep(&stCurrentSequenceIndexes);
+ 163   1          vPrintLcdDeltaConnectionState(ucpConnectionStateString);
+ 164   1      }
+ 165          
+ 166          unsigned char ucReadMemoryI2C(unsigned char* ucpSequence, unsigned char* ucpStep, unsigned char ucArmIndex
+             -)
+ 167          {
+ 168   1          unsigned int uiMemoryAddress = ((((unsigned int)*ucpSequence) * 50) + (*ucpStep * 5) + ucArmIndex);
+ 169   1          return ucLireMemI2C(uiMemoryAddress);
+C51 COMPILER V9.53.0.0   PROJETFINALMAIN                                                   12/09/2019 16:32:02 PAGE 4   
+
+ 170   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    475    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =    105       7
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

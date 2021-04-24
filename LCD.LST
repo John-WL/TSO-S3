@@ -1,0 +1,274 @@
+C51 COMPILER V9.53.0.0   LCD                                                               12/09/2019 16:32:03 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN LCD.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          /**************************************************************************************************
+   2             Nom du fichier : LCD.c
+   3             Auteur : Stéphane Deschênes                  
+   4             Date de création : 1-09-2019
+   5             Version 1.0
+   6             
+   7             Fichier qui contient les fonctions nécessaires à l'utilisation du LCD du 
+   8             kit Dallas du CEGEP Limoilou.
+   9             
+  10            Versions:
+  11            1.0:  Première version
+  12                          
+  13          ***************************************************************************************************/
+  14          
+  15          // *************************************************************************************************
+  16          //  INCLUDES
+  17          // *************************************************************************************************  
+  18          #include "_DS89C450Modifie.h"       // Définition des bits et des registres du microcontrôleur
+  19          #include "_DeclarationGenerale.h"
+  20          #include "LCD.h"
+  21          
+  22          // *************************************************************************************************
+  23          //  CONSTANTES
+  24          // *************************************************************************************************
+  25          #define LIGNE0 0x80
+  26          #define LIGNE1 0xC0
+  27          #define LIGNE2 0x94
+  28          #define LIGNE3 0xD4
+  29          
+  30          // *************************************************************************************************
+  31          //  FONCTIONS LOCALES
+  32          // *************************************************************************************************
+  33          void vAttendreBusyLcd(void);
+  34          void vDelaiLcd(void);
+  35          unsigned char ucDonneValeurLigne(unsigned char ucLine);
+  36          
+  37          // *************************************************************************************************
+  38          //  STRUCTURES ET UNIONS
+  39          // *************************************************************************************************
+  40           /* VIDE */
+  41          
+  42            
+  43          // *************************************************************************************************
+  44          // VARIABLES LOCALES
+  45          // *************************************************************************************************
+  46          unsigned char xdata *PtrLCDConfig = 0x8000;
+  47          unsigned char xdata *PtrLCDBusy = 0x8001;
+  48          unsigned char xdata *PtrLCDChar = 0x8002;
+  49          
+  50          
+  51          
+  52          // *************************************************************************************************
+  53          void vInitLCD(void)
+  54          //
+  55          //  Auteur: Stéphane Deschênes
+C51 COMPILER V9.53.0.0   LCD                                                               12/09/2019 16:32:03 PAGE 2   
+
+  56          //  Date de création :  01-09-2019
+  57          //  Version 1.0
+  58          //
+  59          //  Description: Initialisation de l'écran LCD pour fonctionner avec la carte Dallas
+  60          //  Paramètres d'entrées : Aucun
+  61          //  Paramètres de sortie : Aucun
+  62          //  Notes                : Le premier delai est essentiel pour s'assurer que l'écran est bien en fonction 
+  63          //                         avant de commencer.
+  64          // *************************************************************************************************  
+  65          { 
+  66   1        unsigned int i;
+  67   1        for(i = 0; i < 12000; i++); //Delai d'activation de l'ecran au demarrage  
+  68   1        vAttendreBusyLcd();
+  69   1        *PtrLCDConfig = 0x38;       // Fonction Set (8bits, 2 lines display, 5X8 dot)
+  70   1        vAttendreBusyLcd();
+  71   1        *PtrLCDConfig = 0x0C;       // Display Control (Display on, cursor off et blink off)
+  72   1        vEffaceLCD();
+  73   1        vAttendreBusyLcd();
+  74   1        *PtrLCDConfig = 0x06;       // Entry  Mode Set (Display is shifted by increment)  
+  75   1      }
+  76          
+  77          #ifdef UTILISATION_CARACTERES_SPECIAUX
+              // *************************************************************************************************  
+              void vLoadCGRAM(unsigned char ucTab[8][8])
+              //
+              //  Auteur: Stéphane Deschênes  
+              //  Date de création :  01-09-2019
+              //  Version 1.0
+              //
+              //  Description: Met dans la mémoire CGRAM du contrôleur de LCD un tableau complet pointé
+              //  Paramètres d'entrées : Tableau qui contient toutes les caractères spéciaux voulus
+              //  Paramètres de sortie : Aucun
+              //  Notes                : Sert à créer des caractères spéciaux
+              // *************************************************************************************************  
+              {
+                unsigned char ucCompteurCaract;
+                unsigned char ucCompteurOctetsDansCaract;
+                
+                // Boucle pour chacun des 8 caractères
+                for (ucCompteurCaract= 0; ucCompteurCaract < 8; ucCompteurCaract++)   
+                {
+                  
+                  // Boucle pour chacune des 8 lignes dans un caractère
+                  for(ucCompteurOctetsDansCaract = 0; ucCompteurOctetsDansCaract < 8; ucCompteurOctetsDansCaract++)
+                  {
+                    vAttendreBusyLcd();
+                    *PtrLCDConfig = 0x40 + (8*ucCompteurCaract) + ucCompteurOctetsDansCaract;
+                    vAttendreBusyLcd();
+                    *PtrLCDChar = ucTab[ucCompteurCaract][ucCompteurOctetsDansCaract];      
+                  }
+                } 
+              }
+              #endif
+ 109          
+ 110          // *************************************************************************************************
+ 111          void vLcdEcrireCaract(unsigned char ucCaract, unsigned char ucLigne, unsigned char ucCase)
+ 112          //
+ 113          //  Auteur: Stéphane Deschênes, 
+ 114          //  Date de création :  1-09-2019
+ 115          //  Version 1.0
+ 116          //
+ 117          //  Description: Écrit un caractère sur le LCD, sur la ligne et la colonne voulue.
+C51 COMPILER V9.53.0.0   LCD                                                               12/09/2019 16:32:03 PAGE 3   
+
+ 118          //  Paramètres d'entrées : ucCaract: Caractère que l'on veut écrire
+ 119          //                         ucLigne:  Ligne où l'on veut écrire (o à 3)
+ 120          //                         ucCase:  Colonne où l'on veut écrire (0 à 19)
+ 121          //  Paramètres de sortie : Aucun
+ 122          //  Notes                : Aucune
+ 123          // *************************************************************************************************
+ 124          {
+ 125   1        vAttendreBusyLcd();   
+ 126   1        *PtrLCDConfig = ucDonneValeurLigne(ucLigne) + ucCase; 
+ 127   1        vAttendreBusyLcd();
+ 128   1        *PtrLCDChar = ucCaract;
+ 129   1      }
+ 130          
+ 131          
+ 132          //****************************************************************************
+ 133          void vAfficheLigneLCD(unsigned char ucTab[],unsigned char ucLine)
+ 134          //
+ 135          //  Auteur : Stéphane Deschênes                                     
+ 136          //  Description : Affiche un tableau sur une ligne spécifiée en paramètre            
+ 137          //  Date de création :  1-09-2019
+ 138          //  Version 1.0
+ 139          //  Paramètres d'entrée :  l'adresse du tableau et la ligne d'affichage
+ 140          //  Paramètres de sortie : Aucun.                
+ 141          //  Variables locales :    Aucune
+ 142          //                                     
+ 143          //****************************************************************************
+ 144          {
+ 145   1        unsigned char i = 0;
+ 146   1        
+ 147   1        for(i = 0; i < 20 ; i++)
+ 148   1        {  
+ 149   2          vLcdEcrireCaract(ucTab[i], ucLine, i);
+ 150   2        } 
+ 151   1      }
+ 152          
+ 153          
+ 154          //****************************************************************************
+ 155          void vAfficheLCDComplet(unsigned char ucTab[4][21])
+ 156          //
+ 157          //  Auteur : Stéphane Deschênes                                     
+ 158          //  Description : Affiche un tableau à deux dimensions sur le LCD            
+ 159          //  Date de création :  1-09-2019
+ 160          //  Version 1.0
+ 161          //  Paramètres d'entrée :  l'adresse du tableau
+ 162          //  Paramètres de sortie : Aucun.                
+ 163          //  Variables locales :    Aucune
+ 164          //                                     
+ 165          //****************************************************************************
+ 166          {
+ 167   1        unsigned char i;
+ 168   1        for(i = 0; i < 4 ; i++)
+ 169   1        {
+ 170   2          vAfficheLigneLCD(&ucTab[i][0], i);
+ 171   2        }     
+ 172   1      }
+ 173          
+ 174          //****************************************************************************
+ 175          void vEffaceLCD(void)
+ 176          //
+ 177          //  Auteur : Stéphane Deschênes                                     
+ 178          //  Description : Efface le LCD au complet           
+ 179          //  Date de création :  1-09-2019
+C51 COMPILER V9.53.0.0   LCD                                                               12/09/2019 16:32:03 PAGE 4   
+
+ 180          //  Version 1.0
+ 181          //  Paramètres d'entrée :  Aucun
+ 182          //  Paramètres de sortie : Aucun                
+ 183          //  Variables locales :    Aucune
+ 184          //                                     
+ 185          //****************************************************************************
+ 186          { 
+ 187   1        vAttendreBusyLcd(); 
+ 188   1        *PtrLCDConfig = 0x01;
+ 189   1      }
+ 190          
+ 191          
+ 192          // *************************************************************************************************
+ 193          void vAttendreBusyLcd(void)
+ 194          //
+ 195          //  Auteur: Stéphane Deschênes  
+ 196          //  Date de création :  1-09-2019
+ 197          //  Version 1.0
+ 198          //
+ 199          //  Description: Atttente que le LCD ne soit plus occupé (busy).Le flag busy devient à 0 lorsque le
+ 200          //               LCD n'est plus occupé.
+ 201          //  Paramètres d'entrées : Aucun
+ 202          //  Paramètres de sortie : Aucun
+ 203          //  Notes                : Aucune
+ 204          // *************************************************************************************************
+ 205          {
+ 206   1        unsigned char i;
+ 207   1        while ( *PtrLCDBusy & 0x80 );
+ 208   1        for(i=0; i<10; i++);  
+ 209   1      }
+ 210          
+ 211          // *************************************************************************************************
+ 212          unsigned char ucDonneValeurLigne(unsigned char ucLine)
+ 213          //
+ 214          //  Auteur: Stéphane Deschênes, 
+ 215          //  Date de création :  1-09-2019
+ 216          //  Version 1.0
+ 217          //
+ 218          //  Description: Associe la valeur réelle du pointeur en fonction d'une ligne voulue de 0 à 3
+ 219          //  Paramètres d'entrées : ucLine: Ligne voulue de 0 à 3
+ 220          //  Paramètres de sortie : Valeur réelle de la ligne ( LIGNE0, LIGNE1, LIGNE2,LIGNE3)
+ 221          //  Notes                : Aucune
+ 222          // *************************************************************************************************
+ 223          { 
+ 224   1        unsigned char ucTemp;
+ 225   1        switch(ucLine)
+ 226   1        {
+ 227   2          case 0:     
+ 228   2            ucTemp = LIGNE0;
+ 229   2            break;
+ 230   2          case 1:          
+ 231   2            ucTemp = LIGNE1;
+ 232   2            break;  
+ 233   2          case 2:      
+ 234   2            ucTemp = LIGNE2;
+ 235   2            break;  
+ 236   2          case 3:          
+ 237   2            ucTemp = LIGNE3;
+ 238   2            break;  
+ 239   2        }
+ 240   1        return ucTemp;
+ 241   1      }
+C51 COMPILER V9.53.0.0   LCD                                                               12/09/2019 16:32:03 PAGE 5   
+
+ 242          
+ 243          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    331    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      6      12
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
